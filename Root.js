@@ -2,14 +2,13 @@ import React from 'react'
 import { Text, H1, H2, View } from 'native-base'
 import { Link } from 'react-router-native'
 
+import Carousel from "./Carousel"
+
 export default _ => {
     return (
         <View containerAllRoot>
 
-            <View headerContainerRoot>
-                <H1>Councils</H1>
-                <H2>Area, Stake and Ward leadership communication.</H2>
-            </View>
+            <Carousel />
 
             <View buttonContainerRoot>
 
