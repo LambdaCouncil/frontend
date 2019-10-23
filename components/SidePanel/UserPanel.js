@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
-import { View, Text, Picker, StyleSheet, Image, Modal } from "react-native";
-import {Grid, Col, Row, Header, Icon} from 'native-base'
+import { Picker, StyleSheet, Modal } from "react-native";
+import { Grid, Col, Row, Header, Icon, Thumbnail, View, Text, Left, Item, Body } from 'native-base'
 // import { Header, Icon, Image } from 'react-native-elements';
 // import { Grid, Row, Col } from 'react-native-easy-grid';
 import { connect } from "react-redux";
@@ -42,41 +42,15 @@ const UserPanel = props => {
   };
 
   return (
-    <View style={styles.container}>
-      <Col>
-        <Row>
-          <View style={styles.header}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://avatars3.githubusercontent.com/u/46138601?s=400&v=4'}}
-              // source={{
-              //   uri:
-              //     user.photoURL
-              // }}
-            />
-            <View style={styles.userInfo}>
-              <Text>{user.displayName}</Text>
-              <Text>{user.email}</Text>
-            </View>
-          </View>
-          {/*User Dropdown*/}
-          {/* <Header >
-            <Picker
-              trigger={
-                <span>
-                  <Image src={user.photoURL} spaced="right" avatar />
-                  {user.displayName}
-                </span>
-              }
-            >
-              <Picker.Item label={`Signed in as ${user.displayName}`} />
-              <Picker.Item label="Change Avatar" />
-              <Picker.Item label="Sign Out" />
-            </Picker>
-          </Header> */}
-        </Row>
-      </Col>
-    </View>
+    <Item>
+      <Thumbnail
+        source={{ uri: 'https://avatars3.githubusercontent.com/u/46138601?s=400&v=4' }}
+      />
+      <Left>
+        <Text>{user.displayName}</Text>
+        <Text note>{user.email}</Text>
+      </Left>
+    </Item>
   );
 };
 
@@ -106,4 +80,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps, {} )(UserPanel);
+export default connect(mapStateToProps, {})(UserPanel);

@@ -1,6 +1,5 @@
 import React, { createRef, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button, Drawer, Left, Icon, Body } from 'native-base';
+import { Button, Drawer, Left, Icon, Body, View } from 'native-base';
 import { connect } from "react-redux";
 
 import UserPanel from './UserPanel';
@@ -16,35 +15,16 @@ const SidePanel = props => {
   }
 
   return (
-    <View>
-      <View style={styles.content}>
-        <View>
-          <UserPanel />
-        </View>
-        <View>
-          <UserPanel />
+    <View sidePanel>
+      <UserPanel />
 
-          <SideMenu />
-        </View>
-      </View>
+      <SideMenu />
     </View>
   );
 };
 
 const mapStateToProps = state => ({
   ...state
-});
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFFFFF",
-    // paddingTop: 25
-  },
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%'
-  }
 });
 
 export default connect(mapStateToProps, {})(SidePanel);
