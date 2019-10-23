@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import firebase from "../../firebase"
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3 } from 'native-base'
+import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import Icon from '../Icon'
 import { signUpDisplayName } from '../../actions'
 
 function ChangePassword(props) {
@@ -31,13 +30,10 @@ function ChangePassword(props) {
       behavior='padding'
     >
 
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
-      </Link>
+      <Icon backButton
+        onPress={() => props.history.goBack()}
+        name='arrow-back'
+      />
 
       <H1>Change Password</H1>
 

@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Text, H1, ListItem, CheckBox, Body, Container, Header, Content, View } from 'native-base'
+import { Text, H1, ListItem, CheckBox, Body, Container, Header, Content, View, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
-
-import Icon from '../Icon'
 
 
 function PushNotifications(props) {
@@ -53,13 +51,10 @@ function PushNotifications(props) {
 
     <View containerAllRoot>
 
-      {/*<Link onPress={() => props.history.goBack()} style={styles.link}>*/}
-      {/*  <Icon*/}
-      {/*    name='arrow-back'*/}
-      {/*    color='green'*/}
-      {/*    style={styles.backButton}*/}
-      {/*  />*/}
-      {/*</Link>*/}
+      <Icon backButton
+        onPress={() => props.history.goBack()}
+        name='arrow-back'
+      />
 
       <H1>Push Notifications</H1>
 
@@ -152,13 +147,6 @@ function PushNotifications(props) {
 
         </Content>
       </Container>
-      <Link onPress={() => props.history.goBack()}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
-      </Link>
     </View>
 
   )

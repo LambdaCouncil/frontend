@@ -12,7 +12,7 @@ const Discussions = props => {
         <>
             <Icon backButton
                 onPress={() => props.history.goBack()}
-                name='arrow-dropleft'
+                name='arrow-back'
             />
             <List>
                 {pseudo
