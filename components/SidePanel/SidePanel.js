@@ -22,8 +22,6 @@ const SidePanel = props => {
           <UserPanel />
         </View>
         <View>
-          <UserPanel />
-
           <SideMenu />
         </View>
       </View>

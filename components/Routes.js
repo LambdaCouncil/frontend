@@ -115,35 +115,35 @@ const Routes = props => {
         render={props => <Assignments {...props} />} 
       />
 
-      <Route 
+      {/* <Route 
         path="/files" 
         render={props => <Discussions {...props} />} 
-      />
+      /> */}
 
-      <Route 
+      {/* <Route 
         path="/promptings" 
         render={props => <Discussions {...props} />} 
-      />
+      /> */}
 
-      <Route
-        path="/notifications"
+      {/* <Route
+        path="/adminnotifications"
         render={props => <Discussions {...props} />}
-      />
+      /> */}
 
-      <Route 
+      {/* <Route 
         path="/admin" 
         render={props => <Discussions {...props} />} 
-      />
+      /> */}
 
-      <Route
+      {/* <Route
         path="/closeassignments"
         render={props => <Discussions {...props} />}
-      />
+      /> */}
 
-      <Route 
+      {/* <Route 
         path="/donations" 
         render={props => <Discussions {...props} />} 
-      />
+      /> */}
 
       <ProtectedRoute
         component={props => <ProtectedRoutes />}

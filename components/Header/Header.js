@@ -51,7 +51,7 @@ const pageHeader = props => {
         return <Text>Files</Text>;
       case "/promptings":
         return <Text>Promptings</Text>;
-      case "/notifications":
+      case "/adminnotifications":
         return <Text>Notifications</Text>;
       case "/closeassignments":
         return <Text>Close Assignments</Text>;
