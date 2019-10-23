@@ -8,7 +8,7 @@ export default _ => {
     return (
         <View containerAllRoot>
 
-            <Carousel/>
+            <Carousel />
 
             <View buttonContainerRoot>
 

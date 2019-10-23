@@ -31,7 +31,7 @@ function ChangePassword(props) {
       behavior='padding'
     >
 
-      <Link onPress={props.history.goBack()} style={styles.link}>
+      <Link onPress={() => props.history.goBack()} style={styles.link}>
         <Icon
           name='arrow-back'
           color='green'
@@ -72,9 +72,6 @@ function ChangePassword(props) {
       <Link to='/home'>
         <H3>Cancel</H3>
       </Link>
-
-
-
 
     </KeyboardAvoidingView>
 
