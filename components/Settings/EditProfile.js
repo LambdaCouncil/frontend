@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import firebase from "../../firebase"
-import {KeyboardAvoidingView, StyleSheet} from 'react-native'
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native'
 import {Input, Text, Label, Item, H1, H3} from 'native-base'
 import {Link, withRouter} from 'react-router-native'
 import {connect} from 'react-redux'
@@ -44,62 +44,57 @@ function EditProfile(props) {
 
     <KeyboardAvoidingView
       style={styles.inputContainer}
-      behavior='padding'
-    >
-
+      behavior='padding'>
       <Link onPress={() => props.history.goBack()} style={styles.link}>
         <Icon
           name='arrow-back'
           color='green'
-          style={styles.backButton}
-        />
+          style={styles.backButton}/>
       </Link>
-
-      <H1>Edit Profile</H1>
-
-      <Text>Upload Photo</Text>
-
-
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>First Name</Label>
-        <Input onChangeText={handleFirstName}/>
-      </Item>
-
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Last Name</Label>
-        <Input onChangeText={handleLastName}/>
-      </Item>
-
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Calling</Label>
-        <Input onChangeText={handleChangeCalling}/>
-      </Item>
-
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Email</Label>
-        <Input
-          onChangeText={handleChangeEmail}
-        />
-      </Item>
-
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Phone</Label>
-        <Input
-          onChangeText={handleChangePhone}
-        />
-      </Item>
-
-      <Link to='/changepassword'>
-        <H3>Change Password</H3>
-      </Link>
-      <H3 onPress={deleteAccount}>Delete Account</H3>
-      <Link to='/settings'>
-        <H3>Cancel</H3>
-      </Link>
-
-
+      <View style={styles.pageView}>
+        <H1>Edit Profile</H1>
+        <Text>Upload Photo</Text>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>First Name</Label>
+          <Input onChangeText={handleFirstName}/>
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Last Name</Label>
+          <Input onChangeText={handleLastName}/>
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Calling</Label>
+          <Input onChangeText={handleChangeCalling}/>
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Email</Label>
+          <Input
+            onChangeText={handleChangeEmail}
+          />
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Phone</Label>
+          <Input
+            onChangeText={handleChangePhone}
+          />
+        </Item>
+        <View style={styles.buttonsBottom}>
+          <View style={styles.button}>
+          <Link to='/changepassword'>
+            <Text style={styles.password}>Change Password</Text>
+          </Link>
+          </View>
+        <View style={styles.button}>
+          <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
+        </View>
+        <View style={styles.button}>
+          <Link to='/settings'>
+            <Text style={styles.cancel}>Cancel</Text>
+          </Link>
+        </View>
+        </View>
+      </View>
     </KeyboardAvoidingView>
-
   )
 }
 
@@ -107,9 +102,9 @@ function EditProfile(props) {
 const styles = StyleSheet.create({
   inputContainer: {
     height: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
   link: {
     position: 'absolute',
@@ -121,9 +116,47 @@ const styles = StyleSheet.create({
   backButton: {
     fontSize: 50
   },
-  inputItem: {
-    marginVertical: 10
-  }
+  pageView: {
+    marginHorizontal: 20,
+    marginTop: 80,
+  },
+  header: {
+    fontSize: 28,
+    marginBottom: 10,
+    fontFamily: 'gotham',
+    fontWeight: '500',
+  },
+  subHeader: {
+    fontSize: 17,
+    fontWeight: '500',
+    fontFamily: 'bern2'
+  },
+  textContent: {
+    fontSize: 17,
+    fontFamily: 'bern2',
+  },
+  contentDivs: {
+    marginVertical: 10,
+    lineHeight: 24
+  },
+  buttonsBottom: {
+    marginTop: 10,
+    fontSize: 17,
+    fontFamily: 'bern2',
+    lineHeight: 24
+  },
+  button: {
+    marginVertical: 15,
+  },
+  password: {
+    color: '#288365'
+  },
+  delete: {
+    color: '#dd1d06'
+  },
+  cancel: {
+    color: 'black'
+  },
 })
 
 
