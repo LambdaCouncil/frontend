@@ -1,12 +1,13 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'native-base';
-import { Link, withRouter } from 'react-router-native';
+import React from 'react'
+import { Button, View, Text } from 'native-base'
+import { Link, withRouter } from 'react-router-native'
+
+import firebase from '../../firebase'
 
 const SideMenu = props => {
-  // console.log('props in SideMenu', props);
+
   return (
-    <View sytle={styles.sideMenu}>
+    <View>
       <Button light>
         <Link to="/agendas">
           <Text>Agendas</Text>
@@ -54,20 +55,12 @@ const SideMenu = props => {
       </Button>
       <Button light>
         <Link to="/login">
-          <Text>Log Out</Text>
+          <Text onPress={() => firebase.auth().signOut()}>Log Out</Text>
         </Link>
       </Button>
     </View>
-  );
-};
+  )
 
-const styles = StyleSheet.create({
-  sideMenu: {
-    marginTop: 100,
-    paddingVertical: 100,
-    borderWidth: 2,
-    borderColor: 'red'
-  }
-})
+}
 
-export default withRouter(SideMenu);
+export default withRouter(SideMenu)
