@@ -28,13 +28,13 @@ let slideData = [
 
 export default class MyCarousel extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             currentIndex: 0
         }
 
-        this.onSnapToItem = this.onSnapToItem.bind(this);
+        this.onSnapToItem = this.onSnapToItem.bind(this)
     }
 
 
@@ -45,7 +45,7 @@ export default class MyCarousel extends Component {
                 <Text style = {itemDescriptionStyle}>{ item.description }</Text>
                 <Image source = {item.image} style = {{ resizeMode: "cover" }} />
             </View>
-        );
+        )
     }
 
     onSnapToItem(slideIndex) {
@@ -57,7 +57,7 @@ export default class MyCarousel extends Component {
             <>
                 <CarouselPositionList length = {slideData.length} position = {this.state.currentIndex} />
                 <Carousel
-                    ref={(c) => { this._carousel = c; }}
+                    ref={(c) => { this._carousel = c }}
                     data={slideData}
                     renderItem={this._renderItem}
                     sliderWidth={Dimensions.get('window').width}
@@ -66,7 +66,7 @@ export default class MyCarousel extends Component {
                     loop = {true}
                 />
             </>
-        );
+        )
     }
 }
 
