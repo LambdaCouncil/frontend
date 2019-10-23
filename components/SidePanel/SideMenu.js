@@ -18,7 +18,7 @@ const SideMenu = props => {
         </Link>
       </Button>
       <Button light>
-        <Link to="/home">
+        <Link to="/assignments">
           <Text>Assignments</Text>
         </Link>
       </Button>

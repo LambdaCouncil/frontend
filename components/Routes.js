@@ -18,6 +18,8 @@ import SubmitFeedback from "./Settings/SubmitFeedback";
 import Channels from "./SidePanel/Channels";
 import Messages from "./Messages/Messages";
 import Discussions from "./Discussions/Discussions";
+import Agendas from "./Agendas/Agendas";
+import Assignments from './Assignments';
 
 const Routes = props => {
   useEffect(_ => {
@@ -99,13 +101,18 @@ const Routes = props => {
       />
 
       <Route 
+        path="/agendas" 
+        render={props => <Agendas {...props} />} 
+      />
+
+      <Route 
         path="/discussions" 
         render={props => <Discussions {...props} />} 
       />
 
       <Route 
-        path="/agendas" 
-        render={props => <Discussions {...props} />} 
+        path="/assignments" 
+        render={props => <Assignments {...props} />} 
       />
 
       <Route 
