@@ -38,12 +38,12 @@ export default class MyCarousel extends Component {
     }
 
 
-    _renderItem ({item, index}) {
+    _renderItem({ item, index }) {
         return (
-            <View style = {itemViewStyle}>
-                <Text style = {itemTitleStyle}>{ item.title }</Text>
-                <Text style = {itemDescriptionStyle}>{ item.description }</Text>
-                <Image source = {item.image} style = {{ resizeMode: "cover" }} />
+            <View style={itemViewStyle}>
+                <Text style={itemTitleStyle}>{item.title}</Text>
+                <Text style={itemDescriptionStyle}>{item.description}</Text>
+                <Image source={item.image} style={{ resizeMode: "cover" }} />
             </View>
         )
     }
@@ -52,18 +52,18 @@ export default class MyCarousel extends Component {
         this.setState({ currentIndex: slideIndex })
     }
 
-    render () {
+    render() {
         return (
             <>
-                <CarouselPositionList length = {slideData.length} position = {this.state.currentIndex} />
+                <CarouselPositionList length={slideData.length} position={this.state.currentIndex} />
                 <Carousel
                     ref={(c) => { this._carousel = c }}
                     data={slideData}
                     renderItem={this._renderItem}
                     sliderWidth={Dimensions.get('window').width}
                     itemWidth={Dimensions.get('window').width}
-                    onBeforeSnapToItem = {this.onSnapToItem}
-                    loop = {true}
+                    onBeforeSnapToItem={this.onSnapToItem}
+                    loop={true}
                 />
             </>
         )
@@ -74,22 +74,22 @@ const CarouselPositionList = props => {
 
     const generateArray = n => {
         const array = []
-    
-        for(let i = 0; i < n; i++)
+
+        for (let i = 0; i < n; i++)
             array.push(i)
-    
+
         return array
     }
 
-    const isActive = index => index === props.position 
+    const isActive = index => index === props.position
 
     const positions = generateArray(props.length)
 
     return (
-        <View style = {carouselPositionListStyle}>
-            { 
-                positions.map(index => 
-                    <CarouselPosition key = {index} isActive = {isActive(index)} />
+        <View style={carouselPositionListStyle}>
+            {
+                positions.map(index =>
+                    <CarouselPosition key={index} isActive={isActive(index)} />
                 )
             }
         </View>
@@ -104,42 +104,42 @@ const CarouselPosition = ({ isActive }) => {
         backgroundColor: getColor(),
     }
 
-    return <View style = {carouselStyle} />
+    return <View style={carouselStyle} />
 }
 
 const itemViewStyle = {
-    display: "flex", 
-    flexDirection: "column", 
-    justifyContent: "flex-end", 
-    alignItems: "center", 
-    height: "100%", 
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
     width: "100%"
 }
 
 const itemTitleStyle = {
-    fontSize: 30, 
+    fontSize: 30,
     fontFamily: "gotham"
 }
 
 const itemDescriptionStyle = {
-    marginHorizontal: "10%", 
-    textAlign: "center", 
-    marginVertical: 15, 
-    fontSize: 16, 
-    fontFamily: "bern-r", 
+    marginHorizontal: "10%",
+    textAlign: "center",
+    marginVertical: 15,
+    fontSize: 16,
+    fontFamily: "bern-r",
     lineHeight: 22
 }
 
 const carouselPositionListStyle = {
-    display: "flex", 
-    flexDirection: "row", 
+    display: "flex",
+    flexDirection: "row",
     justifyContent: "center",
     marginTop: "10%"
 }
 
 const defaultCarouselPositionStyle = {
-    width: 11, 
-    height: 11, 
-    borderRadius: 11/2,
+    width: 11,
+    height: 11,
+    borderRadius: 11 / 2,
     margin: 5
 }

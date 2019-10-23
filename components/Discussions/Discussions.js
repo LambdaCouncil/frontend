@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from '../Header/Header'
 import { List, ListItem, Thumbnail, Left, Body, Text, Right, Badge, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import moment from 'moment'
@@ -9,10 +10,11 @@ import pseudo from './pseudo'
 const Discussions = props => {
 
     return (
+
         <>
             <Icon backButton
                 onPress={() => props.history.goBack()}
-                name='arrow-dropleft'
+                name='arrow-back'
             />
             <List>
                 {pseudo

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { ActionSheet, Button, Container, Content, Header, Text  } from 'native-base'
 
-
 const MessageActionSheet = props => {
     const [buttonPressed, setButtonPressed] = useState(0)
     
@@ -13,17 +12,21 @@ const MessageActionSheet = props => {
         <Header />
         <Content padder>
           <Button
-            onPress={() =>
+            onPress={() => {
             ActionSheet.show(
               {
-                options: BUTTONS,
+                options: BUTTONS, 
                 cancelButtonIndex: CANCEL_INDEX,
-                title: "New Discussion"
+                title: "New Discussion",
+                tintColor: 'red'
               },
               buttonIndex => {
                 setButtonPressed({ clicked: BUTTONS[buttonIndex] });
-              }
-            )}
+                // alert to verify button presses are registered correctly
+                alert(buttonIndex)
+            }
+            )
+        }}
           >
             <Text>Plus Button</Text>
           </Button>

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import firebase from "../../firebase"
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3 } from 'native-base'
+import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import Icon from '../Icon'
 import { signUpDisplayName } from '../../actions'
 
 function ChangePassword(props) {
@@ -31,51 +30,37 @@ function ChangePassword(props) {
       behavior='padding'
     >
 
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
-      </Link>
+      <Icon backButton
+        onPress={() => props.history.goBack()}
+        name='arrow-back'
+      />
 
       <H1>Change Password</H1>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>Old Password</Label>
-        <Input
-          onChangeText={handleOldPassword}
-          secureTextEntry={true}
-        />
+        <Input onChangeText={handleOldPassword} secureTextEntry={true} />
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>New Password</Label>
-        <Input
-          onChangeText={handleNewPassword}
-          secureTextEntry={true}
-        />
+        <Input onChangeText={handleNewPassword} secureTextEntry={true} />
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>Confirm New Password</Label>
-        <Input
-          onChangeText={handlePasswordConfirm}
-          secureTextEntry={true}
-        />
+        <Input onChangeText={handlePasswordConfirm} secureTextEntry={true} />
       </Item>
 
-      <Link to='/editprofile'>
+      <Link to="/editprofile">
         <H3>Save</H3>
       </Link>
 
-      <Link to='/home'>
+      <Link to="/home">
         <H3>Cancel</H3>
       </Link>
-
     </KeyboardAvoidingView>
-
-  )
+  );
 }
 
 
