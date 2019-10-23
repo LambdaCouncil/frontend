@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import firebase from "../../firebase"
-import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
-import { Input, Text, Label, Item, H1, H3 } from 'native-base'
-import { Link, withRouter } from 'react-router-native'
-import { connect } from 'react-redux'
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native'
+import {Input, Text, Label, Item, H1, H3} from 'native-base'
+import {Link, withRouter} from 'react-router-native'
+import {connect} from 'react-redux'
 
 import Icon from '../Icon'
-import { signUpDisplayName } from '../../actions'
+import {signUpDisplayName} from '../../actions'
 
 function About(props) {
 
@@ -17,7 +17,6 @@ function About(props) {
       style={styles.inputContainer}
       behavior='padding'
     >
-
       <Link onPress={() => props.history.goBack()} style={styles.link}>
         <Icon
           name='arrow-back'
@@ -25,20 +24,27 @@ function About(props) {
           style={styles.backButton}
         />
       </Link>
-
-      <View>
-        <H1>Councils v.1.0</H1>
-        <H3>Terms of Use</H3>
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nunc tellus, convallis pharetra
-          condimentum eu, sodales eget magna. Maecenas auctor eget diam ac efficitur. Praesent et rhoncus erat, eu
-          consequat.</Text>
-        <H3>Privacy Policy</H3>
-        <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nunc tellus, convallis pharetra
-          condimentum eu, sodales eget magna. Maecenas auctor eget diam ac efficitur. Praesent et rhoncus erat, eu
-          consequat.</Text>
-        <H3>Contect</H3>
-        <Text>Email: info@councils.io</Text>
-        <Text>Web: councils.io</Text>
+      <View style={styles.pageView}>
+        <Text style={styles.header}>Councils v.1.0</Text>
+        <View style={styles.contentDivs}>
+          <Text style={styles.subHeader}>Terms of Use</Text>
+          <Text style={styles.textContent}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nunc
+            tellus, convallis pharetra
+            condimentum eu, sodales eget magna. Maecenas auctor eget diam ac efficitur. Praesent et rhoncus erat, eu
+            consequat.</Text>
+        </View>
+        <View style={styles.contentDivs}>
+          <Text style={styles.subHeader}>Privacy Policy</Text>
+          <Text style={styles.textContent}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nunc
+            tellus, convallis pharetra
+            condimentum eu, sodales eget magna. Maecenas auctor eget diam ac efficitur. Praesent et rhoncus erat, eu
+            consequat.</Text>
+        </View>
+        <View style={styles.contentDivs}>
+          <Text style={styles.subHeader}>Contact</Text>
+          <Text style={styles.contactContent}>Email: info@councils.io</Text>
+          <Text style={styles.contactContent}>Web: councils.io</Text>
+        </View>
       </View>
 
 
@@ -51,9 +57,9 @@ function About(props) {
 const styles = StyleSheet.create({
   inputContainer: {
     height: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
   link: {
     position: 'absolute',
@@ -65,8 +71,34 @@ const styles = StyleSheet.create({
   backButton: {
     fontSize: 50
   },
-  inputItem: {
-    marginVertical: 10
+  pageView: {
+    marginHorizontal: 20,
+    marginTop: 80,
+  },
+  header: {
+    fontSize: 28,
+    marginBottom: 10,
+    fontFamily: 'gotham',
+    fontWeight: '500',
+  },
+  subHeader: {
+    fontSize: 17,
+    fontWeight: '500',
+    fontFamily: 'bern2'
+  },
+  textContent: {
+    fontSize: 17,
+    fontFamily: 'bern2',
+  },
+  contentDivs: {
+    marginVertical: 10,
+    lineHeight: 24
+  },
+  contactContent: {
+    marginVertical: 10,
+    fontSize: 17,
+    fontFamily: 'bern2',
+    lineHeight: 24
   }
 })
 
