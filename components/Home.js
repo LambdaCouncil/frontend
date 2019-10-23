@@ -5,12 +5,14 @@ import { connect } from 'react-redux'
 import firebase from '../firebase'
 import { H3 } from "native-base";
 import { Link } from "react-router-native";
+import Header from './Header/Header';
 
 const Home = props => {
-    console.log('homeprops', props.currentUser)
+    // console.log('homeprops', props.currentUser)
     return (
-        <View style={homeStyle}>
-            <Text>{`Hello, ${props.currentUser.displayName}`}</Text>
+        <View >
+            <Header />
+            {/* <Text>{`Hello, ${props.currentUser.displayName}`}</Text>
             <Text style = {{ fontFamily: "gotham" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
             <Text style = {{ fontFamily: "bern" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
             <Text style = {{ fontFamily: "bern2" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
@@ -20,7 +22,7 @@ const Home = props => {
             </Link>
             <Link to='/messages'>
                 <H3>Messages</H3>
-            </Link>
+            </Link> */}
         </View>
     )
 }

@@ -1,10 +1,11 @@
 import React, { createRef, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Button, Drawer, Header, Left, Icon, Body } from 'native-base';
+import { Button, Drawer, Left, Icon, Body } from 'native-base';
 import { connect } from "react-redux";
 
 import UserPanel from './UserPanel';
 import SideMenu from './SideMenu';
+import Header from '../Header/Header';
 
 
 const SidePanel = props => {
@@ -16,28 +17,16 @@ const SidePanel = props => {
 
   return (
     <View>
-      <Header>
-        <Left>
-          <Button onPress={() => togglePanel()}>
-            <Icon name="menu" />
-          </Button>
-        </Left>
-        <Body>
-          <Text>Page Name</Text>
-        </Body>
-      </Header>
-      {showPanel ? (
-        <View style={styles.content}>
-          <View>
-            <UserPanel />
-          </View>
-          <View>
-            <SideMenu />
-          </View>
+      <View style={styles.content}>
+        <View>
+          <UserPanel />
         </View>
-      ) : (
-        <Text>When panel is closed, display current page</Text>
-      )}
+        <View>
+          <UserPanel />
+
+          <SideMenu />
+        </View>
+      </View>
     </View>
   );
 };
