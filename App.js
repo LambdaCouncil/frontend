@@ -18,14 +18,12 @@ const App = _ => {
 
   YellowBox.ignoreWarnings(['Setting a timer'])
 
-  useEffect(_ => {
-    Font.loadAsync({
-      'gotham': require("./assets/Fonts/Gotham-Medium.ttf"),
-      'bern-b': require("./assets/Fonts/BerninaSans-Bold.otf"),
-      'bern-r': require("./assets/Fonts/BerninaSans-Regular.otf"),
-      'bern-sb': require("./assets/Fonts/BerninaSans-Semibold.otf"),
-    })
-  }, [])
+  Font.loadAsync({
+    'gotham': require("./assets/Fonts/Gotham-Medium.ttf"),
+    'bern-b': require("./assets/Fonts/BerninaSans-Bold.otf"),
+    'bern-r': require("./assets/Fonts/BerninaSans-Regular.otf"),
+    'bern-sb': require("./assets/Fonts/BerninaSans-Semibold.otf"),
+  })
 
   return (
     <Provider store={store}>
