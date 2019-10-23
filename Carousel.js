@@ -1,22 +1,77 @@
-import React, { useState, useEffect } from "react";
-import { View, ScrollView, Image, Text } from "react-native";
+import React, { Component, useEffect } from "react"
+import { View, Text, Image, Dimensions } from 'react-native'
 
-const defaultPath = "./assets/Screens/";
+import Carousel from 'react-native-snap-carousel'
 
-export default _ => {
-    const [position, setPosition] = useState(1);
+let slideData = [
+    {
+        title: "Councils",
+        description: "Area, Stake and Ward leadership communication.",
+        image: require("./assets/Screens/tour1.png")
+    },
+    {
+        title: "Agendas",
+        description: "Post agendas so councils come inspired & prepared.",
+        image: require("./assets/Screens/tour2.png")
+    },
+    {
+        title: "Discussions",
+        description: "Start council wide or private discussions when you're prompted.",
+        image: require("./assets/Screens/tour3.png")
+    },
+    {
+        title: "Assignments",
+        description: "Create, delegate or complete assignments during the week.",
+        image: require("./assets/Screens/tour4.png")
+    },
+]
 
-    return (
-        <View>
-            <CarouselPositionList length = {4} position = {position} />
-            <ScrollView horizontal = {true}>
+export default class MyCarousel extends Component {
+    constructor(props) {
+        super(props);
 
-            </ScrollView>
-        </View>
-    );
+        this.state = {
+            currentIndex: 0
+        }
+
+        this.onSnapToItem = this.onSnapToItem.bind(this);
+    }
+
+
+    _renderItem ({item, index}) {
+        return (
+            <View style = {itemViewStyle}>
+                <Text style = {itemTitleStyle}>{ item.title }</Text>
+                <Text style = {itemDescriptionStyle}>{ item.description }</Text>
+                <Image source = {item.image} style = {{ resizeMode: "cover" }} />
+            </View>
+        );
+    }
+
+    onSnapToItem(slideIndex) {
+        this.setState({ currentIndex: slideIndex })
+    }
+
+    render () {
+        return (
+            <>
+                <CarouselPositionList length = {slideData.length} position = {this.state.currentIndex} />
+                <Carousel
+                    ref={(c) => { this._carousel = c; }}
+                    data={slideData}
+                    renderItem={this._renderItem}
+                    sliderWidth={Dimensions.get('window').width}
+                    itemWidth={Dimensions.get('window').width}
+                    onBeforeSnapToItem = {this.onSnapToItem}
+                    loop = {true}
+                />
+            </>
+        );
+    }
 }
 
 const CarouselPositionList = props => {
+
     const generateArray = n => {
         const array = []
     
@@ -52,20 +107,34 @@ const CarouselPosition = ({ isActive }) => {
     return <View style = {carouselStyle} />
 }
 
-const CarouselElement = ({ ...props }) => {
-    return (
-        <View>
-            <Text>{title}</Text>
-            <Text>{description}</Text>
-            <Image source = {image} />
-        </View>
-    );
+const itemViewStyle = {
+    display: "flex", 
+    flexDirection: "column", 
+    justifyContent: "flex-end", 
+    alignItems: "center", 
+    height: "100%", 
+    width: "100%"
+}
+
+const itemTitleStyle = {
+    fontSize: 30, 
+    fontFamily: "gotham"
+}
+
+const itemDescriptionStyle = {
+    marginHorizontal: "10%", 
+    textAlign: "center", 
+    marginVertical: 15, 
+    fontSize: 16, 
+    fontFamily: "bern-r", 
+    lineHeight: 22
 }
 
 const carouselPositionListStyle = {
     display: "flex", 
     flexDirection: "row", 
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: "10%"
 }
 
 const defaultCarouselPositionStyle = {
