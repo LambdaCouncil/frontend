@@ -21,8 +21,9 @@ const App = _ => {
   useEffect(_ => {
     Font.loadAsync({
       'gotham': require("./assets/Fonts/Gotham-Medium.ttf"),
-      'bern': require("./assets/Fonts/BerninaSans-Bold.otf"),
-      'bern2': require("./assets/Fonts/BerninaSans-Regular.otf")
+      'bern-b': require("./assets/Fonts/BerninaSans-Bold.otf"),
+      'bern-r': require("./assets/Fonts/BerninaSans-Regular.otf"),
+      'bern-sb': require("./assets/Fonts/BerninaSans-Semibold.otf"),
     })
   }, [])
 
