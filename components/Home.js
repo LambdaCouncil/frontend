@@ -12,8 +12,9 @@ const Home = props => {
         <View style={homeStyle}>
             <Text>{`Hello, ${props.currentUser.displayName}`}</Text>
             <Text style = {{ fontFamily: "gotham" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
-            <Text style = {{ fontFamily: "bern" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
-            <Text style = {{ fontFamily: "bern2" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
+            <Text style = {{ fontFamily: "bern-b" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
+            <Text style = {{ fontFamily: "bern-r" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
+            <Text style = {{ fontFamily: "bern-sb" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
             <Button onPress={() => firebase.auth().signOut()} title='Log out' />
             <Link to='/settings'>
                 <H3>Settings</H3>
