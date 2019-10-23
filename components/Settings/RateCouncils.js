@@ -1,7 +1,7 @@
 import React from 'react'
-import {KeyboardAvoidingView, StyleSheet, View} from "react-native";
-import {H1} from 'native-base'
-import {Link, withRouter} from 'react-router-native'
+import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
+import { H1 } from 'native-base'
+import { Link, withRouter } from 'react-router-native'
 import Icon from "../Icon";
 
 const RateCouncils = (props) => {

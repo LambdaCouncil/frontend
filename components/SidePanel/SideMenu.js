@@ -23,17 +23,17 @@ const SideMenu = props => {
         </Link>
       </Button>
       <Button light>
-        <Link to="/login">
+        <Link to="/files">
           <Text>Files</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/login">
+        <Link to="/promptings">
           <Text>Promptings</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/login">
+        <Link to="/pushnotifications">
           <Text>Notifications</Text>
         </Link>
       </Button>

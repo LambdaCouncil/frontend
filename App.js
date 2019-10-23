@@ -35,6 +35,7 @@ const App = _ => {
       </NativeRouter>
     </Provider>
   )
+
 }
 
 export default App
