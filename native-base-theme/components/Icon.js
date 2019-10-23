@@ -8,6 +8,13 @@ export default _ => {
 
   return {
     fontSize: variable.iconFontSize,
-    color: variable.textColor
+    color: variable.textColor,
+    '.backButton': {
+      marginTop: 20,
+      marginLeft: 10,
+      fontSize: 50,
+      color: text.greal
+    }
   }
+
 }

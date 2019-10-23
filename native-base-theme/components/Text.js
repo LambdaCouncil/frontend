@@ -24,6 +24,7 @@ export default _ => {
     },
     '.registerButton': {
       borderRadius: 7.5,
+      overflow: 'hidden',
       backgroundColor: ui.greal,
       padding: 10,
       paddingBottom: 15,

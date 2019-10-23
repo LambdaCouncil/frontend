@@ -1,21 +1,18 @@
 import React from 'react'
-import { List, ListItem, Thumbnail, Left, Body, Text, Right, Badge } from 'native-base'
+import { List, ListItem, Thumbnail, Left, Body, Text, Right, Badge, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import moment from 'moment'
 
 import variables from '../../native-base-theme/variables/commonColor'
-import Icon from '../Icon'
 import pseudo from './pseudo'
 
 const Discussions = props => {
 
     return (
         <>
-            <Icon
+            <Icon backButton
                 onPress={() => props.history.goBack()}
-                name='arrow-back'
-                color={variables.councils.text.greal}
-                style={{ marginTop: 25, fontSize: 50 }}
+                name='arrow-dropleft'
             />
             <List>
                 {pseudo

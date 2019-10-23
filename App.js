@@ -10,14 +10,14 @@ import thunk from 'redux-thunk'
 import getTheme from './native-base-theme/components'
 import common from './native-base-theme/variables/commonColor'
 import reducer from './reducer'
-import Routes from './components/Discussions/Discussions'
-// import Routes from './components/Routes'
+// import Routes from './components/Discussions/Discussions'
+import Routes from './components/Routes'
 
 const store = createStore(reducer, applyMiddleware(thunk))
 
 const App = _ => {
 
-  YellowBox.ignoreWarnings(['Setting a timer'])
+  YellowBox.ignoreWarnings(['Setting a timer', 'Deprecation warning'])
 
   Font.loadAsync({
     'gotham': require("./assets/Fonts/Gotham-Medium.ttf"),
