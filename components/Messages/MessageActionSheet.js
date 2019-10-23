@@ -1,9 +1,13 @@
-import React from 'react'
-import { ActionSheet } from 'native-base'
+import React, { useState } from 'react'
+import { ActionSheet, Button, Container, Content, Header, Text  } from 'native-base'
 
 
 const MessageActionSheet = props => {
-
+    const [buttonPressed, setButtonPressed] = useState(0)
+    
+    const BUTTONS = ['Council', 'Private', 'Cancel']
+    const CANCEL_INDEX = 2
+    
     return (
         <Container>
         <Header />
@@ -14,15 +18,14 @@ const MessageActionSheet = props => {
               {
                 options: BUTTONS,
                 cancelButtonIndex: CANCEL_INDEX,
-                destructiveButtonIndex: DESTRUCTIVE_INDEX,
-                title: "Testing ActionSheet"
+                title: "New Discussion"
               },
               buttonIndex => {
-                this.setState({ clicked: BUTTONS[buttonIndex] });
+                setButtonPressed({ clicked: BUTTONS[buttonIndex] });
               }
             )}
           >
-            <Text>Actionsheet</Text>
+            <Text>Plus Button</Text>
           </Button>
         </Content>
       </Container>
