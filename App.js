@@ -10,21 +10,21 @@ import thunk from 'redux-thunk'
 import getTheme from './native-base-theme/components'
 import common from './native-base-theme/variables/commonColor'
 import reducer from './reducer'
+// import Routes from './components/Discussions/Discussions'
 import Routes from './components/Routes'
 
 const store = createStore(reducer, applyMiddleware(thunk))
 
 const App = _ => {
 
-  YellowBox.ignoreWarnings(['Setting a timer'])
+  YellowBox.ignoreWarnings(['Setting a timer', 'Deprecation warning'])
 
-  useEffect(_ => {
-    Font.loadAsync({
-      'gotham': require("./assets/Fonts/Gotham-Medium.ttf"),
-      'bern': require("./assets/Fonts/BerninaSans-Bold.otf"),
-      'bern2': require("./assets/Fonts/BerninaSans-Regular.otf")
-    })
-  }, [])
+  Font.loadAsync({
+    'gotham': require("./assets/Fonts/Gotham-Medium.ttf"),
+    'bern-b': require("./assets/Fonts/BerninaSans-Bold.otf"),
+    'bern-r': require("./assets/Fonts/BerninaSans-Regular.otf"),
+    'bern-sb': require("./assets/Fonts/BerninaSans-Semibold.otf"),
+  })
 
   return (
     <Provider store={store}>

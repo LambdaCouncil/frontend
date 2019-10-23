@@ -25,9 +25,18 @@ function ChangePassword(props) {
   const changePassword = _ => console.log('Password Changed')
 
   return (
-    <KeyboardAvoidingView style={styles.inputContainer} behavior="padding">
+
+    <KeyboardAvoidingView
+      style={styles.inputContainer}
+      behavior='padding'
+    >
+
       <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon name="menu" color="green" style={styles.backButton} />
+        <Icon
+          name='arrow-back'
+          color='green'
+          style={styles.backButton}
+        />
       </Link>
 
       <H1>Change Password</H1>

@@ -153,6 +153,7 @@ const Routes = props => {
   );
 };
 
+
 const ProtectedRoute = ({ component: Component, currentUser }) => (
   <Route
     render={props =>
