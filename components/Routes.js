@@ -97,16 +97,12 @@ const Routes = props => {
         />
 
         <Route
-<<<<<<< HEAD
           path='/messageActionSheet'
           render={props => <MessageActionSheet {...props} />}
         />
 
         <Route
           path='/rate'
-=======
-          path="/rate"
->>>>>>> a2b5bf680620a63cf97eab02c12a00d3837600ed
           render={props => <RateCouncils {...props} />}
         />
 
