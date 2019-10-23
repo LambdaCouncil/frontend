@@ -22,6 +22,9 @@ const Home = props => {
             <Link to='/messages'>
                 <H3>Messages</H3>
             </Link>
+            <Link to='/messageActionSheet'>
+                <H3>Message Action Sheet</H3>
+            </Link>
         </View>
     )
 }

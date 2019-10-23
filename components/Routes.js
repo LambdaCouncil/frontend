@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Switch, withRouter, Route, Redirect } from 'react-router-native'
 import { ActivityIndicator, View } from 'react-native'
 
+import MessageActionSheet from './Messages/MessageActionSheet'
 import firebase from '../firebase'
 import Register from './Register'
 import Login from './LogIn'
@@ -94,6 +95,11 @@ const Routes = props => {
         <Route
           path='/messages'
           render={props => <Discussions {...props} />}
+        />
+
+        <Route
+          path='/messageActionSheet'
+          render={props => <MessageActionSheet {...props} />}
         />
 
         <Route
