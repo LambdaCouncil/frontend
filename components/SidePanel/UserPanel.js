@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
-import firebase from "../../firebase";
-import { Picker, StyleSheet, Modal } from "react-native";
+import React, { useState, useEffect } from "react"
+import firebase from "../../firebase"
 import { Grid, Col, Row, Header, Icon, Thumbnail, View, Text, Left, Item, Body } from 'native-base'
-// import { Header, Icon, Image } from 'react-native-elements';
-// import { Grid, Row, Col } from 'react-native-easy-grid';
-import { connect } from "react-redux";
+import { connect } from "react-redux"
 
 const UserPanel = props => {
-  const [user, setUser] = useState(props.currentUser);
 
-  // console.log('user in UserPanel', user.providerData);
+  const [user, setUser] = useState(props.currentUser)
+
   useEffect(() => {
-    setUser(props.currentUser);
-  }, []);
+    setUser(props.currentUser)
+  }, [])
 
   const dropdownOptions = () => [
     {
@@ -32,14 +29,14 @@ const UserPanel = props => {
       key: "signout",
       text: <span onClick={handleSignout}>Sign Out</span>
     }
-  ];
+  ]
 
   const handleSignout = () => {
     firebase
       .auth()
       .signOut()
-      .then(() => console.log("Signed Out"));
-  };
+      .then(() => console.log("Signed Out"))
+  }
 
   return (
     <Item>
@@ -51,33 +48,9 @@ const UserPanel = props => {
         <Text note>{user.email}</Text>
       </Left>
     </Item>
-  );
-};
+  )
+}
 
-const mapStateToProps = state => ({
-  // currentUser: state.user.currentUser
-  ...state
-});
+const mapStateToProps = state => ({ ...state })
 
-const styles = StyleSheet.create({
-  container: {
-    color: '#3CB18A',
-    // paddingVertical: 'auto'
-  },
-  header: {
-    // marginTop: 100,
-    color: '#3CB18A',
-    backgroundColor: 'white',
-    alignItems: 'center'
-  },
-  image: {
-    height: 40,
-    width: 40,
-    borderRadius: 50,
-  },
-  userInfo: {
-    padding: 10
-  }
-})
-
-export default connect(mapStateToProps, {})(UserPanel);
+export default connect(mapStateToProps, {})(UserPanel)
