@@ -94,25 +94,6 @@ const Messages = (props, { currentChannel, currentUser }) => {
   return (
     <Container contentContainerStyle={style.screen}>
 
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color={variables.councils.text.greal}
-          style={styles.backButton}
-        />
-      </Link>
-
-      <Header>
-        <Text>Header</Text>
-        {/* <MessagesHeader
-          channelName={displayChannelName(channel)}
-          numOfUsers={numUniqueUsers}
-          handleSearchChange={handleSearchChange}
-        /> */}
-      </Header>
-
-
-
       {/* 
           List is similar in appearance to the Discussions section in the Style Guide. 
           Alternatively, we could use Card for each message.

@@ -1,12 +1,13 @@
-import React, { useEffect } from "react"
-import { connect } from "react-redux"
-import { Switch, withRouter, Route, Redirect } from "react-router-native"
-import { ActivityIndicator, View } from "react-native"
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { Switch, withRouter, Route, Redirect } from 'react-router-native'
+import { ActivityIndicator, View } from 'react-native'
 
-import firebase from "../firebase"
-import Register from "./Register"
-import Login from "./LogIn"
-import Root from "../Root"
+import MessageActionSheet from './Messages/MessageActionSheet'
+import firebase from '../firebase'
+import Register from './Register'
+import Login from './LogIn'
+import Root from '../Root'
 import ProtectedRoutes from "./ProtectedRoutes"
 import { setUser, clearUser } from "../actions"
 import CompleteProfile from "./CompleteProfile"
@@ -96,7 +97,12 @@ const Routes = props => {
         />
 
         <Route
-          path="/rate"
+          path='/messageActionSheet'
+          render={props => <MessageActionSheet {...props} />}
+        />
+
+        <Route
+          path='/rate'
           render={props => <RateCouncils {...props} />}
         />
 

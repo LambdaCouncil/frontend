@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Switch, withRouter, Route, Redirect } from "react-router-native";
 import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
@@ -63,7 +63,7 @@ const pageHeader = props => {
   }
 
   return (
-    <Fragment>
+    <>
       <Header>
         <Left>
           <Button onPress={() => togglePanel()}>
@@ -74,12 +74,8 @@ const pageHeader = props => {
           <Text>{renderPageName()}</Text>
         </Body>
       </Header>
-      {showPanel ? (
-        <SidePanel />
-      ) : (
-        <Text>When panel is closed, display current page</Text>
-      )}
-    </Fragment>
+      {showPanel && <SidePanel />}
+    </>
   );
 };
 
