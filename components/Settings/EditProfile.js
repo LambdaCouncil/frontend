@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import firebase from "../../firebase"
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3 } from 'native-base'
-import { Link, withRouter } from 'react-router-native'
-import { connect } from 'react-redux'
+import {KeyboardAvoidingView, StyleSheet} from 'react-native'
+import {Input, Text, Label, Item, H1, H3} from 'native-base'
+import {Link, withRouter} from 'react-router-native'
+import {connect} from 'react-redux'
 
 import Icon from '../Icon'
-import { signUpDisplayName } from '../../actions'
+import {signUpDisplayName} from '../../actions'
 
 function EditProfile(props) {
 
@@ -28,8 +28,8 @@ function EditProfile(props) {
 
   const handleChangePhone = text => setPhone(text)
 
-  const handleSubmit = () => {
-    console.log('Info updated')
+  const changePasswordClicked = () => {
+    console.log('Change Password Clicked')
   }
 
   const changePassword = () => {
@@ -62,17 +62,17 @@ function EditProfile(props) {
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>First Name</Label>
-        <Input onChangeText={handleFirstName} />
+        <Input onChangeText={handleFirstName}/>
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>Last Name</Label>
-        <Input onChangeText={handleLastName} />
+        <Input onChangeText={handleLastName}/>
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>Calling</Label>
-        <Input onChangeText={handleChangeCalling} />
+        <Input onChangeText={handleChangeCalling}/>
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
@@ -96,6 +96,7 @@ function EditProfile(props) {
       <Link to='/settings'>
         <H3>Cancel</H3>
       </Link>
+
 
     </KeyboardAvoidingView>
 

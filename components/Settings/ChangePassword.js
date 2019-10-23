@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import firebase from "../../firebase"
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3 } from 'native-base'
-import { Link, withRouter } from 'react-router-native'
-import { connect } from 'react-redux'
-
+import {KeyboardAvoidingView, StyleSheet} from 'react-native'
+import {Input, Text, Label, Item, H1, H3} from 'native-base'
+import {Link, withRouter} from 'react-router-native'
 import Icon from '../Icon'
-import { signUpDisplayName } from '../../actions'
 
 function ChangePassword(props) {
 
@@ -24,23 +21,21 @@ function ChangePassword(props) {
 
   const changePassword = _ => console.log('Password Changed')
 
-  return (
+  console.log('ChangePasswordProps', props)
 
+  return (
     <KeyboardAvoidingView
       style={styles.inputContainer}
       behavior='padding'
     >
-
-      <Link onPress={props.history.goBack()} style={styles.link}>
+      <Link onPress={() => props.history.goBack()} style={styles.link}>
         <Icon
           name='arrow-back'
           color='green'
           style={styles.backButton}
         />
       </Link>
-
       <H1>Change Password</H1>
-
       <Item floatingLabel style={styles.inputItem}>
         <Label>Old Password</Label>
         <Input
@@ -48,7 +43,6 @@ function ChangePassword(props) {
           secureTextEntry={true}
         />
       </Item>
-
       <Item floatingLabel style={styles.inputItem}>
         <Label>New Password</Label>
         <Input
@@ -56,7 +50,6 @@ function ChangePassword(props) {
           secureTextEntry={true}
         />
       </Item>
-
       <Item floatingLabel style={styles.inputItem}>
         <Label>Confirm New Password</Label>
         <Input
@@ -64,20 +57,13 @@ function ChangePassword(props) {
           secureTextEntry={true}
         />
       </Item>
-
       <Link to='/editprofile'>
         <H3>Save</H3>
       </Link>
-
       <Link to='/home'>
         <H3>Cancel</H3>
       </Link>
-
-
-
-
     </KeyboardAvoidingView>
-
   )
 }
 

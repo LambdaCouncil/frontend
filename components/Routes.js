@@ -17,6 +17,8 @@ import PushNotifications from "./Settings/PushNotifications"
 import SubmitFeedback from "./Settings/SubmitFeedback"
 import Channels from './SidePanel/Channels'
 import Messages from './Messages/Messages'
+import RateCouncils from "./Settings/RateCouncils";
+import About from "./Settings/About";
 
 const Routes = props => {
 
