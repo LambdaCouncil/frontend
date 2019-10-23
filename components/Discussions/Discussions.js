@@ -1,24 +1,43 @@
 import React from 'react'
-import { List, ListItem, Thumbnail, Left, Body, Text, Right } from 'native-base'
+import { List, ListItem, Thumbnail, Left, Body, Text, Right, Badge } from 'native-base'
+import { withRouter } from 'react-router-native'
+import moment from 'moment'
 
-const Discussions = _ => {
+import variables from '../../native-base-theme/variables/commonColor'
+import Icon from '../Icon'
+import pseudo from './pseudo'
+
+const Discussions = props => {
 
     return (
-        <List style={{ marginVertical: 25 }}>
-            <ListItem avatar>
-                <Left>
-                    <Thumbnail />
-                </Left>
-                <Body>
-                    <Text>Whoever</Text>
-                    <Text note>Some stuff...</Text>
-                </Body>
-                <Right>
-                    <Text note>Time?</Text>
-                </Right>
-            </ListItem>
-        </List>
+        <>
+            <Icon
+                onPress={() => props.history.goBack()}
+                name='arrow-back'
+                color={variables.councils.text.greal}
+                style={{ marginTop: 25, fontSize: 50 }}
+            />
+            <List>
+                {pseudo
+                    .sort((conv1, conv2) => conv2.time - conv1.time)
+                    .map((conv, id) => (
+                        <ListItem avatar key={id}>
+                            <Left>
+                                <Thumbnail small source={{ uri: conv.image }} />
+                            </Left>
+                            <Body>
+                                <Text name new={conv.new > 0}>{conv.name}</Text>
+                                <Text snippet newSnippet={conv.new > 0}>{conv.message}</Text>
+                                <Text note>{moment(conv.time).format('DD/MM/YYYY')}</Text>
+                            </Body>
+                            <Right>
+                                <Text>{conv.new > 0 && conv.new}{' >'}</Text>
+                            </Right>
+                        </ListItem>
+                    ))}
+            </List>
+        </>
     )
 }
 
-export default Discussions
+export default withRouter(Discussions)

@@ -10,7 +10,8 @@ import thunk from 'redux-thunk'
 import getTheme from './native-base-theme/components'
 import common from './native-base-theme/variables/commonColor'
 import reducer from './reducer'
-import Routes from './components/Routes'
+import Routes from './components/Discussions/Discussions'
+// import Routes from './components/Routes'
 
 const store = createStore(reducer, applyMiddleware(thunk))
 

@@ -11,7 +11,7 @@ export default _ => {
     fontFamily: variable.fontFamily,
     color: variable.textColor,
     '.note': {
-      color: '#a7a7a7',
+      color: text.slateGrey,
       fontSize: variable.noteFontSize
     },
     '.loginButton': {
@@ -32,6 +32,20 @@ export default _ => {
       color: text.white,
       fontSize: 35
     },
+    '.snippet': {
+      color: text.nearBlack,
+    },
+    '.newSnippet': {
+      fontWeight: 'bold'
+    },
+    '.name': {
+      fontSize: 20,
+      color: text.nearBlack,
+    },
+    '.new': {
+      color: text.greal,
+      fontWeight: 'bold'
+    }
   }
 
 }

@@ -16,7 +16,7 @@ import Settings from "./Settings/Settings"
 import PushNotifications from "./Settings/PushNotifications"
 import SubmitFeedback from "./Settings/SubmitFeedback"
 import Channels from './SidePanel/Channels'
-import Messages from './Messages/Messages'
+import Discussions from './Discussions/Discussions'
 
 const Routes = props => {
 
@@ -43,7 +43,7 @@ const Routes = props => {
 
         <Route
           exact path='/'
-          render={props => <Root />}
+          render={props => <Root {...props} />}
         />
 
         <Route
@@ -93,7 +93,7 @@ const Routes = props => {
 
         <Route
           path='/messages'
-          render={props => <Messages {...props} />}
+          render={props => <Discussions {...props} />}
         />
 
         <Route
