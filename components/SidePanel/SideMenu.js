@@ -4,11 +4,11 @@ import { Button } from 'native-base';
 import { Link, withRouter } from 'react-router-native';
 
 const SideMenu = props => {
-  console.log('props in SideMenu', props);
+  // console.log('props in SideMenu', props);
   return (
     <View sytle={styles.sideMenu}>
       <Button light>
-        <Link to="/login">
+        <Link to="/agendas">
           <Text>Agendas</Text>
         </Link>
       </Button>
@@ -18,7 +18,7 @@ const SideMenu = props => {
         </Link>
       </Button>
       <Button light>
-        <Link to="/home">
+        <Link to="/assignments">
           <Text>Assignments</Text>
         </Link>
       </Button>
@@ -35,6 +35,26 @@ const SideMenu = props => {
       <Button light>
         <Link to="/login">
           <Text>Notifications</Text>
+        </Link>
+      </Button>
+      <Button light>
+        <Link to="/settings">
+          <Text>Settings</Text>
+        </Link>
+      </Button>
+      <Button light>
+        <Link to="/admin">
+          <Text>Admin</Text>
+        </Link>
+      </Button>
+      <Button light>
+        <Link to="/donations">
+          <Text>Donations</Text>
+        </Link>
+      </Button>
+      <Button light>
+        <Link to="/login">
+          <Text>Log Out</Text>
         </Link>
       </Button>
     </View>
