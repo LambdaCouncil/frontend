@@ -43,39 +43,18 @@ const UserPanel = props => {
 
   return (
     <View style={styles.container}>
-      <Col>
-        <Row>
-          <View style={styles.header}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://avatars3.githubusercontent.com/u/46138601?s=400&v=4'}}
-              // source={{
-              //   uri:
-              //     user.photoURL
-              // }}
-            />
-            <View style={styles.userInfo}>
-              <Text>{user.displayName}</Text>
-              <Text>{user.email}</Text>
-            </View>
-          </View>
-          {/*User Dropdown*/}
-          {/* <Header >
-            <Picker
-              trigger={
-                <span>
-                  <Image src={user.photoURL} spaced="right" avatar />
-                  {user.displayName}
-                </span>
-              }
-            >
-              <Picker.Item label={`Signed in as ${user.displayName}`} />
-              <Picker.Item label="Change Avatar" />
-              <Picker.Item label="Sign Out" />
-            </Picker>
-          </Header> */}
-        </Row>
-      </Col>
+      <Image
+        style={styles.image}
+        source={{uri: 'https://avatars3.githubusercontent.com/u/46138601?s=400&v=4'}}
+        // source={{
+        //   uri:
+        //     user.photoURL
+        // }}
+      />
+      <View style={styles.userInfo}>
+        <Text>{user.displayName}</Text>
+        <Text>{user.email}</Text>
+      </View>
     </View>
   );
 };
