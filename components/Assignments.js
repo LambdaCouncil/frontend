@@ -8,7 +8,6 @@ import Header from './Header/Header';
 const Assignments = props => {
   return (
     <View>
-      <Header />
       <Text>
         Assignments go here
       </Text>
@@ -17,9 +16,9 @@ const Assignments = props => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-  
-    }
-  });
+  container: {
+
+  }
+});
 
 export default withRouter(Assignments);

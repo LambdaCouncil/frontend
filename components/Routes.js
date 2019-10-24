@@ -16,7 +16,7 @@ import ChangePassword from "./Settings/ChangePassword"
 import Settings from "./Settings/Settings"
 import PushNotifications from "./Settings/PushNotifications"
 import SubmitFeedback from "./Settings/SubmitFeedback"
-import Channels from "./SidePanel/Channels"
+import Header from "./Header/Header"
 import Messages from "./Messages/Messages"
 import Discussions from "./Discussions/Discussions"
 import Agendas from "./Agendas/Agendas"
@@ -36,127 +36,132 @@ const Routes = props => {
     })
   }, [])
 
+  const renderHeaderIf = _ => (props.location.pathname !== '/' && props.location.pathname !== '/register' && props.location.pathname !== '/login') ? <Header /> : null
+
   return props.isLoading ? (
     <View style={styles.spinnerContainer}>
       <ActivityIndicator size="large" color="lime" />
     </View>
   ) : (
-      <Switch>
-        <Route
-          exact path="/"
-          render={props => <Root />}
-        />
+      <>
+        {renderHeaderIf()}
+        <Switch>
+          <Route
+            exact path="/"
+            render={props => <Root />}
+          />
 
-        <Route
-          exact path="/login"
-          render={props => <Login {...props} />}
-        />
+          <Route
+            exact path="/login"
+            render={props => <Login {...props} />}
+          />
 
-        <Route
-          path="/register"
-          render={props => <Register {...props} />}
-        />
+          <Route
+            path="/register"
+            render={props => <Register {...props} />}
+          />
 
-        <Route
-          path="/completeprofile"
-          render={props => <CompleteProfile {...props} />}
-        />
+          <Route
+            path="/complete-profile"
+            render={props => <CompleteProfile {...props} />}
+          />
 
-        <Route
-          path="/editprofile"
-          render={props => <EditProfile {...props} />}
-        />
+          <Route
+            path="/edit-profile"
+            render={props => <EditProfile {...props} />}
+          />
 
-        <Route
-          path="/changepassword"
-          render={props => <ChangePassword {...props} />}
-        />
+          <Route
+            path="/change-password"
+            render={props => <ChangePassword {...props} />}
+          />
 
-        <Route
-          path="/settings"
-          render={props => <Settings {...props} />}
-        />
+          <Route
+            path="/settings"
+            render={props => <Settings {...props} />}
+          />
 
-        <Route
-          path="/notifications"
-          render={props => <PushNotifications {...props} />}
-        />
+          <Route
+            path="/notifications"
+            render={props => <PushNotifications {...props} />}
+          />
 
-        <Route
-          path="/feedback"
-          render={props => <SubmitFeedback {...props} />}
-        />
+          <Route
+            path="/feedback"
+            render={props => <SubmitFeedback {...props} />}
+          />
 
-        <Route
-          path="/about"
-          render={props => <About {...props} />}
-        />
+          <Route
+            path="/about"
+            render={props => <About {...props} />}
+          />
 
-        <Route
-          path="/messages"
-          render={props => <Messages {...props} />}
-        />
+          <Route
+            path="/messages"
+            render={props => <Messages {...props} />}
+          />
 
-        <Route
-          path='/messageActionSheet'
-          render={props => <MessageActionSheet {...props} />}
-        />
+          <Route
+            path='/message-action-sheet'
+            render={props => <MessageActionSheet {...props} />}
+          />
 
-        <Route
-          path='/rate'
-          render={props => <RateCouncils {...props} />}
-        />
+          <Route
+            path='/rate'
+            render={props => <RateCouncils {...props} />}
+          />
 
-        <Route
-          path="/agendas"
-          render={props => <Agendas {...props} />}
-        />
+          <Route
+            path="/agendas"
+            render={props => <Agendas {...props} />}
+          />
 
-        <Route
-          path="/discussions"
-          render={props => <Discussions {...props} />}
-        />
+          <Route
+            path="/discussions"
+            render={props => <Discussions {...props} />}
+          />
 
-        <Route
-          path="/assignments"
-          render={props => <Assignments {...props} />}
-        />
+          <Route
+            path="/assignments"
+            render={props => <Assignments {...props} />}
+          />
 
-        {/* <Route 
+          {/* <Route 
         path="/files" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-        {/* <Route 
+          {/* <Route 
         path="/promptings" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-        {/* <Route
-        path="/adminnotifications"
+          {/* <Route
+        path="/admin-notifications"
         render={props => <Discussions {...props} />}
       /> */}
 
-        {/* <Route 
+          {/* <Route 
         path="/admin" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-        {/* <Route
-        path="/closeassignments"
+          {/* <Route
+        path="/close-assignments"
         render={props => <Discussions {...props} />}
       /> */}
 
-        {/* <Route 
+          {/* <Route 
         path="/donations" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-        <ProtectedRoute
-          component={props => <ProtectedRoutes />}
-          currentUser={props.currentUser}
-        />
-      </Switch>
+          <ProtectedRoute
+            component={props => <ProtectedRoutes />}
+            currentUser={props.currentUser}
+          />
+        </Switch>
+      </>
     )
 }
 

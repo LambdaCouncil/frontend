@@ -1,83 +1,55 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { Switch, withRouter, Route, Redirect } from "react-router-native";
-import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
-import { Button, Drawer, Header, Left, Icon, Body, Right } from "native-base";
-import SidePanel from "../SidePanel/SidePanel";
-import MessageActionSheet from "../Messages/MessageActionSheet";
+import React, { useState, useEffect } from "react"
+import { Button, Text, Header, Left, Icon, Body, Right } from "native-base"
+import { withRouter } from "react-router-native"
+import { connect } from "react-redux"
+
+import SidePanel from "../SidePanel/SidePanel"
+import MessageActionSheet from "../Messages/MessageActionSheet"
 
 const pageHeader = props => {
-  const [showPanel, setShowPanel] = useState(false);
-  const [currentPageName, setCurrentPageName] = useState('');
+  const [showPanel, setShowPanel] = useState(false)
+  const [currentPageName, setCurrentPageName] = useState('')
 
-  const addIconArray = ['/discussions', 
-        '/agendas',
-        '/assignments',
-        '/files',
-        '/promptings'];
+  const addIconArray = [
+    '/discussions',
+    '/agendas',
+    '/assignments',
+    '/files',
+    '/promptings'
+  ]
 
   useEffect(() => {
-    setCurrentPageName(props.location.pathname);
-  }, [props.location.pathname]);
+    setCurrentPageName(props.location.pathname)
+  }, [props.location.pathname])
 
   // console.log(props)
 
   const togglePanel = () => {
-    setShowPanel(!showPanel);
-  };
+    setShowPanel(!showPanel)
+  }
 
   const onClickHandler = () => {
     switch (currentPageName) {
       case '/discussions':
-        return <MessageActionSheet />;
+        return <MessageActionSheet />
 
 
       default:
-        return null;
+        return null
     }
   }
 
   const renderPageName = () => {
-    switch (currentPageName) {
-      case "/completeprofile":
-        return <Text>Complete Profile</Text>;
-      case "/editprofile":
-        return <Text>Edit Profile</Text>;
-      case "/changepassword":
-        return <Text>Change Password</Text>;
-      case "/settings":
-        return <Text>Settings</Text>;
-      case "/notifications":
-        return <Text>Push Notifications</Text>;
-      case "/feedback":
-        return <Text>Submit Feedback</Text>;
-      case "/about":
-        return <Text>About</Text>;
-      case "/messages":
-        return <Text>Messages</Text>;
-      case "/rate":
-        return <Text>Rate Councils</Text>;
-      case "/discussions":
-        return <Text>Discussions</Text>;
-      case "/home":
-        return <Text>Home</Text>;
-      case "/agendas":
-        return <Text>Agendas</Text>;
-      case "/assignments":
-        return <Text>Assignments</Text>;
-      case "/files":
-        return <Text>Files</Text>;
-      case "/promptings":
-        return <Text>Promptings</Text>;
-      case "/adminnotifications":
-        return <Text>Notifications</Text>;
-      case "/closeassignments":
-        return <Text>Close Assignments</Text>;
-      case "/donations":
-        return <Text>Donations</Text>;
-      default:
-        return null;
-    }
+    return currentPageName
+      .replace('/', '')
+      .split('-')
+      .map(word => word.split('')
+        .map((letter, id) => {
+          if (id === 0) return letter.toUpperCase()
+          else return letter.toLowerCase()
+        })
+        .join(''))
+      .join(' ')
   }
 
   return (
@@ -95,22 +67,15 @@ const pageHeader = props => {
           <Button onPress={() => onClickHandler()}>
             <Text>
               {addIconArray.filter(icon => icon === currentPageName).length ? (
-                // <Icon name="wine" />
                 <MessageActionSheet />
-              ) : ( '')}
+              ) : ('')}
             </Text>
           </Button>
         </Right>
       </Header>
-      {showPanel && <SidePanel />}
+      {showPanel && <SidePanel togglePanel={togglePanel} />}
     </>
-  );
-};
+  )
+}
 
-const styles = StyleSheet.create({
-  container: {
-
-  }
-})
-
-export default withRouter(pageHeader);
+export default withRouter(pageHeader)

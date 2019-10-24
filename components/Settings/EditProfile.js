@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import firebase from "../../firebase"
-import {KeyboardAvoidingView, StyleSheet, View} from 'react-native'
-import {Input, Text, Label, Item, H1, H3} from 'native-base'
-import {Link, withRouter} from 'react-router-native'
-import {connect} from 'react-redux'
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
+import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Link, withRouter } from 'react-router-native'
+import { connect } from 'react-redux'
 
-import Icon from '../Icon'
-import {signUpDisplayName} from '../../actions'
+import { signUpDisplayName } from '../../actions'
 
 function EditProfile(props) {
 
@@ -49,22 +48,22 @@ function EditProfile(props) {
         <Icon
           name='arrow-back'
           color='green'
-          style={styles.backButton}/>
+          style={styles.backButton} />
       </Link>
       <View style={styles.pageView}>
         <H1>Edit Profile</H1>
         <Text>Upload Photo</Text>
         <Item floatingLabel style={styles.inputItem}>
           <Label>First Name</Label>
-          <Input onChangeText={handleFirstName}/>
+          <Input onChangeText={handleFirstName} />
         </Item>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Last Name</Label>
-          <Input onChangeText={handleLastName}/>
+          <Input onChangeText={handleLastName} />
         </Item>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Calling</Label>
-          <Input onChangeText={handleChangeCalling}/>
+          <Input onChangeText={handleChangeCalling} />
         </Item>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Email</Label>
@@ -80,18 +79,18 @@ function EditProfile(props) {
         </Item>
         <View style={styles.buttonsBottom}>
           <View style={styles.button}>
-          <Link to='/changepassword'>
-            <Text style={styles.password}>Change Password</Text>
-          </Link>
+            <Link to='/changepassword'>
+              <Text style={styles.password}>Change Password</Text>
+            </Link>
           </View>
-        <View style={styles.button}>
-          <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
-        </View>
-        <View style={styles.button}>
-          <Link to='/settings'>
-            <Text style={styles.cancel}>Cancel</Text>
-          </Link>
-        </View>
+          <View style={styles.button}>
+            <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
+          </View>
+          <View style={styles.button}>
+            <Link to='/settings'>
+              <Text style={styles.cancel}>Cancel</Text>
+            </Link>
+          </View>
         </View>
       </View>
     </KeyboardAvoidingView>

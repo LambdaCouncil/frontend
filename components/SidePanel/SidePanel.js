@@ -11,7 +11,7 @@ const SidePanel = props => {
   return (
     <View>
       <UserPanel />
-      <SideMenu />
+      <SideMenu togglePanel={props.togglePanel} />
     </View>
   )
 }
