@@ -1,73 +1,66 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Button } from 'native-base';
-import { Link, withRouter } from 'react-router-native';
+import React from 'react'
+import { Button, View, Text } from 'native-base'
+import { Link, withRouter } from 'react-router-native'
+
+import firebase from '../../firebase'
 
 const SideMenu = props => {
-  // console.log('props in SideMenu', props);
+
   return (
-    <View sytle={styles.sideMenu}>
+    <View>
       <Button light>
-        <Link to="/agendas">
+        <Link to="/agendas" onPress={() => props.togglePanel()}>
           <Text>Agendas</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/discussions">
+        <Link to="/discussions" onPress={() => props.togglePanel()}>
           <Text>Discussions</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/assignments">
+        <Link to="/assignments" onPress={() => props.togglePanel()}>
           <Text>Assignments</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/login">
+        <Link to="/files" onPress={() => props.togglePanel()}>
           <Text>Files</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/login">
+        <Link to="/promptings" onPress={() => props.togglePanel()}>
           <Text>Promptings</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/login">
+        <Link to="/push-notifications" onPress={() => props.togglePanel()}>
           <Text>Notifications</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/settings">
+        <Link to="/settings" onPress={() => props.togglePanel()}>
           <Text>Settings</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/admin">
+        <Link to="/admin" onPress={() => props.togglePanel()}>
           <Text>Admin</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/donations">
+        <Link to="/donations" onPress={() => props.togglePanel()}>
           <Text>Donations</Text>
         </Link>
       </Button>
       <Button light>
-        <Link to="/login">
-          <Text>Log Out</Text>
+        <Link to="/login" onPress={() => props.togglePanel()}>
+          <Text onPress={() => firebase.auth().signOut()}>Log Out</Text>
         </Link>
       </Button>
     </View>
-  );
-};
+  )
 
-const styles = StyleSheet.create({
-  sideMenu: {
-    marginTop: 100,
-    paddingVertical: 100,
-    borderWidth: 2,
-    borderColor: 'red'
-  }
-})
+}
 
-export default withRouter(SideMenu);
+export default withRouter(SideMenu)

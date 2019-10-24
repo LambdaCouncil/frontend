@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3 } from 'native-base'
+import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { Link } from 'react-router-native'
 
 import variables from '../native-base-theme/variables/commonColor'
 import firebase from "../firebase"
-import Icon from './Icon'
 
 function Login(props) {
     const [email, setEmail] = useState(' ')

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3 } from 'native-base'
+import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import Icon from '../Icon'
 import { signUpDisplayName } from '../../actions'
 
 function Settings(props) {
@@ -17,17 +16,14 @@ function Settings(props) {
       behavior='padding'
     >
 
-      <Link to='/home' style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
-      </Link>
+      <Icon backButton
+        onPress={() => props.history.goBack()}
+        name='arrow-back'
+      />
 
       <H1>Settings</H1>
 
-      <Link to='/editprofile'>
+      <Link to='/edit-profile'>
         <H3>Edit Profile</H3>
       </Link>
       <Link to='/notifications'>

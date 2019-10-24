@@ -28,6 +28,10 @@ export default _ => {
       width: '95%',
       alignItems: 'center',
     },
+    '.sidePanel': {
+      backgroundColor: ui.white,
+      position: 'absolute'
+    }
   }
 
 }

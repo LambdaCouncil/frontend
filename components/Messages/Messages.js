@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { View, Content, Footer, Header, List, ListItem, Container, Text, Col } from 'native-base'
+import { View, Content, Footer, Header, List, ListItem, Container, Text, Col, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { StyleSheet } from 'react-native'
 
@@ -10,7 +10,6 @@ import MessageForm from "./MessagesForm"
 import Message from "./Message"
 import variables from '../../native-base-theme/variables/commonColor'
 import firebase from '../../firebase'
-import Icon from '../Icon'
 
 
 const Messages = (props, { currentChannel, currentUser }) => {
@@ -94,6 +93,7 @@ const Messages = (props, { currentChannel, currentUser }) => {
   return (
     <Container contentContainerStyle={style.screen}>
 
+<<<<<<< HEAD
       <Link onPress={() => props.history.goBack()} style={styles.link}>
         <Icon
           name='arrow-back'
@@ -102,6 +102,8 @@ const Messages = (props, { currentChannel, currentUser }) => {
         />
       </Link>
 
+=======
+>>>>>>> a662ca727353480d5aa4ece632ed7790fe15dc81
       {/* 
           List is similar in appearance to the Discussions section in the Style Guide. 
           Alternatively, we could use Card for each message.

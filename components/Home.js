@@ -10,20 +10,8 @@ import Header from './Header/Header';
 const Home = props => {
     // console.log('homeprops', props.currentUser)
     return (
-        <View >
-            <Header />
-            {/* <Text>{`Hello, ${props.currentUser.displayName}`}</Text>
-            <Text style = {{ fontFamily: "gotham" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
-            <Text style = {{ fontFamily: "bern-b" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
-            <Text style = {{ fontFamily: "bern-r" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
-            <Text style = {{ fontFamily: "bern-sb" }}>{`Hello, ${props.currentUser.displayName}`}</Text>
-            <Button onPress={() => firebase.auth().signOut()} title='Log out' />
-            <Link to='/settings'>
-                <H3>Settings</H3>
-            </Link>
-            <Link to='/messages'>
-                <H3>Messages</H3>
-            </Link> */}
+        <View>
+
         </View>
     )
 }
