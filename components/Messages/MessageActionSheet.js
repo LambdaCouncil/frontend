@@ -27,7 +27,7 @@ const MessageActionSheet = props => {
       }
     )}>
       <Text>
-        <Icon dgreal name='add' />
+        <Icon dgreal name='wine' />
       </Text>
     </Button>
   );
