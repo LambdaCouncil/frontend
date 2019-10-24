@@ -30,7 +30,7 @@ export default _ => {
     },
     '.sidePanel': {
       backgroundColor: ui.white,
-      position: 'absoute'
+      position: 'absolute'
     }
   }
 
