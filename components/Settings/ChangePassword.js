@@ -61,8 +61,9 @@ function ChangePassword(props) {
             secureTextEntry={true}
           />
         </Item>
-        <View style={styles.saveButton}>
-          <H3 onPress={changePassword}>Save</H3>
+        <View>
+          <Text onPress={changePassword}
+                style={styles.saveButton}>Save</Text>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -98,7 +99,11 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   saveButton: {
-    marginVertical: 15
+    // marginVertical: 15,
+    color: '#288365',
+    textAlign: 'center',
+    fontSize: 17,
+    top: 169
   }
 })
 
