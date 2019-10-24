@@ -93,7 +93,6 @@ const Messages = (props, { currentChannel, currentUser }) => {
   return (
     <Container contentContainerStyle={style.screen}>
 
-<<<<<<< HEAD
       <Link onPress={() => props.history.goBack()} style={styles.link}>
         <Icon
           name='arrow-back'
@@ -102,8 +101,6 @@ const Messages = (props, { currentChannel, currentUser }) => {
         />
       </Link>
 
-=======
->>>>>>> a662ca727353480d5aa4ece632ed7790fe15dc81
       {/* 
           List is similar in appearance to the Discussions section in the Style Guide. 
           Alternatively, we could use Card for each message.
@@ -112,16 +109,16 @@ const Messages = (props, { currentChannel, currentUser }) => {
       <Content>
         <View>
 
-          {/* <List className='messages'>
-          {displayMessages(messages)}
-          {messages.map(message => (
-            <ListItem>
-              <Message message={message}
-                user={message.user}
-                key={message.timeStamp} />
-            </ListItem>
-          ))}
-        </List> */}
+          <List className='messages'>
+            {displayMessages(messages)}
+            {messages.map(message => (
+              <ListItem>
+                <Message message={message}
+                  user={message.user}
+                  key={message.timeStamp} />
+              </ListItem>
+            ))}
+          </List>
 
         </View>
       </Content>
