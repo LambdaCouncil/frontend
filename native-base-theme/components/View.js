@@ -29,7 +29,8 @@ export default _ => {
       alignItems: 'center',
     },
     '.sidePanel': {
-      backgroundColor: ui.white
+      backgroundColor: ui.white,
+      position: 'absoute'
     }
   }
 

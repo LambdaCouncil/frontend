@@ -23,8 +23,9 @@ function ChangePassword(props) {
 
   const changePassword = _ => console.log('Password Changed')
 
-  return (
+  console.log('ChangePasswordProps', props)
 
+  return (
     <KeyboardAvoidingView
       style={styles.inputContainer}
       behavior='padding'
@@ -36,31 +37,26 @@ function ChangePassword(props) {
       />
 
       <H1>Change Password</H1>
-
       <Item floatingLabel style={styles.inputItem}>
         <Label>Old Password</Label>
         <Input onChangeText={handleOldPassword} secureTextEntry={true} />
       </Item>
-
       <Item floatingLabel style={styles.inputItem}>
         <Label>New Password</Label>
         <Input onChangeText={handleNewPassword} secureTextEntry={true} />
       </Item>
-
       <Item floatingLabel style={styles.inputItem}>
         <Label>Confirm New Password</Label>
         <Input onChangeText={handlePasswordConfirm} secureTextEntry={true} />
       </Item>
-
-      <Link to="/editprofile">
+      <Link to='/editprofile'>
         <H3>Save</H3>
       </Link>
-
-      <Link to="/home">
+      <Link to='/home'>
         <H3>Cancel</H3>
       </Link>
     </KeyboardAvoidingView>
-  );
+  )
 }
 
 
