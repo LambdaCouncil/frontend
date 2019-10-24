@@ -8,6 +8,7 @@ import firebase from '../firebase'
 import Register from './Register'
 import Login from './LogIn'
 import Root from '../Root'
+import Donations from './Donations/Donations'
 import ProtectedRoutes from "./ProtectedRoutes"
 import { setUser, clearUser } from "../actions"
 import CompleteProfile from "./CompleteProfile"
@@ -125,6 +126,11 @@ const Routes = props => {
             path="/assignments"
             render={props => <Assignments {...props} />}
           />
+
+          <Route
+            exact path="/donations"
+            render={props => <Donations {...props} />}
+          />  
 
           {/* <Route 
         path="/files" 
