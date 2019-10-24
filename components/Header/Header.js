@@ -2,12 +2,19 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Switch, withRouter, Route, Redirect } from "react-router-native";
 import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
-import { Button, Drawer, Header, Left, Icon, Body } from "native-base";
+import { Button, Drawer, Header, Left, Icon, Body, Right } from "native-base";
 import SidePanel from "../SidePanel/SidePanel";
+import MessageActionSheet from "../Messages/MessageActionSheet";
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false);
   const [currentPageName, setCurrentPageName] = useState('');
+
+  const addIconArray = ['/discussions', 
+        '/agendas',
+        '/assignments',
+        '/files',
+        '/promptings'];
 
   useEffect(() => {
     setCurrentPageName(props.location.pathname);
@@ -18,6 +25,17 @@ const pageHeader = props => {
   const togglePanel = () => {
     setShowPanel(!showPanel);
   };
+
+  const onClickHandler = () => {
+    switch (currentPageName) {
+      case '/discussions':
+        return <MessageActionSheet />;
+
+
+      default:
+        return null;
+    }
+  }
 
   const renderPageName = () => {
     switch (currentPageName) {
@@ -73,6 +91,16 @@ const pageHeader = props => {
         <Body>
           <Text>{renderPageName()}</Text>
         </Body>
+        <Right>
+          <Button onPress={() => onClickHandler()}>
+            <Text>
+              {addIconArray.filter(icon => icon === currentPageName).length ? (
+                // <Icon name="wine" />
+                <MessageActionSheet />
+              ) : ( '')}
+            </Text>
+          </Button>
+        </Right>
       </Header>
       {showPanel && <SidePanel />}
     </>

@@ -5,13 +5,14 @@ import { withRouter } from 'react-router-native'
 import moment from 'moment'
 
 import variables from '../../native-base-theme/variables/commonColor'
-import pseudo from './pseudo'
+import pseudo from './pseudo';
 
 const Discussions = props => {
 
     return (
 
         <>
+            <Header />
             <Icon backButton
                 onPress={() => props.history.goBack()}
                 name='arrow-back'

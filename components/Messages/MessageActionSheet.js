@@ -8,17 +8,17 @@ const MessageActionSheet = props => {
     const CANCEL_INDEX = 2
     
     return (
-        <Container>
-        <Header />
-        <Content padder>
-          <Button
+      // <Container>
+      //   <Header />
+      //   <Content padder>
+          <Text
             onPress={() => {
             ActionSheet.show(
               {
                 options: BUTTONS, 
                 cancelButtonIndex: CANCEL_INDEX,
                 title: "New Discussion",
-                tintColor: 'red'
+                // tintColor: 'red'
               },
               buttonIndex => {
                 setButtonPressed({ clicked: BUTTONS[buttonIndex] });
@@ -29,9 +29,9 @@ const MessageActionSheet = props => {
         }}
           >
             <Text>Plus Button</Text>
-          </Button>
-        </Content>
-      </Container>
+          </Text>
+      //   </Content>
+      // </Container>
     )
 }
 
