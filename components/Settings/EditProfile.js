@@ -37,7 +37,8 @@ function EditProfile(props) {
   }
 
   const deleteAccount = () => {
-    console.log('Account Deleted')
+    console.log('Account Deleted');
+    props.history.push('/settings')
   }
 
   return (
@@ -86,11 +87,6 @@ function EditProfile(props) {
           </View>
         <View style={styles.button}>
           <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
-        </View>
-        <View style={styles.button}>
-          <Link to='/settings'>
-            <Text style={styles.cancel}>Cancel</Text>
-          </Link>
         </View>
         </View>
       </View>

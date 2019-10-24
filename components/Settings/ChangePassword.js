@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import firebase from "../../firebase"
-import {KeyboardAvoidingView, StyleSheet} from 'react-native'
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native'
 import {Input, Text, Label, Item, H1, H3} from 'native-base'
 import {Link, withRouter} from 'react-router-native'
 import Icon from '../Icon'
@@ -19,7 +19,10 @@ function ChangePassword(props) {
 
   const handlePasswordConfirm = text => setConfirmNewPassword(text)
 
-  const changePassword = _ => console.log('Password Changed')
+  const changePassword = () => {
+    console.log('Password Changed');
+    props.history.push('/editprofile')
+  }
 
   console.log('ChangePasswordProps', props)
 
@@ -35,34 +38,33 @@ function ChangePassword(props) {
           style={styles.backButton}
         />
       </Link>
-      <H1>Change Password</H1>
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Old Password</Label>
-        <Input
-          onChangeText={handleOldPassword}
-          secureTextEntry={true}
-        />
-      </Item>
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>New Password</Label>
-        <Input
-          onChangeText={handleNewPassword}
-          secureTextEntry={true}
-        />
-      </Item>
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Confirm New Password</Label>
-        <Input
-          onChangeText={handlePasswordConfirm}
-          secureTextEntry={true}
-        />
-      </Item>
-      <Link to='/editprofile'>
-        <H3>Save</H3>
-      </Link>
-      <Link to='/home'>
-        <H3>Cancel</H3>
-      </Link>
+      <View style={styles.pageView}>
+        <H1>Change Password</H1>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Old Password</Label>
+          <Input
+            onChangeText={handleOldPassword}
+            secureTextEntry={true}
+          />
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>New Password</Label>
+          <Input
+            onChangeText={handleNewPassword}
+            secureTextEntry={true}
+          />
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Confirm New Password</Label>
+          <Input
+            onChangeText={handlePasswordConfirm}
+            secureTextEntry={true}
+          />
+        </Item>
+        <View style={styles.saveButton}>
+          <H3 onPress={changePassword}>Save</H3>
+        </View>
+      </View>
     </KeyboardAvoidingView>
   )
 }
@@ -71,9 +73,9 @@ function ChangePassword(props) {
 const styles = StyleSheet.create({
   inputContainer: {
     height: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
   link: {
     position: 'absolute',
@@ -85,8 +87,18 @@ const styles = StyleSheet.create({
   backButton: {
     fontSize: 50
   },
-  inputItem: {
-    marginVertical: 10
+  pageView: {
+    marginHorizontal: 20,
+    marginTop: 80,
+  },
+  header: {
+    fontSize: 28,
+    marginBottom: 10,
+    fontFamily: 'gotham',
+    fontWeight: '500',
+  },
+  saveButton: {
+    marginVertical: 15
   }
 })
 
