@@ -9,6 +9,7 @@ const Donations = props => {
         <View>
             <Text>Join Our Monthly Giving Program</Text>
             <Text>100% of your donation supports development of this platform so members can more effectively magnify their callings.</Text>
+        
         </View>
     )
 }
