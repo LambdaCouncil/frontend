@@ -2,7 +2,7 @@ export const
     SET_USER = 'SET_USER',
     CLEAR_USER = 'CLEAR_USER',
     SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL',
-    SUDN = 'SUDN',
+    SIGN_UP_DISPLAY_NAME = 'SIGN_UP_DISPLAY_NAME',
     SET_PRIVATE_CHANNEL = 'SET_PRIVATE_CHANNEL'
 
 export const
@@ -11,7 +11,7 @@ export const
         payload: user
     }),
     signUpDisplayName = dn => dispatch => dispatch({
-        type: SUDN,
+        type: SIGN_UP_DISPLAY_NAME,
         payload: dn
     }),
     clearUser = _ => dispatch => dispatch({

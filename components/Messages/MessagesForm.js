@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Container, Content, Item, View, Footer } from 'native-base'
-import { Text, StyleSheet } from 'react-native'
+import { Text, Form, Input, Button, Container, Content, Item, View, Footer } from 'native-base'
+import { StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+
 import firebase from '../../firebase'
 
 
-const MessageForm = ({ messagesRef, currentChannel, currentUser }) => {
+const MessageForm = ({ discussionsRef, currentChannel, currentUser }) => {
 
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -12,11 +14,10 @@ const MessageForm = ({ messagesRef, currentChannel, currentUser }) => {
     const [loading, setLoading] = useState(false);
     const [channel, setChannel] = useState(currentChannel);
     const [user, setUser] = useState(currentUser);
-    const [errors, setErrors] = useState([]);
 
 
-    const handleChange = (e) => {
-        setMessage(e.target.value)
+    const handleChange = e => {
+        setMessage(e.nativeEvent.text)
     };
 
     const createMessage = () => {
@@ -32,25 +33,21 @@ const MessageForm = ({ messagesRef, currentChannel, currentUser }) => {
     };
 
 
-    const sendMessage = () => {
+    const sendMessage = _ => {
         if (message) {
             setLoading(true);
-            messagesRef
-                .child(channel.id)
+            discussionsRef
+                .child('thisdiscussiondoesnthaveanid')
                 .push()
                 .set(createMessage())
                 .then(() => {
                     setLoading(false);
-                    setMessage('');
-                    setErrors([]);
+                    setMessage('')
                 })
                 .catch(err => {
                     console.log(err);
-                    setLoading(false);
-                    setErrors((errors => errors.concat(err)));
+                    setLoading(false)
                 })
-        } else {
-            setErrors((errors => errors.concat({ message: 'Add a message' })));
         }
     };
 
@@ -58,27 +55,21 @@ const MessageForm = ({ messagesRef, currentChannel, currentUser }) => {
     return (
 
         <View>
-            <Form>
-                <View>
-                    <Item >
-                        <Input
-                            style={style.input}
-                            name='message'
-                            onChange={handleChange}
-                            value={message}
-                            placeholder='Write your message'
-                        />
-                    </Item>
-                </View>
-                <View style={style.screen}>
-                    <Button transparent style={style.button1}>
-                        <Text style={style.text}>@</Text>
-                    </Button>
-                    <Button transparent style={style.button2}>
-                        <Text style={style.text}> Send Message</Text>
-                    </Button>
-                </View>
-            </Form>
+            <Item >
+                <Input
+                    style={style.input}
+                    name='message'
+                    onChange={handleChange}
+                    value={message}
+                    placeholder='Write your message'
+                />
+            </Item>
+            <Button transparent style={style.button1}>
+                <Text style={style.text}>@</Text>
+            </Button>
+            <Button transparent style={style.button2} onPress={sendMessage}>
+                <Text style={style.text}> Send Message</Text>
+            </Button>
         </View>
 
     );
@@ -109,4 +100,4 @@ const style = StyleSheet.create({
 
 })
 
-export default MessageForm;
+export default connect(state => ({ ...state }))(MessageForm);
