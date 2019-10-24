@@ -102,17 +102,6 @@ const Messages = (props, { currentChannel, currentUser }) => {
         />
       </Link>
 
-      <Header>
-        <Text>Header</Text>
-        {/* <MessagesHeader
-          channelName={displayChannelName(channel)}
-          numOfUsers={numUniqueUsers}
-          handleSearchChange={handleSearchChange}
-        /> */}
-      </Header>
-
-
-
       {/* 
           List is similar in appearance to the Discussions section in the Style Guide. 
           Alternatively, we could use Card for each message.
