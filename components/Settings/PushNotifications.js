@@ -59,7 +59,6 @@ function PushNotifications(props) {
       <H1>Push Notifications</H1>
 
       <Container>
-        <Header />
         <Content>
           <ListItem>
 

@@ -1,12 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import firebase from "../firebase"
-import {KeyboardAvoidingView, StyleSheet} from 'react-native'
-import {Input, Text, Label, Item, H1, H3} from 'native-base'
-import {Link} from 'react-router-native'
-import {connect} from 'react-redux'
+import { KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Link } from 'react-router-native'
+import { connect } from 'react-redux'
 
-import Icon from './Icon'
-import {signUpDisplayName} from '../actions'
+import { signUpDisplayName } from '../actions'
 
 function CompleteProfile(props) {
 
@@ -54,17 +53,17 @@ function CompleteProfile(props) {
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>First Name</Label>
-        <Input onChangeText={handleFirstName}/>
+        <Input onChangeText={handleFirstName} />
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>Last Name</Label>
-        <Input onChangeText={handleLastName}/>
+        <Input onChangeText={handleLastName} />
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>Calling</Label>
-        <Input onChangeText={handleChangeCalling}/>
+        <Input onChangeText={handleChangeCalling} />
       </Item>
 
       <Item floatingLabel style={styles.inputItem}>
@@ -89,27 +88,27 @@ function CompleteProfile(props) {
 }
 
 
-  const styles = StyleSheet.create({
-    inputContainer: {
-      height: '100%',
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    link: {
-      position: 'absolute',
-      top: 25,
-      left: 5,
-      width: '100%',
-      height: 50
-    },
-    backButton: {
-      fontSize: 50
-    },
-    inputItem: {
-      marginVertical: 10
-    }
-  });
+const styles = StyleSheet.create({
+  inputContainer: {
+    height: '100%',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  link: {
+    position: 'absolute',
+    top: 25,
+    left: 5,
+    width: '100%',
+    height: 50
+  },
+  backButton: {
+    fontSize: 50
+  },
+  inputItem: {
+    marginVertical: 10
+  }
+});
 
 
 export default CompleteProfile;

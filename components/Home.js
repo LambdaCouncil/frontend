@@ -10,9 +10,8 @@ import Header from './Header/Header';
 const Home = props => {
     // console.log('homeprops', props.currentUser)
     return (
-        <View >
-            <Header />
-       
+        <View>
+
         </View>
     )
 }

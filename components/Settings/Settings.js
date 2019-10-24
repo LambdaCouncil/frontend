@@ -23,7 +23,7 @@ function Settings(props) {
 
       <H1>Settings</H1>
 
-      <Link to='/editprofile'>
+      <Link to='/edit-profile'>
         <H3>Edit Profile</H3>
       </Link>
       <Link to='/notifications'>

@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { View, Content, Footer, Header, List, ListItem, Container, Text, Col } from 'native-base'
+import { View, Content, Footer, Header, List, ListItem, Container, Text, Col, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { StyleSheet } from 'react-native'
 
@@ -10,7 +10,6 @@ import MessageForm from "./MessagesForm"
 import Message from "./Message"
 import variables from '../../native-base-theme/variables/commonColor'
 import firebase from '../../firebase'
-import Icon from '../Icon'
 
 
 const Messages = (props, { currentChannel, currentUser }) => {
