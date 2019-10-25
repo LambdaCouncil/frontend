@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Form, Input, Button, Container, Content, Item, View, Footer } from 'native-base'
+import { Text, Form, Input, Button, Container, Content, Item, View, Label } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -37,7 +37,6 @@ const MessageForm = ({ discussionsRef, currentChannel, currentUser }) => {
         if (message) {
             setLoading(true);
             discussionsRef
-                .child('thisdiscussiondoesnthaveanid')
                 .push()
                 .set(createMessage())
                 .then(() => {
@@ -55,13 +54,13 @@ const MessageForm = ({ discussionsRef, currentChannel, currentUser }) => {
     return (
 
         <View>
-            <Item >
+            <Item floatingLabel>
+                <Label>Write your message</Label>
                 <Input
                     style={style.input}
                     name='message'
                     onChange={handleChange}
                     value={message}
-                    placeholder='Write your message'
                 />
             </Item>
             <Button transparent style={style.button1}>
