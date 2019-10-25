@@ -3,10 +3,12 @@ import { Text, Form, Input, Button, Container, Content, Item, View, Footer } fro
 import { StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 
+import { withRouter } from 'react-router-native'
+
 import firebase from '../../firebase'
 
 
-const MessageForm = ({ discussionsRef, currentChannel, currentUser }) => {
+const MessageForm = ({ discussionsRef, currentChannel, currentUser, location }) => {
 
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
@@ -15,6 +17,7 @@ const MessageForm = ({ discussionsRef, currentChannel, currentUser }) => {
     const [channel, setChannel] = useState(currentChannel);
     const [user, setUser] = useState(currentUser);
 
+    console.log('Message:', location.pathname)
 
     const handleChange = e => {
         setMessage(e.nativeEvent.text)
@@ -100,4 +103,4 @@ const style = StyleSheet.create({
 
 })
 
-export default connect(state => ({ ...state }))(MessageForm);
+export default connect(state => ({ ...state }))(withRouter(MessageForm));

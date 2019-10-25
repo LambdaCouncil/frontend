@@ -1,7 +1,7 @@
 import React from 'react'
 import { ActionSheet, Icon, Button, Text } from 'native-base'
 
-const MessageActionSheet = props => {
+const ActionSheets = props => {
 
   const BUTTONS = [...props.asInfo.buttons]
   const CANCEL_INDEX = 2
@@ -28,4 +28,4 @@ const MessageActionSheet = props => {
   );
 }
 
-export default MessageActionSheet
+export default ActionSheets

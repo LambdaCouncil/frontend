@@ -8,6 +8,9 @@ export default _ => {
 
   return {
     fontSize: variable.iconFontSize,
+    '.rotate90': {
+      transform: [{ rotate: '90deg'}]
+    }
     color: variable.textColor,
     '.backButton': {
       marginTop: 20,
