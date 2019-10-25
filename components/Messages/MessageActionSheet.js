@@ -3,7 +3,7 @@ import { ActionSheet, Icon, Button, Text } from 'native-base'
 
 const MessageActionSheet = props => {
 
-  const BUTTONS = ['Council', 'Private', 'Cancel']
+  const BUTTONS = [...props.asInfo.buttons]
   const CANCEL_INDEX = 2
 
   return (
@@ -11,9 +11,9 @@ const MessageActionSheet = props => {
       transparent
       onPress={() => ActionSheet.show(
         {
-          options: props.buttons,
+          options: BUTTONS,
           cancelButtonIndex: CANCEL_INDEX,
-          title: props.title
+          title: props.asInfo.title
         },
         buttonIndex => {
           if (buttonIndex === 1) {
