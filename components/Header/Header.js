@@ -20,24 +20,6 @@ const pageHeader = props => {
     '/promptings'
   ]
 
-<<<<<<< HEAD
-  const buttonsObj = [
-    discussions: {
-      default: {
-        title: 'New Discussion',
-        buttons: ['Council', 'Private', 'Cancel'],
-      },
-      public: {
-        title: 'Discussion',
-        buttons: ['Leave', 'Delete', 'Cancel']
-      },
-      private: {
-        title: 'Discussion',
-        buttons: ['Delete', 'Cancel']
-      }
-    }
-  ]
-=======
   const buttonsObj = {
     discussions: {
       default: {
@@ -68,7 +50,6 @@ const pageHeader = props => {
       }
     }
   };
->>>>>>> badaa2c4f466fc2460119e527f3b07e34aa163e0
 
   const togglePanel = _ => setShowPanel(!showPanel)
 
@@ -90,11 +71,7 @@ const pageHeader = props => {
     if (!props.modal && addIconArray.filter(icon => icon === props.location.pathname).length > 0) {
       console.log('pathname in Header arrayForSure', props.location.pathname)
       if (props.location.pathname === '/discussions') {
-<<<<<<< HEAD
-        return <MessageActionSheet setShowModal={setShowModal} buttons={buttonsObj.discussions.default} />
-=======
         return <MessageActionSheet setShowModal={setShowModal} asInfo={buttonsObj.discussions.default} />
->>>>>>> badaa2c4f466fc2460119e527f3b07e34aa163e0
 
       } else if (props.location.pathname === '/agendas') {
         return (
