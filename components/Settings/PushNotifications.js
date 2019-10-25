@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Text, H1, ListItem, CheckBox, Body, Container, Header, Content, View, Icon } from 'native-base'
-import { Link, withRouter } from 'react-router-native'
-import { connect } from 'react-redux'
+import { Text, H1, ListItem, CheckBox, Body, Container, Content, View, Icon } from 'native-base'
+import { withRouter } from 'react-router-native'
 
 
 function PushNotifications(props) {
@@ -50,11 +47,6 @@ function PushNotifications(props) {
   return (
 
     <View containerAllRoot>
-
-      <Icon backButton
-        onPress={() => props.history.goBack()}
-        name='arrow-back'
-      />
 
       <H1>Push Notifications</H1>
 
@@ -150,29 +142,6 @@ function PushNotifications(props) {
 
   )
 }
-
-
-const styles = StyleSheet.create({
-  inputContainer: {
-    height: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  link: {
-    position: 'absolute',
-    top: 25,
-    left: 5,
-    width: '100%',
-    height: 50
-  },
-  backButton: {
-    fontSize: 50
-  },
-  header: {
-    marginTop: 20
-  }
-})
 
 
 export default withRouter(PushNotifications)
