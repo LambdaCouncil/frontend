@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
-import firebase from "../../firebase"
-import { KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { StyleSheet, TextInput } from 'react-native'
+import { Text, View, Icon, Content } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
-import { connect } from 'react-redux'
-
-import { signUpDisplayName } from '../../actions'
 
 function SubmitFeedback(props) {
 
@@ -17,10 +13,7 @@ function SubmitFeedback(props) {
 
   return (
 
-    <KeyboardAvoidingView
-      style={styles.inputContainer}
-      behavior='padding'
-    >
+    <Content padder>
 
       <Link onPress={() => props.history.goBack()} style={styles.link}>
         <Icon
@@ -29,22 +22,23 @@ function SubmitFeedback(props) {
           style={styles.backButton}
         />
       </Link>
-
-      <H1>Submit Feedback</H1>
-
-      <H3>What Can We Improve?</H3>
-      <View>
-        <TextInput
-          // style={styles.textInput}
-          editable
-          maxLength={500}
-        />
+      <View style={styles.pageView}>
+        <Text style={styles.textContent}>Submit Feedback</Text>
+        <Text style={styles.textContent}>What Can We Improve?</Text>
+        <View>
+          <TextInput
+            style={styles.textInput}
+            multiline={true}
+            editable
+            maxLength={500}
+            placeholder='Please type your feedback here...'
+          />
+        </View>
+        <Link to='/settings'>
+          <Text style={styles.submit}>Submit</Text>
+        </Link>
       </View>
-
-      <Link to='/settings'>
-        <H3>Submit</H3>
-      </Link>
-    </KeyboardAvoidingView>
+    </Content>
 
   )
 }
@@ -53,9 +47,9 @@ function SubmitFeedback(props) {
 const styles = StyleSheet.create({
   inputContainer: {
     height: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
   link: {
     position: 'absolute',
@@ -71,7 +65,24 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   textInput: {
-    textAlign: 'left'
+    fontSize: 17
+  },
+  pageView: {
+    marginHorizontal: 20,
+    marginTop: 80,
+  },
+  textContent: {
+    fontSize: 28,
+    marginBottom: 10,
+    fontFamily: 'gotham',
+    fontWeight: '500',
+  },
+  submit: {
+    // marginVertical: 15,
+    color: '#288365',
+    textAlign: 'center',
+    fontSize: 17,
+    top: 169
   }
 })
 

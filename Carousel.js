@@ -1,5 +1,6 @@
 import React, { Component, useEffect } from "react"
-import { View, Text, Image, Dimensions } from 'react-native'
+import { View, Text, Image, Dimensions, Platform, NativeModules } from 'react-native'
+const { StatusBarManager } = NativeModules;
 
 import Carousel from 'react-native-snap-carousel'
 
@@ -64,6 +65,7 @@ export default class MyCarousel extends Component {
                     itemWidth={Dimensions.get('window').width}
                     onBeforeSnapToItem={this.onSnapToItem}
                     loop={true}
+                    contentContainerStyle={{ display: "flex", justifyContent: "center", alignItems: "center" }}
                 />
             </>
         )
@@ -97,7 +99,7 @@ const CarouselPositionList = props => {
 }
 
 const CarouselPosition = ({ isActive }) => {
-    const getColor = _ => isActive ? "green" : "gray"
+    const getColor = _ => isActive ? "#288365" : "lightgray"
 
     const carouselStyle = {
         ...defaultCarouselPositionStyle,
@@ -107,13 +109,17 @@ const CarouselPosition = ({ isActive }) => {
     return <View style={carouselStyle} />
 }
 
+const STATUSBAR_HEIGHT = (Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT) * 1;
+
+console.log(STATUSBAR_HEIGHT)
+
 const itemViewStyle = {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
-    height: "100%",
-    width: "100%"
+    width: "100%",
+    height: "100%"
 }
 
 const itemTitleStyle = {
@@ -134,12 +140,13 @@ const carouselPositionListStyle = {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: "10%"
+    alignItems: "flex-end",
+    marginTop: STATUSBAR_HEIGHT
 }
 
 const defaultCarouselPositionStyle = {
     width: 11,
     height: 11,
     borderRadius: 11 / 2,
-    margin: 5
+    marginHorizontal: 5
 }
