@@ -11,9 +11,9 @@ const MessageActionSheet = props => {
       transparent
       onPress={() => ActionSheet.show(
         {
-          options: BUTTONS,
+          options: props.buttons,
           cancelButtonIndex: CANCEL_INDEX,
-          title: "New Discussion"
+          title: props.title
         },
         buttonIndex => {
           if (buttonIndex === 1) {
