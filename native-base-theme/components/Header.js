@@ -383,6 +383,9 @@ export default _ => {
       flexDirection: 'row',
       justifyContent: 'flex-end'
     },
+    '.modal': {
+      marginTop: 0
+    },
     backgroundColor: ui.white,
     flexDirection: 'row',
     // paddingHorizontal: 10,

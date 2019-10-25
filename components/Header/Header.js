@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Button, Text, Header, Left, Icon, Body, Right } from "native-base"
 import { withRouter } from "react-router-native"
 
 import SidePanel from "../SidePanel/SidePanel"
 import MessageActionSheet from "../Messages/MessageActionSheet"
+import NewPrivateMessage from '../Modals/NewPrivateMessage'
 
 const pageHeader = props => {
+
   const [showPanel, setShowPanel] = useState(false)
-  const [currentPageName, setCurrentPageName] = useState('')
+  const [showModal, setShowModal] = useState(false)
 
   const addIconArray = [
     '/discussions',
@@ -17,20 +19,11 @@ const pageHeader = props => {
     '/promptings'
   ]
 
-  useEffect(_ => {
-    setCurrentPageName(props.location.pathname)
-  }, [props.location.pathname])
-
   const togglePanel = _ => setShowPanel(!showPanel)
 
-  const arrayForSure = _ => {
-    if (addIconArray.filter(icon => icon === currentPageName).length > 0) {
-      return <MessageActionSheet />
-    }
-  }
-
-  const renderPageName = () => {
-    return currentPageName
+  const renderPageName = _ => {
+    if (props.modal) return props.name
+    return props.location.pathname
       .replace('/', '')
       .split('-')
       .map(word => word.split('')
@@ -42,24 +35,44 @@ const pageHeader = props => {
       .join(' ')
   }
 
-  return (
-    <>
-      <Header>
-        <Left>
-          <Button onPress={togglePanel}>
-            <Icon dgreal name="menu" />
-          </Button>
-        </Left>
-        <Body>
-          <Text>{renderPageName()}</Text>
-        </Body>
-        <Right>
-          {arrayForSure()}
-        </Right>
-      </Header>
-      {showPanel && <SidePanel togglePanel={togglePanel} />}
-    </>
-  )
+  const arrayForSure = _ => {
+    if (!props.modal && addIconArray.filter(icon => icon === props.location.pathname).length > 0) {
+      return <MessageActionSheet setShowModal={setShowModal} />
+    }
+  }
+
+  const whichModal = _ => {
+    switch (props.location.pathname) {
+      case '/discussions':
+        return <NewPrivateMessage setShowModal={setShowModal} />
+      default:
+        return
+    }
+  }
+
+  return <>
+    <Header>
+      <Left>
+        <Button
+          transparent
+          onPress={togglePanel}
+        >
+          <Icon dgreal name="menu" />
+        </Button>
+      </Left>
+      <Body>
+        <Text>
+          {renderPageName()}
+        </Text>
+      </Body>
+      <Right>
+        {arrayForSure()}
+      </Right>
+    </Header>
+    {showPanel && <SidePanel togglePanel={togglePanel} />}
+    {showModal && whichModal()}
+  </>
+
 }
 
 export default withRouter(pageHeader)
