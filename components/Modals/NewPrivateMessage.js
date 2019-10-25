@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { withRouter } from 'react-router-native'
 import { Modal } from 'react-native'
 import { connect } from 'react-redux'
-import { Content, Text, List, ListItem } from 'native-base'
+import { Content, Text, List, ListItem, Button } from 'native-base'
 
 import { setCurrentChannel } from '../../actions'
 import ModalHeader from './ModalHeader'
@@ -14,12 +15,10 @@ const NewPrivateMessage = props => {
     const Users = firebase.database().ref('users')
 
     useEffect(_ => {
-        let loadedMessages = []
+        // keep up to date with firebase and re-format firebase user object
         Users.on('value', async snap => {
-            await Object.keys(snap.val())
-                .forEach(id => loadedMessages
-                    .push({ ...snap.val()[id], id }))
-            setAllUsers(loadedMessages)
+            setAllUsers(await Object.keys(snap.val())
+                .map(id => ({ ...snap.val()[id], id })))
         })
     }, [])
 
@@ -41,7 +40,16 @@ const NewPrivateMessage = props => {
                 <List>
                     {allUsers.length > 0 && allUsers.map((user, id) => (
                         <ListItem key={id * Math.random()}>
-                            <Text>{user.name}</Text>
+                            <Button transparent onPress={() => {
+                                props.setCurrentChannel({
+                                    id: `${props.currentUser.uid}:${user.id}`,
+                                    direct: true
+                                })
+                                props.setShowModal(false)
+                                props.history.push('/messages')
+                            }}>
+                                <Text>{user.name}</Text>
+                            </Button>
                         </ListItem>
                     ))}
                 </List>
@@ -51,4 +59,4 @@ const NewPrivateMessage = props => {
     )
 }
 
-export default connect(state => ({ ...state }), { setCurrentChannel })(NewPrivateMessage)
+export default connect(state => ({ ...state }), { setCurrentChannel })(withRouter(NewPrivateMessage))

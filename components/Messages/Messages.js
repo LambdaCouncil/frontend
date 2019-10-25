@@ -1,8 +1,7 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { Content, View, Footer, Header, List, ListItem, Container, Text, Col, Icon } from 'native-base'
+import { Content, View, List, ListItem } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
-import { StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
 
 // Components
@@ -11,16 +10,19 @@ import Message from "./Message"
 import firebase from '../../firebase'
 
 
-const Messages = (props, { currentChannel, currentUser }) => {
-  // const discussionsRef = props.direct ?
-  //   firebase.database().ref('directMessages').child(currentChannel)
-  //   :
-  //   firebase.database().ref('councils').child(props.currentCouncil).child(currentChannel)
+const Messages = props => {
 
-  // if(props.direct && currentChannel.split(':').filter(userId => currentUser.id === userId).length) let them pass
+  const discussionsRef = props.currentChannel.direct ?
+    firebase.database().ref('directMessages').child(props.currentChannel.id)
+    :
+    firebase.database().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
 
-  const discussionsRef = firebase.database().ref('discussions')
-  const [user, setUser] = useState(currentUser)
+  // if(props.direct && props.currentChannel.split(':').filter(userId => props.currentUser.id === userId).length) let them pass
+
+  console.log('location', props.location)
+
+  // const discussionsRef = firebase.database().ref('discussions')
+  const user = props.currentUser
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
   const [messagesLoading, setMessagesLoading] = useState(true)
@@ -34,15 +36,15 @@ const Messages = (props, { currentChannel, currentUser }) => {
   const [barndon, setBarndon] = useState(false)
 
   useEffect(() => {
-    if (!barndon && (currentChannel && user)) {
-      addMessageListener(currentChannel.id)
+    if (!barndon && (props.currentChannel && user)) {
+      addMessageListener()
     }
   }, [messages.length])
 
 
   const addMessageListener = channelId => {
     let loadedMessages = []
-    discussionsRef.child(channelId).on('child_added', async snap => {
+    discussionsRef.on('value', async snap => {
       await loadedMessages.push(snap.val())
       // messages.length > 0 &&
       setMessages(loadedMessages)
@@ -50,7 +52,6 @@ const Messages = (props, { currentChannel, currentUser }) => {
       // console.log('messages', messages)
       setMessagesLoading(false)
     })
-    countUsers(loadedMessages)
   }
 
   const handleSearchChange = e => {
@@ -83,52 +84,31 @@ const Messages = (props, { currentChannel, currentUser }) => {
   }
 
   const displayMessages = messages => {
-    messages.length > 0 && messages.map(message => (
-      <Message
-        key={message.timeStamp}
+    messages.length > 0 && messages.map((message, id) => (
+      <Message message={message}
+        key={id * Math.random()}
         message={message}
-        user={user}
+      // user={user}
       />
     ))
   }
 
-  const displayChannelName = channel => currentChannel ? `#${currentChannel.name}` : ''
+  const displayChannelName = channel => props.currentChannel ? `#${props.currentChannel.name}` : ''
 
   return (
-    <KeyboardAvoidingView
-      style={style.screen}
-      behavior='padding'
-    >
-
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color={variables.councils.text.greal}
-          style={styles.backButton}
-        />
-      </Link>
-
+    <Content padder>
       {/* 
         List is similar in appearance to the Discussions section in the Style Guide. 
           Alternatively, we could use Card for each message.
           see: (Zeplin: 06 Discussions - 1)
         */}
-      <Content>
-        <View>
+      <View>
 
-          <List className='messages'>
-            {displayMessages(messages)}
-            {messages.map(message => (
-              <ListItem>
-                <Message message={message}
-                  user={message.user}
-                  key={message.timeStamp} />
-              </ListItem>
-            ))}
-          </List>
+        <List className='messages'>
+          {displayMessages(messages)}
+        </List>
 
-        </View>
-      </Content>
+      </View>
       {/* 
           MessageForm doesn't exist in the app, instead there is a + button 
           on the right side of the header which opens an ActionSheet
@@ -139,35 +119,12 @@ const Messages = (props, { currentChannel, currentUser }) => {
       <View>
         <MessageForm
           discussionsRef={discussionsRef}
-          currentChannel={currentChannel}
-          currentUser={currentUser}
+          currentChannel={props.currentChannel}
+          currentUser={props.currentUser}
         />
       </View>
-    </KeyboardAvoidingView>
+    </Content>
   )
 }
-
-const styles = {
-  link: {
-    position: 'absolute',
-    top: 25,
-    left: 5,
-    width: '100%',
-    height: 50
-  },
-  backButton: {
-    fontSize: 50
-  },
-}
-
-const style = StyleSheet.create({
-  screen: {
-    flex: 1,
-    height: '100%',
-  },
-  footer: {
-    flexDirection: 'row'
-  }
-})
 
 export default connect(state => ({ ...state }))(withRouter(Messages))
