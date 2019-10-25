@@ -14,6 +14,9 @@ export default _ => {
       marginLeft: 10,
       fontSize: 50,
       color: text.greal
+    },
+    '.dgreal': {
+      color: text.greal
     }
   }
 
