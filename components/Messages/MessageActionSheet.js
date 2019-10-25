@@ -1,31 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ActionSheet, Icon, Button, Text } from 'native-base'
-import { connect } from 'react-redux'
-
-import { setCurrentChannel } from '../../actions'
 
 const MessageActionSheet = props => {
-  const [buttonPressed, setButtonPressed] = useState(0)
 
   const BUTTONS = ['Council', 'Private', 'Cancel']
   const CANCEL_INDEX = 2
 
-  console.log(props.currentChannel)
-
   return (
-    <Button onPress={() => ActionSheet.show(
-      {
-        options: BUTTONS,
-        cancelButtonIndex: CANCEL_INDEX,
-        title: "New Discussion"
-      },
-      buttonIndex => {
-        setButtonPressed({ clicked: BUTTONS[buttonIndex] });
-        if (buttonIndex === 1) {
-          props.setCurrentChannel(`${props.currentUser.uid}`)
+    <Button
+      transparent
+      onPress={() => ActionSheet.show(
+        {
+          options: BUTTONS,
+          cancelButtonIndex: CANCEL_INDEX,
+          title: "New Discussion"
+        },
+        buttonIndex => {
+          if (buttonIndex === 1) {
+            props.setShowModal(true)
+          }
         }
-      }
-    )}>
+      )}>
       <Text>
         <Icon dgreal name='wine' />
       </Text>
@@ -33,4 +28,4 @@ const MessageActionSheet = props => {
   );
 }
 
-export default connect(state => ({ ...state }), { setCurrentChannel })(MessageActionSheet)
+export default MessageActionSheet
