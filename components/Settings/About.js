@@ -3,9 +3,8 @@ import firebase from "../../firebase"
 import {KeyboardAvoidingView, StyleSheet, View} from 'react-native'
 import {Input, Text, Label, Item, H1, H3} from 'native-base'
 import {Link, withRouter} from 'react-router-native'
+import {Icon} from 'native-base'
 import {connect} from 'react-redux'
-
-import Icon from '../Icon'
 import {signUpDisplayName} from '../../actions'
 
 function About(props) {
@@ -17,13 +16,6 @@ function About(props) {
       style={styles.inputContainer}
       behavior='padding'
     >
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
-      </Link>
       <View style={styles.pageView}>
         <Text style={styles.header}>Councils v.1.0</Text>
         <View style={styles.contentDivs}>
@@ -84,11 +76,11 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 17,
     fontWeight: '500',
-    fontFamily: 'bern2'
+    fontFamily: 'bern-r'
   },
   textContent: {
     fontSize: 17,
-    fontFamily: 'bern2',
+    fontFamily: 'bern-r',
   },
   contentDivs: {
     marginVertical: 10,
@@ -97,7 +89,7 @@ const styles = StyleSheet.create({
   contactContent: {
     marginVertical: 10,
     fontSize: 17,
-    fontFamily: 'bern2',
+    fontFamily: 'bern-r',
     lineHeight: 24
   }
 })

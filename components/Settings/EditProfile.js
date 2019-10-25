@@ -42,14 +42,7 @@ function EditProfile(props) {
     <Content
       style={styles.inputContainer}
       behavior='padding'>
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton} />
-      </Link>
       <View style={styles.pageView}>
-        <H1>Edit Profile</H1>
         <Text>Upload Photo</Text>
         <Item floatingLabel style={styles.inputItem}>
           <Label>First Name</Label>
@@ -77,16 +70,8 @@ function EditProfile(props) {
         </Item>
         <View style={styles.buttonsBottom}>
           <View style={styles.button}>
-            <Link to='/changepassword'>
+            <Link to='/change-password'>
               <Text style={styles.password}>Change Password</Text>
-            </Link>
-          </View>
-          <View style={styles.button}>
-            <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
-          </View>
-          <View style={styles.button}>
-            <Link to='/settings'>
-              <Text style={styles.cancel}>Cancel</Text>
             </Link>
           </View>
           <View style={styles.button}>

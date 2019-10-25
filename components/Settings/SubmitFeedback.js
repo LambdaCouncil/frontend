@@ -7,23 +7,15 @@ function SubmitFeedback(props) {
 
   const [feedback, setFeedback] = useState('')
 
+
   const handleSubmit = () => {
-    console.log(feedback)
+    console.log('User Feedback:', feedback);
+    props.history.push('/settings')
   }
 
   return (
-
     <Content padder>
-
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
-      </Link>
       <View style={styles.pageView}>
-        <Text style={styles.textContent}>Submit Feedback</Text>
         <Text style={styles.textContent}>What Can We Improve?</Text>
         <View>
           <TextInput
@@ -32,18 +24,15 @@ function SubmitFeedback(props) {
             editable
             maxLength={500}
             placeholder='Please type your feedback here...'
+            value={feedback}
+            onChangeText={feedback => setFeedback(feedback)}
           />
         </View>
-        <Link to='/settings'>
-          <Text style={styles.submit}>Submit</Text>
-        </Link>
+          <Text style={styles.submit} onPress={handleSubmit}>Submit</Text>
       </View>
     </Content>
-
   )
 }
-
-
 const styles = StyleSheet.create({
   inputContainer: {
     height: '100%',
@@ -69,20 +58,21 @@ const styles = StyleSheet.create({
   },
   pageView: {
     marginHorizontal: 20,
-    marginTop: 80,
+    marginTop: 20,
   },
   textContent: {
     fontSize: 28,
     marginBottom: 10,
     fontFamily: 'gotham',
     fontWeight: '500',
+    textAlign: 'center'
   },
   submit: {
     // marginVertical: 15,
     color: '#288365',
     textAlign: 'center',
     fontSize: 17,
-    top: 169
+    // top: 169
   }
 })
 

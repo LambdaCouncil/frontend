@@ -22,6 +22,7 @@ import Discussions from "./Discussions/Discussions"
 import Agendas from "./Agendas/Agendas"
 import Assignments from './Assignments'
 import RateCouncils from './Settings/RateCouncils'
+import About from "./Settings/About";
 
 const Routes = props => {
   useEffect(_ => {

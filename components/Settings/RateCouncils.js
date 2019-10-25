@@ -15,12 +15,6 @@ const RateCouncils = (props) => {
     <KeyboardAvoidingView
       style={styles.inputContainer}
       behavior='padding'>
-
-      <Icon backButton
-        onPress={() => props.history.goBack()}
-        name='arrow-back'
-      />
-
       <View style={styles.pageView}>
         <Text style={styles.header}>How Would You Rate Our App?</Text>
         <AirbnbRating
