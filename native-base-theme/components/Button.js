@@ -375,9 +375,9 @@ export default _ => {
       }
     },
     paddingVertical: variables.buttonPadding,
-    backgroundColor: variables.buttonPrimaryBg,
+    backgroundColor: ui.white,
     borderRadius: variables.borderRadiusBase,
-    borderColor: variables.buttonPrimaryBg,
+    borderColor: ui.white,
     borderWidth: null,
     height: 45,
     flexDirection: 'row',

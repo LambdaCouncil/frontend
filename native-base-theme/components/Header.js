@@ -383,7 +383,7 @@ export default _ => {
       flexDirection: 'row',
       justifyContent: 'flex-end'
     },
-    backgroundColor: variables.toolbarDefaultBg,
+    backgroundColor: ui.white,
     flexDirection: 'row',
     // paddingHorizontal: 10,
     paddingLeft:
@@ -393,11 +393,8 @@ export default _ => {
     paddingRight: 10,
     justifyContent: 'center',
     paddingTop: platform === PLATFORM.IOS ? 18 : 0,
-    borderBottomWidth:
-      platform === PLATFORM.IOS
-        ? 1 / PixelRatio.getPixelSizeForLayoutSize(1)
-        : 0,
-    borderBottomColor: variables.toolbarDefaultBorder,
+    borderBottomWidth: 1,
+    borderBottomColor: '#dbdcdf',
     height:
       variables.platform === PLATFORM.IOS &&
         variables.platformStyle === PLATFORM.MATERIAL
@@ -411,7 +408,8 @@ export default _ => {
     shadowRadius: platformStyle === PLATFORM.MATERIAL ? 1.2 : undefined,
     top: 0,
     left: 0,
-    right: 0
+    right: 0,
+    marginTop: 24
   }
 
 }

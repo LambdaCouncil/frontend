@@ -1,4 +1,4 @@
-import { CLEAR_USER, SET_USER, SET_CURRENT_CHANNEL, SUDN } from '../actions'
+import { CLEAR_USER, SET_USER, SET_CURRENT_CHANNEL, SIGN_UP_DISPLAY_NAME } from '../actions'
 
 const initialUserState = {
     currentUser: undefined,
@@ -16,7 +16,7 @@ export default (state = initialUserState, action) => {
                 } : action.payload,
                 isLoading: false
             }
-        case SUDN:
+        case SIGN_UP_DISPLAY_NAME:
             return {
                 ...state,
                 displayName: action.payload
