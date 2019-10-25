@@ -1,10 +1,11 @@
-import React, { useState } from "react"
-import { Button, Text, Header, Left, Icon, Body, Right } from "native-base"
-import { withRouter } from "react-router-native"
+import React, { useState } from "react";
+import { Button, Text, Header, Left, Icon, Body, Right } from "native-base";
+import { withRouter } from "react-router-native";
 
-import SidePanel from "../SidePanel/SidePanel"
-import MessageActionSheet from "../Messages/MessageActionSheet"
-import NewPrivateMessage from '../Modals/NewPrivateMessage'
+import SidePanel from "../SidePanel/SidePanel";
+import MessageActionSheet from "../Messages/MessageActionSheet";
+import AgendaActionSheet from '../Agendas/AgendaActionSheet';
+import NewPrivateMessage from '../Modals/NewPrivateMessage';
 
 const pageHeader = props => {
 
@@ -37,7 +38,13 @@ const pageHeader = props => {
 
   const arrayForSure = _ => {
     if (!props.modal && addIconArray.filter(icon => icon === props.location.pathname).length > 0) {
-      return <MessageActionSheet setShowModal={setShowModal} />
+      console.log('pathname in Header arrayForSure', props.location.pathname)
+      if (props.location.pathname === '/discussions') {
+        return <MessageActionSheet setShowModal={setShowModal} />
+
+      } else if (props.location.pathname === '/agendas') {
+        return <AgendaActionSheet setShowModal={setShowModal} />
+      }
     }
   }
 
