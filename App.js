@@ -14,6 +14,8 @@ import reducer from './reducer'
 // import Routes from './components/Discussions/Discussions'
 import Routes from './components/Routes'
 
+import OfflineStatus from "./OfflineStatus"
+
 const store = createStore(reducer, applyMiddleware(thunk))
 
 const App = _ => {
@@ -32,7 +34,10 @@ const App = _ => {
       <NativeRouter>
         <StyleProvider style={getTheme(common)}>
           <Root>
-            <Routes />
+            <>
+              <Routes />
+              <OfflineStatus />
+            </>
           </Root>
         </StyleProvider>
       </NativeRouter>
