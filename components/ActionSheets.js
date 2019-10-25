@@ -22,7 +22,7 @@ const ActionSheets = props => {
         }
       )}>
       <Text>
-        <Icon dgreal name='wine' />
+        <Icon dgreal name={props.asInfo.iconName} />
       </Text>
     </Button>
   );

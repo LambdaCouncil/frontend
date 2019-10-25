@@ -17,7 +17,8 @@ const pageHeader = props => {
     '/agendas',
     '/assignments',
     '/files',
-    '/promptings'
+    '/promptings',
+    '/messages'
   ]
 
   // title and button text for dynamic actionsheet component
@@ -34,7 +35,8 @@ const pageHeader = props => {
       tertiary: {
         title: 'Agenda',
         buttons: ['Edit', 'Delete', 'Cancel']
-      },
+      }    
+    }, 
     discussions: {
       default: {
         title: 'New Discussion',
@@ -51,7 +53,6 @@ const pageHeader = props => {
         buttons: ['Delete', 'Cancel'],
         iconName: 'more'
       }
-    }
    }
   };
 
