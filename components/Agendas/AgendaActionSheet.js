@@ -2,7 +2,7 @@ import React from "react";
 import { ActionSheet, Icon, Button, Text } from "native-base";
 
 const AgendaActionSheet = props => {
-  const BUTTONS = ["Extended", "Light", "Cancel"];
+  const BUTTONS = [...props.asInfo.buttons];
   const CANCEL_INDEX = 2;
 
   return (
@@ -13,7 +13,7 @@ const AgendaActionSheet = props => {
           {
             options: BUTTONS,
             cancelButtonIndex: CANCEL_INDEX,
-            title: "New Agenda"
+            title: props.asInfo.title
           },
           buttonIndex => {
             if (buttonIndex === 1) {
