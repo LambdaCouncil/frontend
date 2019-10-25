@@ -1,10 +1,9 @@
-import React, { createRef, useState } from 'react'
-import { Button, View, Left, Icon, Body } from 'native-base'
+import React from 'react'
+import { View } from 'native-base'
 import { connect } from "react-redux"
 
 import UserPanel from './UserPanel'
 import SideMenu from './SideMenu'
-import Header from '../Header/Header'
 
 
 const SidePanel = props => {
@@ -16,8 +15,6 @@ const SidePanel = props => {
   )
 }
 
-const mapStateToProps = state => ({
-  ...state
-})
+const mapStateToProps = state => ({ ...state })
 
-export default connect(mapStateToProps, {})(SidePanel)
+export default connect(mapStateToProps)(SidePanel)

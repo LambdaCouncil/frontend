@@ -1,21 +1,25 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { View, Content, Footer, Header, List, ListItem, Container, Text, Col, Icon } from 'native-base'
+import { Content, View, Footer, Header, List, ListItem, Container, Text, Col, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { connect } from 'react-redux'
 
 // Components
-import MessagesHeader from "./MessageHeader"
 import MessageForm from "./MessagesForm"
 import Message from "./Message"
-import variables from '../../native-base-theme/variables/commonColor'
 import firebase from '../../firebase'
 
 
 const Messages = (props, { currentChannel, currentUser }) => {
+  // const discussionsRef = props.direct ?
+  //   firebase.database().ref('directMessages').child(currentChannel)
+  //   :
+  //   firebase.database().ref('councils').child(props.currentCouncil).child(currentChannel)
 
-  const messagesRef = firebase.database().ref('messages')
-  const [channel, setChannel] = useState(currentChannel)
+  // if(props.direct && currentChannel.split(':').filter(userId => currentUser.id === userId).length) let them pass
+
+  const discussionsRef = firebase.database().ref('discussions')
   const [user, setUser] = useState(currentUser)
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
@@ -30,15 +34,15 @@ const Messages = (props, { currentChannel, currentUser }) => {
   const [barndon, setBarndon] = useState(false)
 
   useEffect(() => {
-    if (!barndon && (channel && user)) {
-      addMessageListener(channel.id)
+    if (!barndon && (currentChannel && user)) {
+      addMessageListener(currentChannel.id)
     }
   }, [messages.length])
 
 
   const addMessageListener = channelId => {
     let loadedMessages = []
-    messagesRef.child(channelId).on('child_added', async snap => {
+    discussionsRef.child(channelId).on('child_added', async snap => {
       await loadedMessages.push(snap.val())
       // messages.length > 0 &&
       setMessages(loadedMessages)
@@ -88,29 +92,32 @@ const Messages = (props, { currentChannel, currentUser }) => {
     ))
   }
 
-  const displayChannelName = channel => channel ? `#${channel.name}` : ''
+  const displayChannelName = channel => currentChannel ? `#${currentChannel.name}` : ''
 
   return (
-    <Container contentContainerStyle={style.screen}>
+    <KeyboardAvoidingView
+      style={style.screen}
+      behavior='padding'
+    >
 
       {/* 
-          List is similar in appearance to the Discussions section in the Style Guide. 
+        List is similar in appearance to the Discussions section in the Style Guide. 
           Alternatively, we could use Card for each message.
           see: (Zeplin: 06 Discussions - 1)
         */}
       <Content>
         <View>
 
-          {/* <List className='messages'>
-          {displayMessages(messages)}
-          {messages.map(message => (
-            <ListItem>
-              <Message message={message}
-                user={message.user}
-                key={message.timeStamp} />
-            </ListItem>
-          ))}
-        </List> */}
+          <List className='messages'>
+            {displayMessages(messages)}
+            {messages.map(message => (
+              <ListItem>
+                <Message message={message}
+                  user={message.user}
+                  key={message.timeStamp} />
+              </ListItem>
+            ))}
+          </List>
 
         </View>
       </Content>
@@ -123,10 +130,12 @@ const Messages = (props, { currentChannel, currentUser }) => {
 
       <View>
         <MessageForm
-          messagesRef={messagesRef} currentChannel={currentChannel} currentUser={currentUser}
+          discussionsRef={discussionsRef}
+          currentChannel={currentChannel}
+          currentUser={currentUser}
         />
       </View>
-    </Container>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -153,4 +162,4 @@ const style = StyleSheet.create({
   }
 })
 
-export default withRouter(Messages)
+export default connect(state => ({ ...state }))(withRouter(Messages))
