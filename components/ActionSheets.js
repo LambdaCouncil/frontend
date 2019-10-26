@@ -4,7 +4,7 @@ import { ActionSheet, Icon, Button, Text } from 'native-base'
 const ActionSheets = props => {
 
   const BUTTONS = [...props.asInfo.buttons]
-  const CANCEL_INDEX = 2
+  const CANCEL_INDEX = props.asInfo.cancelIndex
 
   return (
     <Button

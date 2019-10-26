@@ -26,31 +26,40 @@ const pageHeader = props => {
     agendas: {
       primary: {
         title: 'New Agenda',
-        buttons: ['Extended', 'Light', 'Cancel']
+        buttons: ['Extended', 'Light', 'Cancel'],
+        cancelIndex: 2,
+        iconName: 'wine'
       },
       secondary: {
         title: 'Agenda',
-        buttons: ['Start Discussion', 'Make Assignmet', 'Cancel']
+        buttons: ['Start Discussion', 'Make Assignmet', 'Cancel'],
+        cancelIndex: 2,
+        iconName: 'wine'
       },
       tertiary: {
         title: 'Agenda',
-        buttons: ['Edit', 'Delete', 'Cancel']
+        buttons: ['Edit', 'Delete', 'Cancel'],
+        cancelIndex: 2, 
+        iconName: 'wine'
       }    
     }, 
     discussions: {
       default: {
         title: 'New Discussion',
         buttons: ['Council', 'Private', 'Cancel'],
+        cancelIndex: 2,
         iconName: 'wine'
       },
       public: {
         title: 'Discussion',
         buttons: ['Leave', 'Delete', 'Cancel'],
+        cancelIndex: 2,
         iconName: 'more'
       },
       private: {
         title: 'Discussion',
         buttons: ['Delete', 'Cancel'],
+        cancelIndex: 1,
         iconName: 'more'
       }
    }
