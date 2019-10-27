@@ -119,7 +119,7 @@ const pageHeader = props => {
       <Header>
         <Left>
           <Button transparent onPress={togglePanel}>
-            <Icon dgreal name='menu' />
+            <Icon dgreal name='menu' /> 
           </Button>
         </Left>
         <Body>
