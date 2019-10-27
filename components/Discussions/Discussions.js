@@ -4,11 +4,12 @@ import { withRouter, Link } from 'react-router-native'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
+import { setCurrentChannel } from '../../actions'
 import firebase from '../../firebase';
 
 const Discussions = props => {
 
-    const discussionsRef = firebase.database().ref('directMessages')
+    const discussionsRef = firebase.firestore().collection('directMessages')
 
     const [barndon, setBarndon] = useState(false)
     const [discussions, setDiscussions] = useState([])
@@ -17,15 +18,14 @@ const Discussions = props => {
 
         const discussionListener = _ => {
             let loadedChannels = []
-            discussionsRef.on('value', async snap => {
-                await loadedChannels.push(snap.val())
-                setDiscussions(loadedChannels
-                    .map(chanId => ({
-                        [chanId]: Object.keys(chanId)
-                            .map(messId => ({ ...chanId[messId], messId }))
-                    })))
-                setBarndon(true)
-            })
+            discussionsRef.get()
+                .then(async querySnapshot => {
+                    await querySnapshot.forEach(doc => {
+                        loadedChannels.push({ id: doc.id, ...doc.data() })
+                    })
+                    setDiscussions(loadedChannels)
+                })
+            console.log(discussions)
         }
 
         if (!barndon) discussionListener()
@@ -38,23 +38,30 @@ const Discussions = props => {
         <Content padder>
             <List>
                 {discussions.length > 0 && discussions
-                    .map((conv, id) => (
-                        <ListItem avatar key={id * Math.random()}>
-                            {/*<Left>
+                    .map(messages => (messages.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)
+                        .map((conv, id) => {
+
+                            if (id === 0) return (
+
+                                <ListItem avatar
+                                    key={id * Math.random()}
+                                    onPress={() => {
+                                        props.setCurrentChannel({
+                                            id: messages.id,
+                                            direct: true
+                                        })
+                                        props.history.push('/messages')
+                                    }}
+                                >
+                                    {/*<Left>
                             <Thumbnail small source={{ uri: conv.image }} />
                         </Left>*/}
-                            <Body>
-                                <Link to='/messages'>
-                                    <Text name>{conv[0].user.name}</Text>
-                                </Link>
-                                <Link to='/messages'>
-                                    <Text snippet>{conv[0].content}</Text>
-                                </Link>
-                                <Link to='/messages'>
-                                    <Text note>{moment(conv[0].timestamp).format('DD/MM/YYYY')}</Text>
-                                </Link>
-                            </Body>
-                            {/*<Right>
+                                    <Body>
+                                        <Text name>{conv.user.name}</Text>
+                                        <Text snippet>{conv.content}</Text>
+                                        <Text note>{moment(conv.timestamp).format('lll')}</Text>
+                                    </Body>
+                                    {/*<Right>
                             <Link to='/messages'>
                                 <Text>
                                 <Text new>{conv.new > 0 && conv.new}</Text>
@@ -62,11 +69,13 @@ const Discussions = props => {
                                 </Text>
                                 </Link>
                         </Right>*/}
-                        </ListItem>
+                                </ListItem>
+                            )
+                        })
                     ))}
             </List>
         </Content>
     )
 }
 
-export default connect(state => ({ ...state }), {})(withRouter(Discussions))
+export default connect(state => ({ ...state }), { setCurrentChannel })(withRouter(Discussions))

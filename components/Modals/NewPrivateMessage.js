@@ -43,7 +43,8 @@ const NewPrivateMessage = props => {
                             <Button transparent onPress={() => {
                                 props.setCurrentChannel({
                                     id: `${props.currentUser.uid}:${user.id}`,
-                                    direct: true
+                                    direct: true,
+                                    brandNewChannel: true
                                 })
                                 props.setShowModal(false)
                                 props.history.push('/messages')
