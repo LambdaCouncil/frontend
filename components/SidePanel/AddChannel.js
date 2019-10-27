@@ -51,7 +51,7 @@ const AddChannel = props => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
+      <View>
         <Header style={styles.header}>
           <Left>
             <Button transparent onPress={() => onCancelNewChannel()}>
@@ -114,19 +114,5 @@ const AddChannel = props => {
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFFFFF',
-    paddingTop: 25
-  },
-  // header: {
-  //   backgroundColor: "#FAFAFA"
-  // }
-  inputItem: {
-    marginVertical: 15,
-    paddingBottom: 10
-  }
-});
 
 export default withRouter(AddChannel);

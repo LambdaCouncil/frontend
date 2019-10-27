@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Text, Form, Input, Button, Container, Content, Item, View, Label } from 'native-base'
-import { StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { Text, Form, Input, Button, Item, View, Label } from 'native-base'
 import { connect } from 'react-redux'
 
 import { setCurrentChannel } from '../../actions'
@@ -10,7 +9,6 @@ import firebase from '../../firebase'
 const MessageForm = props => {
 
     const [message, setMessage] = useState('')
-
 
     const handleChange = e => {
         setMessage(e.nativeEvent.text)
