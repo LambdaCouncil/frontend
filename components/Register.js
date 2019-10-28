@@ -4,11 +4,7 @@ import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-<<<<<<< HEAD
-import { signUpDisplayName } from '../actions'
-=======
 import { signUpDisplayName, setUser } from '../actions'
->>>>>>> 529b0ab0e4e6f831c7845dae146a42b80678e8b6
 
 function Register(props) {
 
