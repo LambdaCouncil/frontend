@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 
-import variables from '../native-base-theme/variables/commonColor'
 import firebase from "../firebase"
 
 function Login(props) {
@@ -44,11 +43,11 @@ function Login(props) {
                 <Content
                     padder
                     contentContainerStyle={{
-                        alignItems: 'center',
-                        paddingTop: '15%',
-                        paddingBottom: '85%'
-                    }}>
-
+                         alignItems: 'center',
+                         paddingTop: '15%',
+                    //     paddingBottom: '85%'
+                     }}>
+                    
                     <H1>Log In</H1>
 
                     <Text>Log into your Councils account.</Text>
