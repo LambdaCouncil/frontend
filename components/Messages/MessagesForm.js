@@ -16,6 +16,7 @@ const MessageForm = props => {
         setMessage(e.nativeEvent.text)
     }
 
+    console.log('MessageForm', props.currentUser)
 
     const sendMessage = _ => {
         if (message) {

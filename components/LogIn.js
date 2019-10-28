@@ -32,13 +32,7 @@ function Login(props) {
 
     return (
 
-        <Content
-            padder
-            contentContainerStyle={{
-                alignItems: 'center',
-                paddingTop: '15%',
-                paddingBottom: '85%'
-            }}>
+        <>
 
             <Icon
                 backButton
@@ -46,26 +40,36 @@ function Login(props) {
                 onPress={props.history.goBack}
             />
 
-            <H1>Log In</H1>
+            <Content
+                padder
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    paddingTop: '15%',
+                    paddingBottom: '85%'
+                }}>
 
-            <Text>Log into your Councils account.</Text>
+                <H1>Log In</H1>
 
-            <Item floatingLabel>
-                <Label>Email</Label>
-                <Input onChangeText={handleChangeEmail} />
-            </Item>
+                <Text>Log into your Councils account.</Text>
 
-            <Item floatingLabel>
-                <Label>Password</Label>
-                <Input
-                    onChangeText={handleChangePassword}
-                    secureTextEntry={true}
-                />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Email</Label>
+                    <Input onChangeText={handleChangeEmail} />
+                </Item>
 
-            <H3 onPress={handleSubmit} submit>Log In</H3>
+                <Item floatingLabel>
+                    <Label>Password</Label>
+                    <Input
+                        onChangeText={handleChangePassword}
+                        secureTextEntry={true}
+                    />
+                </Item>
 
-        </Content>
+                <H3 onPress={handleSubmit} submit>Log In</H3>
+
+            </Content>
+
+        </>
 
     )
 }
