@@ -37,7 +37,7 @@ function Register(props) {
                         createdUser.user
                             .updateProfile({
                                 displayName: displayName,
-                                photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+                                photoURL: `https://ui-avatars.com/api/?name=${displayName.replace(' ', '+')}`
                             })
                             .then(_ => {
                                 userRef
