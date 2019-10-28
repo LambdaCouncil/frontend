@@ -43,7 +43,8 @@ function Register(props) {
                                 userRef
                                     .add({
                                         name: createdUser.user.displayName,
-                                        avatar: createdUser.user.photoURL
+                                        avatar: createdUser.user.photoURL,
+                                        id: createdUser.user.uid
                                     })
                                     .then(_ => {
                                         setDisplayName(' ')
@@ -75,10 +76,10 @@ function Register(props) {
             <Content
                 padder
                 contentContainerStyle={{
-                alignItems: 'center',
-                paddingTop: '15%',
-                paddingBottom: '85%'
-            }}>
+                    alignItems: 'center',
+                    paddingTop: '15%',
+                    paddingBottom: '85%'
+                }}>
 
                 <H1>Sign Up</H1>
 
