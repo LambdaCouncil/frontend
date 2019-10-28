@@ -1,23 +1,22 @@
 import React, { useState } from 'react'
 import firebase from "../firebase"
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
-import { Link, withRouter } from 'react-router-native'
+import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import variables from '../native-base-theme/variables/commonColor'
 import { signUpDisplayName } from '../actions'
+import md5 from 'md5'
 
 function Register(props) {
 
-    const [userName, setUserName] = useState(' ')
+    const [displayName, setDisplayName] = useState(' ')
     const [email, setEmail] = useState(' ')
     const [password, setPassword] = useState(' ')
     const [passwordConfirm, setPasswordConfirm] = useState(' ')
 
-    const userRef = firebase.database().ref('users'),
+    const userRef = firebase.firestore().collection('users'),
 
-        handleChangeUserName = text => setUserName(text),
+        handleChangeDisplayName = text => setDisplayName(text),
 
         handleChangeEmail = text => setEmail(text),
 
@@ -29,20 +28,26 @@ function Register(props) {
 
             if (password === passwordConfirm) {
 
-                props.signUpDisplayName(userName)
+                props.signUpDisplayName(displayName)
 
                 firebase
                     .auth()
                     .createUserWithEmailAndPassword(email, password)
                     .then(createdUser => {
                         createdUser.user
-                            .updateProfile({ displayName: userName })
+                            .updateProfile({
+                                displayName: displayName,
+                                photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+                            })
                             .then(_ => {
                                 userRef
-                                    .child(createdUser.user.uid)
-                                    .set({ name: createdUser.user.displayName })
+                                    .add({
+                                        name: createdUser.user.displayName,
+                                        avatar: createdUser.user.photoURL,
+                                        id: createdUser.user.uid
+                                    })
                                     .then(_ => {
-                                        setUserName(' ')
+                                        setDisplayName(' ')
                                         setEmail(' ')
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
@@ -60,78 +65,60 @@ function Register(props) {
         }
 
     return (
+        <>
 
-        <KeyboardAvoidingView
-            style={styles.inputContainer}
-            behavior='padding'
-        >
+            <Icon
+                backButton
+                name='arrow-back'
+                onPress={props.history.goBack}
+            />
 
-            <Link to='/' style={styles.link}>
-                <Icon
-                    name='arrow-back'
-                    color={variables.councils.text.greal}
-                    style={styles.backButton}
-                />
-            </Link>
+            <Content
+                padder
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    paddingTop: '15%',
+                    paddingBottom: '85%'
+                }}>
 
-            <H1>Sign Up</H1>
+                <H1>Sign Up</H1>
 
-            <Text>Create Councils account.</Text>
+                <Text>Create Councils account.</Text>
 
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Username</Label>
-                <Input onChangeText={handleChangeUserName} />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Display Name</Label>
+                    <Input onChangeText={handleChangeDisplayName} />
+                </Item>
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Email</Label>
-                <Input onChangeText={handleChangeEmail} />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Email</Label>
+                    <Input onChangeText={handleChangeEmail} />
+                </Item>
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Password</Label>
-                <Input
-                    onChangeText={handleChangePassword}
-                    secureTextEntry={true}
-                />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Password</Label>
+                    <Input
+                        onChangeText={handleChangePassword}
+                        secureTextEntry={true}
+                    />
+                </Item>
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Confirm Password</Label>
-                <Input
-                    secureTextEntry={true}
-                    onChangeText={handleChangePasswordConfirm}
-                />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Confirm Password</Label>
+                    <Input
+                        secureTextEntry={true}
+                        onChangeText={handleChangePasswordConfirm}
+                    />
+                </Item>
 
-            <H3 onPress={handleSubmit} submit>Sign Up</H3>
+                <H3 onPress={handleSubmit} submit>Sign Up</H3>
 
-        </KeyboardAvoidingView>
+            </Content>
+
+        </>
 
     )
 }
-
-const styles = StyleSheet.create({
-    inputContainer: {
-        height: '100%',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    link: {
-        position: 'absolute',
-        top: 25,
-        left: 5,
-        width: '100%',
-        height: 50
-    },
-    backButton: {
-        fontSize: 50
-    },
-    inputItem: {
-        marginVertical: 10
-    }
-})
 
 export default connect(state => ({ ...state }), { signUpDisplayName })(withRouter(Register))

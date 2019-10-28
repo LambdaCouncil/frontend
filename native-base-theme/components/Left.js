@@ -9,7 +9,10 @@ export default _ => {
   return {
     flex: 1,
     alignSelf: 'center',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    '.userPanel': {
+      marginLeft: 15
+    }
   }
 
 }

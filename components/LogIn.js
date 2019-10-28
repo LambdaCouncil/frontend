@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
-import { Link } from 'react-router-native'
+import { StyleSheet } from 'react-native'
+import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { withRouter } from 'react-router-native'
 
 import variables from '../native-base-theme/variables/commonColor'
 import firebase from "../firebase"
@@ -32,18 +32,19 @@ function Login(props) {
 
     return (
 
-        <KeyboardAvoidingView
-            style={styles.inputContainer}
-            behavior='padding'
-        >
+        <Content
+            padder
+            contentContainerStyle={{
+                alignItems: 'center',
+                paddingTop: '15%',
+                paddingBottom: '85%'
+            }}>
 
-            <Link to='/' style={styles.link}>
-                <Icon
-                    name='arrow-back'
-                    color={variables.councils.text.greal}
-                    style={styles.backButton}
-                />
-            </Link>
+            <Icon
+                backButton
+                name='arrow-back'
+                onPress={props.history.goBack}
+            />
 
             <H1>Log In</H1>
 
@@ -64,7 +65,7 @@ function Login(props) {
 
             <H3 onPress={handleSubmit} submit>Log In</H3>
 
-        </KeyboardAvoidingView>
+        </Content>
 
     )
 }
@@ -88,4 +89,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Login
+export default withRouter(Login)
