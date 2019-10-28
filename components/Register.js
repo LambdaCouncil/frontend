@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
 import { signUpDisplayName } from '../actions'
-import md5 from 'md5'
 
 function Register(props) {
 
