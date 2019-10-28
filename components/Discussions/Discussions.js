@@ -18,13 +18,12 @@ const Discussions = props => {
 
         const discussionListener = _ => {
             let loadedChannels = []
-            discussionsRef.get()
-                .then(async querySnapshot => {
-                    await querySnapshot.forEach(doc => {
-                        loadedChannels.push({ id: doc.id, ...doc.data() })
-                    })
-                    loadedChannels.length && setDiscussions(loadedChannels.filter(disc => disc.users.includes(props.currentUser.uid)))
+            discussionsRef.onSnapshot(async querySnapshot => {
+                await querySnapshot.forEach(doc => {
+                    loadedChannels.push({ id: doc.id, ...doc.data() })
                 })
+                loadedChannels.length && setDiscussions(loadedChannels.filter(disc => disc.users.includes(props.currentUser.uid)))
+            })
         }
 
         if (!barndon) discussionListener()

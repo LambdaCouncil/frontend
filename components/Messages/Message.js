@@ -6,7 +6,7 @@ import firebase from '../../firebase'
 
 const Message = props => {
 
-    const [avatar, setAvatar] = useState('')
+    const [avatar, setAvatar] = useState('https://ui-avatars.com/api/?name=Councils+App')
 
     const { user, content, timestamp } = props.message
 
@@ -15,7 +15,7 @@ const Message = props => {
         .catch(err => console.error(err))
 
     return user.id === props.currentUser.uid ?
-        <ListItem avatar last>
+        <ListItem avatar>
             <Body>
                 <Text snippet>{content}</Text>
             </Body>
@@ -32,7 +32,6 @@ const Message = props => {
                 <Text snippet>{content}</Text>
             </Body>
         </ListItem>
-
 
 }
 
