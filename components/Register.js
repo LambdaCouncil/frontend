@@ -77,8 +77,7 @@ function Register(props) {
                 padder
                 contentContainerStyle={{
                     alignItems: 'center',
-                    paddingTop: '15%',
-                    paddingBottom: '85%'
+                    justifyContent: 'center',
                 }}>
 
                 <H1>Sign Up</H1>

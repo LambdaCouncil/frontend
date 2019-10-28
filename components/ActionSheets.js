@@ -24,7 +24,7 @@ const ActionSheets = props => {
         )
       }>
       {Platform.OS === 'android' ?
-        <Text style={{ transform: [{ rotate: '90deg' }] }}>
+        <Text style={{ transform: [{ rotate: '90deg' }] }, {justifyContent: 'center'}}>
           <Icon dgreal name={props.asInfo.iconName} />
         </Text> :
         <Text>
