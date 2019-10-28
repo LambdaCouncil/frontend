@@ -95,17 +95,7 @@ const Messages = (props, { currentChannel, currentUser }) => {
   const displayChannelName = channel => currentChannel ? `#${currentChannel.name}` : ''
 
   return (
-    <KeyboardAvoidingView
-      style={style.screen}
-      behavior='padding'
-    >
-
-      {/* 
-        List is similar in appearance to the Discussions section in the Style Guide. 
-          Alternatively, we could use Card for each message.
-          see: (Zeplin: 06 Discussions - 1)
-        */}
-      <Content>
+    <Content padder>
         <View>
 
           <List className='messages'>
@@ -120,13 +110,6 @@ const Messages = (props, { currentChannel, currentUser }) => {
           </List>
 
         </View>
-      </Content>
-      {/* 
-          MessageForm doesn't exist in the app, instead there is a + button 
-          on the right side of the header which opens an ActionSheet
-          see: (Zeplin: 06 Discussions - 1, 06 Discussions - 2) 
-        */}
-
 
       <View>
         <MessageForm
@@ -135,31 +118,8 @@ const Messages = (props, { currentChannel, currentUser }) => {
           currentUser={currentUser}
         />
       </View>
-    </KeyboardAvoidingView>
+    </Content>
   )
 }
-
-const styles = {
-  link: {
-    position: 'absolute',
-    top: 25,
-    left: 5,
-    width: '100%',
-    height: 50
-  },
-  backButton: {
-    fontSize: 50
-  },
-}
-
-const style = StyleSheet.create({
-  screen: {
-    flex: 1,
-    height: '100%',
-  },
-  footer: {
-    flexDirection: 'row'
-  }
-})
 
 export default connect(state => ({ ...state }))(withRouter(Messages))
