@@ -16,13 +16,10 @@ const NewPrivateMessage = props => {
 
     useEffect(_ => {
         // keep up to date with firebase and re-format firebase user object
-        Users.on('value', async snap => {
-            setAllUsers(await Object.keys(snap.val())
-                .map(id => ({ ...snap.val()[id], id })))
-        })
+        Users.get()
+            .then(docs => docs.forEach(doc => setAllUsers([...allUsers, doc.data()])))
+            .catch(err => console.error(err))
     }, [])
-
-    console.log(allUsers)
 
     return (
         <Modal
