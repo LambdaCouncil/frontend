@@ -41,7 +41,7 @@ const Routes = props => {
     if (props.location.pathname !== '/' && props.location.pathname !== '/register' && props.location.pathname !== '/login') return <Header />
   }
 
-  return props.isLoading ?
+  return props.isLoading || props.loadingFonts ?
 
     <View loading>
       <Spinner />
