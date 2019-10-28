@@ -39,8 +39,8 @@ function Register(props) {
                                 photoURL: `https://ui-avatars.com/api/?name=${displayName.replace(' ', '+')}`
                             })
                             .then(_ => {
-                                userRef
-                                    .add({
+                                userRef.doc(createdUser.user.uid)
+                                    .set({
                                         name: createdUser.user.displayName,
                                         avatar: createdUser.user.photoURL,
                                         id: createdUser.user.uid
