@@ -23,7 +23,7 @@ function Login(props) {
                         setEmail(' ')
                         setPassword(' ')
                     })
-                    .catch(err => console.error(err))
+                    .catch(err => console.log(err))
             }
         },
 
@@ -43,11 +43,11 @@ function Login(props) {
                 <Content
                     padder
                     contentContainerStyle={{
-                         alignItems: 'center',
-                         paddingTop: '15%',
-                    //     paddingBottom: '85%'
-                     }}>
-                    
+                        alignItems: 'center',
+                        paddingTop: '15%',
+                        //     paddingBottom: '85%'
+                    }}>
+
                     <H1>Log In</H1>
 
                     <Text>Log into your Councils account.</Text>
@@ -74,24 +74,5 @@ function Login(props) {
 
     )
 }
-
-const styles = StyleSheet.create({
-    inputContainer: {
-        height: '100%',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    link: {
-        position: 'absolute',
-        top: 25,
-        left: 5,
-        width: '100%',
-        height: 50
-    },
-    backButton: {
-        fontSize: 50
-    },
-})
 
 export default withRouter(Login)
