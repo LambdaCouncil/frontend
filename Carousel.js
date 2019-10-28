@@ -111,8 +111,6 @@ const CarouselPosition = ({ isActive }) => {
 
 const STATUSBAR_HEIGHT = (Platform.OS === 'ios' ? 20 : StatusBarManager.HEIGHT) * 1;
 
-console.log(STATUSBAR_HEIGHT)
-
 const itemViewStyle = {
     display: "flex",
     flexDirection: "column",
