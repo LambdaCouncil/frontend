@@ -16,8 +16,12 @@ const NewPrivateMessage = props => {
 
     useEffect(_ => {
         // keep up to date with firebase and re-format firebase user object
+        let loadedUsers = []
         Users.get()
-            .then(docs => docs.forEach(doc => setAllUsers([...allUsers, doc.data()])))
+            .then(docs => docs.forEach(async doc => {
+                await loadedUsers.push(doc.data())
+                setAllUsers(loadedUsers)
+            }))
             .catch(err => console.error(err))
     }, [])
 
