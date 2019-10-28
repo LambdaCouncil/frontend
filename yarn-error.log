@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js upgrade native-base
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js remove md5
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Brellin\bin;C:\Python37\Scripts;C:\Python37;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\ProgramData\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Program Files\OpenJDK\jdk-12.0.2\bin;C:\Users\Brellin\AppData\Local\Microsoft\WindowsApps;C:\Users\Brellin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\Brellin\AppData\Local\Yarn\bin;C:\Users\Brellin\AppData\Roaming\npm;C:\Users\Brellin\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Java\jdk1.8.0_221;C:\Users\Brellin\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.1\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Brellin\Programming\Council\frontend\node_modules\@babel\generator\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Brellin\Programming\Council\frontend\node_modules\@babel\plugin-transform-runtime\node_modules\.bin'
 
 npm manifest: 
   {
@@ -30,7 +30,6 @@ npm manifest:
       "expo": "^35.0.0",
       "expo-font": "~7.0.0",
       "firebase": "^7.1.0",
-      "md5": "^2.2.1",
       "mem": "^4.0.0",
       "moment": "^2.24.0",
       "native-base": "^2.13.8",

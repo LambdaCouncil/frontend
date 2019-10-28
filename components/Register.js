@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import firebase from "../firebase"
-import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import { signUpDisplayName } from '../actions'
-import md5 from 'md5'
+import { signUpDisplayName, setUser } from '../actions'
 
 function Register(props) {
 
@@ -51,6 +50,7 @@ function Register(props) {
                                         setEmail(' ')
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
+                                        props.setUser(createdUser.user)
                                         props.history.push('/completeprofile')
                                     })
                             })
@@ -121,4 +121,4 @@ function Register(props) {
     )
 }
 
-export default connect(state => ({ ...state }), { signUpDisplayName })(withRouter(Register))
+export default connect(state => ({ ...state }), { signUpDisplayName, setUser })(withRouter(Register))
