@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
-import { Content, View, List, ListItem, Footer } from 'native-base'
+import { Content, View, List, Container, Footer } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -17,20 +17,17 @@ const Messages = props => {
     :
     firebase.database().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
 
-  const user = props.currentUser
-  const [messages, setMessages] = useState([])
 
   // The Barndon Constant
   // 2019 Colorized
   const [barndon, setBarndon] = useState(false)
+  const [messages, setMessages] = useState([])
 
   useEffect(_ => {
 
-    const messageListener = _ => {
-      discussionsRef.onSnapshot(doc => {
-        doc.data() && setMessages(doc.data().messages)
-      })
-    }
+    const messageListener = _ => discussionsRef.onSnapshot(doc => {
+      doc.data() && setMessages(doc.data().messages)
+    })
 
     if (!barndon) messageListener()
 
@@ -39,33 +36,36 @@ const Messages = props => {
   console.log('messages', messages)
 
   return (
-    <Content padder>
-      {/* 
-        List is similar in appearance to the Discussions section in the Style Guide. 
+    <Container>
+
+
+      {/* List is similar in appearance to the Discussions section in the Style Guide. 
           Alternatively, we could use Card for each message.
-          see: (Zeplin: 06 Discussions - 1)
-        */}
+          see: (Zeplin: 06 Discussions - 1) */}
 
-      {messages.length > 0 && messages.map((message, id) => (
-        <Message message={message}
-          key={id * Math.random()}
-          message={message}
-        />
-      ))}
+      <Content>
+        <List>
+          {messages.length > 0 && messages.map((message, id) =>
+            <Message message={message}
+              currentUser={props.currentUser}
+              key={id * Math.random()}
+              message={message}
+            />
+          )}
+        </List>
 
-      {/* 
-          MessageForm doesn't exist in the app, instead there is a + button 
+        {/* MessageForm doesn't exist in the app, instead there is a + button 
           on the right side of the header which opens an ActionSheet
-          see: (Zeplin: 06 Discussions - 1, 06 Discussions - 2) 
-        */}
-      <Footer>
+          see: (Zeplin: 06 Discussions - 1, 06 Discussions - 2) */}
+
         <MessageForm
           discussionsRef={discussionsRef}
           currentChannel={props.currentChannel}
           currentUser={props.currentUser}
         />
-      </Footer>
-    </Content>
+      </Content>
+
+    </Container>
   )
 }
 

@@ -39,15 +39,7 @@ function EditProfile(props) {
 
   return (
 
-    <Content
-      style={styles.inputContainer}
-      behavior='padding'>
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton} />
-      </Link>
+    <Content padder>
       <View style={styles.pageView}>
         <H1>Edit Profile</H1>
         <Text>Upload Photo</Text>

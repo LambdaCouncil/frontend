@@ -23,7 +23,7 @@ const Discussions = props => {
                     await querySnapshot.forEach(doc => {
                         loadedChannels.push({ id: doc.id, ...doc.data() })
                     })
-                    setDiscussions(loadedChannels)
+                    loadedChannels.length && setDiscussions(loadedChannels.filter(disc => disc.users.includes(props.currentUser.uid)))
                 })
             console.log(discussions)
         }
@@ -38,7 +38,9 @@ const Discussions = props => {
         <Content padder>
             <List>
                 {discussions.length > 0 && discussions
-                    .map(messages => (messages.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)
+                    .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
+                    .map(messages => (messages.messages
+                        .sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)
                         .map((conv, id) => {
 
                             if (id === 0) return (

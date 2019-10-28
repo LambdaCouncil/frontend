@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, Form, Input, Button, Item, View, Label } from 'native-base'
+import { Text, Input, Button, Item, Label, Form } from 'native-base'
 import { connect } from 'react-redux'
 
 import { setCurrentChannel } from '../../actions'
@@ -7,6 +7,8 @@ import firebase from '../../firebase'
 
 
 const MessageForm = props => {
+
+    console.log(props.currentUser)
 
     const [message, setMessage] = useState('')
 
@@ -31,7 +33,7 @@ const MessageForm = props => {
             }
 
             props.currentChannel.brandNewChannel ?
-                props.discussionsRef.set(newMessage)
+                props.discussionsRef.set({ ...newMessage, users: props.currentChannel.users })
                     .then(_ => {
                         props.setCurrentChannel({ ...props.currentChannel, brandNewChannel: false })
                         setMessage('')
@@ -47,8 +49,7 @@ const MessageForm = props => {
 
 
     return (
-
-        <View>
+        <Form>
             <Item floatingLabel>
                 <Label>Write your message</Label>
                 <Input onChange={handleChange} value={message} />
@@ -59,8 +60,7 @@ const MessageForm = props => {
             <Button transparent onPress={sendMessage}>
                 <Text>Send Message</Text>
             </Button>
-        </View>
-
+        </Form>
     )
 }
 

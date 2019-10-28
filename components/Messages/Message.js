@@ -1,18 +1,31 @@
 import React from "react"
 import moment from "moment"
-import { Text, Content, Container, Thumbnail } from 'native-base'
-
-
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
 
 const Message = props => {
 
-    return (
-        <Content padder>
-            {/*<Thumbnail src={user.avatar} />*/}
-            {/*<Text as='a'>{props.message.user.name}</Text>*/}
-            <Text>{props.message.content}</Text>
-        </Content>
-    );
-};
+    const { user, content, timestamp } = props.message
 
-export default Message;
+    return user.id === props.currentUser.uid ?
+        <ListItem avatar last>
+            <Body>
+                <Text snippet>{content}</Text>
+            </Body>
+            <Right>
+                <Thumbnail small source={{ uri: user.avatar }} />
+            </Right>
+        </ListItem>
+        :
+        <ListItem avatar>
+            <Left>
+                <Thumbnail small source={{ uri: user.avatar }} />
+            </Left>
+            <Body>
+                <Text snippet>{content}</Text>
+            </Body>
+        </ListItem>
+
+
+}
+
+export default Message
