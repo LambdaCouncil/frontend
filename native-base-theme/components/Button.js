@@ -378,7 +378,6 @@ export default _ => {
       borderWidth: 0,
       borderColor: ui.white
     },
-    paddingVertical: variables.buttonPadding,
     backgroundColor: ui.white,
     borderRadius: variables.borderRadiusBase,
     borderColor: ui.white,

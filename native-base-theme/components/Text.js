@@ -46,7 +46,7 @@ export default _ => {
     '.new': {
       color: text.greal,
       fontWeight: 'bold'
-    }
+    },
   }
 
 }
