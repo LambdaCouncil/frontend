@@ -51,7 +51,7 @@ function Register(props) {
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
                                         props.setUser(createdUser.user)
-                                        props.history.push('/completeprofile')
+                                        props.history.push('/complete-profile')
                                     })
                             })
                     })
