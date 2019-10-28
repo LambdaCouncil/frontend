@@ -12,7 +12,7 @@ export default _ => {
     'NativeBase.Segment': {
       borderWidth: 0,
       backgroundColor: 'transparent'
-    }
+    },
   }
 
 }

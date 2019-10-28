@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Switch, withRouter, Route, Redirect } from 'react-router-native'
-import { ActivityIndicator, View } from 'react-native'
+import { View, Spinner, Container } from 'native-base'
 
-import MessageActionSheet from './Messages/MessageActionSheet'
+import ActionSheets from './ActionSheets'
 import firebase from '../firebase'
 import Register from './Register'
 import Login from './LogIn'
@@ -36,133 +36,142 @@ const Routes = props => {
     })
   }, [])
 
-  const renderHeaderIf = _ => (props.location.pathname !== '/' && props.location.pathname !== '/register' && props.location.pathname !== '/login') ? <Header /> : null
+  const renderHeaderIf = _ => {
+    if (props.location.pathname !== '/' && props.location.pathname !== '/register' && props.location.pathname !== '/login') return <Header />
+  }
 
-  return props.isLoading ? (
-    <View style={styles.spinnerContainer}>
-      <ActivityIndicator size="large" color="lime" />
+  return props.isLoading ?
+
+    <View loading>
+      <Spinner />
     </View>
-  ) : (
-      <>
-        {renderHeaderIf()}
-        <Switch>
-          <Route
-            exact path="/"
-            render={props => <Root />}
-          />
 
-          <Route
-            exact path="/login"
-            render={props => <Login {...props} />}
-          />
+    :
+    <Container>
 
-          <Route
-            path="/register"
-            render={props => <Register {...props} />}
-          />
+      {renderHeaderIf()}
 
-          <Route
-            path="/complete-profile"
-            render={props => <CompleteProfile {...props} />}
-          />
+      <Switch>
 
-          <Route
-            path="/edit-profile"
-            render={props => <EditProfile {...props} />}
-          />
+        <Route
+          exact path="/"
+          render={props => <Root {...props} />}
+        />
 
-          <Route
-            path="/change-password"
-            render={props => <ChangePassword {...props} />}
-          />
+        <Route
+          path="/login"
+          render={props => <Login {...props} />}
+        />
 
-          <Route
-            path="/settings"
-            render={props => <Settings {...props} />}
-          />
+        <Route
+          path="/register"
+          render={props => <Register {...props} />}
+        />
 
-          <Route
-            path="/notifications"
-            render={props => <PushNotifications {...props} />}
-          />
+        <Route
+          path="/complete-profile"
+          render={props => <CompleteProfile {...props} />}
+        />
 
-          <Route
-            path="/feedback"
-            render={props => <SubmitFeedback {...props} />}
-          />
+        <Route
+          path="/edit-profile"
+          render={props => <EditProfile {...props} />}
+        />
 
-          <Route
-            path="/about"
-            render={props => <About {...props} />}
-          />
+        <Route
+          path="/change-password"
+          render={props => <ChangePassword {...props} />}
+        />
 
-          <Route
-            path="/messages"
-            render={props => <Messages {...props} />}
-          />
+        <Route
+          path="/settings"
+          render={props => <Settings {...props} />}
+        />
 
-          <Route
-            path='/message-action-sheet'
-            render={props => <MessageActionSheet {...props} />}
-          />
+        <Route
+          path="/notifications"
+          render={props => <PushNotifications {...props} />}
+        />
 
-          <Route
-            path='/rate'
-            render={props => <RateCouncils {...props} />}
-          />
+        <Route
+          path="/feedback"
+          render={props => <SubmitFeedback {...props} />}
+        />
 
-          <Route
-            path="/agendas"
-            render={props => <Agendas {...props} />}
-          />
+        <Route
+          path="/about"
+          render={props => <About {...props} />}
+        />
 
-          <Route
-            path="/discussions"
-            render={props => <Discussions {...props} />}
-          />
+        <Route
+          path="/messages"
+          render={props => <Messages {...props} />}
+        />
 
-          <Route
-            path="/assignments"
-            render={props => <Assignments {...props} />}
-          />
+        <Route
+          path='/action-sheets'
+          render={props => <ActionSheets {...props} />}
+        />
 
-          {/* <Route 
+        <Route
+          path='/rate'
+          render={props => <RateCouncils {...props} />}
+        />
+
+        <Route
+          path="/agendas"
+          render={props => <Agendas {...props} />}
+        />
+
+        <Route
+          path="/discussions"
+          render={props => <Discussions {...props} />}
+        />
+
+        <Route
+          path="/assignments"
+          render={props => <Assignments {...props} />}
+        />
+
+        {/* <Route 
         path="/files" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-          {/* <Route 
+        {/* <Route 
         path="/promptings" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-          {/* <Route
+        {/* <Route
         path="/admin-notifications"
         render={props => <Discussions {...props} />}
       /> */}
 
-          {/* <Route 
+        {/* <Route 
         path="/admin" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-          {/* <Route
+        {/* <Route
         path="/close-assignments"
         render={props => <Discussions {...props} />}
       /> */}
 
-          {/* <Route 
+        {/* <Route 
         path="/donations" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-          <ProtectedRoute
-            component={props => <ProtectedRoutes />}
-            currentUser={props.currentUser}
-          />
-        </Switch>
-      </>
-    )
+        <ProtectedRoute
+          component={props => <ProtectedRoutes />}
+          currentUser={props.currentUser}
+        />
+
+      </Switch>
+
+    </Container>
+
 }
 
 
@@ -182,13 +191,6 @@ const ProtectedRoute = ({ component: Component, currentUser }) => (
     }
   />
 )
-
-const styles = {
-  spinnerContainer: {
-    flex: 1,
-    justifyContent: "center"
-  }
-}
 
 export default connect(
   state => ({ ...state }),

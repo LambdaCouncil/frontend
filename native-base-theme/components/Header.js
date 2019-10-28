@@ -3,7 +3,6 @@
 import variables, { platform, PLATFORM } from './../variables/commonColor'
 
 export default _ => {
-
   const { platformStyle } = variables
 
   const { ui, text } = variables.councils
@@ -214,7 +213,7 @@ export default _ => {
             color: variables.toolbarBtnColor,
             fontSize:
               platform === PLATFORM.IOS &&
-                variables.platformStyle !== PLATFORM.MATERIAL
+              variables.platformStyle !== PLATFORM.MATERIAL
                 ? variables.iconHeaderSize + 1
                 : variables.iconHeaderSize,
             marginTop: 0,
@@ -226,7 +225,7 @@ export default _ => {
             color: variables.toolbarBtnColor,
             fontSize:
               platform === PLATFORM.IOS &&
-                variables.platformStyle !== PLATFORM.MATERIAL
+              variables.platformStyle !== PLATFORM.MATERIAL
                 ? variables.iconHeaderSize + 1
                 : variables.iconHeaderSize - 2,
             marginTop: 0,
@@ -356,7 +355,7 @@ export default _ => {
             top: platform === PLATFORM.IOS ? 1 : -1.5,
             paddingRight:
               platform === PLATFORM.IOS &&
-                variables.platformStyle !== PLATFORM.MATERIAL
+              variables.platformStyle !== PLATFORM.MATERIAL
                 ? 0
                 : undefined
           },
@@ -400,7 +399,7 @@ export default _ => {
     borderBottomColor: '#dbdcdf',
     height:
       variables.platform === PLATFORM.IOS &&
-        variables.platformStyle === PLATFORM.MATERIAL
+      variables.platformStyle === PLATFORM.MATERIAL
         ? variables.toolbarHeight + 10
         : variables.toolbarHeight,
     elevation: 3,
@@ -414,5 +413,4 @@ export default _ => {
     right: 0,
     marginTop: 24
   }
-
 }

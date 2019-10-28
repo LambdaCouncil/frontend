@@ -1,102 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { Text, Form, Input, Button, Container, Content, Item, View, Label } from 'native-base'
-import { StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { Text, Input, Button, Item, Label, Form } from 'native-base'
 import { connect } from 'react-redux'
 
+import { setCurrentChannel } from '../../actions'
 import firebase from '../../firebase'
 
 
-const MessageForm = ({ discussionsRef, currentChannel, currentUser }) => {
+const MessageForm = props => {
 
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
-    const [messagesLoading, setMessagesLoading] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [channel, setChannel] = useState(currentChannel);
-    const [user, setUser] = useState(currentUser);
+    console.log(props.currentUser)
 
+    const [message, setMessage] = useState('')
 
     const handleChange = e => {
         setMessage(e.nativeEvent.text)
-    };
-
-    const createMessage = () => {
-        return {
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-            user: {
-                id: user.uid,
-                name: user.displayName,
-                avatar: user.photoURL
-            },
-            content: message
-        };
-    };
+    }
 
 
     const sendMessage = _ => {
         if (message) {
-            setLoading(true);
-            discussionsRef
-                .push()
-                .set(createMessage())
-                .then(() => {
-                    setLoading(false);
-                    setMessage('')
+
+            const newMessage = {
+                messages: firebase.firestore.FieldValue.arrayUnion({
+                    timestamp: Date.now(),
+                    user: {
+                        id: props.currentUser.uid,
+                        name: props.currentUser.displayName,
+                        avatar: props.currentUser.photoURL
+                    },
+                    content: message
                 })
-                .catch(err => {
-                    console.log(err);
-                    setLoading(false)
-                })
+            }
+
+            props.currentChannel.brandNewChannel ?
+                props.discussionsRef.set({ ...newMessage, users: props.currentChannel.users })
+                    .then(_ => {
+                        props.setCurrentChannel({ ...props.currentChannel, brandNewChannel: false })
+                        setMessage('')
+                    })
+                    .catch(err => console.log(err))
+                :
+                props.discussionsRef.update(newMessage)
+                    .then(_ => setMessage(''))
+                    .catch(err => console.log(err))
+
         }
-    };
+    }
 
 
     return (
-
-        <View>
+        <Form>
             <Item floatingLabel>
                 <Label>Write your message</Label>
-                <Input
-                    style={style.input}
-                    name='message'
-                    onChange={handleChange}
-                    value={message}
-                />
+                <Input onChange={handleChange} value={message} />
             </Item>
-            <Button transparent style={style.button1}>
-                <Text style={style.text}>@</Text>
+            <Button transparent>
+                <Text>@</Text>
             </Button>
-            <Button transparent style={style.button2} onPress={sendMessage}>
-                <Text style={style.text}> Send Message</Text>
+            <Button transparent onPress={sendMessage}>
+                <Text>Send Message</Text>
             </Button>
-        </View>
+        </Form>
+    )
+}
 
-    );
-};
-
-const style = StyleSheet.create({
-    screen: {
-        flexDirection: 'row'
-    },
-    button1: {
-        width: '50%',
-        justifyContent: 'center'
-
-    },
-    button2: {
-        width: '50%',
-        justifyContent: 'center'
-
-    },
-    text: {
-        color: '#288365'
-    },
-
-    input: {
-        borderWidth: 0.5,
-        borderColor: 'black'
-    }
-
-})
-
-export default connect(state => ({ ...state }))(MessageForm);
+export default connect(state => ({ ...state }), { setCurrentChannel })(MessageForm)
