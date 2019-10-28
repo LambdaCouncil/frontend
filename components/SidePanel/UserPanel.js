@@ -41,9 +41,9 @@ const UserPanel = props => {
   return (
     <Item>
       <Thumbnail
-        source={{ uri: 'https://avatars3.githubusercontent.com/u/46138601?s=400&v=4' }}
+        source={{ uri: props.currentUser.photoURL }}
       />
-      <Left>
+      <Left userPanel>
         <Text>{user.displayName}</Text>
         <Text note>{user.email}</Text>
       </Left>
