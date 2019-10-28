@@ -141,7 +141,8 @@ const carouselPositionListStyle = {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-end",
-    marginTop: STATUSBAR_HEIGHT
+    marginTop: STATUSBAR_HEIGHT,
+    zIndex: 1
 }
 
 const defaultCarouselPositionStyle = {

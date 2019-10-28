@@ -31,6 +31,10 @@ export default _ => {
     '.sidePanel': {
       backgroundColor: ui.white,
       position: 'absolute'
+    },
+    '.loading': {
+      flex: 1,
+      justifyContent: 'center'
     }
   }
 

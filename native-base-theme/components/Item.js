@@ -12,6 +12,7 @@ export default _ => {
     '.floatingLabel': {
       marginVertical: 10,
       'NativeBase.Input': {
+        marginVertical: 5,
         height: 50,
         top: 8,
         paddingTop: 3,
