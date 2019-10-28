@@ -39,8 +39,8 @@ function Register(props) {
                                 photoURL: `https://ui-avatars.com/api/?name=${displayName.replace(' ', '+')}`
                             })
                             .then(_ => {
-                                userRef
-                                    .add({
+                                userRef.doc(createdUser.user.uid)
+                                    .set({
                                         name: createdUser.user.displayName,
                                         avatar: createdUser.user.photoURL,
                                         id: createdUser.user.uid
@@ -51,7 +51,7 @@ function Register(props) {
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
                                         props.setUser(createdUser.user)
-                                        props.history.push('/completeprofile')
+                                        props.history.push('/complete-profile')
                                     })
                             })
                     })
@@ -77,8 +77,7 @@ function Register(props) {
                 padder
                 contentContainerStyle={{
                     alignItems: 'center',
-                    paddingTop: '15%',
-                    paddingBottom: '85%'
+                    justifyContent: 'center',
                 }}>
 
                 <H1>Sign Up</H1>
