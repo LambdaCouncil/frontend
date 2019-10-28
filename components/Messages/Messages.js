@@ -35,12 +35,6 @@ const Messages = props => {
 
   return (
     <Container>
-
-
-      {/* List is similar in appearance to the Discussions section in the Style Guide. 
-          Alternatively, we could use Card for each message.
-          see: (Zeplin: 06 Discussions - 1) */}
-
       <Content>
         <List>
           {messages.length > 0 && messages.map((message, id) =>
@@ -52,17 +46,12 @@ const Messages = props => {
           )}
         </List>
 
-        {/* MessageForm doesn't exist in the app, instead there is a + button 
-          on the right side of the header which opens an ActionSheet
-          see: (Zeplin: 06 Discussions - 1, 06 Discussions - 2) */}
-
         <MessageForm
           discussionsRef={discussionsRef}
           currentChannel={props.currentChannel}
           currentUser={props.currentUser}
         />
       </Content>
-
     </Container>
   )
 }

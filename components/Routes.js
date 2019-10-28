@@ -28,7 +28,7 @@ const Routes = props => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         props.setUser(user)
-        props.history.push("/home")
+        props.history.push("/agendas")
       } else {
         props.history.push("/")
         props.clearUser()
