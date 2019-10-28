@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import firebase from "../firebase"
-import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import { signUpDisplayName } from '../actions'
-import md5 from 'md5'
+import { signUpDisplayName, setUser } from '../actions'
 
 function Register(props) {
 
@@ -37,11 +36,11 @@ function Register(props) {
                         createdUser.user
                             .updateProfile({
                                 displayName: displayName,
-                                photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+                                photoURL: `https://ui-avatars.com/api/?name=${displayName.replace(' ', '+')}`
                             })
                             .then(_ => {
-                                userRef
-                                    .add({
+                                userRef.doc(createdUser.user.uid)
+                                    .set({
                                         name: createdUser.user.displayName,
                                         avatar: createdUser.user.photoURL,
                                         id: createdUser.user.uid
@@ -51,7 +50,8 @@ function Register(props) {
                                         setEmail(' ')
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
-                                        props.history.push('/completeprofile')
+                                        props.setUser(createdUser.user)
+                                        props.history.push('/complete-profile')
                                     })
                             })
                     })
@@ -77,8 +77,7 @@ function Register(props) {
                 padder
                 contentContainerStyle={{
                     alignItems: 'center',
-                    paddingTop: '15%',
-                    paddingBottom: '85%'
+                    justifyContent: 'center',
                 }}>
 
                 <H1>Sign Up</H1>
@@ -121,4 +120,4 @@ function Register(props) {
     )
 }
 
-export default connect(state => ({ ...state }), { signUpDisplayName })(withRouter(Register))
+export default connect(state => ({ ...state }), { signUpDisplayName, setUser })(withRouter(Register))

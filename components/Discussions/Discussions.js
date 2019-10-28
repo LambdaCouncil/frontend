@@ -25,7 +25,6 @@ const Discussions = props => {
                     })
                     loadedChannels.length && setDiscussions(loadedChannels.filter(disc => disc.users.includes(props.currentUser.uid)))
                 })
-            console.log(discussions)
         }
 
         if (!barndon) discussionListener()

@@ -16,7 +16,6 @@ const MessageForm = props => {
         setMessage(e.nativeEvent.text)
     }
 
-
     const sendMessage = _ => {
         if (message) {
 
@@ -25,8 +24,7 @@ const MessageForm = props => {
                     timestamp: Date.now(),
                     user: {
                         id: props.currentUser.uid,
-                        name: props.currentUser.displayName,
-                        avatar: props.currentUser.photoURL
+                        name: props.currentUser.displayName
                     },
                     content: message
                 })

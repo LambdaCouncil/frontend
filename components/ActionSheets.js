@@ -23,21 +23,15 @@ const ActionSheets = props => {
           }
         )
       }>
-      {Platform.OS === 'android' ? 
-        <Text style={styles.text}>   
-          <Icon dgreal name={props.asInfo.iconName} /> 
-        </Text> : 
+      {Platform.OS === 'android' ?
+        <Text style={{ transform: [{ rotate: '90deg' }] }, {justifyContent: 'center'}}>
+          <Icon dgreal name={props.asInfo.iconName} />
+        </Text> :
         <Text>
           <Icon dgreal name={props.asInfo.iconName} />
         </Text>}
     </Button>
   )
 }
-
-const styles = StyleSheet.create({
-  text: {
-    transform: [{ rotate: '90deg'}],
-  }
-})
 
 export default ActionSheets
