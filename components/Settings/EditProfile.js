@@ -38,14 +38,7 @@ function EditProfile(props) {
   }
 
   return (
-
-<<<<<<< HEAD
-    <Content
-      style={styles.inputContainer}
-      behavior='padding'>
-=======
     <Content padder>
->>>>>>> fc93d89a4707d9eb8c12791513397e103cb18486
       <View style={styles.pageView}>
         <Text>Upload Photo</Text>
         <Item floatingLabel style={styles.inputItem}>

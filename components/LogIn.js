@@ -31,41 +31,39 @@ function Login(props) {
         isFormValid = _ => email.length > 1 && password.length > 1
 
     return (
-
-        <Content
-            padder
-            contentContainerStyle={{
-                alignItems: 'center',
-                paddingTop: '15%',
-                paddingBottom: '85%'
-            }}>
-
+        <>
             <Icon
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
             />
+            <Content
+                padder
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    paddingTop: '15%',
+                    paddingBottom: '85%'
+                }}>
+                <H1>Log In</H1>
+                <Text>Log into your Councils account.</Text>
+                <Item floatingLabel>
+                    <Label>Email</Label>
+                    <Input onChangeText={handleChangeEmail} />
+                </Item>
 
-            <H1>Log In</H1>
+                <Item floatingLabel>
+                    <Label>Password</Label>
+                    <Input
+                        onChangeText={handleChangePassword}
+                        secureTextEntry={true}
+                    />
+                </Item>
 
-            <Text>Log into your Councils account.</Text>
+                <H3 onPress={handleSubmit} submit>Log In</H3>
 
-            <Item floatingLabel>
-                <Label>Email</Label>
-                <Input onChangeText={handleChangeEmail} />
-            </Item>
+            </Content>
 
-            <Item floatingLabel>
-                <Label>Password</Label>
-                <Input
-                    onChangeText={handleChangePassword}
-                    secureTextEntry={true}
-                />
-            </Item>
-
-            <H3 onPress={handleSubmit} submit>Log In</H3>
-
-        </Content>
+        </>
 
     )
 }
