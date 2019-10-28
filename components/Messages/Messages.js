@@ -33,8 +33,6 @@ const Messages = props => {
 
   }, [messages.length])
 
-  console.log('messages', messages)
-
   return (
     <Container>
 

@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import firebase from "../firebase"
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
-import { Link } from 'react-router-native'
-import { connect } from 'react-redux'
+import {KeyboardAvoidingView, StyleSheet, View} from 'react-native'
+import {Input, Text, Label, Item, H1, H3, Icon} from 'native-base'
+import {Link} from 'react-router-native'
+import {connect} from 'react-redux'
 
-import { signUpDisplayName } from '../actions'
+import {signUpDisplayName} from '../actions'
 
 function CompleteProfile(props) {
 
@@ -46,39 +46,39 @@ function CompleteProfile(props) {
         />
       </Link>
 
-      <H1>Complete Profile</H1>
+      <View>
+        <Text>Upload Photo</Text>
 
-      <Text>Upload Photo</Text>
 
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>First Name</Label>
+          <Input onChangeText={handleFirstName}/>
+        </Item>
 
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>First Name</Label>
-        <Input onChangeText={handleFirstName} />
-      </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Last Name</Label>
+          <Input onChangeText={handleLastName}/>
+        </Item>
 
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Last Name</Label>
-        <Input onChangeText={handleLastName} />
-      </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Calling</Label>
+          <Input onChangeText={handleChangeCalling}/>
+        </Item>
 
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Calling</Label>
-        <Input onChangeText={handleChangeCalling} />
-      </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Email</Label>
+          <Input
+            onChangeText={handleChangeEmail}
+          />
+        </Item>
 
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Email</Label>
-        <Input
-          onChangeText={handleChangeEmail}
-        />
-      </Item>
-
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Phone</Label>
-        <Input
-          onChangeText={handleChangePhone}
-        />
-      </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Phone</Label>
+          <Input
+            onChangeText={handleChangePhone}
+          />
+        </Item>
+      </View>
 
       <H3 onPress={handleSubmit}>Save and Continue</H3>
 

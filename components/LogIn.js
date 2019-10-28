@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 
-import variables from '../native-base-theme/variables/commonColor'
 import firebase from "../firebase"
 
 function Login(props) {
@@ -37,31 +36,38 @@ function Login(props) {
                 name='arrow-back'
                 onPress={props.history.goBack}
             />
-            <Content
-                padder
-                contentContainerStyle={{
-                    alignItems: 'center',
-                    paddingTop: '15%',
-                    // paddingBottom: '85%'
-                }}>
-                <H1>Log In</H1>
-                <Text>Log into your Councils account.</Text>
-                <Item floatingLabel>
-                    <Label>Email</Label>
-                    <Input onChangeText={handleChangeEmail} />
-                </Item>
 
-                <Item floatingLabel>
-                    <Label>Password</Label>
-                    <Input
-                        onChangeText={handleChangePassword}
-                        secureTextEntry={true}
-                    />
-                </Item>
 
-                <H3 onPress={handleSubmit} submit>Log In</H3>
+            <Container>
+                <Content
+                    padder
+                    contentContainerStyle={{
+                         alignItems: 'center',
+                         paddingTop: '15%',
+                    //     paddingBottom: '85%'
+                     }}>
+                    
+                    <H1>Log In</H1>
 
-            </Content>
+                    <Text>Log into your Councils account.</Text>
+
+                    <Item floatingLabel>
+                        <Label>Email</Label>
+                        <Input onChangeText={handleChangeEmail} />
+                    </Item>
+
+                    <Item floatingLabel>
+                        <Label>Password</Label>
+                        <Input
+                            onChangeText={handleChangePassword}
+                            secureTextEntry={true}
+                        />
+                    </Item>
+
+                    <H3 onPress={handleSubmit} submit>Log In</H3>
+
+                </Content>
+            </Container>
 
         </>
 
