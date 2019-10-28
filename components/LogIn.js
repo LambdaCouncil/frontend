@@ -42,7 +42,7 @@ function Login(props) {
                 contentContainerStyle={{
                     alignItems: 'center',
                     paddingTop: '15%',
-                    paddingBottom: '85%'
+                    // paddingBottom: '85%'
                 }}>
                 <H1>Log In</H1>
                 <Text>Log into your Councils account.</Text>
