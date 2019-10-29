@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
 import firebase from "../firebase"
-import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import { signUpDisplayName } from '../actions'
-import md5 from 'md5'
+import { signUpDisplayName, setUser } from '../actions'
 
 function Register(props) {
 
-    const [displayName, setDisplayName] = useState(' ')
-    const [email, setEmail] = useState(' ')
-    const [password, setPassword] = useState(' ')
-    const [passwordConfirm, setPasswordConfirm] = useState(' ')
+    const [displayName, setDisplayName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
 
     const userRef = firebase.firestore().collection('users'),
 
-        handleChangeDisplayName = text => setDisplayName(text),
+        handleChangeDisplayName = text => setDisplayName(text.trim()),
 
-        handleChangeEmail = text => setEmail(text),
+        handleChangeEmail = text => setEmail(text.trim()),
 
-        handleChangePassword = text => setPassword(text),
+        handleChangePassword = text => setPassword(text.trim()),
 
-        handleChangePasswordConfirm = text => setPasswordConfirm(text),
+        handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
 
         handleSubmit = _ => {
 
@@ -40,8 +39,8 @@ function Register(props) {
                                 photoURL: `https://ui-avatars.com/api/?name=${displayName.replace(' ', '+')}`
                             })
                             .then(_ => {
-                                userRef
-                                    .add({
+                                userRef.doc(createdUser.user.uid)
+                                    .set({
                                         name: createdUser.user.displayName,
                                         avatar: createdUser.user.photoURL,
                                         id: createdUser.user.uid
@@ -51,7 +50,8 @@ function Register(props) {
                                         setEmail(' ')
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
-                                        props.history.push('/completeprofile')
+                                        props.setUser(createdUser.user)
+                                        props.history.push('/complete-profile')
                                     })
                             })
                     })
@@ -77,8 +77,7 @@ function Register(props) {
                 padder
                 contentContainerStyle={{
                     alignItems: 'center',
-                    paddingTop: '15%',
-                    paddingBottom: '85%'
+                    justifyContent: 'center',
                 }}>
 
                 <H1>Sign Up</H1>
@@ -88,18 +87,19 @@ function Register(props) {
 
                 <Item floatingLabel>
                     <Label>Display Name</Label>
-                    <Input onChangeText={handleChangeDisplayName} />
+                    <Input onChangeText={handleChangeDisplayName} value = {displayName} />
                 </Item>
 
                 <Item floatingLabel>
                     <Label>Email</Label>
-                    <Input onChangeText={handleChangeEmail} />
+                    <Input onChangeText={handleChangeEmail} value = {email} />
                 </Item>
 
                 <Item floatingLabel>
                     <Label>Password</Label>
                     <Input
                         onChangeText={handleChangePassword}
+                        value = {password}
                         secureTextEntry={true}
                     />
                 </Item>
@@ -108,6 +108,7 @@ function Register(props) {
                     <Label>Confirm Password</Label>
                     <Input
                         secureTextEntry={true}
+                        value = {passwordConfirm}
                         onChangeText={handleChangePasswordConfirm}
                     />
                 </Item>
@@ -121,4 +122,4 @@ function Register(props) {
     )
 }
 
-export default connect(state => ({ ...state }), { signUpDisplayName })(withRouter(Register))
+export default connect(state => ({ ...state }), { signUpDisplayName, setUser })(withRouter(Register))
