@@ -31,7 +31,7 @@ const Discussions = props => {
 
     }, [])
 
-    console.log(discussions)
+    console.log("(Discussions.js) discussions: ", discussions)
 
     return (
         <Content padder>

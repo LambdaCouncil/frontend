@@ -8,7 +8,8 @@ import firebase from '../../firebase'
 
 const MessageForm = props => {
 
-    console.log(props.currentUser)
+    console.log("MessageForm current user props (from MessagesForm.js): ", props.currentUser)
+    console.log("MessageForm all props (from MessagesForm.js): ", props)
 
     const [message, setMessage] = useState('')
 

@@ -45,7 +45,7 @@ const pageHeader = props => {
       !props.modal &&
       addIconArray.filter(icon => icon === props.location.pathname).length > 0
     ) {
-      console.log('pathname in Header arrayForSure', props.location.pathname)
+      console.log('(Header.js) pathname: ', props.location.pathname)
       switch (props.location.pathname) {
         // primary actionsheets only as of 10/25, (need additional routes for corresponding renders)
         case '/agendas':
