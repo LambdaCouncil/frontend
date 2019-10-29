@@ -133,6 +133,11 @@ const Routes = props => {
           render={props => <Assignments {...props} />}
         />
 
+        <Route 
+        path="/donations" 
+        render={props => <Donations {...props} />} 
+      /> 
+
         {/* <Route 
         path="/files" 
         render={props => <Discussions {...props} />} 
@@ -158,10 +163,7 @@ const Routes = props => {
         render={props => <Discussions {...props} />}
       /> */}
 
-         <Route 
-        path="/donations" 
-        render={props => <Discussions {...props} />} 
-      /> 
+       
 
         <ProtectedRoute
           component={props => <ProtectedRoutes />}
