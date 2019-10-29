@@ -1,20 +1,30 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js remove md5
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.17.3/libexec/bin/yarn.js add stripe-elements
 
 PATH: 
-  C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Brellin\bin;C:\Python37\Scripts;C:\Python37;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\ProgramData\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Program Files\OpenJDK\jdk-12.0.2\bin;C:\Users\Brellin\AppData\Local\Microsoft\WindowsApps;C:\Users\Brellin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\Brellin\AppData\Local\Yarn\bin;C:\Users\Brellin\AppData\Roaming\npm;C:\Users\Brellin\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Java\jdk1.8.0_221;C:\Users\Brellin\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.1\bin
+  /Users/annamarie/Library/Android/sdk/platform-tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/annamarie/Library/Android/sdk/platform-tools
 
 Yarn version: 
   1.17.3
 
 Node version: 
-  12.8.0
+  10.15.3
 
 Platform: 
-  win32 x64
+  darwin x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Brellin\Programming\Council\frontend\node_modules\@babel\plugin-transform-runtime\node_modules\.bin'
+  Error: https://registry.yarnpkg.com/stripe-elements: Not found
+      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.17.3/libexec/lib/cli.js:66830:18)
+      at Request.self.callback (/usr/local/Cellar/yarn/1.17.3/libexec/lib/cli.js:140464:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (/usr/local/Cellar/yarn/1.17.3/libexec/lib/cli.js:141436:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.17.3/libexec/lib/cli.js:141358:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1125:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -27,6 +37,7 @@ npm manifest:
       "eject": "expo eject"
     },
     "dependencies": {
+      "components": "^0.1.0",
       "expo": "^35.0.0",
       "expo-font": "~7.0.0",
       "firebase": "^7.1.0",
@@ -43,10 +54,13 @@ npm manifest:
       "react-native-star-rating": "^1.1.0",
       "react-native-vector-icons": "^6.6.0",
       "react-native-web": "^0.11.7",
+      "react-payment": "^0.1.8",
       "react-redux": "^7.1.1",
       "react-router-native": "^5.1.2",
       "redux": "^4.0.4",
-      "redux-thunk": "^2.3.0"
+      "redux-thunk": "^2.3.0",
+      "stripe": "^7.10.0",
+      "styled": "^1.0.0"
     },
     "devDependencies": {
       "babel-preset-expo": "^7.0.0"
@@ -1639,6 +1653,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/blueimp-md5/-/blueimp-md5-2.12.0.tgz#be7367938a889dec3ffbb71138617c117e9c130a"
     integrity sha512-zo+HIdIhzojv6F1siQPqPFROyVy7C50KzHv/k/Iz+BtvtVzSHXiMXOpq2wCfNkeBqdCv+V8XOV96tsEt2W/3rQ==
   
+  bowser@^1.0.0:
+    version "1.9.4"
+    resolved "https://registry.yarnpkg.com/bowser/-/bowser-1.9.4.tgz#890c58a2813a9d3243704334fa81b96a5c150c9a"
+    integrity sha512-9IdMmj2KjigRq6oWhmwv1W36pDuA4STQZ8q6YO9um+x07xgYNCD3Oou+WP/3L1HNz7iqythGet3/p4wvc8AAwQ==
+  
   bplist-creator@0.0.7:
     version "0.0.7"
     resolved "https://registry.yarnpkg.com/bplist-creator/-/bplist-creator-0.0.7.tgz#37df1536092824b87c42f957b01344117372ae45"
@@ -1803,6 +1822,11 @@ Lockfile:
     dependencies:
       rsvp "^3.3.3"
   
+  chain-function@^1.0.0:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/chain-function/-/chain-function-1.0.1.tgz#c63045e5b4b663fb86f1c6e186adaf1de402a1cc"
+    integrity sha512-SxltgMwL9uCko5/ZCLiyG2B7R9fY4pDZUw7hJ4MhirdjBLosoDqkWABi3XMucddHdLiFJMb7PD2MZifZriuMTg==
+  
   chalk@1.1.1:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/chalk/-/chalk-1.1.1.tgz#509afb67066e7499f7eb3535c77445772ae2d019"
@@ -1834,15 +1858,15 @@ Lockfile:
       escape-string-regexp "^1.0.5"
       supports-color "^5.3.0"
   
+  change-emitter@^0.1.2:
+    version "0.1.6"
+    resolved "https://registry.yarnpkg.com/change-emitter/-/change-emitter-0.1.6.tgz#e8b2fe3d7f1ab7d69a32199aff91ea6931409515"
+    integrity sha1-6LL+PX8at9aaMhma/5HqaTFAlRU=
+  
   chardet@^0.4.0:
     version "0.4.2"
     resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
     integrity sha1-tUc7M9yXxCTl2Y3IfVXU2KKci/I=
-  
-  charenc@~0.0.1:
-    version "0.0.2"
-    resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
-    integrity sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
   
   chownr@^1.1.1:
     version "1.1.3"
@@ -1975,6 +1999,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.3.0.tgz#16e4070fba8ae29b679f2215853ee181ab2eabc0"
     integrity sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg==
   
+  components@^0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/components/-/components-0.1.0.tgz#2057c08e9c7bf2662feec95c49e5ff2a9ab85ed5"
+    integrity sha1-IFfAjpx78mYv7slcSeX/Kpq4XtU=
+  
   compressible@~2.0.16:
     version "2.0.17"
     resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.17.tgz#6e8c108a16ad58384a977f3a482ca20bff2f38c1"
@@ -2104,11 +2133,6 @@ Lockfile:
       shebang-command "^1.2.0"
       which "^1.2.9"
   
-  crypt@~0.0.1:
-    version "0.0.2"
-    resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
-    integrity sha1-iNf/fsDfuG9xPch7u0LQRNPmxBs=
-  
   css-in-js-utils@^2.0.0:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/css-in-js-utils/-/css-in-js-utils-2.0.1.tgz#3b472b398787291b47cfe3e44fecfdd9e914ba99"
@@ -2218,6 +2242,13 @@ Lockfile:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
     integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
+  
+  dom-helpers@^3.2.0:
+    version "3.4.0"
+    resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-3.4.0.tgz#e9b369700f959f62ecde5a6babde4bccd9169af8"
+    integrity sha512-LnuPJ+dwqKDIyotW1VzmOZ5TONUN7CwkCR5hrgawTUbkBGYdeoNLZo6nNfGkCrjtE1nXXaj7iMMpDa8/d9WoIA==
+    dependencies:
+      "@babel/runtime" "^7.1.2"
   
   dom-storage@2.1.0:
     version "2.1.0"
@@ -2610,7 +2641,7 @@ Lockfile:
       semver "^5.1.0"
       through2 "^2.0.0"
   
-  fbjs@^0.8.4, fbjs@^0.8.9:
+  fbjs@^0.8.0, fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.9:
     version "0.8.17"
     resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
     integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -2750,6 +2781,33 @@ Lockfile:
     integrity sha1-UmXGgaTylNq78XyVCbZ2OqhFEM4=
     dependencies:
       for-in "^1.0.1"
+  
+  form-data-to-object@^0.2.0:
+    version "0.2.0"
+    resolved "https://registry.yarnpkg.com/form-data-to-object/-/form-data-to-object-0.2.0.tgz#f7a8e68ddd910a1100a65e25ac6a484143ff8168"
+    integrity sha1-96jmjd2RChEApl4lrGpIQUP/gWg=
+  
+  formsy-material-ui@=0.5.0:
+    version "0.5.0"
+    resolved "https://registry.yarnpkg.com/formsy-material-ui/-/formsy-material-ui-0.5.0.tgz#7548952e02551c5fb322eacdad97829749d2b64c"
+    integrity sha1-dUiVLgJVHF+zIurNrZeCl0nStkw=
+    dependencies:
+      keycode "^2.1.0"
+  
+  formsy-react@^0.18.1:
+    version "0.18.1"
+    resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-0.18.1.tgz#c52ee95baef2896f1547ce6df8dae5fcdbd9ab40"
+    integrity sha1-xS7pW67yiW8VR85t+Nrl/NvZq0A=
+    dependencies:
+      form-data-to-object "^0.2.0"
+  
+  formsy-react@^1.1.4:
+    version "1.1.5"
+    resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-1.1.5.tgz#ee0911bb70712eb6fb9924d56fdb974a19006955"
+    integrity sha512-nNWe4Vbp6aDQ/zSxJ7gVQgD5+avFRVbydcjA2Om42flxpQFrKE54AAbuyEj3Jvv+2b9LVl+WLMAPalyvLjwNcQ==
+    dependencies:
+      form-data-to-object "^0.2.0"
+      prop-types "^15.5.10"
   
   fragment-cache@^0.2.1:
     version "0.2.1"
@@ -3002,7 +3060,7 @@ Lockfile:
       tiny-warning "^1.0.0"
       value-equal "^1.0.1"
   
-  hoist-non-react-statics@^1.0.5:
+  hoist-non-react-statics@^1.0.0, hoist-non-react-statics@^1.0.5:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
     integrity sha1-qkSM8JhtVcxAdzsXF0t90GbLfPs=
@@ -3035,7 +3093,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.4.10.tgz#92c9c1374c35085f75db359ec56cc257cbb93fa4"
     integrity sha1-ksnBN0w1CF912zWexWzCV8u5P6Q=
   
-  hyphenate-style-name@^1.0.2:
+  hyphenate-style-name@^1.0.1, hyphenate-style-name@^1.0.2:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.3.tgz#097bb7fa0b8f1a9cf0bd5c734cf95899981a9b48"
     integrity sha512-EcuixamT82oplpoJ2XU4pDtKGWQ7b00CD9f1ug9IaQ3p1bkHMiKCZ9ut9QDI6qsa6cpUuB+A/I+zLtdNK4n2DQ==
@@ -3100,6 +3158,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
     integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
   
+  inline-style-prefixer@^2.0.1:
+    version "2.0.5"
+    resolved "https://registry.yarnpkg.com/inline-style-prefixer/-/inline-style-prefixer-2.0.5.tgz#c153c7e88fd84fef5c602e95a8168b2770671fe7"
+    integrity sha1-wVPH6I/YT+9cYC6VqBaLJ3BnH+c=
+    dependencies:
+      bowser "^1.0.0"
+      hyphenate-style-name "^1.0.1"
+  
   inline-style-prefixer@^5.0.3:
     version "5.1.0"
     resolved "https://registry.yarnpkg.com/inline-style-prefixer/-/inline-style-prefixer-5.1.0.tgz#cb63195f9456dcda25cf59743e45c4d9815b0811"
@@ -3163,7 +3229,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.3.2.tgz#4574a2ae56f7ab206896fb431eaeed066fdf8f03"
     integrity sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==
   
-  is-buffer@^1.1.5, is-buffer@~1.1.1:
+  is-buffer@^1.1.5:
     version "1.1.6"
     resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
     integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
@@ -3463,6 +3529,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
     integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
   
+  keycode@^2.1.0, keycode@^2.1.1:
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
+    integrity sha1-PQr1bce4uOXLqNCpfxByBO7CKwQ=
+  
   kind-of@^1.1.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-1.1.0.tgz#140a3d2d41a36d2efcfa9377b62c24f8495a5c44"
@@ -3562,7 +3633,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
     integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
   
-  lodash@^4.0.0, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0, lodash@^4.6.1:
+  lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.1, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0, lodash@^4.6.1:
     version "4.17.15"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
     integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
@@ -3626,6 +3697,21 @@ Lockfile:
     dependencies:
       object-visit "^1.0.0"
   
+  material-ui@^0.15.3:
+    version "0.15.4"
+    resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.15.4.tgz#c66b210884f1584108526c498b2c462aee4c3dbb"
+    integrity sha1-xmshCITxWEEIUmxJiyxGKu5MPbs=
+    dependencies:
+      inline-style-prefixer "^2.0.1"
+      keycode "^2.1.1"
+      lodash "^4.13.1"
+      react-addons-create-fragment "^15.2.1"
+      react-addons-transition-group "^15.2.1"
+      react-event-listener "^0.2.1"
+      recompose "^0.20.2"
+      simple-assign "^0.1.0"
+      warning "^3.0.0"
+  
   math-random@^1.0.1:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/math-random/-/math-random-1.0.4.tgz#5dd6943c938548267016d4e34f057583080c514c"
@@ -3637,15 +3723,6 @@ Lockfile:
     integrity sha512-3Tkp1piAHaworfcCgH0jKbTvj1jWWFgbvh2cXaNCgHwyTCBxxvD1Y04rmfpvdPm1P4oXMOpm6+2H7sr7v9v8Fw==
     dependencies:
       buffer-alloc "^1.1.0"
-  
-  md5@^2.2.1:
-    version "2.2.1"
-    resolved "https://registry.yarnpkg.com/md5/-/md5-2.2.1.tgz#53ab38d5fe3c8891ba465329ea23fac0540126f9"
-    integrity sha1-U6s41f48iJG6RlMp6iP6wFQBJvk=
-    dependencies:
-      charenc "~0.0.1"
-      crypt "~0.0.1"
-      is-buffer "~1.1.1"
   
   mem@^1.1.0:
     version "1.1.0"
@@ -4682,6 +4759,13 @@ Lockfile:
     dependencies:
       pify "^2.0.0"
   
+  payment@^2.0.3:
+    version "2.3.0"
+    resolved "https://registry.yarnpkg.com/payment/-/payment-2.3.0.tgz#b2a95e9c3052459647da3926b8b66c553d93098f"
+    integrity sha1-sqlenDBSRZZH2jkmuLZsVT2TCY8=
+    dependencies:
+      qj "~2.0.0"
+  
   performance-now@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
@@ -4803,7 +4887,7 @@ Lockfile:
     dependencies:
       asap "~2.0.3"
   
-  prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+  prop-types@^15.5.10, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
     version "15.7.2"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
     integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -4854,7 +4938,12 @@ Lockfile:
       end-of-stream "^1.1.0"
       once "^1.3.1"
   
-  qs@^6.5.0:
+  qj@~2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/qj/-/qj-2.0.0.tgz#054dd3b75ce018728d23a0605f030dfda0bd158a"
+    integrity sha1-BU3Tt1zgGHKNI6BgXwMN/aC9FYo=
+  
+  qs@^6.5.0, qs@^6.6.0:
     version "6.9.0"
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.0.tgz#d1297e2a049c53119cb49cca366adbbacc80b409"
     integrity sha512-27RP4UotQORTpmNQDX8BHPukOnBP3p1uUJY5UnDhaJB+rMt9iMsok724XL+UHU23bEFOHRMQ2ZhI99qOWUMGFA==
@@ -4895,6 +4984,15 @@ Lockfile:
       minimist "^1.2.0"
       strip-json-comments "~2.0.1"
   
+  react-addons-create-fragment@^15.2.1:
+    version "15.6.2"
+    resolved "https://registry.yarnpkg.com/react-addons-create-fragment/-/react-addons-create-fragment-15.6.2.tgz#a394de7c2c7becd6b5475ba1b97ac472ce7c74f8"
+    integrity sha1-o5TefCx77Na1R1uhuXrEcs58dPg=
+    dependencies:
+      fbjs "^0.8.4"
+      loose-envify "^1.3.1"
+      object-assign "^4.1.0"
+  
   react-addons-shallow-compare@15.6.2:
     version "15.6.2"
     resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.2.tgz#198a00b91fc37623db64a28fd17b596ba362702f"
@@ -4902,6 +5000,13 @@ Lockfile:
     dependencies:
       fbjs "^0.8.4"
       object-assign "^4.1.0"
+  
+  react-addons-transition-group@^15.2.1:
+    version "15.6.2"
+    resolved "https://registry.yarnpkg.com/react-addons-transition-group/-/react-addons-transition-group-15.6.2.tgz#8baebc2ae91ccdbf245fe29c9fd3d36f8b471923"
+    integrity sha1-i668Kukczb8kX+Kcn9PTb4tHGSM=
+    dependencies:
+      react-transition-group "^1.2.0"
   
   react-clone-referenced-element@^1.0.1:
     version "1.1.0"
@@ -4930,6 +5035,13 @@ Lockfile:
       object-assign "^4.1.1"
       prop-types "^15.6.2"
       scheduler "^0.13.3"
+  
+  react-event-listener@^0.2.1:
+    version "0.2.1"
+    resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.2.1.tgz#9fc2e17aac264d5c9fc21cc78d5fa02e969914f3"
+    integrity sha1-n8LheqwmTVyfwhzHjV+gLpaZFPM=
+    dependencies:
+      fbjs "^0.8.0"
   
   react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.9.0:
     version "16.11.0"
@@ -5108,6 +5220,18 @@ Lockfile:
       xmldoc "^0.4.0"
       yargs "^9.0.0"
   
+  react-payment@^0.1.8:
+    version "0.1.8"
+    resolved "https://registry.yarnpkg.com/react-payment/-/react-payment-0.1.8.tgz#3eb409c728ee773cb88e6f8a9ebd94c8f9c5e9f6"
+    integrity sha512-jyDw4p5GgLD/Hr13sBCDx0TPR4gTWTtFA1CU+GpsmDi/q8D4oWOadph0xWSdGMNnitXBqxNH7cSznPQDcCvlCg==
+    dependencies:
+      formsy-material-ui "=0.5.0"
+      formsy-react "^0.18.1"
+      lodash "^4.14.1"
+      material-ui "^0.15.3"
+      payment "^2.0.3"
+      segmented-control "^0.1.0"
+  
   react-proxy@^1.1.7:
     version "1.1.8"
     resolved "https://registry.yarnpkg.com/react-proxy/-/react-proxy-1.1.8.tgz#9dbfd9d927528c3aa9f444e4558c37830ab8c26a"
@@ -5165,6 +5289,17 @@ Lockfile:
       global "^4.3.0"
       react-proxy "^1.1.7"
   
+  react-transition-group@^1.2.0:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.2.1.tgz#e11f72b257f921b213229a774df46612346c7ca6"
+    integrity sha512-CWaL3laCmgAFdxdKbhhps+c0HRGF4c+hdM4H23+FI1QBNUyx/AMeIJGWorehPNSaKnQNOAxL7PQmqMu78CDj3Q==
+    dependencies:
+      chain-function "^1.0.0"
+      dom-helpers "^3.2.0"
+      loose-envify "^1.3.1"
+      prop-types "^15.5.6"
+      warning "^3.0.0"
+  
   react-tween-state@^0.1.5:
     version "0.1.5"
     resolved "https://registry.yarnpkg.com/react-tween-state/-/react-tween-state-0.1.5.tgz#e98b066551efb93cb92dd1be14995c2e3deae339"
@@ -5212,6 +5347,16 @@ Lockfile:
       safe-buffer "~5.1.1"
       string_decoder "~1.1.1"
       util-deprecate "~1.0.1"
+  
+  recompose@^0.20.2:
+    version "0.20.2"
+    resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.20.2.tgz#113d6ac7e29ca664cfffec16b681ddddf15250bc"
+    integrity sha1-ET1qx+KcpmTP/+wWtoHd3fFSULw=
+    dependencies:
+      change-emitter "^0.1.2"
+      fbjs "^0.8.1"
+      hoist-non-react-statics "^1.0.0"
+      symbol-observable "^0.2.4"
   
   redux-thunk@^2.3.0:
     version "2.3.0"
@@ -5462,6 +5607,16 @@ Lockfile:
       loose-envify "^1.1.0"
       object-assign "^4.1.1"
   
+  segmented-control@^0.1.0:
+    version "0.1.12"
+    resolved "https://registry.yarnpkg.com/segmented-control/-/segmented-control-0.1.12.tgz#91f61a0a874d06f5e550423115b69709dadbae1a"
+    integrity sha512-PPy66hyifyAWbyFSNCr8RgFrgl6JDbmFNC8nzTOXQ0J3kKogLDuZfJS1weE8No2tC/6yTY9xa2BSBdEtXoXAHw==
+    dependencies:
+      create-react-class "^15.6.3"
+      formsy-react "^1.1.4"
+      lodash "^4.14.1"
+      prop-types "^15.6.1"
+  
   "semver@2 || 3 || 4 || 5", semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@^5.4.1, semver@^5.5.0, semver@^5.5.1, semver@^5.6.0:
     version "5.7.1"
     resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
@@ -5567,6 +5722,11 @@ Lockfile:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
     integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
+  
+  simple-assign@^0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/simple-assign/-/simple-assign-0.1.0.tgz#17fd3066a5f3d7738f50321bb0f14ca281cc4baa"
+    integrity sha1-F/0wZqXz13OPUDIbsPFMooHMS6o=
   
   simple-plist@^1.0.0:
     version "1.0.0"
@@ -5788,6 +5948,18 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
     integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
   
+  stripe@^7.10.0:
+    version "7.10.0"
+    resolved "https://registry.yarnpkg.com/stripe/-/stripe-7.10.0.tgz#1b6894d128eb4b3b6d7cff63338064657c972b4e"
+    integrity sha512-mwW6iIZ+h957CJAcJEt8zb2ZnVvGNceG8dNQPANu6O8Zzm1pr+noC/mxvZSCuAAvMq04VWqbXBON5QvBCT5miw==
+    dependencies:
+      qs "^6.6.0"
+  
+  styled@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/styled/-/styled-1.0.0.tgz#4b4ff3b5df061016870abfd7177ff6916eaedc60"
+    integrity sha1-S0/ztd8GEBaHCr/XF3/2kW6u3GA=
+  
   supports-color@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -5806,6 +5978,11 @@ Lockfile:
     integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
     dependencies:
       has-flag "^3.0.0"
+  
+  symbol-observable@^0.2.4:
+    version "0.2.4"
+    resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-0.2.4.tgz#95a83db26186d6af7e7a18dbd9760a2f86d08f40"
+    integrity sha1-lag9smGG1q9+ehjb2XYKL4bQj0A=
   
   symbol-observable@^1.2.0:
     version "1.2.0"
@@ -6119,6 +6296,13 @@ Lockfile:
     integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
     dependencies:
       makeerror "1.0.x"
+  
+  warning@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+    integrity sha1-MuU3fLVy3kqwR1O9+IIcAe1gW3w=
+    dependencies:
+      loose-envify "^1.0.0"
   
   watch@~0.18.0:
     version "0.18.0"
