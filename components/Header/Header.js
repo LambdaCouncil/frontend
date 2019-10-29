@@ -55,7 +55,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.agendas.primary}
             />
           )
-          break
 
         case '/assignments':
           return (
@@ -64,7 +63,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.assignments.primary}
             />
           )
-          break
 
         case '/discussions':
           return (
@@ -73,7 +71,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.discussions.primary}
             />
           )
-          break
 
         case '/files':
           return (
@@ -82,7 +79,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.files.primary}
             />
           )
-          break
 
         case '/promptings':
           return (
@@ -91,7 +87,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.promptings.primary}
             />
           )
-          break
 
         case '/messages':
           return (
@@ -100,7 +95,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.discussions.public}
             />
           )
-          break
       }
     }
   }
@@ -119,7 +113,7 @@ const pageHeader = props => {
       <Header>
         <Left>
           <Button transparent onPress={togglePanel}>
-            <Icon dgreal name='menu' /> 
+            <Icon dgreal name='menu' />
           </Button>
         </Left>
         <Body>
