@@ -23,7 +23,7 @@ import Agendas from "./Agendas/Agendas"
 import Assignments from './Assignments'
 import RateCouncils from './Settings/RateCouncils'
 import Donations from './Donations/Donations'
-
+import Form from './Donations/Form'
 const Routes = props => {
   useEffect(_ => {
     firebase.auth().onAuthStateChanged(user => {

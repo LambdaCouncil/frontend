@@ -31,7 +31,8 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "stripe": "^7.10.0",
-    "styled": "^1.0.0"
+    "styled": "^1.0.0",
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.0.0"
