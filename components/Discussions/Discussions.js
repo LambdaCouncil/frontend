@@ -9,9 +9,9 @@ import firebase from '../../firebase';
 
 const Discussions = props => {
 
-    const discussionsRef = firebase.firestore().collection('directMessages')
+    const db = firebase.firestore()
+    const discussionsRef = db.collection('directMessages')
     const [discussions, setDiscussions] = useState([])
-    const [otherUser, setOtherUser] = useState()
 
     useEffect(_ => {
 
@@ -20,58 +20,70 @@ const Discussions = props => {
             await querySnapshot.forEach(doc => {
                 loadedChannels.push({ id: doc.id, ...doc.data() })
             })
-            loadedChannels.length && setDiscussions(loadedChannels.filter(disc => disc.users.includes(props.currentUser.uid)))
+            setDiscussions(loadedChannels)
         })
 
     }, [])
-
 
     return (
         <Content padder>
             <List>
                 {discussions.length > 0 && discussions
                     .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
-                    .map(messages => (messages.messages
-                        .sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)
-                        .map((conv, id) => {
-
-                            {/* const otherUserId = disc.users[0] === props.currentUser.uid ? disc.users[1] : disc.users[0]
-
-                            const otherUser = firebase.firestore().collection('users').doc(otherUserId) */}
-
-                            if (id === 0) return (
-
-                                <ListItem avatar
-                                    key={id * Math.random()}
-                                    onPress={() => {
-                                        props.setCurrentChannel({
-                                            id: messages.id,
-                                            direct: true
-                                        })
-                                        props.history.push('/messages')
-                                    }}
-                                >
-                                    <Left>
-                                        <Thumbnail small source={{ uri: props.currentUser.photoURL }} />
-                                    </Left>
-                                    <Body>
-                                        <Text name>{conv.user.name}</Text>
-                                        <Text snippet>{conv.content}</Text>
-                                        <Text note>{moment(conv.timestamp).format('lll')}</Text>
-                                    </Body>
-                                    <Right>
-                                        <Text>
-                                            {/* <Text new>{conv.new > 0 && conv.new}</Text> */}
-                                            {' >'}
-                                        </Text>
-                                    </Right>
-                                </ListItem>
-                            )
-                        })
-                    ))}
+                    .map(disc => {
+                        return <Discussion currentUser={props.currentUser} discussion={disc} key={disc.id} />
+                    })}
             </List>
         </Content>
     )
+}
+
+const Discussion = props => {
+
+    const [usersArray, setUsersArray] = useState([])
+    const [otherUser, setOtherUser] = useState({})
+
+    const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0]
+
+    useEffect(_ => {
+
+        props.discussion.users.forEach(user => {
+            user.get().then(querySnapshot => {
+                if (querySnapshot.data().id !== props.currentUser.uid) setOtherUser(querySnapshot.data())
+                setUsersArray([...usersArray, querySnapshot.data()])
+            })
+        })
+
+    }, [])
+
+    return (
+
+        <ListItem avatar
+            onPress={() => {
+                props.setCurrentChannel({
+                    id: props.discussion.id,
+                    direct: true
+                })
+                props.history.push('/messages')
+            }}
+        >
+            <Left>
+                <Thumbnail small source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
+            </Left>
+            <Body>
+                <Text name>{otherUser.name || mostRecent.user.name}</Text>
+                <Text snippet>{mostRecent.content}</Text>
+                <Text note>{moment(mostRecent.timestamp).format('lll')}</Text>
+            </Body>
+            <Right>
+                <Text>
+                    {/* <Text new>{conv.new > 0 && conv.new}</Text> */}
+                    {' >'}
+                </Text>
+            </Right>
+        </ListItem>
+    )
+
 }
 
 export default connect(state => ({ ...state }), { setCurrentChannel })(withRouter(Discussions))
