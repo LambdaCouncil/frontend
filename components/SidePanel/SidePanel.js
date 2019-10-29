@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from 'native-base'
 import { connect } from "react-redux"
 
+
 import UserPanel from './UserPanel'
 import SideMenu from './SideMenu'
 

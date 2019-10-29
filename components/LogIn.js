@@ -19,7 +19,7 @@ function Login(props) {
                     .auth()
                     .signInWithEmailAndPassword(email, password)
                     .then(signedInUser => {
-                        console.log(signedInUser)
+                        console.log('signedInUser (from Login.js): ', signedInUser)
                         setEmail(' ')
                         setPassword(' ')
                     })

@@ -25,6 +25,7 @@ const Discussions = props => {
 
     }, [])
 
+    console.log("(Discussions.js) discussions: ", discussions)
 
     return (
         <Content padder>
