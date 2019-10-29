@@ -8,7 +8,6 @@ import firebase from '../firebase'
 import Register from './Register'
 import Login from './LogIn'
 import Root from '../Root'
-import Donations from './Donations/Donations'
 import ProtectedRoutes from "./ProtectedRoutes"
 import { setUser, clearUser } from "../actions"
 import CompleteProfile from "./CompleteProfile"
@@ -37,7 +36,6 @@ const Routes = props => {
     })
   }, [])
 
-
   const renderHeaderIf = _ => {
     if (props.location.pathname !== '/' && props.location.pathname !== '/register' && props.location.pathname !== '/login') return <Header />
   }
@@ -48,10 +46,131 @@ const Routes = props => {
       <Spinner />
     </View>
 
-          <Route
-            exact path="/donations"
-            render={props => <Donations {...props} />}
-          /> 
+    :
+    <Container>
+
+      {renderHeaderIf()}
+
+      <Switch>
+
+        <Route
+          exact path="/"
+          render={props => <Root {...props} />}
+        />
+
+        <Route
+          path="/login"
+          render={props => <Login {...props} />}
+        />
+
+        <Route
+          path="/register"
+          render={props => <Register {...props} />}
+        />
+
+        <Route
+          path="/complete-profile"
+          render={props => <CompleteProfile {...props} />}
+        />
+
+        <Route
+          path="/edit-profile"
+          render={props => <EditProfile {...props} />}
+        />
+
+        <Route
+          path="/change-password"
+          render={props => <ChangePassword {...props} />}
+        />
+
+        <Route
+          path="/settings"
+          render={props => <Settings {...props} />}
+        />
+
+        <Route
+          path="/notifications"
+          render={props => <PushNotifications {...props} />}
+        />
+
+        <Route
+          path="/feedback"
+          render={props => <SubmitFeedback {...props} />}
+        />
+
+        <Route
+          path="/about"
+          render={props => <About {...props} />}
+        />
+
+        <Route
+          path="/messages"
+          render={props => <Messages {...props} />}
+        />
+
+        <Route
+          path='/action-sheets'
+          render={props => <ActionSheets {...props} />}
+        />
+
+        <Route
+          path='/rate'
+          render={props => <RateCouncils {...props} />}
+        />
+
+        <Route
+          path="/agendas"
+          render={props => <Agendas {...props} />}
+        />
+
+        <Route
+          path="/discussions"
+          render={props => <Discussions {...props} />}
+        />
+
+        <Route
+          path="/assignments"
+          render={props => <Assignments {...props} />}
+        />
+
+        {/* <Route 
+        path="/files" 
+        render={props => <Discussions {...props} />} 
+      /> */}
+
+        {/* <Route 
+        path="/promptings" 
+        render={props => <Discussions {...props} />} 
+      /> */}
+
+        {/* <Route
+        path="/admin-notifications"
+        render={props => <Discussions {...props} />}
+      /> */}
+
+        {/* <Route 
+        path="/admin" 
+        render={props => <Discussions {...props} />} 
+      /> */}
+
+        {/* <Route
+        path="/close-assignments"
+        render={props => <Discussions {...props} />}
+      /> */}
+
+         <Route 
+        path="/donations" 
+        render={props => <Discussions {...props} />} 
+      /> 
+
+        <ProtectedRoute
+          component={props => <ProtectedRoutes />}
+          currentUser={props.currentUser}
+        />
+
+      </Switch>
+
+    </Container>
 
 }
 
