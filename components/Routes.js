@@ -109,11 +109,6 @@ const Routes = props => {
         />
 
         <Route
-          path='/action-sheets'
-          render={props => <ActionSheets {...props} />}
-        />
-
-        <Route
           path='/rate'
           render={props => <RateCouncils {...props} />}
         />
