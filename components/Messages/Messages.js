@@ -15,7 +15,7 @@ const Messages = props => {
   const discussionsRef = props.currentChannel.direct ?
     firebase.firestore().collection('directMessages').doc(props.currentChannel.id)
     :
-    firebase.database().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
+    firebase.firestore().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
 
   const [messages, setMessages] = useState([])
 

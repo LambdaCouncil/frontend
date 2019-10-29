@@ -15,7 +15,7 @@ function CompleteProfile(props) {
   const [email, setEmail] = useState(' ')
   const [phone, setPhone] = useState(' ')
 
-  const userRef = firebase.database().ref('users');
+  const userRef = firebase.firestore().ref('users');
 
   const handleFirstName = text => setFirstName(text);
 

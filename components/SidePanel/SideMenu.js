@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, View, Text } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
-import Modal from 'react-native-modal'
 
 import firebase from '../../firebase'
 
@@ -9,8 +8,6 @@ const SideMenu = props => {
 
   return (
     <View>
-      <Modal>
-        <View>
       <Button light>
         <Link to="/agendas" onPress={() => props.togglePanel()}>
           <Text>Agendas</Text>
@@ -61,8 +58,6 @@ const SideMenu = props => {
           <Text onPress={() => firebase.auth().signOut()}>Log Out</Text>
         </Link>
       </Button>
-      </View>
-      </Modal>
     </View>
   )
 
