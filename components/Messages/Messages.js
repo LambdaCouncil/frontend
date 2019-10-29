@@ -17,28 +17,23 @@ const Messages = props => {
     :
     firebase.database().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
 
-
-  // The Barndon Constant
-  // 2019 Colorized
-  const [barndon, setBarndon] = useState(false)
   const [messages, setMessages] = useState([])
 
   useEffect(_ => {
 
-    const messageListener = _ => discussionsRef.onSnapshot(doc => {
+    discussionsRef.onSnapshot(doc => {
       doc.data() && setMessages(doc.data().messages)
     })
 
-    if (!barndon) messageListener()
-
-  }, [messages.length])
+  }, [])
 
   return (
     <Container>
       <Content>
         <List>
           {messages.length > 0 && messages.map((message, id) =>
-            <Message message={message}
+            <Message
+              message={message}
               currentUser={props.currentUser}
               key={id * Math.random()}
               message={message}

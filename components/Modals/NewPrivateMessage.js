@@ -15,7 +15,6 @@ const NewPrivateMessage = props => {
     const Users = firebase.firestore().collection('users')
 
     useEffect(_ => {
-        // keep up to date with firebase and re-format firebase user object
         let loadedUsers = []
         Users.get()
             .then(docs => docs.forEach(async doc => {
