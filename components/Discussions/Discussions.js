@@ -24,19 +24,11 @@ const Discussions = props => {
     const [discussions, setDiscussions] = useState([])
 
     const populateUsers = cb => {
-        discussionsRef.onSnapshot(allDiscussions => {
-            allDiscussions.forEach(doc => {
-                const loadedUsers = doc.data().users.map(async user => {
-                    const userDoc = await user.get()
-                    return userDoc.data()
-                })
-                Promise.all(loadedUsers).then(users => {
-                    const newDocument = { ...doc.data(), users }
-                    setDiscussions([...discussions, newDocument])// happens for each discussion at the same time
-                    console.log('newDocument', newDocument)
-                })
+        discussionsRef
+            .where('users', 'array-contains', db.doc(`users/${props.currentUser.uid}`))
+            .onSnapshot(allDiscussions => {
+                allDiscussions.map(doc => doc.data())
             })
-        })
     }
 
     useEffect(_ => populateUsers(), [])
