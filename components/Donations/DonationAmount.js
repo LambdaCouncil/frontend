@@ -18,4 +18,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
 
     }
 }
+
+interface IFormState {}
+interface IFormState {}
 export default DonationAmount;
