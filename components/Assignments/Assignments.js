@@ -9,7 +9,6 @@ const Assignments = props => {
     <View>
       <Text>Temp Text. You have no assignments.</Text>
       <Text>Click + to create a new assignment.</Text>
-      <Link><Text>Temp +</Text></Link>
     </View>
   );
 };
