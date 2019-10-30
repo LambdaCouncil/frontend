@@ -15,8 +15,8 @@ const SideMenu = props => {
         isVisible={isVisible}   
         animationIn={'slideInLeft'} 
         animationOut={'slideOutLeft'}
-        onBackdropPress={() => setIsVisible(false)}
-        onSwipeComplete={() => setIsVisible(false)}
+        onBackdropPress={() => setVisible(false)}
+        onSwipeComplete={() => setVisible(false)}
         swipeDirection='left'
         >
         <View>

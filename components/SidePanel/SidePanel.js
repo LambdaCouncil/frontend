@@ -10,8 +10,10 @@ import SideMenu from './SideMenu'
 const SidePanel = props => {
   return (
     <View>
-      <UserPanel />
-      <SideMenu togglePanel={props.togglePanel} />
+      <Modal>
+        <UserPanel />
+        <SideMenu togglePanel={props.togglePanel} />
+      </Modal>
     </View>
   )
 }
