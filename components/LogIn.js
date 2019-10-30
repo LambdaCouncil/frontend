@@ -6,12 +6,12 @@ import { withRouter } from 'react-router-native'
 import firebase from "../firebase"
 
 function Login(props) {
-    const [email, setEmail] = useState(' ')
-    const [password, setPassword] = useState(' ')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
-    const handleChangeEmail = text => setEmail(text),
+    const handleChangeEmail = text => setEmail(text.trim()),
 
-        handleChangePassword = text => setPassword(text),
+        handleChangePassword = text => setPassword(text.trim()),
 
         handleSubmit = _ => {
             if (isFormValid()) {
@@ -53,13 +53,14 @@ function Login(props) {
 
                     <Item floatingLabel>
                         <Label>Email</Label>
-                        <Input onChangeText={handleChangeEmail} />
+                        <Input onChangeText={handleChangeEmail} value = {email} />
                     </Item>
 
                     <Item floatingLabel>
                         <Label>Password</Label>
                         <Input
                             onChangeText={handleChangePassword}
+                            value = {password}
                             secureTextEntry={true}
                         />
                     </Item>

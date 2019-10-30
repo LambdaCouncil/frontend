@@ -8,20 +8,20 @@ import {signUpDisplayName, setUser} from '../actions'
 
 function Register(props) {
 
-    const [displayName, setDisplayName] = useState(' ')
-    const [email, setEmail] = useState(' ')
-    const [password, setPassword] = useState(' ')
-    const [passwordConfirm, setPasswordConfirm] = useState(' ')
+    const [displayName, setDisplayName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
 
     const userRef = firebase.firestore().collection('users'),
 
-        handleChangeDisplayName = text => setDisplayName(text),
+        handleChangeDisplayName = text => setDisplayName(text.trim()),
 
-        handleChangeEmail = text => setEmail(text),
+        handleChangeEmail = text => setEmail(text.trim()),
 
-        handleChangePassword = text => setPassword(text),
+        handleChangePassword = text => setPassword(text.trim()),
 
-        handleChangePasswordConfirm = text => setPasswordConfirm(text),
+        handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
 
         handleSubmit = _ => {
 
@@ -87,18 +87,19 @@ function Register(props) {
 
                 <Item floatingLabel>
                     <Label>Display Name</Label>
-                    <Input onChangeText={handleChangeDisplayName} />
+                    <Input onChangeText={handleChangeDisplayName} value = {displayName} />
                 </Item>
 
                 <Item floatingLabel>
                     <Label>Email</Label>
-                    <Input onChangeText={handleChangeEmail} />
+                    <Input onChangeText={handleChangeEmail} value = {email} />
                 </Item>
 
                 <Item floatingLabel>
                     <Label>Password</Label>
                     <Input
                         onChangeText={handleChangePassword}
+                        value = {password}
                         secureTextEntry={true}
                     />
                 </Item>
@@ -107,6 +108,7 @@ function Register(props) {
                     <Label>Confirm Password</Label>
                     <Input
                         secureTextEntry={true}
+                        value = {passwordConfirm}
                         onChangeText={handleChangePasswordConfirm}
                     />
                 </Item>
