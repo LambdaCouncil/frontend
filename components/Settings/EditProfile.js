@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import firebase from "../../firebase"
-import { StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, Icon, View, Content } from 'native-base'
-import { Link, withRouter } from 'react-router-native'
+import {StyleSheet} from 'react-native'
+import {Input, Text, Label, Item, H1, Icon, View, Content} from 'native-base'
+import {Link, withRouter} from 'react-router-native'
 
 function EditProfile(props) {
 
@@ -40,18 +40,22 @@ function EditProfile(props) {
   return (
     <Content padder>
       <View style={styles.pageView}>
-        <Text>Upload Photo</Text>
+        <View style={styles.iconCenter}>
+          <View style={styles.uploadPhoto}>
+            <Icon dgreal name='camera'/>
+          </View>
+        </View>
         <Item floatingLabel style={styles.inputItem}>
           <Label>First Name</Label>
-          <Input onChangeText={handleFirstName} />
+          <Input onChangeText={handleFirstName}/>
         </Item>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Last Name</Label>
-          <Input onChangeText={handleLastName} />
+          <Input onChangeText={handleLastName}/>
         </Item>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Calling</Label>
-          <Input onChangeText={handleChangeCalling} />
+          <Input onChangeText={handleChangeCalling}/>
         </Item>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Email</Label>
@@ -88,6 +92,21 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'center'
   },
+  uploadPhoto: {
+    borderStyle: 'solid',
+    borderColor: '#e8e9eb',
+    backgroundColor: '#fafafa',
+    borderWidth: 1,
+    width: 112,
+    height: 112,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconCenter: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   link: {
     position: 'absolute',
     top: 25,
@@ -100,7 +119,7 @@ const styles = StyleSheet.create({
   },
   pageView: {
     marginHorizontal: 20,
-    marginTop: 80,
+    marginTop: 20,
   },
   header: {
     fontSize: 28,

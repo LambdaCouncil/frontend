@@ -23,7 +23,7 @@ function Login(props) {
                         setEmail(' ')
                         setPassword(' ')
                     })
-                    .catch(err => console.error(err))
+                    .catch(err => console.log(err))
             }
         },
 
@@ -68,9 +68,7 @@ function Login(props) {
 
                 </Content>
             </Container>
-
         </>
-
     )
 }
 

@@ -4,8 +4,7 @@ import {KeyboardAvoidingView, StyleSheet, View} from 'react-native'
 import {Input, Text, Label, Item, H1, H3} from 'native-base'
 import {Link, withRouter} from 'react-router-native'
 import {Icon} from 'native-base'
-import {connect} from 'react-redux'
-import {signUpDisplayName} from '../../actions'
+
 
 function About(props) {
 
@@ -34,12 +33,10 @@ function About(props) {
         </View>
         <View style={styles.contentDivs}>
           <Text style={styles.subHeader}>Contact</Text>
-          <Text style={styles.contactContent}>Email: info@councils.io</Text>
-          <Text style={styles.contactContent}>Web: councils.io</Text>
+          <Text style={styles.contactContent}>Email: <Text style={styles.contactInfo}>info@councils.io</Text></Text>
+          <Text style={styles.contactContent}>Web: <Text style={styles.contactInfo}>councils.io</Text></Text>
         </View>
       </View>
-
-
     </KeyboardAvoidingView>
 
   )
@@ -49,9 +46,9 @@ function About(props) {
 const styles = StyleSheet.create({
   inputContainer: {
     height: '100%',
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center'
+  },
+  contactInfo: {
+    color: '#288365'
   },
   link: {
     position: 'absolute',

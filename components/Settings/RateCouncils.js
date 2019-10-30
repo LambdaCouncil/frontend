@@ -19,7 +19,7 @@ const RateCouncils = (props) => {
         <Text style={styles.header}>How Would You Rate Our App?</Text>
         <AirbnbRating
           count={5}
-          defaultRating={5}
+          defaultRating={0}
           size={50}
           selectedColor='#288365'
           showRating={false}
