@@ -24,30 +24,23 @@ const Discussions = props => {
     const [discussions, setDiscussions] = useState([])
 
     const populateUsers = cb => {
-        discussionsRef.onSnapshot(querySnapshot => {
-            querySnapshot.forEach(doc => {
+        discussionsRef.onSnapshot(allDiscussions => {
+            allDiscussions.forEach(doc => {
                 const loadedUsers = doc.data().users.map(async user => {
                     const userDoc = await user.get()
-                    return await userDoc.data()
+                    return userDoc.data()
                 })
-                Promise.all(loadedUsers).then(users => cb(users))
+                Promise.all(loadedUsers).then(users => {
+                    const newDocument = { ...doc.data(), users }
+                    setDiscussions([...discussions, newDocument])// happens for each discussion at the same time
+                    console.log('newDocument', newDocument)
+                })
             })
         })
     }
 
-    const populateDiscussions = users => {
-        const loadedDiscussions = []
-        discussionsRef.onSnapshot(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                if (users.map(user => user.id).includes(props.currentUser.uid)) {
-                    loadedDiscussions.push({ id: doc.id, ...doc.data(), users })
-                }
-            })
-            setDiscussions(loadedDiscussions)
-        })
-    }
-
-    useEffect(_ => populateUsers(populateDiscussions), [])
+    useEffect(_ => populateUsers(), [])
+    console.log('discussions', discussions)
 
     return (
         <Content padder>

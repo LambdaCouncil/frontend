@@ -9,7 +9,7 @@ import firebase from "../../firebase";
 //   Input,
 //   Button
 // } from "react-native-elements";
-import { View, Text } from "react-native";
+import { View, Text } from 'native-base';
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 

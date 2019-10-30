@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import { Button, View, Text } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 
-import Modal from 'react-native-modal'
-
 import firebase from '../../firebase'
 
 const SideMenu = props => {
-  const [isVisible, setIsVisible] = useState(true)
 
   return (
     <View>
-      <Button light style={{ height: 48, marginTop: 48 }}>
+      <Button light>
         <Link to="/agendas" onPress={() => props.togglePanel()}>
           <Text>Agendas</Text>
         </Link>
