@@ -10,7 +10,7 @@ function ChangePassword(props) {
   const [newPassword, setNewPassword] = useState(' ')
   const [confirmNewPassword, setConfirmNewPassword] = useState(' ')
 
-  const userRef = firebase.database().ref('users')
+  const userRef = firebase.firestore().ref('users')
 
   const handleOldPassword = text => setOldPassword(text)
 

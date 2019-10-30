@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js remove md5
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js upgrade firebase
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Brellin\bin;C:\Python37\Scripts;C:\Python37;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\ProgramData\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Program Files\OpenJDK\jdk-12.0.2\bin;C:\Users\Brellin\AppData\Local\Microsoft\WindowsApps;C:\Users\Brellin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\heroku\bin;C:\Users\Brellin\AppData\Local\Yarn\bin;C:\Users\Brellin\AppData\Roaming\npm;C:\Users\Brellin\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\Java\jdk1.8.0_221;C:\Users\Brellin\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.1\bin
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\Brellin\Programming\Council\frontend\node_modules\@babel\plugin-transform-runtime\node_modules\.bin'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Brellin\Programming\Council\frontend\node_modules\@babel\generator\node_modules\.bin'
 
 npm manifest: 
   {
@@ -37,6 +37,7 @@ npm manifest:
       "react-dom": "16.8.3",
       "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
       "react-native-drawer": "^2.5.1",
+      "react-native-modal": "^11.4.0",
       "react-native-rating-star": "^0.2.1",
       "react-native-ratings": "^6.5.0",
       "react-native-snap-carousel": "^3.8.2",
@@ -1839,11 +1840,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
     integrity sha1-tUc7M9yXxCTl2Y3IfVXU2KKci/I=
   
-  charenc@~0.0.1:
-    version "0.0.2"
-    resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
-    integrity sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
-  
   chownr@^1.1.1:
     version "1.1.3"
     resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.3.tgz#42d837d5239688d55f303003a508230fa6727142"
@@ -2103,11 +2099,6 @@ Lockfile:
       semver "^5.5.0"
       shebang-command "^1.2.0"
       which "^1.2.9"
-  
-  crypt@~0.0.1:
-    version "0.0.2"
-    resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
-    integrity sha1-iNf/fsDfuG9xPch7u0LQRNPmxBs=
   
   css-in-js-utils@^2.0.0:
     version "2.0.1"
@@ -3163,7 +3154,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/is-arrayish/-/is-arrayish-0.3.2.tgz#4574a2ae56f7ab206896fb431eaeed066fdf8f03"
     integrity sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==
   
-  is-buffer@^1.1.5, is-buffer@~1.1.1:
+  is-buffer@^1.1.5:
     version "1.1.6"
     resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
     integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
@@ -3637,15 +3628,6 @@ Lockfile:
     integrity sha512-3Tkp1piAHaworfcCgH0jKbTvj1jWWFgbvh2cXaNCgHwyTCBxxvD1Y04rmfpvdPm1P4oXMOpm6+2H7sr7v9v8Fw==
     dependencies:
       buffer-alloc "^1.1.0"
-  
-  md5@^2.2.1:
-    version "2.2.1"
-    resolved "https://registry.yarnpkg.com/md5/-/md5-2.2.1.tgz#53ab38d5fe3c8891ba465329ea23fac0540126f9"
-    integrity sha1-U6s41f48iJG6RlMp6iP6wFQBJvk=
-    dependencies:
-      charenc "~0.0.1"
-      crypt "~0.0.1"
-      is-buffer "~1.1.1"
   
   mem@^1.1.0:
     version "1.1.0"
@@ -4936,7 +4918,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.11.0.tgz#b85dfecd48ad1ce469ff558a882ca8e8313928fa"
     integrity sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
   
-  react-native-animatable@^1.2.4:
+  react-native-animatable@^1.2.4, react-native-animatable@^1.3.1:
     version "1.3.3"
     resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.3.tgz#a13a4af8258e3bb14d0a9d839917e9bb9274ec8a"
     integrity sha512-2ckIxZQAsvWn25Ho+DK3d1mXIgj7tITkrS4pYDvx96WyOttSvzzFeQnM2od0+FUMzILbdHDsDEqZvnz1DYNQ1w==
@@ -4982,6 +4964,14 @@ Lockfile:
     dependencies:
       prop-types "^15.6.2"
       react-native-iphone-x-helper "^1.0.3"
+  
+  react-native-modal@^11.4.0:
+    version "11.4.0"
+    resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-11.4.0.tgz#29f2fd241aed864f3c7ce25a941498ebe2ab217a"
+    integrity sha512-5AsvppV843bGBOgRotORhb0OJLAf3EOueJ1Z0a9vH/ZO3E2KdnGpxgJFRWx2SZhgUmQ65YP392rsMZl/NYwdIw==
+    dependencies:
+      prop-types "^15.6.2"
+      react-native-animatable "^1.3.1"
   
   react-native-rating-star@^0.2.1:
     version "0.2.1"

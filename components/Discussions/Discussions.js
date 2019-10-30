@@ -13,26 +13,43 @@ const Discussions = props => {
     const discussionsRef = db.collection('directMessages')
     const [discussions, setDiscussions] = useState([])
 
-    useEffect(_ => {
-
-        let loadedChannels = []
-        discussionsRef.onSnapshot(async querySnapshot => {
-            await querySnapshot.forEach(doc => {
-                loadedChannels.push({ id: doc.id, ...doc.data() })
+    const populateUsers = cb => {
+        discussionsRef.onSnapshot(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                const loadedUsers = doc.data().users.map(async user => {
+                    const userDoc = await user.get()
+                    return await userDoc.data()
+                })
+                Promise.all(loadedUsers).then(users => cb(users))
             })
-            setDiscussions(loadedChannels)
         })
+    }
 
-    }, [])
+    const populateDiscussions = users => {
+        const loadedDiscussions = []
+        discussionsRef.onSnapshot(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                loadedDiscussions.push({ id: doc.id, ...doc.data(), users })
+            })
+            setDiscussions(loadedDiscussions.filter(disc => disc.users.map(user => user.id).includes(props.currentUser.uid)))
+        })
+    }
+
+    useEffect(_ => populateUsers(populateDiscussions), [])
 
     return (
         <Content padder>
             <List>
                 {discussions.length > 0 && discussions
                     .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
-                    .map(disc => {
-                        return <Discussion currentUser={props.currentUser} discussion={disc} key={disc.id} />
-                    })}
+                    .map(disc => <Discussion
+                        setCurrentChannel={props.setCurrentChannel}
+                        currentUser={props.currentUser}
+                        discussion={disc}
+                        key={disc.id}
+                        history={props.history}
+                    />
+                    )}
             </List>
         </Content>
     )
@@ -40,21 +57,11 @@ const Discussions = props => {
 
 const Discussion = props => {
 
-    const [usersArray, setUsersArray] = useState([])
-    const [otherUser, setOtherUser] = useState({})
+    console.log('props', props)
+
+    const otherUser = props.discussion.users[0].id === props.currentUser.uid ? props.discussion.users[1] : props.discussion.users[0]
 
     const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0]
-
-    useEffect(_ => {
-
-        props.discussion.users.forEach(user => {
-            user.get().then(querySnapshot => {
-                if (querySnapshot.data().id !== props.currentUser.uid) setOtherUser(querySnapshot.data())
-                setUsersArray([...usersArray, querySnapshot.data()])
-            })
-        })
-
-    }, [])
 
     return (
 

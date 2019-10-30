@@ -11,8 +11,8 @@ const Channels = ({ currentUser, setCurrentChannel }) => {
   const [channel, setChannel] = useState(null)
   const [modal, setModal] = useState(false)
 
-  const channelsRef = firebase.database().ref("channels")
-  const messagesRef = firebase.database().ref("messages")
+  const channelsRef = firebase.firestore().ref("channels")
+  const messagesRef = firebase.firestore().ref("messages")
   const user = currentUser
   const [barndon, setBarndon] = useState(false)
   const [firstLoad, setFirstLoad] = useState(true)

@@ -28,7 +28,7 @@ const Routes = props => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         props.setUser(user)
-        props.history.push("/home")
+        props.history.push("/agendas")
       } else {
         props.history.push("/")
         props.clearUser()
@@ -106,11 +106,6 @@ const Routes = props => {
         <Route
           path="/messages"
           render={props => <Messages {...props} />}
-        />
-
-        <Route
-          path='/action-sheets'
-          render={props => <ActionSheets {...props} />}
         />
 
         <Route
