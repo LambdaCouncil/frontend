@@ -18,7 +18,7 @@ const SidePanel = props => {
         onBackdropPress={() => setIsVisible(false)}
         style={{ flex: 1, margin: 0, height: '100%', marginTop: 25 }}
       >
-        <View style={{ width: '80%', backgroundColor: 'grey' }}>
+        <View style={{ width: '80%', backgroundColor: 'white' }}>
           <UserPanel />
           <SideMenu togglePanel={props.togglePanel} />
         </View>
