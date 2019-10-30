@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import {
-  List,
-  ListItem,
-  Thumbnail,
-  Left,
-  Body,
-  Text,
-  Right,
-  View,
-  Content
+    List,
+    ListItem,
+    Thumbnail,
+    Left,
+    Body,
+    Text,
+    Right,
+    View,
+    Content
 } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
@@ -18,96 +18,87 @@ import { setCurrentChannel } from '../../actions'
 import firebase from '../../firebase'
 
 const Discussions = props => {
-  const db = firebase.firestore()
-  const discussionsRef = db.collection('directMessages')
-  const [discussions, setDiscussions] = useState([])
 
-  useEffect(_ => {
-    let loadedChannels = []
-    discussionsRef.onSnapshot(async querySnapshot => {
-      await querySnapshot.forEach(doc => {
-        loadedChannels.push({ id: doc.id, ...doc.data() })
-      })
-      setDiscussions(loadedChannels)
-    })
-  }, [])
+    const db = firebase.firestore()
+    const discussionsRef = db.collection('directMessages')
+    const [discussions, setDiscussions] = useState([])
 
-  console.log('(Discussions.js) discussions: ', discussions)
+    const populateUsers = cb => {
+        discussionsRef.onSnapshot(allDiscussions => {
+            allDiscussions.forEach(doc => {
+                const loadedUsers = doc.data().users.map(async user => {
+                    const userDoc = await user.get()
+                    return userDoc.data()
+                })
+                Promise.all(loadedUsers).then(users => {
+                    const newDocument = { ...doc.data(), users }
+                    setDiscussions([...discussions, newDocument])// happens for each discussion at the same time
+                    console.log('newDocument', newDocument)
+                })
+            })
+        })
+    }
 
-  return (
-    <Content padder>
-      <List>
-        {discussions.length > 0 &&
-          discussions
-            .sort(
-              (disc1, disc2) =>
-                disc2.messages[disc2.messages.length - 1].timestamp -
-                disc1.messages[disc1.messages.length - 1].timestamp
-            )
-            .map(disc => {
-              return (
-                <Discussion
-                  currentUser={props.currentUser}
-                  discussion={disc}
-                  key={disc.id}
-                />
-              )
-            })}
-      </List>
-    </Content>
-  )
+    useEffect(_ => populateUsers(), [])
+    console.log('discussions', discussions)
+
+    return (
+        <Content padder>
+            <List>
+                {discussions.length > 0 && discussions
+                    .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
+                    .map(disc => <Discussion
+                        setCurrentChannel={props.setCurrentChannel}
+                        currentUser={props.currentUser}
+                        discussion={disc}
+                        key={disc.id}
+                        history={props.history}
+                    />
+                    )}
+            </List>
+        </Content>
+    )
 }
 
 const Discussion = props => {
-  const [usersArray, setUsersArray] = useState([])
-  const [otherUser, setOtherUser] = useState({})
 
-  const mostRecent = props.discussion.messages.sort(
-    (conv1, conv2) => conv2.timestamp - conv1.timestamp
-  )[0]
+    console.log('discussion', props.discussion)
 
-  useEffect(_ => {
-    props.discussion.users.forEach(user => {
-      user.get().then(querySnapshot => {
-        if (querySnapshot.data().id !== props.currentUser.uid)
-          setOtherUser(querySnapshot.data())
-        setUsersArray([...usersArray, querySnapshot.data()])
-      })
-    })
-  }, [])
+    const otherUser = props.discussion.users[0].id === props.currentUser.uid ? props.discussion.users[1] : props.discussion.users[0]
 
-  return (
-    <ListItem
-      avatar
-      onPress={() => {
-        props.setCurrentChannel({
-          id: props.discussion.id,
-          direct: true
-        })
-        props.history.push('/messages')
-      }}>
-      <Left>
-        <Thumbnail
-          small
-          source={{ uri: otherUser.avatar || props.currentUser.photoURL }}
-        />
-      </Left>
-      <Body>
-        <Text name>{otherUser.name || mostRecent.user.name}</Text>
-        <Text snippet>{mostRecent.content}</Text>
-        <Text note>{moment(mostRecent.timestamp).format('lll')}</Text>
-      </Body>
-      <Right>
-        <Text>
-          {/* <Text new>{conv.new > 0 && conv.new}</Text> */}
-          {' >'}
-        </Text>
-      </Right>
-    </ListItem>
-  )
+    const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0]
+
+    return (
+
+        <ListItem avatar
+            onPress={() => {
+                props.setCurrentChannel({
+                    id: props.discussion.id,
+                    direct: true
+                })
+                props.history.push('/messages')
+            }}
+        >
+            <Left>
+                <Thumbnail small source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
+            </Left>
+            <Body>
+                <Text name>{otherUser.name || mostRecent.user.name}</Text>
+                <Text snippet>{mostRecent.content}</Text>
+                <Text note>{moment(mostRecent.timestamp).format('lll')}</Text>
+            </Body>
+            <Right>
+                <Text>
+                    {/* <Text new>{conv.new > 0 && conv.new}</Text> */}
+                    {' >'}
+                </Text>
+            </Right>
+        </ListItem>
+    )
+
 }
 
 export default connect(
-  state => ({ ...state }),
-  { setCurrentChannel }
+    state => ({ ...state }),
+    { setCurrentChannel }
 )(withRouter(Discussions))

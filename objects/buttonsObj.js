@@ -13,17 +13,17 @@ export const buttonsObj = {
       title: 'Agenda',
       buttons: ['Start Discussion', 'Make Assignmet', 'Cancel'],
       cancelIndex: 2,
-      iconName: 'add'
+      iconName: 'more'
     },
     // See Zeplin: 05 Agendas - 11
     tertiary: {
       title: 'Agenda',
       buttons: ['Edit', 'Delete', 'Cancel'],
       cancelIndex: 2,
-      iconName: 'add'
+      iconName: 'more'
     }
   },
-  assignments: {
+  assignment: {
     // See Zeplin: 07 Assignments - 10
     primary: {
       title: 'Assignment',

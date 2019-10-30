@@ -7,6 +7,7 @@ import ActionSheets from '../ActionSheets'
 import NewPrivateMessage from '../Modals/NewPrivateMessage'
 
 import { buttonsObj } from '../../objects/buttonsObj'
+import NewAssignment from '../Assignments/NewAssignment'
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
@@ -14,6 +15,7 @@ const pageHeader = props => {
 
   const addIconArray = [
     '/agendas',
+    '/assignment',
     '/assignments',
     '/discussions',
     '/files',
@@ -58,9 +60,18 @@ const pageHeader = props => {
 
         case '/assignments':
           return (
+            <Button onPress={() => setShowModal(true)}>
+              <Text>
+                <Icon name='add' />
+              </Text>
+            </Button>
+          )
+
+        case '/assignment':
+          return (
             <ActionSheets
               setShowModal={setShowModal}
-              asInfo={buttonsObj.assignments.primary}
+              asInfo={buttonsObj.assignment.primary}
             />
           )
 
@@ -103,6 +114,8 @@ const pageHeader = props => {
     switch (props.location.pathname) {
       case '/discussions':
         return <NewPrivateMessage setShowModal={setShowModal} />
+      case '/assignments':
+        return <NewAssignment setShowModal={setShowModal} />
       default:
         return
     }

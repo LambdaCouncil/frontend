@@ -20,7 +20,7 @@ import Header from "./Header/Header"
 import Messages from "./Messages/Messages"
 import Discussions from "./Discussions/Discussions"
 import Agendas from "./Agendas/Agendas"
-import Assignments from './Assignments'
+import Assignments from './Assignments/Assignments'
 import RateCouncils from './Settings/RateCouncils'
 
 const Routes = props => {
