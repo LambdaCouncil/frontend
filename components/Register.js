@@ -12,6 +12,8 @@ function Register(props) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [requestActive, setActive] = useState(false)
+    const [error, setError] = useState({ message: "" })
 
     const userRef = firebase.firestore().collection('users'),
 
@@ -24,10 +26,14 @@ function Register(props) {
         handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
 
         handleSubmit = _ => {
+            setActive(false)
+            setError({ message: "" })
 
             if (password === passwordConfirm) {
 
                 props.signUpDisplayName(displayName)
+
+                setActive(true)
 
                 firebase
                     .auth()
@@ -53,15 +59,30 @@ function Register(props) {
                                         props.setUser(createdUser.user)
                                         props.history.push('/complete-profile')
                                     })
+                                    .catch(handleError)
                             })
+                            .catch(handleError)
                     })
-                    .catch(err => {
-                        props.history.push('/register')
-                        console.error(err)
-                    })
+                    .catch(handleError)
 
-            } else alert("Passwords don't match.")
+            } else handleError({ message: "Passwords dont match" })
 
+        },
+
+        handleError = err => {
+            setError(err)
+            setActive(false)
+        }
+
+        _renderButton = _ => {
+            if(requestActive) 
+                return <H3 submit>Signing Up...</H3>
+            else 
+                return <H3 onPress={handleSubmit} submit>Sign Up</H3>
+        }
+
+        _renderErrorText = _ => {
+            return error ? error.message :"An internal error occured"
         }
 
     return (
@@ -113,7 +134,9 @@ function Register(props) {
                     />
                 </Item>
 
-                <H3 onPress={handleSubmit} submit>Sign Up</H3>
+                { _renderButton() }
+
+                <Text style = {{ color: "red" }}>{_renderErrorText()}</Text>
 
             </Content>
 
