@@ -26,8 +26,8 @@ const Discussions = props => {
     const populateUsers = cb => {
         discussionsRef
             .where('users', 'array-contains', db.doc(`users/${props.currentUser.uid}`))
-            .onSnapshot(allDiscussions => {
-                allDiscussions.map(doc => doc.data())
+            .get().then(allDiscussions => {
+                setDiscussions(allDiscussions.docs.map(doc => doc.data()))
             })
     }
 
