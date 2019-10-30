@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { List, ListItem, Thumbnail, Left, Body, Text, Right, View, Content } from 'native-base'
+import {
+    List,
+    ListItem,
+    Thumbnail,
+    Left,
+    Body,
+    Text,
+    Right,
+    View,
+    Content
+} from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { setCurrentChannel } from '../../actions'
-import firebase from '../../firebase';
+import firebase from '../../firebase'
 
 const Discussions = props => {
 
@@ -95,4 +105,7 @@ const Discussion = props => {
 
 }
 
-export default connect(state => ({ ...state }), { setCurrentChannel })(withRouter(Discussions))
+export default connect(
+    state => ({ ...state }),
+    { setCurrentChannel }
+)(withRouter(Discussions))

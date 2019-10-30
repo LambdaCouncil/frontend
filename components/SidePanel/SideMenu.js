@@ -11,16 +11,7 @@ const SideMenu = props => {
 
   return (
     <View>
-      <Modal 
-        isVisible={isVisible}   
-        animationIn={'slideInLeft'} 
-        animationOut={'slideOutLeft'}
-        onBackdropPress={() => setIsVisible(false)}
-        onSwipeComplete={() => setIsVisible(false)}
-        swipeDirection='left'
-        >
-        <View>
-          <Button light>
+          <Button light style={{height: 48}, {marginTop: 48}}>
             <Link to="/agendas" onPress={() => props.togglePanel()}>
               <Text>Agendas</Text>
             </Link>
@@ -71,8 +62,7 @@ const SideMenu = props => {
             </Link>
           </Button>
       </View>
-      </Modal>
-    </View>
+
   )
 
 }
