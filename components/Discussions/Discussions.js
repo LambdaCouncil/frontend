@@ -29,9 +29,11 @@ const Discussions = props => {
         const loadedDiscussions = []
         discussionsRef.onSnapshot(querySnapshot => {
             querySnapshot.forEach(doc => {
-                loadedDiscussions.push({ id: doc.id, ...doc.data(), users })
+                if (users.map(user => user.id).includes(props.currentUser.uid)) {
+                    loadedDiscussions.push({ id: doc.id, ...doc.data(), users })
+                }
             })
-            setDiscussions(loadedDiscussions.filter(disc => disc.users.map(user => user.id).includes(props.currentUser.uid)))
+            setDiscussions(loadedDiscussions)
         })
     }
 
@@ -57,7 +59,7 @@ const Discussions = props => {
 
 const Discussion = props => {
 
-    console.log('props', props)
+    console.log('discussion', props.discussion)
 
     const otherUser = props.discussion.users[0].id === props.currentUser.uid ? props.discussion.users[1] : props.discussion.users[0]
 
