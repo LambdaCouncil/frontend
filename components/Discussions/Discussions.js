@@ -16,6 +16,7 @@ import moment from 'moment'
 
 import { setCurrentChannel } from '../../actions'
 import firebase from '../../firebase'
+import pseudoDiscussion from './pseudo'
 
 const Discussions = props => {
 
@@ -23,23 +24,23 @@ const Discussions = props => {
     const discussionsRef = db.collection('directMessages')
     const [discussions, setDiscussions] = useState([])
 
-    const populateUsers = cb => {
+    const populateUsers = _ => {
         discussionsRef
             .where('users', 'array-contains', db.doc(`users/${props.currentUser.uid}`))
-            .onSnapshot(allDiscussions => {
-                allDiscussions.map(doc => doc.data())
+            .get().then(async allDiscussions => {
+                await setDiscussions(allDiscussions.docs.map(doc => ({ id: doc.id, ...doc.data() })))
             })
     }
 
     useEffect(_ => populateUsers(), [])
     console.log('discussions', discussions)
 
-    return (
+    if (discussions.length > 0) return (
         <Content padder>
             <List>
                 {discussions.length > 0 && discussions
                     .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
-                    .map(disc => <Discussion
+                    .map((disc, id) => <Discussion
                         setCurrentChannel={props.setCurrentChannel}
                         currentUser={props.currentUser}
                         discussion={disc}
@@ -47,6 +48,16 @@ const Discussions = props => {
                         history={props.history}
                     />
                     )}
+            </List>
+        </Content>
+    )
+    else return (
+        <Content padder>
+            <List>
+                <Discussion
+                    discussion={pseudoDiscussion}
+                    currentUser={props.currentUser}
+                />
             </List>
         </Content>
     )
