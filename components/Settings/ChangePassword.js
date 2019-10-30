@@ -31,7 +31,6 @@ function ChangePassword(props) {
       behavior='padding'
     >
       <View style={styles.pageView}>
-        <H1>Change Password</H1>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Old Password</Label>
           <Input
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
   },
   pageView: {
     marginHorizontal: 20,
-    marginTop: 80,
+    marginTop: 20,
   },
   header: {
     fontSize: 28,
