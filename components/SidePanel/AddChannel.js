@@ -99,6 +99,7 @@ const AddChannel = props => {
               <Picker.Item label="Young Women" value="youngWomen" />
               <Picker.Item label="Sunday School" value="sundaySchool" />
               <Picker.Item label="Primary" value="primary" />
+              <Picker.Item label="Ward Missionary" value="wardMissionary" />
             </Picker>
           </Item>
         </Form>
