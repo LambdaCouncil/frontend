@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, StyleSheet} from 'react-native'
 import { ActionSheet, Icon, Button, Text } from 'native-base'
 
 const ActionSheets = props => {
@@ -24,9 +24,10 @@ const ActionSheets = props => {
         )
       }>
       {Platform.OS === 'android' ?
-        <Text style={{ transform: [{ rotate: '90deg' }] }, {justifyContent: 'center'}}>
+        <Text style={styles.rotateIcon}>
           <Icon dgreal name={props.asInfo.iconName} />
-        </Text> :
+        </Text> 
+        :
         <Text>
           <Icon dgreal name={props.asInfo.iconName} />
         </Text>}
@@ -34,4 +35,10 @@ const ActionSheets = props => {
   )
 }
 
+const styles = StyleSheet.create({
+  androidIcon: {
+    justifyContent: 'center',
+    transform: [{ rotate: '90deg' }]
+  }
+})
 export default ActionSheets

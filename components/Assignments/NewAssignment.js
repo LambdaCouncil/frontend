@@ -1,8 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-native";
 import { Modal } from "react-native";
-// import { connect } from "react-redux";
-import { Content, View, Text, List, ListItem, Button, Form, Item, Input, Label, TextInput, Picker, Footer, H3, DatePicker, Icon, Left, Right } from "native-base";
+import { Content, 
+         View, 
+         Text, 
+         List, 
+         ListItem, 
+         Button, 
+         Form, 
+         Item, 
+         Input, 
+         Label, 
+         TextInput, 
+         Picker, 
+         Footer, 
+         H3, 
+         DatePicker, 
+         Icon, 
+         Left, 
+         Right 
+        } from "native-base";
 import ModalHeader from "../Modals/ModalHeader";
 import CouncilNames from "../CouncilNames";
 
