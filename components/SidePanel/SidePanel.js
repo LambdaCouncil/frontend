@@ -9,6 +9,7 @@ import SideMenu from './SideMenu'
 
 const SidePanel = props => {
   const [isVisible, setIsVisible] = useState(true);
+  
   return (
 
     <View style={{flex: 1}}>
