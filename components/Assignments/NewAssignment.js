@@ -8,15 +8,47 @@ import CouncilNames from "../CouncilNames";
 
 // import { setCurrentChannel } from "../../actions";
 // import ModalHeader from "../Modals/ModalHeader";
-// import firebase from "../../firebase";
+import firebase from "../../firebase";
 
 const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
   const [council, setCouncil] = useState('');
+  const [assignTo, setAssignTo] = useState('');
   const [assignmentDescription, setAssignmentDescription] = useState('');
   const [notes, setNotes] = useState('');
   const [councilNameScreen, setCouncilNameScreen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showCouncilModal, setShowCouncilModal] = useState(false);
+  const [showATModal, setShowATModal] = useState(false);
+
+  const councilNames = [
+    "bishopric",
+    "ward-council",
+    "elders",
+    "relief-society",
+    "young-men",
+    "young-women",
+    "sunday-school",
+    "primary",
+    "ward-missionary"
+  ];
+
+  const db = firebase.firestore();
+  const Users = db.collection("users");
+
+  const [allUsers, setAllUsers] = useState([]);
+
+  useEffect(_ => {
+    let loadedUsers = [];
+    Users.get()
+      .then(docs =>
+        docs.forEach(async doc => {
+          await loadedUsers.push(doc.data());
+          setAllUsers(loadedUsers);
+        })
+      )
+      .catch(err => console.error(err));
+  }, []);
+
 
   console.log(councilNameScreen);
 
@@ -33,6 +65,11 @@ const NewAssignment = props => {
     console.log(name + ' was pressed')
     setCouncil(name);
   }
+
+  const handleAssignTo = name => {
+    console.log(name + " was pressed");
+    setAssignTo(name);
+  };
 
   const handleNotes = text => {
     setNotes(text);
@@ -65,57 +102,53 @@ const NewAssignment = props => {
             />
           </Item>
 
-          {council.length > 0 ? (
-            <View>
-              <Label>Council</Label>
-              <Text>{council}</Text>
-            </View>
-          ) : (
-            <Button
-              title="Council"
-              onPress={() => setShowModal(true)}
-              transparent
-            >
+          <Button
+            title="Council"
+            onPress={() => setShowCouncilModal(true)}
+            transparent
+          >
+            {council.length > 0 ? (
+              <View>
+                <Text>Council</Text>
+                <Text>{council}</Text>
+              </View>
+            ) : (
               <Text>Council</Text>
-            </Button>
-          )}
+            )}
+          </Button>
 
-          {showModal && (
+          {showCouncilModal && (
             <CouncilNames
-              setShowModal={setShowModal}
+              options={councilNames}
+              setShowModal={setShowCouncilModal}
               council={council}
               handleCouncil={handleCouncil}
             />
           )}
 
-          {/* 
-          <List>
-            {councilNames.map((name, id) => (
-              // <Button>
-              <ListItem key={id} onPress={() => handleCouncil(name)}>
-                <Left>
-                  <Text>{renderCouncilName(name)}</Text>
-                </Left>
-                <Right>
-                  <Text>{renderCheckmark(name)}</Text>
-                </Right>
-              </ListItem>
-              // </Button>
-            ))}
-          </List> */}
+          <Button
+            title="AssignTo"
+            onPress={() => setShowATModal(true)}
+            transparent
+          >
+            {assignTo.length > 0 ? (
+              <View>
+                <Text>Assign To</Text>
+                <Text>{assignTo}</Text>
+              </View>
+            ) : (
+              <Text>Assign To</Text>
+            )}
+          </Button>
 
-          {/* <Item floatingLabel >
-            <Label>Council</Label>
-            <View onPress={openCouncilModal}><Text>Council</Text></View>
-            <Modal visible={true}>
-              <ModalHeader name='Council' />
-            </Modal>
-
-           
-          </Item> */}
-          <Item floatingLabel>
-            <Label>Assign To</Label>
-          </Item>
+          {showATModal && (
+            <CouncilNames
+              options={allUsers.map(user => user.name)}
+              setShowModal={setShowATModal}
+              council={assignTo}
+              handleCouncil={handleAssignTo}
+            />
+          )}
 
           <Label>Date &amp; Time</Label>
           <DatePicker

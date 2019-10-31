@@ -4,18 +4,9 @@ import { Modal } from "react-native";
 import { Header, Body, View, List, ListItem, Left, Right, Text, Icon, Button, Title } from 'native-base';
 
 const CouncilNames = props => {
+  const {options} = props;
   const [isVisible, setIsVisible] = useState(true);
-  const councilNames = [
-    "bishopric",
-    "ward-council",
-    "elders",
-    "relief-society",
-    "young-men",
-    "young-women",
-    "sunday-school",
-    "primary",
-    "ward-missionary"
-  ];
+
 
   const renderCouncilName = name => {
     return name
@@ -67,7 +58,7 @@ const CouncilNames = props => {
             </Body>
           </Header>
           <List>
-            {councilNames.map((name, id) => (
+            {options.map((name, id) => (
               // <Button>
               <ListItem key={id} onPress={() => props.handleCouncil(name)}>
                 <Left>
