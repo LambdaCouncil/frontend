@@ -24,23 +24,20 @@ const Discussions = props => {
     const discussionsRef = db.collection('directMessages')
     const [discussions, setDiscussions] = useState([])
 
-    const populateUsers = _ => {
+    useEffect(_ => {
         discussionsRef
             .where('users', 'array-contains', db.doc(`users/${props.currentUser.uid}`))
-            .get().then(async allDiscussions => {
-                await setDiscussions(allDiscussions.docs.map(doc => ({ id: doc.id, ...doc.data() })))
+            .onSnapshot(allDiscussions => {
+                setDiscussions(allDiscussions.docs.map(doc => ({ ...doc.data(), id: doc.id })))
             })
-    }
-
-    useEffect(_ => populateUsers(), [])
-    console.log('discussions', discussions)
+    }, [])
 
     if (discussions.length > 0) return (
         <Content padder>
             <List>
                 {discussions
                     .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
-                    .map((disc, id) => <Discussion
+                    .map(disc => <Discussion
                         setCurrentChannel={props.setCurrentChannel}
                         currentUser={props.currentUser}
                         discussion={disc}
@@ -54,7 +51,7 @@ const Discussions = props => {
     else return (
         <Content padder>
             <List>
-                <Discussion
+                <Discussion loading={true}
                     discussion={pseudoDiscussion}
                     currentUser={props.currentUser}
                 />
@@ -65,9 +62,20 @@ const Discussions = props => {
 
 const Discussion = props => {
 
-    console.log('***discussion***: ', props.discussion)
-    //props.discussion.users.map(user => user.data())
-    const otherUser = props.discussion.users[0].id === props.currentUser.uid ? props.discussion.users[1] : props.discussion.users[0]
+    const db = firebase.firestore()
+    const [otherUser, setOtherUser] = useState({})
+
+    useEffect(_ => {
+
+        const populateUsers = _ => {
+            const discIdArr = props.discussion.id.split(':')
+            const otherUserId = discIdArr[0] === props.currentUser.uid ? discIdArr[1] : discIdArr[0]
+            db.doc(`users/${otherUserId}`).get().then(user => setOtherUser(user.data()))
+        }
+
+        if (!props.loading) populateUsers()
+
+    }, [])
 
     const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0]
 
