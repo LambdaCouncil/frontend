@@ -9,6 +9,8 @@ import UserPanel from './UserPanel'
 
 const SideMenu = props => {
 
+  console.log('SideMenu Path***: ', props.location.pathname)
+
   let path = props.location.pathname
 
   return (
