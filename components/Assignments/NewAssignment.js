@@ -16,6 +16,7 @@ const NewAssignment = props => {
   const [assignmentDescription, setAssignmentDescription] = useState('');
   const [notes, setNotes] = useState('');
   const [councilNameScreen, setCouncilNameScreen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   console.log(councilNameScreen);
 
@@ -63,12 +64,31 @@ const NewAssignment = props => {
               value={assignmentDescription}
             />
           </Item>
-          {/* {council.length > 0 && <Label>Council</Label>} */}
 
-          {/* <CouncilNames council={council} handleCouncil={handleCouncil} /> */}
+          {council.length > 0 ? (
+            <View>
+              <Label>Council</Label>
+              <Text>{council}</Text>
+            </View>
+          ) : (
+            <Button
+              title="Council"
+              onPress={() => setShowModal(true)}
+              transparent
+            >
+              <Text>Council</Text>
+            </Button>
+          )}
 
-          <View onPress={() => changeScreen('council')}><Text>Council</Text></View>
-{/* 
+          {showModal && (
+            <CouncilNames
+              setShowModal={setShowModal}
+              council={council}
+              handleCouncil={handleCouncil}
+            />
+          )}
+
+          {/* 
           <List>
             {councilNames.map((name, id) => (
               // <Button>
