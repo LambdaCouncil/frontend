@@ -14,7 +14,7 @@ const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
   const [council, setCouncil] = useState('');
   const [assignTo, setAssignTo] = useState('');
-  const [assignmentDescription, setAssignmentDescription] = useState('');
+  const [description, setDescription] = useState('');
   const [notes, setNotes] = useState('');
   const [councilNameScreen, setCouncilNameScreen] = useState(false);
   const [showCouncilModal, setShowCouncilModal] = useState(false);
@@ -54,15 +54,15 @@ const NewAssignment = props => {
 
   const handleSubmit = () => {
     console.log('handleSubmit for assignments pressed');
+    props.setShowModal(false);
   };
 
-  const handleAssignmentDescription = text => {
-    setAssignmentDescription(text);
-    console.log(assignmentDescription);
+  const handleDescription = text => {
+    setDescription(text);
   }
 
   const handleCouncil = name => {
-    console.log(name + ' was pressed')
+    console.log(name + ' was pressed');
     setCouncil(name);
   }
 
@@ -71,10 +71,23 @@ const NewAssignment = props => {
     setAssignTo(name);
   };
 
+  const handleDate = value => {
+    setChosenDate(value);
+  }
+
   const handleNotes = text => {
     setNotes(text);
-    console.log(notes);
   };
+
+  console.log("description: ", description);
+  console.log("council: ", council);
+  console.log("assignTo: ", assignTo);
+  console.log("date: ", chosenDate);
+  console.log("notes", notes);
+
+
+
+
 
   const openCouncilModal = _ => {
     console.log('modal for council selection should open')
@@ -97,8 +110,8 @@ const NewAssignment = props => {
             <Label>Description</Label>
             <Input
               name="description"
-              onChangeText={text => handleAssignmentDescription(text)}
-              value={assignmentDescription}
+              onChangeText={text => handleDescription(text)}
+              value={description}
             />
           </Item>
 
@@ -166,7 +179,7 @@ const NewAssignment = props => {
             // placeHolderText="Select date"
             textStyle={{ color: "green" }}
             placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={value => setChosenDate(value)}
+            onDateChange={value => handleDate(value)}
             disabled={false}
           />
           {/* <Text>{chosenDate && chosenDate.toString().substr(4, 12)}</Text> */}
