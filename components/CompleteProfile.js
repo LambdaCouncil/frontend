@@ -3,9 +3,6 @@ import firebase from "../firebase"
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { Link } from 'react-router-native'
-import { connect } from 'react-redux'
-
-import { signUpDisplayName } from '../actions'
 
 function CompleteProfile(props) {
 

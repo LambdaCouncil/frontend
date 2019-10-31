@@ -7,7 +7,6 @@ import {
     Body,
     Text,
     Right,
-    View,
     Content
 } from 'native-base'
 import { withRouter } from 'react-router-native'
