@@ -107,14 +107,21 @@ const NewAssignment = props => {
             onPress={() => setShowCouncilModal(true)}
             transparent
           >
-            {council.length > 0 ? (
+            {/* {council.length > 0 ? (
               <View>
                 <Text>Council</Text>
                 <Text>{council}</Text>
               </View>
             ) : (
+              <View>
+                <Text>Council</Text>
+              </View>
+            )} */}
+
+            <View>
               <Text>Council</Text>
-            )}
+              {council.length > 0 ? <Text>{council}</Text> : null}
+            </View>
           </Button>
 
           {showCouncilModal && (
@@ -131,14 +138,10 @@ const NewAssignment = props => {
             onPress={() => setShowATModal(true)}
             transparent
           >
-            {assignTo.length > 0 ? (
-              <View>
-                <Text>Assign To</Text>
-                <Text>{assignTo}</Text>
-              </View>
-            ) : (
+            <View>
               <Text>Assign To</Text>
-            )}
+              {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
+            </View>
           </Button>
 
           {showATModal && (
@@ -152,7 +155,7 @@ const NewAssignment = props => {
 
           <Label>Date &amp; Time</Label>
           <DatePicker
-            // defaultDate={new Date(2019, 9, 30)}
+            // defaultDate={new Date(Date.now())}
             minimumDate={new Date(2018, 0, 1)}
             maximumDate={new Date(3019, 11, 31)}
             locale={"en"}
