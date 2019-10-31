@@ -8,26 +8,53 @@ import firebase from "../firebase"
 function Login(props) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [requestActive, setActive] = useState(false)
+    const [error, setError] = useState("")
 
     const handleChangeEmail = text => setEmail(text.trim()),
 
         handleChangePassword = text => setPassword(text.trim()),
 
         handleSubmit = _ => {
-            if (isFormValid()) {
-                firebase
-                    .auth()
-                    .signInWithEmailAndPassword(email, password)
-                    .then(signedInUser => {
-                        console.log('signedInUser (from Login.js): ', signedInUser)
-                        setEmail(' ')
-                        setPassword(' ')
-                    })
-                    .catch(err => console.log(err))
+            if(isEmailInvalid()) {
+                setError({ message: "Email is invalid" })
+                return
             }
+
+            if(isPasswordInvalid()) {
+                setError({ message: "Password is invalid" })
+                return
+            }
+
+            setError({ message: "" })
+
+            setActive(true)
+
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(signedInUser => {
+                    console.log(signedInUser)
+                    setEmail(' ')
+                    setPassword(' ')
+                    setActive(false)
+                })
+                .catch(err => {
+                    setError(err)
+                    setActive(false)
+                })
         },
 
-        isFormValid = _ => email.length > 1 && password.length > 1
+        isEmailInvalid = _ => email.length <= 1
+
+        isPasswordInvalid = _ => password.length <= 1
+
+        _renderButton = _ => {
+            if(requestActive) 
+                return <H3 submit>Logging in...</H3>
+            else 
+                return <H3 onPress={handleSubmit} submit>Log In</H3>
+        }
 
     return (
 
@@ -66,7 +93,9 @@ function Login(props) {
                         />
                     </Item>
 
-                    <H3 onPress={handleSubmit} submit>Log In</H3>
+                    { _renderButton() }
+
+                    <Text style = {{ color: "red" }}>{error.message}</Text>
 
                 </Content>
             </Container>

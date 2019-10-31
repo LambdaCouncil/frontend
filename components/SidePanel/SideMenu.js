@@ -8,54 +8,54 @@ const SideMenu = props => {
 
   return (
     <View>
-      <Button light>
+      <Button>
         <Link to="/agendas" onPress={() => props.togglePanel()}>
-          <Text>Agendas</Text>
+          <Text style={{color: 'black'}}>Agendas</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/discussions" onPress={() => props.togglePanel()}>
-          <Text>Discussions</Text>
+          <Text style={{color: 'black'}}>Discussions</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/assignments" onPress={() => props.togglePanel()}>
-          <Text>Assignments</Text>
+          <Text style={{color: 'black'}}>Assignments</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/files" onPress={() => props.togglePanel()}>
-          <Text>Files</Text>
+          <Text style={{color: 'black'}}>Files</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/promptings" onPress={() => props.togglePanel()}>
-          <Text>Promptings</Text>
+          <Text style={{color: 'black'}}>Promptings</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/push-notifications" onPress={() => props.togglePanel()}>
-          <Text>Notifications</Text>
+          <Text style={{color: 'black'}}>Notifications</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/settings" onPress={() => props.togglePanel()}>
-          <Text>Settings</Text>
+          <Text style={{color: 'black'}}>Settings</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/admin" onPress={() => props.togglePanel()}>
-          <Text>Admin</Text>
+          <Text style={{color: 'black'}}>Admin</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/donations" onPress={() => props.togglePanel()}>
-          <Text>Donations</Text>
+          <Text style={{color: 'black'}}>Donations</Text>
         </Link>
       </Button>
-      <Button light>
+      <Button>
         <Link to="/login" onPress={() => props.togglePanel()}>
-          <Text onPress={() => firebase.auth().signOut()}>Log Out</Text>
+          <Text style={{color: 'black'}} onPress={() => firebase.auth().signOut()}>Log Out</Text>
         </Link>
       </Button>
     </View>

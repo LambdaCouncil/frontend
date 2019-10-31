@@ -65,8 +65,8 @@ const Discussions = props => {
 
 const Discussion = props => {
 
-    console.log('discussion', props.discussion)
-
+    console.log('***discussion***: ', props.discussion)
+    //props.discussion.users.map(user => user.data())
     const otherUser = props.discussion.users[0].id === props.currentUser.uid ? props.discussion.users[1] : props.discussion.users[0]
 
     const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0]
