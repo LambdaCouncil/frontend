@@ -38,7 +38,7 @@ const Discussions = props => {
     if (discussions.length > 0) return (
         <Content padder>
             <List>
-                {discussions.length > 0 && discussions
+                {discussions
                     .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
                     .map((disc, id) => <Discussion
                         setCurrentChannel={props.setCurrentChannel}
