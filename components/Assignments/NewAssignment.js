@@ -15,8 +15,9 @@ const NewAssignment = props => {
   const [council, setCouncil] = useState('');
   const [assignmentDescription, setAssignmentDescription] = useState('');
   const [notes, setNotes] = useState('');
+  const [councilNameScreen, setCouncilNameScreen] = useState(false);
 
-  const councilNames = ['bishopric', 'ward-council', 'elders', 'relief-society', 'young-men', 'young-women', 'sunday-school', 'primary', 'ward-missionary'];
+  console.log(councilNameScreen);
 
   const handleSubmit = () => {
     console.log('handleSubmit for assignments pressed');
@@ -41,22 +42,12 @@ const NewAssignment = props => {
     console.log('modal for council selection should open')
   }
 
-  const renderCouncilName = name => {
-    return name.split('-')
-      .map(word =>
-        word
-          .split('')
-          .map((letter, id) => {
-            if (id === 0) return letter.toUpperCase()
-            else return letter.toLowerCase()
-          })
-          .join('')
-      )
-      .join(' ')
-  }
-
-  const renderCheckmark = name => {
-    return (council == name) ? <Icon name='checkmark' /> : ''
+  const changeScreen = text => {
+    console.log('changeScreen pressed')
+    if (text === 'council') {
+      setCouncilNameScreen(true)
+      console.log(councilNameScreen);
+    }
   }
 
   return (
@@ -74,6 +65,10 @@ const NewAssignment = props => {
           </Item>
           {/* {council.length > 0 && <Label>Council</Label>} */}
 
+          {/* <CouncilNames council={council} handleCouncil={handleCouncil} /> */}
+
+          <View onPress={() => changeScreen('council')}><Text>Council</Text></View>
+{/* 
           <List>
             {councilNames.map((name, id) => (
               // <Button>
@@ -87,7 +82,7 @@ const NewAssignment = props => {
               </ListItem>
               // </Button>
             ))}
-          </List>
+          </List> */}
 
           {/* <Item floatingLabel >
             <Label>Council</Label>
