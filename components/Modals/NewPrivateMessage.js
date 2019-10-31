@@ -10,12 +10,12 @@ import firebase from '../../firebase'
 
 const NewPrivateMessage = props => {
 
+    const db = firebase.firestore()
+    const Users = db.collection('users')
+
     const [allUsers, setAllUsers] = useState([])
 
-    const Users = firebase.firestore().collection('users')
-
     useEffect(_ => {
-        // keep up to date with firebase and re-format firebase user object
         let loadedUsers = []
         Users.get()
             .then(docs => docs.forEach(async doc => {
@@ -46,7 +46,7 @@ const NewPrivateMessage = props => {
                                     id: `${props.currentUser.uid}:${user.id}`,
                                     direct: true,
                                     brandNewChannel: true,
-                                    users: [props.currentUser.uid, user.id]
+                                    users: [db.doc(`/users/${props.currentUser.uid}`), db.doc(`/users/${user.id}`)]
                                 })
                                 props.setShowModal(false)
                                 props.history.push('/messages')
