@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
-import { Button, Text, Header, Left, Icon, Body, Right } from 'native-base'
-import { withRouter } from 'react-router-native'
+import React, {useState} from 'react'
+import {Button, Text, Header, Left, Icon, Body, Right} from 'native-base'
+import {withRouter} from 'react-router-native'
 
 import SidePanel from '../SidePanel/SidePanel'
 import ActionSheets from '../ActionSheets'
 import NewPrivateMessage from '../Modals/NewPrivateMessage'
 
-import { buttonsObj } from '../../objects/buttonsObj'
+import {buttonsObj} from '../../objects/buttonsObj'
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
@@ -108,7 +108,7 @@ const pageHeader = props => {
   const whichModal = _ => {
     switch (props.location.pathname) {
       case '/discussions':
-        return <NewPrivateMessage setShowModal={setShowModal} />
+        return <NewPrivateMessage setShowModal={setShowModal}/>
       default:
         return
     }
@@ -119,7 +119,7 @@ const pageHeader = props => {
       <Header>
         <Left>
           <Button transparent onPress={togglePanel}>
-            <Icon dgreal name='menu' /> 
+            <Icon dgreal name='menu'/>
           </Button>
         </Left>
         <Body>
@@ -127,7 +127,7 @@ const pageHeader = props => {
         </Body>
         <Right>{arrayForSure()}</Right>
       </Header>
-      {showPanel && <SidePanel togglePanel={togglePanel} />}
+      {showPanel && <SidePanel togglePanel={togglePanel}/>}
       {showModal && whichModal()}
     </>
   )
