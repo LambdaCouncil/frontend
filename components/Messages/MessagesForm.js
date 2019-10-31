@@ -8,8 +8,6 @@ import firebase from '../../firebase'
 
 const MessageForm = props => {
 
-    console.log(props.currentUser)
-
     const [message, setMessage] = useState('')
 
     const handleChange = e => {

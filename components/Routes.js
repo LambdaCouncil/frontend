@@ -20,7 +20,7 @@ import Header from "./Header/Header"
 import Messages from "./Messages/Messages"
 import Discussions from "./Discussions/Discussions"
 import Agendas from "./Agendas/Agendas"
-import Assignments from './Assignments'
+import Assignments from './Assignments/Assignments'
 import RateCouncils from './Settings/RateCouncils'
 
 const Routes = props => {
@@ -28,7 +28,7 @@ const Routes = props => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         props.setUser(user)
-        props.history.push("/home")
+        props.history.push("/agendas")
       } else {
         props.history.push("/")
         props.clearUser()
@@ -106,11 +106,6 @@ const Routes = props => {
         <Route
           path="/messages"
           render={props => <Messages {...props} />}
-        />
-
-        <Route
-          path='/action-sheets'
-          render={props => <ActionSheets {...props} />}
         />
 
         <Route

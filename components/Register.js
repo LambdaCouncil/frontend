@@ -8,26 +8,32 @@ import { signUpDisplayName, setUser } from '../actions'
 
 function Register(props) {
 
-    const [displayName, setDisplayName] = useState(' ')
-    const [email, setEmail] = useState(' ')
-    const [password, setPassword] = useState(' ')
-    const [passwordConfirm, setPasswordConfirm] = useState(' ')
+    const [displayName, setDisplayName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [requestActive, setActive] = useState(false)
+    const [error, setError] = useState({ message: "" })
 
     const userRef = firebase.firestore().collection('users'),
 
-        handleChangeDisplayName = text => setDisplayName(text),
+        handleChangeDisplayName = text => setDisplayName(text.trim()),
 
-        handleChangeEmail = text => setEmail(text),
+        handleChangeEmail = text => setEmail(text.trim()),
 
-        handleChangePassword = text => setPassword(text),
+        handleChangePassword = text => setPassword(text.trim()),
 
-        handleChangePasswordConfirm = text => setPasswordConfirm(text),
+        handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
 
         handleSubmit = _ => {
+            setActive(false)
+            setError({ message: "" })
 
             if (password === passwordConfirm) {
 
                 props.signUpDisplayName(displayName)
+
+                setActive(true)
 
                 firebase
                     .auth()
@@ -53,15 +59,30 @@ function Register(props) {
                                         props.setUser(createdUser.user)
                                         props.history.push('/complete-profile')
                                     })
+                                    .catch(handleError)
                             })
+                            .catch(handleError)
                     })
-                    .catch(err => {
-                        props.history.push('/register')
-                        console.error(err)
-                    })
+                    .catch(handleError)
 
-            } else alert("Passwords don't match.")
+            } else handleError({ message: "Passwords dont match" })
 
+        },
+
+        handleError = err => {
+            setError(err)
+            setActive(false)
+        }
+
+        _renderButton = _ => {
+            if(requestActive) 
+                return <H3 submit>Signing Up...</H3>
+            else 
+                return <H3 onPress={handleSubmit} submit>Sign Up</H3>
+        }
+
+        _renderErrorText = _ => {
+            return error ? error.message :"An internal error occured"
         }
 
     return (
@@ -87,18 +108,19 @@ function Register(props) {
 
                 <Item floatingLabel>
                     <Label>Display Name</Label>
-                    <Input onChangeText={handleChangeDisplayName} />
+                    <Input onChangeText={handleChangeDisplayName} value = {displayName} />
                 </Item>
 
                 <Item floatingLabel>
                     <Label>Email</Label>
-                    <Input onChangeText={handleChangeEmail} />
+                    <Input onChangeText={handleChangeEmail} value = {email} />
                 </Item>
 
                 <Item floatingLabel>
                     <Label>Password</Label>
                     <Input
                         onChangeText={handleChangePassword}
+                        value = {password}
                         secureTextEntry={true}
                     />
                 </Item>
@@ -107,11 +129,14 @@ function Register(props) {
                     <Label>Confirm Password</Label>
                     <Input
                         secureTextEntry={true}
+                        value = {passwordConfirm}
                         onChangeText={handleChangePasswordConfirm}
                     />
                 </Item>
 
-                <H3 onPress={handleSubmit} submit>Sign Up</H3>
+                { _renderButton() }
+
+                <Text style = {{ color: "red" }}>{_renderErrorText()}</Text>
 
             </Content>
 

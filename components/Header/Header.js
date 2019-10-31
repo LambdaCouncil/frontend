@@ -7,6 +7,7 @@ import ActionSheets from '../ActionSheets'
 import NewPrivateMessage from '../Modals/NewPrivateMessage'
 
 import { buttonsObj } from '../../objects/buttonsObj'
+import NewAssignment from '../Assignments/NewAssignment'
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
@@ -14,6 +15,7 @@ const pageHeader = props => {
 
   const addIconArray = [
     '/agendas',
+    '/assignment',
     '/assignments',
     '/discussions',
     '/files',
@@ -45,7 +47,7 @@ const pageHeader = props => {
       !props.modal &&
       addIconArray.filter(icon => icon === props.location.pathname).length > 0
     ) {
-      console.log('pathname in Header arrayForSure', props.location.pathname)
+      console.log('(Header.js) pathname: ', props.location.pathname)
       switch (props.location.pathname) {
         // primary actionsheets only as of 10/25, (need additional routes for corresponding renders)
         case '/agendas':
@@ -55,16 +57,23 @@ const pageHeader = props => {
               asInfo={buttonsObj.agendas.primary}
             />
           )
-          break
 
         case '/assignments':
           return (
+            <Button onPress={() => setShowModal(true)}>
+              <Text>
+                <Icon name='add' />
+              </Text>
+            </Button>
+          )
+
+        case '/assignment':
+          return (
             <ActionSheets
               setShowModal={setShowModal}
-              asInfo={buttonsObj.assignments.primary}
+              asInfo={buttonsObj.assignment.primary}
             />
           )
-          break
 
         case '/discussions':
           return (
@@ -73,7 +82,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.discussions.primary}
             />
           )
-          break
 
         case '/files':
           return (
@@ -82,7 +90,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.files.primary}
             />
           )
-          break
 
         case '/promptings':
           return (
@@ -91,7 +98,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.promptings.primary}
             />
           )
-          break
 
         case '/messages':
           return (
@@ -100,7 +106,6 @@ const pageHeader = props => {
               asInfo={buttonsObj.discussions.public}
             />
           )
-          break
       }
     }
   }
@@ -109,6 +114,8 @@ const pageHeader = props => {
     switch (props.location.pathname) {
       case '/discussions':
         return <NewPrivateMessage setShowModal={setShowModal} />
+      case '/assignments':
+        return <NewAssignment setShowModal={setShowModal} />
       default:
         return
     }
@@ -119,7 +126,7 @@ const pageHeader = props => {
       <Header>
         <Left>
           <Button transparent onPress={togglePanel}>
-            <Icon dgreal name='menu' /> 
+            <Icon dgreal name='menu' />
           </Button>
         </Left>
         <Body>
