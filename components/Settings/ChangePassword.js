@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import firebase from "../../firebase"
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Input, Text, Label, Item, H1, View, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
-import { connect } from 'react-redux'
-
-import { signUpDisplayName } from '../../actions'
 
 function ChangePassword(props) {
 
@@ -13,7 +10,7 @@ function ChangePassword(props) {
   const [newPassword, setNewPassword] = useState(' ')
   const [confirmNewPassword, setConfirmNewPassword] = useState(' ')
 
-  const userRef = firebase.database().ref('users')
+  const userRef = firebase.firestore().ref('users')
 
   const handleOldPassword = text => setOldPassword(text)
 
@@ -21,7 +18,10 @@ function ChangePassword(props) {
 
   const handlePasswordConfirm = text => setConfirmNewPassword(text)
 
-  const changePassword = _ => console.log('Password Changed')
+  const changePassword = () => {
+    console.log('Password Changed');
+    props.history.push('/editprofile')
+  }
 
   console.log('ChangePasswordProps', props)
 
@@ -30,31 +30,41 @@ function ChangePassword(props) {
       style={styles.inputContainer}
       behavior='padding'
     >
-
-      <Icon backButton
-        onPress={() => props.history.goBack()}
-        name='arrow-back'
-      />
-
-      <H1>Change Password</H1>
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Old Password</Label>
-        <Input onChangeText={handleOldPassword} secureTextEntry={true} />
-      </Item>
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>New Password</Label>
-        <Input onChangeText={handleNewPassword} secureTextEntry={true} />
-      </Item>
-      <Item floatingLabel style={styles.inputItem}>
-        <Label>Confirm New Password</Label>
-        <Input onChangeText={handlePasswordConfirm} secureTextEntry={true} />
-      </Item>
-      <Link to='/editprofile'>
-        <H3>Save</H3>
+      <Link onPress={() => props.history.goBack()} style={styles.link}>
+        <Icon
+          name='arrow-back'
+          color='green'
+          style={styles.backButton}
+        />
       </Link>
-      <Link to='/home'>
-        <H3>Cancel</H3>
-      </Link>
+      <View style={styles.pageView}>
+        <H1>Change Password</H1>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Old Password</Label>
+          <Input
+            onChangeText={handleOldPassword}
+            secureTextEntry={true}
+          />
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>New Password</Label>
+          <Input
+            onChangeText={handleNewPassword}
+            secureTextEntry={true}
+          />
+        </Item>
+        <Item floatingLabel style={styles.inputItem}>
+          <Label>Confirm New Password</Label>
+          <Input
+            onChangeText={handlePasswordConfirm}
+            secureTextEntry={true}
+          />
+        </Item>
+        <View>
+          <Text onPress={changePassword}
+            style={styles.saveButton}>Save</Text>
+        </View>
+      </View>
     </KeyboardAvoidingView>
   )
 }
@@ -63,9 +73,9 @@ function ChangePassword(props) {
 const styles = StyleSheet.create({
   inputContainer: {
     height: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
   link: {
     position: 'absolute',
@@ -77,8 +87,22 @@ const styles = StyleSheet.create({
   backButton: {
     fontSize: 50
   },
-  inputItem: {
-    marginVertical: 10
+  pageView: {
+    marginHorizontal: 20,
+    marginTop: 80,
+  },
+  header: {
+    fontSize: 28,
+    marginBottom: 10,
+    fontFamily: 'gotham',
+    fontWeight: '500',
+  },
+  saveButton: {
+    // marginVertical: 15,
+    color: '#288365',
+    textAlign: 'center',
+    fontSize: 17,
+    top: 169
   }
 })
 

@@ -1,91 +1,108 @@
 import React, { useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
-import { Link } from 'react-router-native'
+import { StyleSheet } from 'react-native'
+import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { withRouter } from 'react-router-native'
 
-import variables from '../native-base-theme/variables/commonColor'
 import firebase from "../firebase"
 
 function Login(props) {
-    const [email, setEmail] = useState(' ')
-    const [password, setPassword] = useState(' ')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [requestActive, setActive] = useState(false)
+    const [error, setError] = useState("")
 
-    const handleChangeEmail = text => setEmail(text),
+    const handleChangeEmail = text => setEmail(text.trim()),
 
-        handleChangePassword = text => setPassword(text),
+        handleChangePassword = text => setPassword(text.trim()),
 
         handleSubmit = _ => {
-            if (isFormValid()) {
-                firebase
-                    .auth()
-                    .signInWithEmailAndPassword(email, password)
-                    .then(signedInUser => {
-                        console.log(signedInUser)
-                        setEmail(' ')
-                        setPassword(' ')
-                    })
-                    .catch(err => console.error(err))
+            if(isEmailInvalid()) {
+                setError({ message: "Email is invalid" })
+                return
             }
+
+            if(isPasswordInvalid()) {
+                setError({ message: "Password is invalid" })
+                return
+            }
+
+            setError({ message: "" })
+
+            setActive(true)
+
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(signedInUser => {
+                    console.log(signedInUser)
+                    setEmail(' ')
+                    setPassword(' ')
+                    setActive(false)
+                })
+                .catch(err => {
+                    setError(err)
+                    setActive(false)
+                })
         },
 
-        isFormValid = _ => email.length > 1 && password.length > 1
+        isEmailInvalid = _ => email.length <= 1
+
+        isPasswordInvalid = _ => password.length <= 1
+
+        _renderButton = _ => {
+            if(requestActive) 
+                return <H3 submit>Logging in...</H3>
+            else 
+                return <H3 onPress={handleSubmit} submit>Log In</H3>
+        }
 
     return (
 
-        <KeyboardAvoidingView
-            style={styles.inputContainer}
-            behavior='padding'
-        >
+        <>
 
-            <Link to='/' style={styles.link}>
-                <Icon
-                    name='arrow-back'
-                    color={variables.councils.text.greal}
-                    style={styles.backButton}
-                />
-            </Link>
+            <Icon
+                backButton
+                name='arrow-back'
+                onPress={props.history.goBack}
+            />
 
-            <H1>Log In</H1>
+            <Container>
+                <Content
+                    padder
+                    contentContainerStyle={{
+                        alignItems: 'center',
+                        paddingTop: '15%',
+                        //     paddingBottom: '85%'
+                    }}>
 
-            <Text>Log into your Councils account.</Text>
+                    <H1>Log In</H1>
 
-            <Item floatingLabel>
-                <Label>Email</Label>
-                <Input onChangeText={handleChangeEmail} />
-            </Item>
+                    <Text>Log into your Councils account.</Text>
 
-            <Item floatingLabel>
-                <Label>Password</Label>
-                <Input
-                    onChangeText={handleChangePassword}
-                    secureTextEntry={true}
-                />
-            </Item>
+                    <Item floatingLabel>
+                        <Label>Email</Label>
+                        <Input onChangeText={handleChangeEmail} value = {email} />
+                    </Item>
 
-            <H3 onPress={handleSubmit} submit>Log In</H3>
+                    <Item floatingLabel>
+                        <Label>Password</Label>
+                        <Input
+                            onChangeText={handleChangePassword}
+                            value = {password}
+                            secureTextEntry={true}
+                        />
+                    </Item>
 
-        </KeyboardAvoidingView>
+                    { _renderButton() }
+
+                    <Text style = {{ color: "red" }}>{error.message}</Text>
+
+                </Content>
+            </Container>
+
+        </>
 
     )
 }
 
-const styles = StyleSheet.create({
-    inputContainer: {
-        height: '100%',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    link: {
-        position: 'absolute',
-        top: 25,
-        left: 5,
-        width: '100%',
-        height: 50
-    },
-    backButton: {
-        fontSize: 50
-    },
-})
-
-export default Login
+export default withRouter(Login)

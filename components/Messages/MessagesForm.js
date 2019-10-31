@@ -1,112 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Container, Content, Item, View, Footer } from 'native-base'
-import { Text, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { Text, Input, Button, Item, Label, Form } from 'native-base'
+import { connect } from 'react-redux'
+
+import { setCurrentChannel } from '../../actions'
 import firebase from '../../firebase'
 
 
-const MessageForm = ({ messagesRef, currentChannel, currentUser }) => {
+const MessageForm = props => {
 
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
-    const [messagesLoading, setMessagesLoading] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [channel, setChannel] = useState(currentChannel);
-    const [user, setUser] = useState(currentUser);
-    const [errors, setErrors] = useState([]);
+    const [message, setMessage] = useState('')
 
+    const handleChange = e => {
+        setMessage(e.nativeEvent.text)
+    }
 
-    const handleChange = (e) => {
-        setMessage(e.target.value)
-    };
-
-    const createMessage = () => {
-        return {
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-            user: {
-                id: user.uid,
-                name: user.displayName,
-                avatar: user.photoURL
-            },
-            content: message
-        };
-    };
-
-
-    const sendMessage = () => {
+    const sendMessage = _ => {
         if (message) {
-            setLoading(true);
-            messagesRef
-                .child(channel.id)
-                .push()
-                .set(createMessage())
-                .then(() => {
-                    setLoading(false);
-                    setMessage('');
-                    setErrors([]);
+
+            const newMessage = {
+                messages: firebase.firestore.FieldValue.arrayUnion({
+                    timestamp: Date.now(),
+                    user: {
+                        id: props.currentUser.uid,
+                        name: props.currentUser.displayName
+                    },
+                    content: message
                 })
-                .catch(err => {
-                    console.log(err);
-                    setLoading(false);
-                    setErrors((errors => errors.concat(err)));
+            }
+
+            props.currentChannel.brandNewChannel ?
+                props.discussionsRef.set({
+                    ...newMessage,
+                    users: props.currentChannel.users
                 })
-        } else {
-            setErrors((errors => errors.concat({ message: 'Add a message' })));
+                    .then(_ => {
+                        props.setCurrentChannel({
+                            ...props.currentChannel,
+                            brandNewChannel: false
+                        })
+                        setMessage('')
+                    })
+                    .catch(err => console.log(err))
+                :
+                props.discussionsRef.update(newMessage)
+                    .then(_ => setMessage(''))
+                    .catch(err => console.log(err))
+
         }
-    };
+    }
 
 
     return (
+        <Form>
+            <Item floatingLabel>
+                <Label>Write your message</Label>
+                <Input onChange={handleChange} value={message} />
+            </Item>
+            <Button transparent>
+                <Text>@</Text>
+            </Button>
+            <Button transparent onPress={sendMessage}>
+                <Text>Send Message</Text>
+            </Button>
+        </Form>
+    )
+}
 
-        <View>
-            <Form>
-                <View>
-                    <Item >
-                        <Input
-                            style={style.input}
-                            name='message'
-                            onChange={handleChange}
-                            value={message}
-                            placeholder='Write your message'
-                        />
-                    </Item>
-                </View>
-                <View style={style.screen}>
-                    <Button transparent style={style.button1}>
-                        <Text style={style.text}>@</Text>
-                    </Button>
-                    <Button transparent style={style.button2}>
-                        <Text style={style.text}> Send Message</Text>
-                    </Button>
-                </View>
-            </Form>
-        </View>
-
-    );
-};
-
-const style = StyleSheet.create({
-    screen: {
-        flexDirection: 'row'
-    },
-    button1: {
-        width: '50%',
-        justifyContent: 'center'
-
-    },
-    button2: {
-        width: '50%',
-        justifyContent: 'center'
-
-    },
-    text: {
-        color: '#288365'
-    },
-
-    input: {
-        borderWidth: 0.5,
-        borderColor: 'black'
-    }
-
-})
-
-export default MessageForm;
+export default connect(state => ({ ...state }), { setCurrentChannel })(MessageForm)

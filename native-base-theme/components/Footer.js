@@ -6,7 +6,7 @@ export default _ => {
 
   const { ui, text } = variables.councils
 
-  return {
+  const iconCommon = {
     'NativeBase.Icon': {
       color: variables.tabBarActiveTextColor
     }
@@ -21,7 +21,7 @@ export default _ => {
       color: variables.tabBarActiveTextColor
     }
   };
-  const footerTheme = {
+  return {
     'NativeBase.Left': {
       'NativeBase.Button': {
         '.transparent': {

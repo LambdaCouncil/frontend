@@ -51,7 +51,7 @@ const AddChannel = props => {
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
+      <View>
         <Header style={styles.header}>
           <Left>
             <Button transparent onPress={() => onCancelNewChannel()}>
@@ -99,6 +99,7 @@ const AddChannel = props => {
               <Picker.Item label="Young Women" value="youngWomen" />
               <Picker.Item label="Sunday School" value="sundaySchool" />
               <Picker.Item label="Primary" value="primary" />
+              <Picker.Item label="Ward Missionary" value="wardMissionary" />
             </Picker>
           </Item>
         </Form>
@@ -114,19 +115,5 @@ const AddChannel = props => {
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#FFFFFF',
-    paddingTop: 25
-  },
-  // header: {
-  //   backgroundColor: "#FAFAFA"
-  // }
-  inputItem: {
-    marginVertical: 15,
-    paddingBottom: 10
-  }
-});
 
 export default withRouter(AddChannel);

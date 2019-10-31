@@ -1,28 +1,38 @@
-import React from "react"
+import React, { useState } from "react"
 import moment from "moment"
-import { Text, Content, Container, Thumbnail } from 'native-base'
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
 
+import firebase from '../../firebase'
 
-const isOwnMessage = (message, user) => {
-    return message.user.id === user.uid ? 'message__self' : '';
-};
+const Message = props => {
 
-const timeFromNow = timestamp => moment(timestamp).fromNow();
+    const [avatar, setAvatar] = useState('https://ui-avatars.com/api/?name=Councils+App')
 
-const Message = ({ message, user, key }) => {
+    const { user, content, timestamp } = props.message
 
+    firebase.firestore().collection('users').doc(user.id).get()
+        .then(doc => setAvatar(doc.data().avatar))
+        .catch(err => console.error(err))
 
-    return (
+    return user.id === props.currentUser.uid ?
+        <ListItem avatar>
+            <Body>
+                <Text snippet>{content}</Text>
+            </Body>
+            <Right>
+                <Thumbnail small source={{ uri: avatar }} />
+            </Right>
+        </ListItem>
+        :
+        <ListItem avatar>
+            <Left>
+                <Thumbnail small source={{ uri: avatar }} />
+            </Left>
+            <Body>
+                <Text snippet>{content}</Text>
+            </Body>
+        </ListItem>
 
-        <Container>
-            <Thumbnail src={user.avatar} />
-            <Content className={isOwnMessage(message, user)}>
-                <Text as='a'>{message.user.name}</Text>
-                {/*<Comment.MetaData>{timeFromNow(message.timestamp)}</Comment.MetaData>*/}
-                <Text>{message.content}</Text>
-            </Content>
-        </Container>
-    );
-};
+}
 
-export default Message;
+export default Message

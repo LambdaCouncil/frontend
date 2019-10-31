@@ -39,13 +39,13 @@ const UserPanel = props => {
   }
 
   return (
-    <Item>
-      <Thumbnail
-        source={{ uri: 'https://avatars3.githubusercontent.com/u/46138601?s=400&v=4' }}
+    <Item style={{borderBottomColor: 'white'}}>
+      <Thumbnail style={{height: 48, width: 48}}
+        source={{ uri: props.currentUser.photoURL }}
       />
-      <Left>
-        <Text>{user.displayName}</Text>
-        <Text note>{user.email}</Text>
+      <Left userPanel>
+        <Text style={{color: '#202224', fontSize: 17}}>{user.displayName}</Text>
+        <Text note style={{fontSize: 13}}>{user.email}</Text>
       </Left>
     </Item>
   )

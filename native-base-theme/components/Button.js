@@ -374,20 +374,17 @@ export default _ => {
         }
       }
     },
-    paddingVertical: variables.buttonPadding,
-    backgroundColor: variables.buttonPrimaryBg,
+    '.noBorder': {
+      borderWidth: 0,
+      borderColor: ui.white
+    },
+    backgroundColor: ui.white,
     borderRadius: variables.borderRadiusBase,
-    borderColor: variables.buttonPrimaryBg,
-    borderWidth: null,
+    borderColor: ui.white,
+    borderWidth: 0,
     height: 45,
     flexDirection: 'row',
     elevation: 2,
-    shadowColor:
-      platformStyle === PLATFORM.MATERIAL ? variables.brandDark : undefined,
-    shadowOffset:
-      platformStyle === PLATFORM.MATERIAL ? { width: 0, height: 2 } : undefined,
-    shadowOpacity: platformStyle === PLATFORM.MATERIAL ? 0.2 : undefined,
-    shadowRadius: platformStyle === PLATFORM.MATERIAL ? 1.2 : undefined,
     alignItems: 'center',
     justifyContent: 'space-between'
   }

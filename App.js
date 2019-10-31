@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import * as Font from 'expo-font'
-import { YellowBox } from 'react-native'
+import { YellowBox, View } from 'react-native'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import { NativeRouter } from 'react-router-native'
-import { StyleProvider } from 'native-base'
+import { StyleProvider, Spinner } from 'native-base'
 import { Root } from 'native-base'
 import thunk from 'redux-thunk'
 
@@ -14,9 +14,12 @@ import reducer from './reducer'
 // import Routes from './components/Discussions/Discussions'
 import Routes from './components/Routes'
 
+import OfflineStatus from "./OfflineStatus"
+
 const store = createStore(reducer, applyMiddleware(thunk))
 
 const App = _ => {
+  const[isLoading, setLoading] = useState(true)
 
   YellowBox.ignoreWarnings(['Setting a timer', 'Deprecation warning'])
 
@@ -26,13 +29,19 @@ const App = _ => {
     'bern-r': require("./assets/Fonts/BerninaSans-Regular.otf"),
     'bern-sb': require("./assets/Fonts/BerninaSans-Semibold.otf"),
   })
+    .then(_ => {
+      setLoading(false)
+    })
 
   return (
     <Provider store={store}>
       <NativeRouter>
         <StyleProvider style={getTheme(common)}>
           <Root>
-            <Routes />
+            <>
+              <Routes loadingFonts = {isLoading} />
+              <OfflineStatus />
+            </>
           </Root>
         </StyleProvider>
       </NativeRouter>

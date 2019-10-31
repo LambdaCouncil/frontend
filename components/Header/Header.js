@@ -1,79 +1,141 @@
-import React, { useState, useEffect } from "react"
-import { Button, Text, Header, Left, Icon, Body, Right } from "native-base"
-import { withRouter } from "react-router-native"
-import { connect } from "react-redux"
+import React, { useState } from 'react'
+import { Button, Text, Header, Left, Icon, Body, Right } from 'native-base'
+import { withRouter } from 'react-router-native'
 
-import SidePanel from "../SidePanel/SidePanel"
-import MessageActionSheet from "../Messages/MessageActionSheet"
+import SidePanel from '../SidePanel/SidePanel'
+import ActionSheets from '../ActionSheets'
+import NewPrivateMessage from '../Modals/NewPrivateMessage'
+
+import { buttonsObj } from '../../objects/buttonsObj'
+import NewAssignment from '../Assignments/NewAssignment'
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
-  const [currentPageName, setCurrentPageName] = useState('')
+  const [showModal, setShowModal] = useState(false)
 
   const addIconArray = [
-    '/discussions',
     '/agendas',
+    '/assignment',
     '/assignments',
+    '/discussions',
     '/files',
-    '/promptings'
+    '/promptings',
+    '/messages'
   ]
 
-  useEffect(() => {
-    setCurrentPageName(props.location.pathname)
-  }, [props.location.pathname])
+  const togglePanel = _ => setShowPanel(!showPanel)
 
-  // console.log(props)
-
-  const togglePanel = () => {
-    setShowPanel(!showPanel)
+  const renderPageName = _ => {
+    if (props.modal) return props.name
+    return props.location.pathname
+      .replace('/', '')
+      .split('-')
+      .map(word =>
+        word
+          .split('')
+          .map((letter, id) => {
+            if (id === 0) return letter.toUpperCase()
+            else return letter.toLowerCase()
+          })
+          .join('')
+      )
+      .join(' ')
   }
 
-  const onClickHandler = () => {
-    switch (currentPageName) {
-      case '/discussions':
-        return <MessageActionSheet />
+  const arrayForSure = _ => {
+    if (
+      !props.modal &&
+      addIconArray.filter(icon => icon === props.location.pathname).length > 0
+    ) {
+      console.log('(Header.js) pathname: ', props.location.pathname)
+      switch (props.location.pathname) {
+        // primary actionsheets only as of 10/25, (need additional routes for corresponding renders)
+        case '/agendas':
+          return (
+            <ActionSheets
+              setShowModal={setShowModal}
+              asInfo={buttonsObj.agendas.primary}
+            />
+          )
 
+        case '/assignments':
+          return (
+            <Button onPress={() => setShowModal(true)}>
+              <Text>
+                <Icon name='add' />
+              </Text>
+            </Button>
+          )
 
-      default:
-        return null
+        case '/assignment':
+          return (
+            <ActionSheets
+              setShowModal={setShowModal}
+              asInfo={buttonsObj.assignment.primary}
+            />
+          )
+
+        case '/discussions':
+          return (
+            <ActionSheets
+              setShowModal={setShowModal}
+              asInfo={buttonsObj.discussions.primary}
+            />
+          )
+
+        case '/files':
+          return (
+            <ActionSheets
+              setShowModal={setShowModal}
+              asInfo={buttonsObj.files.primary}
+            />
+          )
+
+        case '/promptings':
+          return (
+            <ActionSheets
+              setShowModal={setShowModal}
+              asInfo={buttonsObj.promptings.primary}
+            />
+          )
+
+        case '/messages':
+          return (
+            <ActionSheets
+              setShowModal={setShowModal}
+              asInfo={buttonsObj.discussions.public}
+            />
+          )
+      }
     }
   }
 
-  const renderPageName = () => {
-    return currentPageName
-      .replace('/', '')
-      .split('-')
-      .map(word => word.split('')
-        .map((letter, id) => {
-          if (id === 0) return letter.toUpperCase()
-          else return letter.toLowerCase()
-        })
-        .join(''))
-      .join(' ')
+  const whichModal = _ => {
+    switch (props.location.pathname) {
+      case '/discussions':
+        return <NewPrivateMessage setShowModal={setShowModal} />
+      case '/assignments':
+        return <NewAssignment setShowModal={setShowModal} />
+      default:
+        return
+    }
   }
 
   return (
     <>
       <Header>
         <Left>
-          <Button onPress={() => togglePanel()}>
-            <Icon name="menu" />
+          <Button transparent onPress={togglePanel}>
+            <Icon dgreal name='menu' />
           </Button>
         </Left>
         <Body>
           <Text>{renderPageName()}</Text>
         </Body>
-        <Right>
-          <Button onPress={() => onClickHandler()}>
-            <Text>
-              {addIconArray.filter(icon => icon === currentPageName).length ? (
-                <MessageActionSheet />
-              ) : ('')}
-            </Text>
-          </Button>
-        </Right>
+        <Right>{arrayForSure()}</Right>
       </Header>
       {showPanel && <SidePanel togglePanel={togglePanel} />}
+      {showModal && whichModal()}
     </>
   )
 }

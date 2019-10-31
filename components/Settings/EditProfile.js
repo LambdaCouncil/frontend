@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import firebase from "../../firebase"
-import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { StyleSheet } from 'react-native'
+import { Input, Text, Label, Item, H1, Icon, View, Content } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
-import { connect } from 'react-redux'
-
-import { signUpDisplayName } from '../../actions'
 
 function EditProfile(props) {
 
@@ -15,7 +12,7 @@ function EditProfile(props) {
   const [email, setEmail] = useState(' ')
   const [phone, setPhone] = useState(' ')
 
-  const userRef = firebase.database().ref('users')
+  const userRef = firebase.firestore().ref('users')
 
   const handleFirstName = text => setFirstName(text)
 
@@ -36,20 +33,13 @@ function EditProfile(props) {
   }
 
   const deleteAccount = () => {
-    console.log('Account Deleted')
+    console.log('Account Deleted');
+    props.history.push('/settings')
   }
 
   return (
 
-    <KeyboardAvoidingView
-      style={styles.inputContainer}
-      behavior='padding'>
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton} />
-      </Link>
+    <Content padder>
       <View style={styles.pageView}>
         <H1>Edit Profile</H1>
         <Text>Upload Photo</Text>
@@ -91,9 +81,12 @@ function EditProfile(props) {
               <Text style={styles.cancel}>Cancel</Text>
             </Link>
           </View>
+          <View style={styles.button}>
+            <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
+          </View>
         </View>
       </View>
-    </KeyboardAvoidingView>
+    </Content>
   )
 }
 
@@ -128,11 +121,11 @@ const styles = StyleSheet.create({
   subHeader: {
     fontSize: 17,
     fontWeight: '500',
-    fontFamily: 'bern2'
+    fontFamily: 'bern-r'
   },
   textContent: {
     fontSize: 17,
-    fontFamily: 'bern2',
+    fontFamily: 'bern-r',
   },
   contentDivs: {
     marginVertical: 10,
@@ -141,7 +134,7 @@ const styles = StyleSheet.create({
   buttonsBottom: {
     marginTop: 10,
     fontSize: 17,
-    fontFamily: 'bern2',
+    fontFamily: 'bern-r',
     lineHeight: 24
   },
   button: {

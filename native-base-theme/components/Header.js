@@ -3,7 +3,6 @@
 import variables, { platform, PLATFORM } from './../variables/commonColor'
 
 export default _ => {
-
   const { platformStyle } = variables
 
   const { ui, text } = variables.councils
@@ -214,7 +213,7 @@ export default _ => {
             color: variables.toolbarBtnColor,
             fontSize:
               platform === PLATFORM.IOS &&
-                variables.platformStyle !== PLATFORM.MATERIAL
+              variables.platformStyle !== PLATFORM.MATERIAL
                 ? variables.iconHeaderSize + 1
                 : variables.iconHeaderSize,
             marginTop: 0,
@@ -226,7 +225,7 @@ export default _ => {
             color: variables.toolbarBtnColor,
             fontSize:
               platform === PLATFORM.IOS &&
-                variables.platformStyle !== PLATFORM.MATERIAL
+              variables.platformStyle !== PLATFORM.MATERIAL
                 ? variables.iconHeaderSize + 1
                 : variables.iconHeaderSize - 2,
             marginTop: 0,
@@ -356,7 +355,7 @@ export default _ => {
             top: platform === PLATFORM.IOS ? 1 : -1.5,
             paddingRight:
               platform === PLATFORM.IOS &&
-                variables.platformStyle !== PLATFORM.MATERIAL
+              variables.platformStyle !== PLATFORM.MATERIAL
                 ? 0
                 : undefined
           },
@@ -383,7 +382,10 @@ export default _ => {
       flexDirection: 'row',
       justifyContent: 'flex-end'
     },
-    backgroundColor: variables.toolbarDefaultBg,
+    '.modal': {
+      marginTop: 0
+    },
+    backgroundColor: ui.white,
     flexDirection: 'row',
     // paddingHorizontal: 10,
     paddingLeft:
@@ -393,14 +395,11 @@ export default _ => {
     paddingRight: 10,
     justifyContent: 'center',
     paddingTop: platform === PLATFORM.IOS ? 18 : 0,
-    borderBottomWidth:
-      platform === PLATFORM.IOS
-        ? 1 / PixelRatio.getPixelSizeForLayoutSize(1)
-        : 0,
-    borderBottomColor: variables.toolbarDefaultBorder,
+    borderBottomWidth: 1,
+    borderBottomColor: '#dbdcdf',
     height:
       variables.platform === PLATFORM.IOS &&
-        variables.platformStyle === PLATFORM.MATERIAL
+      variables.platformStyle === PLATFORM.MATERIAL
         ? variables.toolbarHeight + 10
         : variables.toolbarHeight,
     elevation: 3,
@@ -411,7 +410,7 @@ export default _ => {
     shadowRadius: platformStyle === PLATFORM.MATERIAL ? 1.2 : undefined,
     top: 0,
     left: 0,
-    right: 0
+    right: 0,
+    marginTop: 24
   }
-
 }

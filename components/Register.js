@@ -1,137 +1,148 @@
 import React, { useState } from 'react'
 import firebase from "../firebase"
-import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
-import { Link, withRouter } from 'react-router-native'
+import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import variables from '../native-base-theme/variables/commonColor'
-import { signUpDisplayName } from '../actions'
+import { signUpDisplayName, setUser } from '../actions'
 
 function Register(props) {
 
-    const [userName, setUserName] = useState(' ')
-    const [email, setEmail] = useState(' ')
-    const [password, setPassword] = useState(' ')
-    const [passwordConfirm, setPasswordConfirm] = useState(' ')
+    const [displayName, setDisplayName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [requestActive, setActive] = useState(false)
+    const [error, setError] = useState({ message: "" })
 
-    const userRef = firebase.database().ref('users'),
+    const userRef = firebase.firestore().collection('users'),
 
-        handleChangeUserName = text => setUserName(text),
+        handleChangeDisplayName = text => setDisplayName(text.trim()),
 
-        handleChangeEmail = text => setEmail(text),
+        handleChangeEmail = text => setEmail(text.trim()),
 
-        handleChangePassword = text => setPassword(text),
+        handleChangePassword = text => setPassword(text.trim()),
 
-        handleChangePasswordConfirm = text => setPasswordConfirm(text),
+        handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
 
         handleSubmit = _ => {
+            setActive(false)
+            setError({ message: "" })
 
             if (password === passwordConfirm) {
 
-                props.signUpDisplayName(userName)
+                props.signUpDisplayName(displayName)
+
+                setActive(true)
 
                 firebase
                     .auth()
                     .createUserWithEmailAndPassword(email, password)
                     .then(createdUser => {
                         createdUser.user
-                            .updateProfile({ displayName: userName })
+                            .updateProfile({
+                                displayName: displayName,
+                                photoURL: `https://ui-avatars.com/api/?name=${displayName.replace(' ', '+')}`
+                            })
                             .then(_ => {
-                                userRef
-                                    .child(createdUser.user.uid)
-                                    .set({ name: createdUser.user.displayName })
+                                userRef.doc(createdUser.user.uid)
+                                    .set({
+                                        name: createdUser.user.displayName,
+                                        avatar: createdUser.user.photoURL,
+                                        id: createdUser.user.uid
+                                    })
                                     .then(_ => {
-                                        setUserName(' ')
+                                        setDisplayName(' ')
                                         setEmail(' ')
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
-                                        props.history.push('/completeprofile')
+                                        props.setUser(createdUser.user)
+                                        props.history.push('/complete-profile')
                                     })
+                                    .catch(handleError)
                             })
+                            .catch(handleError)
                     })
-                    .catch(err => {
-                        props.history.push('/register')
-                        console.error(err)
-                    })
+                    .catch(handleError)
 
-            } else alert("Passwords don't match.")
+            } else handleError({ message: "Passwords dont match" })
 
+        },
+
+        handleError = err => {
+            setError(err)
+            setActive(false)
+        }
+
+        _renderButton = _ => {
+            if(requestActive) 
+                return <H3 submit>Signing Up...</H3>
+            else 
+                return <H3 onPress={handleSubmit} submit>Sign Up</H3>
+        }
+
+        _renderErrorText = _ => {
+            return error ? error.message :"An internal error occured"
         }
 
     return (
+        <>
 
-        <KeyboardAvoidingView
-            style={styles.inputContainer}
-            behavior='padding'
-        >
+            <Icon
+                backButton
+                name='arrow-back'
+                onPress={props.history.goBack}
+            />
 
-            <Link to='/' style={styles.link}>
-                <Icon
-                    name='arrow-back'
-                    color={variables.councils.text.greal}
-                    style={styles.backButton}
-                />
-            </Link>
+            <Content
+                padder
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
 
-            <H1>Sign Up</H1>
+                <H1>Sign Up</H1>
 
-            <Text>Create Councils account.</Text>
+                <Text>Create Councils account.</Text>
 
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Username</Label>
-                <Input onChangeText={handleChangeUserName} />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Display Name</Label>
+                    <Input onChangeText={handleChangeDisplayName} value = {displayName} />
+                </Item>
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Email</Label>
-                <Input onChangeText={handleChangeEmail} />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Email</Label>
+                    <Input onChangeText={handleChangeEmail} value = {email} />
+                </Item>
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Password</Label>
-                <Input
-                    onChangeText={handleChangePassword}
-                    secureTextEntry={true}
-                />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Password</Label>
+                    <Input
+                        onChangeText={handleChangePassword}
+                        value = {password}
+                        secureTextEntry={true}
+                    />
+                </Item>
 
-            <Item floatingLabel style={styles.inputItem}>
-                <Label>Confirm Password</Label>
-                <Input
-                    secureTextEntry={true}
-                    onChangeText={handleChangePasswordConfirm}
-                />
-            </Item>
+                <Item floatingLabel>
+                    <Label>Confirm Password</Label>
+                    <Input
+                        secureTextEntry={true}
+                        value = {passwordConfirm}
+                        onChangeText={handleChangePasswordConfirm}
+                    />
+                </Item>
 
-            <H3 onPress={handleSubmit} submit>Sign Up</H3>
+                { _renderButton() }
 
-        </KeyboardAvoidingView>
+                <Text style = {{ color: "red" }}>{_renderErrorText()}</Text>
+
+            </Content>
+
+        </>
 
     )
 }
 
-const styles = StyleSheet.create({
-    inputContainer: {
-        height: '100%',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    link: {
-        position: 'absolute',
-        top: 25,
-        left: 5,
-        width: '100%',
-        height: 50
-    },
-    backButton: {
-        fontSize: 50
-    },
-    inputItem: {
-        marginVertical: 10
-    }
-})
-
-export default connect(state => ({ ...state }), { signUpDisplayName })(withRouter(Register))
+export default connect(state => ({ ...state }), { signUpDisplayName, setUser })(withRouter(Register))
