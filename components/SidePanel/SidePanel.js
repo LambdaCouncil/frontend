@@ -7,27 +7,22 @@ import SideMenu from './SideMenu'
 
 
 const SidePanel = props => {
-  const [isVisible, setIsVisible] = useState(true);
-  
-  return (
 
-    <View style={{flex: 1}}>
-      <Modal
-        isVisible={isVisible}
-        animationIn={'slideInLeft'}
-        animationOut={'slideOutLeft'}
-        backdropColor={'#202224'}
-        backdropOpacity={0.5}
-        onBackdropPress={() => setIsVisible(false)}
-        style={{ flex: 1, margin: 0}}
-      >
-        <View style={{ height: '100%', width: '80%', paddingTop: '15%', backgroundColor: 'white', borderColor: 'white' }}>     
-          <SideMenu togglePanel={props.togglePanel} />
-        </View>
-      </Modal>
-    </View>
- 
-  );
+  return (
+    <Modal
+      isVisible={props.showPanel}
+      animationIn={'slideInLeft'}
+      animationOut={'slideOutLeft'}
+      backdropColor={'#202224'}
+      backdropOpacity={0.5}
+      onBackdropPress={props.togglePanel}
+      style={{ flex: 1, margin: 0 }}
+    >
+      <View style={{ height: '100%', width: '80%', paddingTop: '15%', backgroundColor: 'white', borderColor: 'white' }}>
+        <SideMenu togglePanel={props.togglePanel} />
+      </View>
+    </Modal>
+  )
 }
 
 const mapStateToProps = state => ({ ...state })

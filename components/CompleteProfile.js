@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import firebase from "../firebase"
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
-import { Link } from 'react-router-native'
+import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
-
-import { signUpDisplayName } from '../actions'
 
 function CompleteProfile(props) {
 
@@ -26,7 +24,9 @@ function CompleteProfile(props) {
   const handleChangePhone = text => setPhone(text);
 
   const handleSubmit = () => {
-    console.log('Info updated')
+    firebase.firestore().doc(`users/${props.currentUser.uid}`).set({
+      firstName, lastName, calling, email, phone
+    })
   };
 
   return (
@@ -78,7 +78,10 @@ function CompleteProfile(props) {
         />
       </Item>
 
-      <H3 onPress={handleSubmit}>Save and Continue</H3>
+      <H3 onPress={() => {
+        handleSubmit()
+        props.history.push('/agendas')
+      }}>Save and Continue</H3>
 
     </KeyboardAvoidingView>
 
@@ -108,5 +111,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default CompleteProfile;
+export default connect(state => ({ ...state }))(withRouter(CompleteProfile));
