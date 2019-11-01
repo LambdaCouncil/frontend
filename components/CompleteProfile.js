@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import firebase from "../firebase"
 import { KeyboardAvoidingView, StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Input, Text, Label, Item, H1, H3, Icon, View } from 'native-base'
 import { Link } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -44,10 +44,11 @@ function CompleteProfile(props) {
         />
       </Link>
 
-      <H1>Complete Profile</H1>
-
-      <Text>Upload Photo</Text>
-
+      <View style={styles.btnWrapper}>
+          <View style={styles.photobtn}>
+            <Icon name='camera' />
+          </View>
+        </View>
 
       <Item floatingLabel style={styles.inputItem}>
         <Label>First Name</Label>
@@ -105,7 +106,22 @@ const styles = StyleSheet.create({
   },
   inputItem: {
     marginVertical: 10
-  }
+  },
+  btnWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  photobtn: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    height: 112,
+    width: 112,
+    borderRadius: 224,
+    backgroundColor: '#fafafa'
+  },
 });
 
 
