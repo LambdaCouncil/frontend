@@ -28,26 +28,24 @@ const Messages = props => {
   }, [])
 
   return (
-    <Container>
-      <Content>
-        <List>
-          {messages.length > 0 && messages.map((message, id) =>
-            <Message
-              message={message}
-              currentUser={props.currentUser}
-              key={id * Math.random()}
-              message={message}
-            />
-          )}
-        </List>
+    <Content test>
+      <List>
+        {messages.length > 0 && messages.map((message, id) =>
+          <Message
+            message={message}
+            currentUser={props.currentUser}
+            key={id * Math.random()}
+            message={message}
+          />
+        )}
+      </List>
 
-        <MessageForm
-          discussionsRef={discussionsRef}
-          currentChannel={props.currentChannel}
-          currentUser={props.currentUser}
-        />
-      </Content>
-    </Container>
+      <MessageForm
+        discussionsRef={discussionsRef}
+        currentChannel={props.currentChannel}
+        currentUser={props.currentUser}
+      />
+    </Content>
   )
 }
 
