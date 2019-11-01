@@ -1,36 +1,66 @@
 import React from 'react'
-import { H1, H3, Content } from 'native-base'
+import { StyleSheet } from 'react-native'
+import { Container, Content, Icon, List, ListItem, Text } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 
 function Settings(props) {
 
   return (
-
-    <Content padder>
-
-      <H1>Settings</H1>
-
-      <Link to='/edit-profile'>
-        <H3>Edit Profile</H3>
-      </Link>
-      <Link to='/notifications'>
-        <H3>Push Notifications</H3>
-      </Link>
-      <Link to='/feedback'>
-        <H3>Submit Feedback</H3>
-      </Link>
-      <Link to='/rate'>
-        <H3>Rate Councils</H3>
-      </Link>
-      <Link to='/about'>
-        <H3>About</H3>
-      </Link>
-
-
-    </Content>
+    <Container>
+      <Content padder>
+        <List>
+          <ListItem style={styles.listItem}>
+            <Link to='/edit-profile'>
+              <Text style={styles.text}>Edit Profile</Text>              
+            </Link>
+            <Icon name='arrow-forward' style={styles.icon} />
+          </ListItem>
+          <ListItem style={styles.listItem}>
+            <Link to='/notifications'>
+              <Text style={styles.text}>Push Notifications</Text>
+            </Link>
+            <Icon name='arrow-forward' style={styles.icon} />
+          </ListItem>
+          <ListItem style={styles.listItem}>
+            <Link to='/feedback'>
+              <Text style={styles.text}>Submit Feedback</Text>
+            </Link>
+            <Icon name='arrow-forward' style={styles.icon} />
+          </ListItem>
+          <ListItem style={styles.listItem}>
+            <Link to='/rate'>
+              <Text style={styles.text}>Rate Councils</Text>
+            </Link>
+            <Icon name='arrow-forward' style={styles.icon} />
+          </ListItem>
+          <ListItem style={styles.listItem}>
+            <Link to='/about'>
+              <Text style={styles.text}>About</Text>
+            </Link>
+            <Icon name='arrow-forward' style={styles.icon} />
+          </ListItem>
+        </List>
+      </Content>
+    </Container>
 
   )
 }
 
+const styles = StyleSheet.create({
+  icon: {
+    color: '#6f777e',
+    fontSize: 12,    
+  },
+  listItem: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  text: {
+    color: '#202224',
+    fontFamily: 'bern-r',
+    fontSize: 17
+  }
+})
 
 export default withRouter(Settings)

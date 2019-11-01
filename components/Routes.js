@@ -21,6 +21,8 @@ import Messages from "./Messages/Messages"
 import Discussions from "./Discussions/Discussions"
 import Agendas from "./Agendas/Agendas"
 import Assignments from './Assignments/Assignments'
+import Files from './Files/Files'
+import Promptings from './Promptings/Promptings'
 import RateCouncils from './Settings/RateCouncils'
 
 const Routes = props => {
@@ -128,15 +130,15 @@ const Routes = props => {
           render={props => <Assignments {...props} />}
         />
 
-        {/* <Route 
-        path="/files" 
-        render={props => <Discussions {...props} />} 
-      /> */}
+        <Route 
+          path="/files" 
+          render={props => <Files {...props} />} 
+        /> 
 
-        {/* <Route 
-        path="/promptings" 
-        render={props => <Discussions {...props} />} 
-      /> */}
+        <Route 
+          path="/promptings" 
+          render={props => <Promptings {...props} />} 
+        /> 
 
         {/* <Route
         path="/admin-notifications"
