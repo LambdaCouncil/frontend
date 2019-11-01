@@ -1,24 +1,21 @@
 import React from 'react'
-import { KeyboardAvoidingView, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { H1, H3, Text, View, Icon } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
-import { AirbnbRating, Rating } from "react-native-ratings";
+import { AirbnbRating, Rating } from 'react-native-ratings'
 
-
-const RateCouncils = (props) => {
-
-  const _valueChanged = (rating) => {
+const RateCouncils = props => {
+  const _valueChanged = rating => {
     console.log(rating)
-  };
+  }
 
   return (
-    <KeyboardAvoidingView
-      style={styles.inputContainer}
-      behavior='padding'>
-
-      <Icon backButton
+    <KeyboardAvoidingView style={styles.inputContainer} behavior='padding'>
+      <Icon
+        backButton
         onPress={() => props.history.goBack()}
         name='arrow-back'
+        style={{ fontSize: 32 }}
       />
 
       <View style={styles.pageView}>
@@ -36,15 +33,12 @@ const RateCouncils = (props) => {
           </Text>
         </View>
         <View>
-          <Text style={styles.appStoreLink}>
-            Go to App Store
-          </Text>
+          <Text style={styles.appStoreLink}>Go to App Store</Text>
         </View>
       </View>
-
     </KeyboardAvoidingView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -58,7 +52,7 @@ const styles = StyleSheet.create({
     top: 25,
     left: 5,
     width: '100%',
-    height: 50,
+    height: 50
   },
   pageView: {
     marginHorizontal: 20
@@ -78,7 +72,7 @@ const styles = StyleSheet.create({
     marginTop: 32,
     fontSize: 17,
     marginVertical: 20,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   header: {
     fontSize: 28,
@@ -88,6 +82,6 @@ const styles = StyleSheet.create({
     width: 335,
     marginLeft: 20
   }
-});
+})
 
-export default RateCouncils;
+export default RateCouncils

@@ -12,7 +12,8 @@ function EditProfile(props) {
   const [email, setEmail] = useState(' ')
   const [phone, setPhone] = useState(' ')
 
-  const userRef = firebase.firestore().ref('users')
+  const db = firebase.firestore()
+  const userRef = db.collection('users')
 
   const handleFirstName = text => setFirstName(text)
 
@@ -41,8 +42,11 @@ function EditProfile(props) {
 
     <Content padder>
       <View style={styles.pageView}>
-        <H1>Edit Profile</H1>
-        <Text>Upload Photo</Text>
+        <View style={styles.btnWrapper}>
+          <View style={styles.photobtn}>
+            <Icon name='camera' />
+          </View>
+        </View>
         <Item floatingLabel style={styles.inputItem}>
           <Label>First Name</Label>
           <Input onChangeText={handleFirstName} />
@@ -76,14 +80,7 @@ function EditProfile(props) {
           <View style={styles.button}>
             <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
           </View>
-          <View style={styles.button}>
-            <Link to='/settings'>
-              <Text style={styles.cancel}>Cancel</Text>
-            </Link>
-          </View>
-          <View style={styles.button}>
-            <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
-          </View>
+
         </View>
       </View>
     </Content>
@@ -92,62 +89,40 @@ function EditProfile(props) {
 
 
 const styles = StyleSheet.create({
+  btnWrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  photobtn: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    height: 112,
+    width: 112,
+    borderRadius: 224,
+    backgroundColor: '#fafafa'
+  },
   inputContainer: {
     height: '100%',
-    // flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center'
-  },
-  link: {
-    position: 'absolute',
-    top: 25,
-    left: 5,
-    width: '100%',
-    height: 50
-  },
-  backButton: {
-    fontSize: 50
   },
   pageView: {
     marginHorizontal: 20,
-    marginTop: 80,
-  },
-  header: {
-    fontSize: 28,
-    marginBottom: 10,
-    fontFamily: 'gotham',
-    fontWeight: '500',
-  },
-  subHeader: {
-    fontSize: 17,
-    fontWeight: '500',
-    fontFamily: 'bern-r'
-  },
-  textContent: {
-    fontSize: 17,
-    fontFamily: 'bern-r',
-  },
-  contentDivs: {
-    marginVertical: 10,
-    lineHeight: 24
-  },
-  buttonsBottom: {
-    marginTop: 10,
-    fontSize: 17,
-    fontFamily: 'bern-r',
-    lineHeight: 24
+    marginTop: 20
   },
   button: {
     marginVertical: 15,
   },
   password: {
-    color: '#288365'
+    color: '#288365',
+    fontFamily: 'bern-r',
+    fontSize: 17
   },
   delete: {
-    color: '#dd1d06'
-  },
-  cancel: {
-    color: 'black'
+    color: '#dd1d06',
+    fontFamily: 'bern-r',
+    fontSize: 17
   },
 })
 
