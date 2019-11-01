@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import firebase from "../../firebase"
-import { StyleSheet } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet } from 'react-native'
 import { Input, Text, Label, Item, H1, Icon, View, Content } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 
@@ -39,6 +39,8 @@ function EditProfile(props) {
   }
 
   return (
+
+    <KeyboardAvoidingView>
 
     <Content padder>
       <View style={styles.pageView}>
@@ -84,6 +86,7 @@ function EditProfile(props) {
         </View>
       </View>
     </Content>
+    </KeyboardAvoidingView>
   )
 }
 
