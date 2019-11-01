@@ -23,8 +23,8 @@ const CouncilNames = props => {
       .join(" ");
   };
 
-  const renderCheckmark = name => {
-    return props.council == name ? <Icon name="checkmark" /> : "";
+  const renderCheckmark = (name) => {
+    return props.council === name ? <Icon name="checkmark" /> : "";
   };
 
   return (
@@ -58,18 +58,29 @@ const CouncilNames = props => {
             </Body>
           </Header>
           <List>
-            {options.map((name, id) => (
-              // <Button>
-              <ListItem key={id} onPress={() => props.handleCouncil(name)}>
-                <Left>
-                  <Text>{renderCouncilName(name)}</Text>
-                </Left>
-                <Right>
-                  <Text>{renderCheckmark(name)}</Text>
-                </Right>
-              </ListItem>
-              // </Button>
-            ))}
+            {props.users ? (
+              options.map((obj, id) => (
+                <ListItem key={id} onPress={() => props.setAssignedToId(obj.id)}>
+                  <Left>
+                    <Text>{renderCouncilName(obj.name)}</Text>
+                  </Left>
+                  <Right>
+                    <Text>{renderCheckmark(obj.name)}</Text>
+                  </Right>
+                </ListItem>
+              ))
+            ) : (
+              options.map((name, id) => (
+                <ListItem key={id} onPress={() => props.handleCouncil(name)}>
+                  <Left>
+                    <Text>{renderCouncilName(name)}</Text>
+                  </Left>
+                  <Right>
+                    <Text>{renderCheckmark(name)}</Text>
+                  </Right>
+                </ListItem>
+              ))
+            )}
           </List>
         </View>
       </Modal>

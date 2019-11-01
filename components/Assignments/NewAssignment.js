@@ -21,13 +21,13 @@ import CouncilNames from "../CouncilNames";
 // import { setCurrentChannel } from "../../actions";
 import firebase from "../../firebase";
 
-// const blankAssignment = {
-//   date: null,
-//   council: '',
-//   assign: '',
-//   descript: '',
-//   note: ''
-// }
+const blankAssignment = {
+  date: null,
+  council: '',
+  assign: '',
+  descript: '',
+  note: ''
+}
 
 const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
@@ -37,7 +37,9 @@ const NewAssignment = props => {
   const [notes, setNotes] = useState('');
   const [showCouncilModal, setShowCouncilModal] = useState(false);
   const [showATModal, setShowATModal] = useState(false);
-  // const [assignment, setAssignment] = useState(blankAssignment);
+  const [assignment, setAssignment] = useState(blankAssignment);
+  // const [createdById, setCreatedById] = useState('');
+  const [assignedToId, setAssignedToId] = useState(""); 
 
   const councilNames = [
     "bishopric",
@@ -61,7 +63,7 @@ const NewAssignment = props => {
     Users.get()
       .then(docs =>
         docs.forEach(async doc => {
-          await loadedUsers.push(doc.data());
+          await loadedUsers.push({...doc.data(), id: doc.id});
           setAllUsers(loadedUsers);
         })
       )
@@ -86,7 +88,8 @@ const NewAssignment = props => {
       // const newAssignment =
       assignmentsRef.add({
         timestamp: Date.now(),
-        user: {},
+        createdBy: props.currentUser.uid,
+        assignedTo: assignedToId,
         content: {
           date: chosenDate,
           council: chosenCouncil,
@@ -101,6 +104,10 @@ const NewAssignment = props => {
       console.log('boooooo')
     }
   };
+
+  // useEffect(_ => {
+  //   assignmentsRef.doc.
+  // })
 
   // console.log('assignment obj outside', assignment);
 
@@ -131,6 +138,8 @@ const NewAssignment = props => {
   // console.log("assignTo: ", assignTo);
   // console.log("date: ", chosenDate);
   // console.log("notes", notes);
+  console.log('assignedTo id', assignedToId);
+  console.log('createdBy id', props.currentUser.uid)
 
   return (
     <Modal animationType="slide" transparent={false} visible={true}>
@@ -179,10 +188,12 @@ const NewAssignment = props => {
 
           {showATModal && (
             <CouncilNames
-              options={allUsers.map(user => user.name)}
+              users={true}
+              options={allUsers}
               setShowModal={setShowATModal}
               council={assignTo}
               handleCouncil={handleAssignTo}
+              setAssignedToId={setAssignedToId}
             />
           )}
 
