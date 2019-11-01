@@ -120,9 +120,10 @@ const NewAssignment = props => {
     setChosenCouncil(name);
   }
 
-  const handleAssignTo = name => {
+  const handleAssignTo = (name, id) => {
     console.log(name + " was pressed");
     setAssignTo(name);
+    setAssignedToId(id);
   };
 
   const handleDate = value => {

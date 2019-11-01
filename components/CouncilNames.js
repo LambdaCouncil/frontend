@@ -60,7 +60,7 @@ const CouncilNames = props => {
           <List>
             {props.users ? (
               options.map((obj, id) => (
-                <ListItem key={id} onPress={() => props.setAssignedToId(obj.id)}>
+                <ListItem key={id} onPress={() => props.handleCouncil(obj.name, obj.id)}>
                   <Left>
                     <Text>{renderCouncilName(obj.name)}</Text>
                   </Left>
