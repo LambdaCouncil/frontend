@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { StyleSheet } from 'react-native'
 import { Button, Text, Header, Left, Icon, Body, Right } from 'native-base'
 import { withRouter } from 'react-router-native'
 
@@ -12,6 +13,7 @@ import NewAssignment from '../Assignments/NewAssignment'
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [menuIcon, setMenuIcon] = useState('menu')
 
   const addIconArray = [
     '/agendas',
@@ -22,6 +24,8 @@ const pageHeader = props => {
     '/promptings',
     '/messages'
   ]
+
+  
 
   const togglePanel = _ => setShowPanel(!showPanel)
 
@@ -106,6 +110,10 @@ const pageHeader = props => {
               asInfo={buttonsObj.discussions.public}
             />
           )
+
+        case '/edit-profile':
+          setMenuIcon('arrow-round-back')
+          break
       }
     }
   }
@@ -124,20 +132,42 @@ const pageHeader = props => {
   return (
     <>
       <Header>
-        <Left>
+        <Left style={styles.icons}>
           <Button transparent onPress={togglePanel}>
-            <Icon dgreal name='menu' />
+            <Icon dgreal name={menuIcon} />
           </Button>
         </Left>
-        <Body>
-          <Text>{renderPageName()}</Text>
+        <Body style={styles.body}>
+          <Text style={styles.text}>{renderPageName()}</Text>
         </Body>
-        <Right>{arrayForSure()}</Right>
+        <Right style={styles.icons}>{arrayForSure()}</Right>
       </Header>
       <SidePanel togglePanel={togglePanel} showPanel={showPanel} />
       {showModal && whichModal()}
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%'
+  },
+  icons: {
+    maxHeight: 44, 
+    maxWidth: 50
+  },
+  body: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center',
+  },
+  text: {
+    fontFamily: 'bern-sb', 
+    fontSize: 17, 
+    color: '#202224'
+  }
+})
 
 export default withRouter(pageHeader)

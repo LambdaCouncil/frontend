@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native'
 import { View } from 'native-base'
 import { connect } from "react-redux"
 import Modal from 'react-native-modal'

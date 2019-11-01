@@ -70,14 +70,16 @@ export const buttonsObj = {
       cancelIndex: 2,
       iconName: 'more'
     }
-  },
+  },  
   promptings: {
     // See Zeplin: 09 Promptings - 6
     primary: {
       title: 'Prompting',
       buttons: ['Edit', 'Delete', 'Cancel'],
       cancelIndex: 2,
-      iconName: 'more'
+      //iconName: 'more'
+      // FOR 10/1 DEMO:
+      iconName: 'add'
     }
   }
 }
