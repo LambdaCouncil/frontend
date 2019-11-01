@@ -44,8 +44,8 @@ const UserPanel = props => {
         source={{ uri: props.currentUser.photoURL }}
       />
       <Left userPanel>
-        <Text style={{color: '#202224', fontSize: 17}}>{user.displayName}</Text>
-        <Text note style={{fontSize: 13}}>{user.email}</Text>
+        <Text style={{color: '#202224', fontFamily: 'bern-sb', fontSize: 17}}>{user.displayName}</Text>
+        <Text note style={{color: '#6f777e', fontFamily: 'bern-r', fontSize: 13}}>{user.email}</Text>
       </Left>
     </Item>
   )

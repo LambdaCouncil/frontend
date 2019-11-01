@@ -9,6 +9,8 @@ import UserPanel from './UserPanel'
 
 const SideMenu = props => {
 
+  console.log('SideMenu Path***: ', props.location.pathname)
+
   let path = props.location.pathname
 
   return (
@@ -43,9 +45,9 @@ const SideMenu = props => {
           <Text style={(path === '/promptings') ? styles.activeText : styles.normalText}>Promptings</Text>
         </Link>
       </Button>
-      <Button style={(path === '/push-notifications') ? styles.activeButton : styles.normalButton}>
-        <Link to="/push-notifications" onPress={() => props.togglePanel()}>
-          <Text style={(path === '/push-notifications') ? styles.activeText : styles.normalText}>Notifications</Text>
+      <Button style={(path === '/notifications') ? styles.activeButton : styles.normalButton}>
+        <Link to="/notifications" onPress={() => props.togglePanel()}>
+          <Text style={(path === '/notifications') ? styles.activeText : styles.normalText}>Notifications</Text>
         </Link>
       </Button>
       <Button style={styles.normalButton}>
@@ -112,15 +114,18 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   activeText: {
-    color: '#288365', 
+    color: '#288365',
+    fontFamily: 'bern-sb', 
     fontSize: 17,
   },
   normalText: {
     color: '#202224', 
+    fontFamily: 'bern-r',
     fontSize: 17,
   },
   bottomText: {
-    color: '#6f777e', 
+    color: '#6f777e',
+    fontFamily: 'bern-r', 
     fontSize: 17,
   }
 })

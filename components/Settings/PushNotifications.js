@@ -48,7 +48,9 @@ function PushNotifications(props) {
 
     <View containerAllRoot>
 
-      <H1>Push Notifications</H1>
+      <Text style={{color: 'red', fontFamily:'bern-b', fontSize: 17, marginLeft: 15}}>
+        (section under development)
+      </Text>
 
       <Container>
         <Content>
