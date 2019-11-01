@@ -3,7 +3,8 @@ export const
     CLEAR_USER = 'CLEAR_USER',
     SET_CURRENT_CHANNEL = 'SET_CURRENT_CHANNEL',
     SIGN_UP_DISPLAY_NAME = 'SIGN_UP_DISPLAY_NAME',
-    SET_PRIVATE_CHANNEL = 'SET_PRIVATE_CHANNEL'
+    SET_PRIVATE_CHANNEL = 'SET_PRIVATE_CHANNEL',
+    SET_CURRENT_ASSIGNMENT = 'SET_CURRENT_ASSIGNMENT'
 
 export const
     setUser = user => dispatch => dispatch({
@@ -24,4 +25,8 @@ export const
     setPrivateChannel = isPrivateChannel => dispatch => dispatch({
         type: SET_PRIVATE_CHANNEL,
         payload: isPrivateChannel
+    }),
+    setCurrentAssignment = assignment => dispatch => dispatch({
+        type: SET_CURRENT_ASSIGNMENT,
+        payload: assignment
     })

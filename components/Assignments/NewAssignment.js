@@ -1,41 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-native";
+import { connect } from "react-redux";
 import { Modal } from "react-native";
 import { Content, 
          View, 
          Text, 
-         List, 
-         ListItem, 
          Button, 
          Form, 
          Item, 
          Input, 
          Label, 
-         TextInput, 
-         Picker, 
-         Footer, 
          H3, 
-         DatePicker, 
-         Icon, 
-         Left, 
-         Right 
+         DatePicker
         } from "native-base";
+import { setCurrentAssignment } from '../../actions'
 import ModalHeader from "../Modals/ModalHeader";
 import CouncilNames from "../CouncilNames";
 
 // import { setCurrentChannel } from "../../actions";
-// import ModalHeader from "../Modals/ModalHeader";
 import firebase from "../../firebase";
+
+// const blankAssignment = {
+//   date: null,
+//   council: '',
+//   assign: '',
+//   descript: '',
+//   note: ''
+// }
 
 const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
-  const [council, setCouncil] = useState('');
+  const [chosenCouncil, setChosenCouncil] = useState('');
   const [assignTo, setAssignTo] = useState('');
   const [description, setDescription] = useState('');
   const [notes, setNotes] = useState('');
-  const [councilNameScreen, setCouncilNameScreen] = useState(false);
   const [showCouncilModal, setShowCouncilModal] = useState(false);
   const [showATModal, setShowATModal] = useState(false);
+  // const [assignment, setAssignment] = useState(blankAssignment);
 
   const councilNames = [
     "bishopric",
@@ -66,13 +67,42 @@ const NewAssignment = props => {
       .catch(err => console.error(err));
   }, []);
 
+  const assignmentsRef = db.collection('assignments')
 
-  console.log(councilNameScreen);
-
-  const handleSubmit = () => {
-    console.log('handleSubmit for assignments pressed');
+  const createAssignment = () => {
+    console.log('createAssignment pressed');
     props.setShowModal(false);
+    // console.log('assignment', assignment);
+    // setAssignment({
+    //   date: chosenDate,
+    //   council: chosenCouncil,
+    //   assign: assignTo,
+    //   descript: description,
+    //   note: notes
+    // })
+    if (description.length > 0 || chosenCouncil.length > 0 || assignTo.length > 0 || chosenDate != null || notes.length > 0) {
+      console.log('hurray')
+      const newAssignment = {
+        assignments: firebase.firestore.FieldValue.arrayUnion({
+          timestamp: Date.now(),
+          user: {},
+          content: {
+            date: chosenDate,
+            council: chosenCouncil,
+            assign: assignTo,
+            descript: description,
+            note: notes
+          }
+        })
+      }
+
+      
+    } else {
+      console.log('boooooo')
+    }
   };
+
+  // console.log('assignment obj outside', assignment);
 
   const handleDescription = text => {
     setDescription(text);
@@ -80,7 +110,7 @@ const NewAssignment = props => {
 
   const handleCouncil = name => {
     console.log(name + ' was pressed');
-    setCouncil(name);
+    setChosenCouncil(name);
   }
 
   const handleAssignTo = name => {
@@ -96,27 +126,11 @@ const NewAssignment = props => {
     setNotes(text);
   };
 
-  console.log("description: ", description);
-  console.log("council: ", council);
-  console.log("assignTo: ", assignTo);
-  console.log("date: ", chosenDate);
-  console.log("notes", notes);
-
-
-
-
-
-  const openCouncilModal = _ => {
-    console.log('modal for council selection should open')
-  }
-
-  const changeScreen = text => {
-    console.log('changeScreen pressed')
-    if (text === 'council') {
-      setCouncilNameScreen(true)
-      console.log(councilNameScreen);
-    }
-  }
+  // console.log("description: ", description);
+  // console.log("council: ", chosenCouncil);
+  // console.log("assignTo: ", assignTo);
+  // console.log("date: ", chosenDate);
+  // console.log("notes", notes);
 
   return (
     <Modal animationType="slide" transparent={false} visible={true}>
@@ -137,20 +151,9 @@ const NewAssignment = props => {
             onPress={() => setShowCouncilModal(true)}
             transparent
           >
-            {/* {council.length > 0 ? (
-              <View>
-                <Text>Council</Text>
-                <Text>{council}</Text>
-              </View>
-            ) : (
-              <View>
-                <Text>Council</Text>
-              </View>
-            )} */}
-
             <View>
               <Text>Council</Text>
-              {council.length > 0 ? <Text>{council}</Text> : null}
+              {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
             </View>
           </Button>
 
@@ -158,7 +161,7 @@ const NewAssignment = props => {
             <CouncilNames
               options={councilNames}
               setShowModal={setShowCouncilModal}
-              council={council}
+              council={chosenCouncil}
               handleCouncil={handleCouncil}
             />
           )}
@@ -199,8 +202,6 @@ const NewAssignment = props => {
             onDateChange={value => handleDate(value)}
             disabled={false}
           />
-          {/* <Text>{chosenDate && chosenDate.toString().substr(4, 12)}</Text> */}
-          {/* </Item> */}
           <Item floatingLabel>
             <Label>Notes</Label>
             <Input
@@ -210,7 +211,7 @@ const NewAssignment = props => {
             />
           </Item>
 
-          <H3 onPress={handleSubmit} submit>
+          <H3 onPress={createAssignment} submit>
             Create
           </H3>
         </Form>
@@ -219,4 +220,4 @@ const NewAssignment = props => {
   );
 };
 
-export default withRouter(NewAssignment);
+export default connect(state => ({ ...state}), { setCurrentAssignment })(withRouter(NewAssignment));
