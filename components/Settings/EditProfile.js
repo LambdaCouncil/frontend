@@ -49,46 +49,6 @@ function EditProfile(props) {
 
   return (
 
-<<<<<<< HEAD
-    <KeyboardAvoidingView>
-
-    <Content padder>
-      <View style={styles.pageView}>
-        <View style={styles.btnWrapper}>
-          <View style={styles.photobtn}>
-            <Icon name='camera' />
-          </View>
-        </View>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>First Name</Label>
-          <Input onChangeText={handleFirstName} />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Last Name</Label>
-          <Input onChangeText={handleLastName} />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Calling</Label>
-          <Input onChangeText={handleChangeCalling} />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Email</Label>
-          <Input
-            onChangeText={handleChangeEmail}
-          />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Phone</Label>
-          <Input
-            onChangeText={handleChangePhone}
-          />
-        </Item>
-        <View style={styles.buttonsBottom}>
-          <View style={styles.button}>
-            <Link to='/changepassword'>
-              <Text style={styles.password}>Change Password</Text>
-            </Link>
-=======
     <KeyboardAvoidingView
       style={styles.inputContainer}
       behavior='padding'
@@ -102,7 +62,6 @@ function EditProfile(props) {
             <View style={styles.photobtn}>
               <Icon name='camera' />
             </View>
->>>>>>> 4726a51d87f9e58b46d329fa46cbbe6a98af4540
           </View>
 
           <Item floatingLabel style={styles.inputItem}>
@@ -154,17 +113,11 @@ function EditProfile(props) {
           </View>
 
         </View>
-<<<<<<< HEAD
-      </View>
-    </Content>
-    </KeyboardAvoidingView>
-=======
 
       </Content>
 
     </KeyboardAvoidingView>
 
->>>>>>> 4726a51d87f9e58b46d329fa46cbbe6a98af4540
   )
 
 }
