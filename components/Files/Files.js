@@ -5,17 +5,17 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-native";
 
 
-const Agendas = props => {
+const Files = props => {
   return (
     <View style={styles.view}>
       <Text style={styles.text}>
-        You have no agendas.
+        You have no files.
       </Text>
       <Text style={styles.text}>
-        Click + to create a new agenda.
+        Click + to create a new file.
       </Text>
       <Text style={styles.sud}>
-        (section under development)
+          (section under development)
       </Text>
     </View>
   );
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withRouter(Agendas);
+export default withRouter(Files);
