@@ -64,7 +64,7 @@ const pageHeader = props => {
 
         case '/assignments':
           return (
-            <Button transparent onPress={() => setShowModal(true)}>
+            <Button transparent onPress={() => setShowModal(true)} style={{elevation: 0}}>
               <Icon dgreal name='add' />
             </Button>
           )
