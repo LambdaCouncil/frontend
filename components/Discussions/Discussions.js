@@ -50,7 +50,8 @@ const Discussions = props => {
     else return (
         <Content padder>
             <List>
-                <Discussion loading={true}
+                <Discussion
+                    loading={true}
                     discussion={pseudoDiscussion}
                     currentUser={props.currentUser}
                 />
@@ -82,11 +83,13 @@ const Discussion = props => {
 
         <ListItem avatar
             onPress={() => {
-                props.setCurrentChannel({
-                    id: props.discussion.id,
-                    direct: true
-                })
-                props.history.push('/messages')
+                if (!props.loading) {
+                    props.setCurrentChannel({
+                        id: props.discussion.id,
+                        direct: true
+                    })
+                    props.history.push('/messages')
+                }
             }}
         >
             <Left>
