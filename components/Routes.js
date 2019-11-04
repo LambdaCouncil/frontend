@@ -9,7 +9,6 @@ import Login from './LogIn'
 import Root from '../Root'
 import ProtectedRoutes from './ProtectedRoutes'
 import { setUser, clearUser } from '../actions'
-import CompleteProfile from './CompleteProfile'
 import EditProfile from './Settings/EditProfile'
 import ChangePassword from './Settings/ChangePassword'
 import Settings from './Settings/Settings'
@@ -30,7 +29,7 @@ const Routes = props => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         props.setUser(user)
-        props.history.push('/agendas')
+        props.history.push('/discussions')
       } else {
         props.history.push('/')
         props.clearUser()
@@ -52,92 +51,92 @@ const Routes = props => {
       <Spinner />
     </View>
   ) : (
-    <Container>
-      {renderHeaderIf()}
+      <Container>
+        {renderHeaderIf()}
 
-      <Switch>
-        <Route exact path='/' render={props => <Root {...props} />} />
+        <Switch>
+          <Route exact path='/' render={props => <Root {...props} />} />
 
-        <Route path='/login' render={props => <Login {...props} />} />
+          <Route path='/login' render={props => <Login {...props} />} />
 
-        <Route path='/register' render={props => <Register {...props} />} />
+          <Route path='/register' render={props => <Register {...props} />} />
 
-        <Route
-          path='/complete-profile'
-          render={props => <CompleteProfile {...props} />}
-        />
+          <Route
+            path='/complete-profile'
+            render={props => <EditProfile {...props} />}
+          />
 
-        <Route
-          path='/edit-profile'
-          render={props => <EditProfile {...props} />}
-        />
+          <Route
+            path='/edit-profile'
+            render={props => <EditProfile {...props} />}
+          />
 
-        <Route
-          path='/change-password'
-          render={props => <ChangePassword {...props} />}
-        />
+          <Route
+            path='/change-password'
+            render={props => <ChangePassword {...props} />}
+          />
 
-        <Route path='/settings' render={props => <Settings {...props} />} />
+          <Route path='/settings' render={props => <Settings {...props} />} />
 
-        <Route
-          path='/notifications'
-          render={props => <PushNotifications {...props} />}
-        />
+          <Route
+            path='/notifications'
+            render={props => <PushNotifications {...props} />}
+          />
 
-        <Route
-          path='/feedback'
-          render={props => <SubmitFeedback {...props} />}
-        />
+          <Route
+            path='/feedback'
+            render={props => <SubmitFeedback {...props} />}
+          />
 
-        <Route path='/about' render={props => <About {...props} />} />
+          <Route path='/about' render={props => <About {...props} />} />
 
-        <Route path='/messages' render={props => <Messages {...props} />} />
+          <Route path='/messages' render={props => <Messages {...props} />} />
 
-        <Route path='/rate' render={props => <RateCouncils {...props} />} />
+          <Route path='/rate' render={props => <RateCouncils {...props} />} />
 
-        <Route path='/agendas' render={props => <Agendas {...props} />} />
+          <Route path='/agendas' render={props => <Agendas {...props} />} />
 
-        <Route
-          path='/discussions'
-          render={props => <Discussions {...props} />}
-        />
+          <Route
+            path='/discussions'
+            render={props => <Discussions {...props} />}
+          />
 
-        <Route
-          path='/assignments'
-          render={props => <Assignments {...props} />}
-        />
+          <Route
+            path='/assignments'
+            render={props => <Assignments {...props} />}
+          />
 
-        <Route path='/files' render={props => <Files {...props} />} />
+          <Route path='/files' render={props => <Files {...props} />} />
 
-        <Route path='/promptings' render={props => <Promptings {...props} />} />
+          <Route path='/promptings' render={props => <Promptings {...props} />} />
 
-        {/* <Route
+          {/* <Route
         path="/admin-notifications"
         render={props => <Discussions {...props} />}
       /> */}
 
-        {/* <Route 
+          {/* <Route 
         path="/admin" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-        {/* <Route
+          {/* <Route
         path="/close-assignments"
         render={props => <Discussions {...props} />}
       /> */}
 
-        {/* <Route 
+          {/* <Route 
         path="/donations" 
         render={props => <Discussions {...props} />} 
       /> */}
 
-        <ProtectedRoute
-          component={props => <ProtectedRoutes />}
-          currentUser={props.currentUser}
-        />
-      </Switch>
-    </Container>
-  )
+          <ProtectedRoute
+            component={props => <ProtectedRoutes />}
+            currentUser={props.currentUser}
+          />
+        </Switch>
+      </Container>
+    )
 }
 
 const ProtectedRoute = ({ component: Component, currentUser }) => (
@@ -146,13 +145,13 @@ const ProtectedRoute = ({ component: Component, currentUser }) => (
       currentUser ? (
         <Component {...props} currentUser={currentUser} />
       ) : (
-        <Redirect
-          to={{
-            pathname: '/',
-            state: { from: props.location }
-          }}
-        />
-      )
+          <Redirect
+            to={{
+              pathname: '/',
+              state: { from: props.location }
+            }}
+          />
+        )
     }
   />
 )

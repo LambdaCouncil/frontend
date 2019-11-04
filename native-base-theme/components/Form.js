@@ -84,6 +84,11 @@ export default _ => {
         paddingRight: 5
       },
       marginLeft: 15
+    },
+    '.message': {
+      flexDirection: 'row',
+      alignContent: 'space-between',
+      width: '100%'
     }
   }
 

@@ -60,7 +60,7 @@ const MessageForm = props => {
                 <Text>@</Text>
             </Button>
             <Button transparent onPress={sendMessage}>
-                <Text>Send Message</Text>
+                <Text>Send</Text>
             </Button>
         </Form>
     )

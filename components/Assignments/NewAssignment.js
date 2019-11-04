@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-native";
 import { connect } from "react-redux";
 import { Modal } from "react-native";
-import { Content, 
-         View, 
-         Text, 
-         Button, 
-         Form, 
-         Item, 
-         Input, 
-         Label, 
-         H3, 
-         DatePicker
-        } from "native-base";
+import {
+  Content,
+  View,
+  Text,
+  Button,
+  Form,
+  Item,
+  Input,
+  Label,
+  H3,
+  DatePicker
+} from "native-base";
 import { setCurrentAssignment } from '../../actions'
 import ModalHeader from "../Modals/ModalHeader";
 import CouncilNames from "../CouncilNames";
@@ -80,23 +81,22 @@ const NewAssignment = props => {
     //   descript: description,
     //   note: notes
     // })
-    if (description.length > 0 || chosenCouncil.length > 0 || assignTo.length > 0 || chosenDate != null || notes.length > 0) {
+    if (description.length > 0 && chosenCouncil.length > 0 && assignTo.length > 0 && chosenDate != null && notes.length > 0) {
       console.log('hurray')
-      const newAssignment = {
-        assignments: firebase.firestore.FieldValue.arrayUnion({
-          timestamp: Date.now(),
-          user: {},
-          content: {
-            date: chosenDate,
-            council: chosenCouncil,
-            assign: assignTo,
-            descript: description,
-            note: notes
-          }
-        })
-      }
+      // const newAssignment =
+      assignmentsRef.add({
+        timestamp: Date.now(),
+        user: {},
+        content: {
+          date: chosenDate,
+          council: chosenCouncil,
+          assign: assignTo,
+          descript: description,
+          note: notes
+        }
+      })
 
-      
+
     } else {
       console.log('boooooo')
     }
@@ -220,4 +220,4 @@ const NewAssignment = props => {
   );
 };
 
-export default connect(state => ({ ...state}), { setCurrentAssignment })(withRouter(NewAssignment));
+export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(NewAssignment));

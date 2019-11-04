@@ -53,7 +53,7 @@ function Login(props) {
             if(requestActive) 
                 return <H3 submit>Logging in...</H3>
             else 
-                return <H3 onPress={handleSubmit} submit>Log In</H3>
+                return <H3 onPress={handleSubmit} style={{fontFamily: 'bern-r', fontSize: 17}} submit>Log In</H3>
         }
 
     return (
@@ -64,6 +64,7 @@ function Login(props) {
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
+                style={{fontSize: 24, marginLeft: 20}}
             />
 
             <Container>
@@ -75,17 +76,17 @@ function Login(props) {
                         //     paddingBottom: '85%'
                     }}>
 
-                    <H1>Log In</H1>
+                    <H1 style={{fontFamily: 'gotham', fontSize: 28, color: '#202224'}}>Log In</H1>
 
-                    <Text>Log into your Councils account.</Text>
+                    <Text style={{fontFamily: 'bern-r', fontSize: 17, color: '#202224'}}>Log into your Councils account.</Text>
 
                     <Item floatingLabel>
-                        <Label>Email</Label>
+                        <Label style={{fontFamily: 'bern-r', fontSize: 17, color: '#6f777e'}}>Email</Label>
                         <Input onChangeText={handleChangeEmail} value = {email} />
                     </Item>
 
                     <Item floatingLabel>
-                        <Label>Password</Label>
+                        <Label style={{fontFamily: 'bern-r', fontSize: 17, color: '#6f777e'}}>Password</Label>
                         <Input
                             onChangeText={handleChangePassword}
                             value = {password}
@@ -104,5 +105,6 @@ function Login(props) {
 
     )
 }
+
 
 export default withRouter(Login)
