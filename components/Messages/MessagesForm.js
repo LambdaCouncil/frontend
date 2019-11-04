@@ -51,18 +51,22 @@ const MessageForm = props => {
 
 
     return (
-        <Form>
+        <>
             <Item floatingLabel>
                 <Label>Write your message</Label>
                 <Input onChange={handleChange} value={message} />
             </Item>
-            <Button transparent>
-                <Text>@</Text>
-            </Button>
-            <Button transparent onPress={sendMessage}>
-                <Text>Send</Text>
-            </Button>
-        </Form>
+
+            <Form message>
+                <Button transparent>
+                    <Text>@</Text>
+                </Button>
+
+                <Button transparent onPress={sendMessage}>
+                    <Text>Send</Text>
+                </Button>
+            </Form>
+        </>
     )
 }
 

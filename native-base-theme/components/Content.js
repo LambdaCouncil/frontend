@@ -16,7 +16,7 @@ export default _ => {
     '.test': {
       flexDirection: 'column-reverse',
       height: '100%',
-      marginBottom: 150
+      marginBottom: 50
     }
   }
 

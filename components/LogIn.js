@@ -16,12 +16,12 @@ function Login(props) {
         handleChangePassword = text => setPassword(text.trim()),
 
         handleSubmit = _ => {
-            if(isEmailInvalid()) {
+            if (isEmailInvalid()) {
                 setError({ message: "Email is invalid" })
                 return
             }
 
-            if(isPasswordInvalid()) {
+            if (isPasswordInvalid()) {
                 setError({ message: "Password is invalid" })
                 return
             }
@@ -40,21 +40,23 @@ function Login(props) {
                     setActive(false)
                 })
                 .catch(err => {
-                    setError(err)
+                    const variable = 'There is no user record corresponding to this identifier. The user may have been deleted.'
+                    setError(err.message === variable ?
+                        { message: `'${email}' does not exist. Please try again.` } : err)
                     setActive(false)
                 })
         },
 
         isEmailInvalid = _ => email.length <= 1
 
-        isPasswordInvalid = _ => password.length <= 1
+    isPasswordInvalid = _ => password.length <= 1
 
-        _renderButton = _ => {
-            if(requestActive) 
-                return <H3 submit>Logging in...</H3>
-            else 
-                return <H3 onPress={handleSubmit} style={{fontFamily: 'bern-r', fontSize: 17}} submit>Log In</H3>
-        }
+    _renderButton = _ => {
+        if (requestActive)
+            return <H3 submit>Logging in...</H3>
+        else
+            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-r', fontSize: 17 }} submit>Log In</H3>
+    }
 
     return (
 
@@ -64,7 +66,7 @@ function Login(props) {
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
-                style={{fontSize: 24, marginLeft: 20}}
+                style={{ fontSize: 24, marginLeft: 20 }}
             />
 
             <Container>
@@ -76,27 +78,27 @@ function Login(props) {
                         //     paddingBottom: '85%'
                     }}>
 
-                    <H1 style={{fontFamily: 'gotham', fontSize: 28, color: '#202224'}}>Log In</H1>
+                    <H1 style={{ fontFamily: 'gotham', fontSize: 28, color: '#202224' }}>Log In</H1>
 
-                    <Text style={{fontFamily: 'bern-r', fontSize: 17, color: '#202224'}}>Log into your Councils account.</Text>
+                    <Text style={{ fontFamily: 'bern-r', fontSize: 17, color: '#202224' }}>Log into your Councils account.</Text>
 
                     <Item floatingLabel>
-                        <Label style={{fontFamily: 'bern-r', fontSize: 17, color: '#6f777e'}}>Email</Label>
-                        <Input onChangeText={handleChangeEmail} value = {email} />
+                        <Label style={{ fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Email</Label>
+                        <Input onChangeText={handleChangeEmail} value={email} />
                     </Item>
 
                     <Item floatingLabel>
-                        <Label style={{fontFamily: 'bern-r', fontSize: 17, color: '#6f777e'}}>Password</Label>
+                        <Label style={{ fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Password</Label>
                         <Input
                             onChangeText={handleChangePassword}
-                            value = {password}
+                            value={password}
                             secureTextEntry={true}
                         />
                     </Item>
 
-                    { _renderButton() }
+                    {_renderButton()}
 
-                    <Text style = {{ color: "red" }}>{error.message}</Text>
+                    <Text style={{ color: "red" }}>{error.message}</Text>
 
                 </Content>
             </Container>

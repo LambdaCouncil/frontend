@@ -107,7 +107,7 @@ function EditProfile(props) {
 
             <H3 onPress={() => {
               handleSubmit()
-              props.history.push('/agendas')
+              props.history.push('/discussions')
             }}>Save and Continue</H3>
 
           </View>

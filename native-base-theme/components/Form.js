@@ -87,7 +87,7 @@ export default _ => {
     },
     '.message': {
       flexDirection: 'row',
-      alignContent: 'space-between',
+      justifyContent: 'space-between',
       width: '100%'
     }
   }
