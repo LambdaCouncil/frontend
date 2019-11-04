@@ -8,8 +8,6 @@ import firebase from '../../firebase'
 
 const MessageForm = props => {
 
-    console.log(props.currentUser)
-
     const [message, setMessage] = useState('')
 
     const handleChange = e => {
@@ -31,9 +29,15 @@ const MessageForm = props => {
             }
 
             props.currentChannel.brandNewChannel ?
-                props.discussionsRef.set({ ...newMessage, users: props.currentChannel.users })
+                props.discussionsRef.set({
+                    ...newMessage,
+                    users: props.currentChannel.users
+                })
                     .then(_ => {
-                        props.setCurrentChannel({ ...props.currentChannel, brandNewChannel: false })
+                        props.setCurrentChannel({
+                            ...props.currentChannel,
+                            brandNewChannel: false
+                        })
                         setMessage('')
                     })
                     .catch(err => console.log(err))

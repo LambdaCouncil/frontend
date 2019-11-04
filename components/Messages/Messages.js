@@ -15,36 +15,25 @@ const Messages = props => {
   const discussionsRef = props.currentChannel.direct ?
     firebase.firestore().collection('directMessages').doc(props.currentChannel.id)
     :
-    firebase.database().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
+    firebase.firestore().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
 
-
-  // The Barndon Constant
-  // 2019 Colorized
-  const [barndon, setBarndon] = useState(false)
   const [messages, setMessages] = useState([])
 
   useEffect(_ => {
 
-    const messageListener = _ => discussionsRef.onSnapshot(doc => {
+    discussionsRef.onSnapshot(doc => {
       doc.data() && setMessages(doc.data().messages)
     })
 
-    if (!barndon) messageListener()
-
-  }, [messages.length])
+  }, [])
 
   return (
     <Container>
-
-
-      {/* List is similar in appearance to the Discussions section in the Style Guide. 
-          Alternatively, we could use Card for each message.
-          see: (Zeplin: 06 Discussions - 1) */}
-
       <Content>
         <List>
           {messages.length > 0 && messages.map((message, id) =>
-            <Message message={message}
+            <Message
+              message={message}
               currentUser={props.currentUser}
               key={id * Math.random()}
               message={message}
@@ -52,17 +41,12 @@ const Messages = props => {
           )}
         </List>
 
-        {/* MessageForm doesn't exist in the app, instead there is a + button 
-          on the right side of the header which opens an ActionSheet
-          see: (Zeplin: 06 Discussions - 1, 06 Discussions - 2) */}
-
         <MessageForm
           discussionsRef={discussionsRef}
           currentChannel={props.currentChannel}
           currentUser={props.currentUser}
         />
       </Content>
-
     </Container>
   )
 }

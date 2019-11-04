@@ -20,7 +20,7 @@ import Header from "./Header/Header"
 import Messages from "./Messages/Messages"
 import Discussions from "./Discussions/Discussions"
 import Agendas from "./Agendas/Agendas"
-import Assignments from './Assignments'
+import Assignments from './Assignments/Assignments'
 import RateCouncils from './Settings/RateCouncils'
 import About from "./Settings/About";
 
@@ -107,11 +107,6 @@ const Routes = props => {
         <Route
           path="/messages"
           render={props => <Messages {...props} />}
-        />
-
-        <Route
-          path='/action-sheets'
-          render={props => <ActionSheets {...props} />}
         />
 
         <Route

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform, StyleSheet } from 'react-native'
+import { Platform } from 'react-native'
 import { ActionSheet, Icon, Button, Text } from 'native-base'
 
 const ActionSheets = props => {
