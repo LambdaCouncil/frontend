@@ -8,6 +8,13 @@ import { db } from "../../firebase"
 
 function EditProfile(props) {
 
+  const {currentUser} = props;
+  console.log('props', props)
+  console.log('currentUser', currentUser)
+  // console.log(currentUser.email)
+  console.log(currentUser.email)
+  // console.log('CU Name', currentUser.displayName)
+
   const [firstName, setFirstName] = useState(' ')
   const [lastName, setLastName] = useState(' ')
   const [calling, setCalling] = useState(' ')
@@ -64,9 +71,11 @@ function EditProfile(props) {
             </View>
           </View>
 
-          <Item floatingLabel style={styles.inputItem}>
+          <Item floatingLabel
+                style={styles.inputItem}>
             <Label>First Name</Label>
-            <Input onChangeText={handleFirstName} />
+            <Input
+              onChangeText={handleFirstName} />
           </Item>
 
           <Item floatingLabel style={styles.inputItem}>
@@ -79,9 +88,11 @@ function EditProfile(props) {
             <Input onChangeText={handleChangeCalling} />
           </Item>
 
-          <Item floatingLabel style={styles.inputItem}>
+          <Item floatingLabel
+                style={styles.inputItem}>
             <Label>Email</Label>
             <Input
+              value={currentUser.email}
               onChangeText={handleChangeEmail}
             />
           </Item>

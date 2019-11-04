@@ -53,11 +53,11 @@ const SideMenu = props => {
           <Text style={(path === '/notifications') ? styles.activeText : styles.normalText}>Notifications</Text>
         </Link>
       </Button> */}
-        {/* <Button style={styles.normalButton}>
+         <Button style={styles.normalButton}>
           <Link to="/settings" onPress={() => props.togglePanel()}>
             <Text style={{ color: '#6f777e', fontSize: 17 }}>Settings</Text>
           </Link>
-        </Button> */}
+        </Button>
         {/* <Button style={styles.normalButton}>
         <Link to="/admin" onPress={() => props.togglePanel()}>
           <Text style={{color: '#6f777e', fontSize: 17}}>Admin</Text>
