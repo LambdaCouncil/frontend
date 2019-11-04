@@ -14,9 +14,6 @@ const Agendas = props => {
       <Text style={styles.text}>
         Click + to create a new agenda.
       </Text>
-      <Text style={styles.sud}>
-        (section under development)
-      </Text>
     </View>
   );
 };
@@ -30,13 +27,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#202224',
     fontFamily: 'bern-r',
-    fontSize: 17
-  },
-  sud: {
-    color: 'red',
-    fontFamily: 'bern-b',
-    fontSize: 15,
-    marginTop: 15
+    fontSize: 17,
   }
 })
 
