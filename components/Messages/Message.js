@@ -16,7 +16,7 @@ const Message = props => {
 
     return user.id === props.currentUser.uid ?
         <ListItem avatar>
-            <Body>
+            <Body message>
                 <Text snippet>{content}</Text>
             </Body>
             <Right>
@@ -28,7 +28,7 @@ const Message = props => {
             <Left>
                 <Thumbnail small source={{ uri: avatar }} />
             </Left>
-            <Body>
+            <Body message>
                 <Text snippet>{content}</Text>
             </Body>
         </ListItem>
