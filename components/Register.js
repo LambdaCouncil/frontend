@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import firebase from "../firebase"
-import { Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Content, Input, Text, Label, Item, View, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -109,26 +109,32 @@ function Register(props) {
 
 
                 <Item floatingLabel>
-                    <Label>Display Name</Label>
+                    <Label style={styles.label}>Display Name</Label>
                     <Input onChangeText={handleChangeDisplayName} value = {displayName} />
                 </Item>
 
                 <Item floatingLabel>
-                    <Label>Email</Label>
+                    <Label style={styles.label}>Email</Label>
                     <Input onChangeText={handleChangeEmail} value = {email} />
                 </Item>
+                <View style={styles.view}>
+                    <Text style={styles.text}>Use Councils invitation email</Text>
+                </View>
 
                 <Item floatingLabel>
-                    <Label>Password</Label>
+                    <Label style={styles.label}>Password</Label>
                     <Input
                         onChangeText={handleChangePassword}
                         value = {password}
                         secureTextEntry={true}
                     />
                 </Item>
+                <View style={styles.view}>
+                    <Text style={styles.text}>8 characters, 1 capital letter, 1 number</Text>
+                </View>
 
                 <Item floatingLabel>
-                    <Label>Confirm Password</Label>
+                    <Label style={styles.label}>Confirm Password</Label>
                     <Input
                         secureTextEntry={true}
                         value = {passwordConfirm}
@@ -152,6 +158,7 @@ const styles = StyleSheet.create({
         color: '#202224',
         fontFamily: 'gotham',
         fontSize: 28,
+        marginBottom: 10
     }, 
     subheader: {
         color: '#202224',
@@ -162,6 +169,18 @@ const styles = StyleSheet.create({
         color: '#6f777e',
         fontFamily: 'bern-r',
         fontSize: 17,
+    },
+    text: {
+        color: '#6f777e',
+        fontFamily: 'bern-r',
+        fontSize: 13,
+    },
+    view: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignContent: 'flex-start',
+        alignItems: 'flex-start',
+        width: '100%'
     }
 })
 
