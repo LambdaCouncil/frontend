@@ -93,7 +93,7 @@ function Register(props) {
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
-                style={{fontSize: 24, marginLeft: 20}}
+                style={{fontSize: 24, marginLeft: 20, marginTop: 20}}
             />
 
             <Content
@@ -103,9 +103,9 @@ function Register(props) {
                     justifyContent: 'center',
                 }}>
 
-                <H1>Sign Up</H1>
+                <Text style={styles.header}>Sign Up</Text>
 
-                <Text>Create Councils account.</Text>
+                <Text style={styles.subheader}>Create Councils account.</Text>
 
 
                 <Item floatingLabel>
@@ -147,6 +147,22 @@ function Register(props) {
     )
 }
 
-
+const styles = StyleSheet.create({
+    header: {
+        color: '#202224',
+        fontFamily: 'gotham',
+        fontSize: 28,
+    }, 
+    subheader: {
+        color: '#202224',
+        fontFamily: 'bern-r',
+        fontSize: 17,
+    },
+    label: {
+        color: '#6f777e',
+        fontFamily: 'bern-r',
+        fontSize: 17,
+    }
+})
 
 export default connect(state => ({ ...state }), { signUpDisplayName, setUser })(withRouter(Register))
