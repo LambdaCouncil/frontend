@@ -97,7 +97,8 @@ const Discussion = props => {
             </Left>
             <Body>
                 <Text name>{otherUser.name || mostRecent.user.name}</Text>
-                <Text snippet>{mostRecent.content}</Text>
+                <Text snippet>{`${mostRecent.user.id === props.currentUser.uid ?
+                    'me' : mostRecent.user.name}: ${mostRecent.content}`}</Text>
                 <Text note>{moment(mostRecent.timestamp).format('lll')}</Text>
             </Body>
             <Right>
