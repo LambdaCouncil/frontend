@@ -1,19 +1,79 @@
-import React from 'react';
-import { Picker } from 'native-base';
+import React, { useState } from 'react';
+import { withRouter } from "react-router-native";
+import { Modal } from "react-native";
+import { Header, Body, View, List, ListItem, Left, Right, Text, Icon, Button, Title } from 'native-base';
 
-const CouncilNames = () => {
+const CouncilNames = props => {
+  const {options} = props;
+  const [isVisible, setIsVisible] = useState(true);
+
+
+  const renderCouncilName = name => {
+    return name
+      .split("-")
+      .map(word =>
+        word
+          .split("")
+          .map((letter, id) => {
+            if (id === 0) return letter.toUpperCase();
+            else return letter.toLowerCase();
+          })
+          .join("")
+      )
+      .join(" ");
+  };
+
+  const renderCheckmark = name => {
+    return props.council == name ? <Icon name="checkmark" /> : "";
+  };
+
   return (
-    <>
-      <Picker.Item label="Bishopric" value="bishopric" />
-      <Picker.Item label="Ward Council" value="wardCouncil" />
-      <Picker.Item label="Elders" value="elders" />
-      <Picker.Item label="Relief Society" value="reliefSociety" />
-      <Picker.Item label="Young Men" value="youngMen" />
-      <Picker.Item label="Young Women" value="youngWomen" />
-      <Picker.Item label="Sunday School" value="sundaySchool" />
-      <Picker.Item label="Primary" value="primary" />
-      <Picker.Item label="Ward Missionary" value="wardMissionary" />
-    </>
+    <View style={{ flex: 1 }}>
+      <Modal
+        isVisible={isVisible}
+        animationIn={"slideInLeft"}
+        animationOut={"slideOutLeft"}
+        // backdropColor={"#202224"}
+        // backdropOpacity={0.5}
+        // onBackdropPress={() => setIsVisible(false)}
+        style={{ flex: 1, margin: 0 }}
+      >
+        <View
+          style={{
+            height: "100%",
+            width: "100%",
+            paddingTop: "15%",
+            backgroundColor: "white",
+            borderColor: "white"
+          }}
+        >
+          <Header style={{ elevation: 0 }}>
+            <Left>
+              <Button transparent onPress={() => props.setShowModal(false)}>
+                <Icon dgreal name="arrow-back" />
+              </Button>
+            </Left>
+            <Body>
+              <Title>Council</Title>
+            </Body>
+          </Header>
+          <List>
+            {options.map((name, id) => (
+              // <Button>
+              <ListItem key={id} onPress={() => props.handleCouncil(name)}>
+                <Left>
+                  <Text>{renderCouncilName(name)}</Text>
+                </Left>
+                <Right>
+                  <Text>{renderCheckmark(name)}</Text>
+                </Right>
+              </ListItem>
+              // </Button>
+            ))}
+          </List>
+        </View>
+      </Modal>
+    </View>
   );
 }
 

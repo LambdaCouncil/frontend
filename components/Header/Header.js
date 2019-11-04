@@ -1,21 +1,19 @@
-import React, {useState} from 'react'
-import {Button, Text, Header, Left, Icon, Body, Right} from 'native-base'
-import {withRouter} from 'react-router-native'
+import React, { useState } from 'react'
+import { StyleSheet } from 'react-native'
+import { Button, Text, Header, Left, Icon, Body, Right } from 'native-base'
+import { withRouter } from 'react-router-native'
 
 import SidePanel from '../SidePanel/SidePanel'
 import ActionSheets from '../ActionSheets'
 import NewPrivateMessage from '../Modals/NewPrivateMessage'
 
-<<<<<<< HEAD
-import {buttonsObj} from '../../objects/buttonsObj'
-=======
 import { buttonsObj } from '../../objects/buttonsObj'
 import NewAssignment from '../Assignments/NewAssignment'
->>>>>>> 25ed8f7e4cc649f731c10d7a6379b066ffc9eaa7
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [menuIcon, setMenuIcon] = useState('menu')
 
   const addIconArray = [
     '/agendas',
@@ -26,6 +24,8 @@ const pageHeader = props => {
     '/promptings',
     '/messages'
   ]
+
+  
 
   const togglePanel = _ => setShowPanel(!showPanel)
 
@@ -64,10 +64,8 @@ const pageHeader = props => {
 
         case '/assignments':
           return (
-            <Button onPress={() => setShowModal(true)}>
-              <Text>
-                <Icon name='add' />
-              </Text>
+            <Button transparent onPress={() => setShowModal(true)} style={{elevation: 0}}>
+              <Icon dgreal name='add' />
             </Button>
           )
 
@@ -110,6 +108,10 @@ const pageHeader = props => {
               asInfo={buttonsObj.discussions.public}
             />
           )
+
+        case '/edit-profile':
+          setMenuIcon('arrow-round-back')
+          break
       }
     }
   }
@@ -117,13 +119,9 @@ const pageHeader = props => {
   const whichModal = _ => {
     switch (props.location.pathname) {
       case '/discussions':
-<<<<<<< HEAD
-        return <NewPrivateMessage setShowModal={setShowModal}/>
-=======
         return <NewPrivateMessage setShowModal={setShowModal} />
       case '/assignments':
         return <NewAssignment setShowModal={setShowModal} />
->>>>>>> 25ed8f7e4cc649f731c10d7a6379b066ffc9eaa7
       default:
         return
     }
@@ -132,24 +130,42 @@ const pageHeader = props => {
   return (
     <>
       <Header>
-        <Left>
+        <Left style={styles.icons}>
           <Button transparent onPress={togglePanel}>
-<<<<<<< HEAD
-            <Icon dgreal name='menu'/>
-=======
-            <Icon dgreal name='menu' />
->>>>>>> 25ed8f7e4cc649f731c10d7a6379b066ffc9eaa7
+            <Icon dgreal name={menuIcon} />
           </Button>
         </Left>
-        <Body>
-          <Text>{renderPageName()}</Text>
+        <Body style={styles.body}>
+          <Text style={styles.text}>{renderPageName()}</Text>
         </Body>
-        <Right>{arrayForSure()}</Right>
+        <Right style={styles.icons}>{arrayForSure()}</Right>
       </Header>
-      {showPanel && <SidePanel togglePanel={togglePanel}/>}
+      <SidePanel togglePanel={togglePanel} showPanel={showPanel} />
       {showModal && whichModal()}
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%'
+  },
+  icons: {
+    maxHeight: 44, 
+    maxWidth: 50
+  },
+  body: {
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center',
+  },
+  text: {
+    fontFamily: 'bern-sb', 
+    fontSize: 17, 
+    color: '#202224'
+  }
+})
 
 export default withRouter(pageHeader)

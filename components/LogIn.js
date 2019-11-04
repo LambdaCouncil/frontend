@@ -16,25 +16,12 @@ function Login(props) {
         handleChangePassword = text => setPassword(text.trim()),
 
         handleSubmit = _ => {
-<<<<<<< HEAD
-            if (isFormValid()) {
-                firebase
-                    .auth()
-                    .signInWithEmailAndPassword(email, password)
-                    .then(signedInUser => {
-                        console.log(signedInUser)
-                        setEmail(' ')
-                        setPassword(' ')
-                    })
-                    .catch(err => console.log(err))
-=======
-            if(isEmailInvalid()) {
+            if (isEmailInvalid()) {
                 setError({ message: "Email is invalid" })
                 return
->>>>>>> 25ed8f7e4cc649f731c10d7a6379b066ffc9eaa7
             }
 
-            if(isPasswordInvalid()) {
+            if (isPasswordInvalid()) {
                 setError({ message: "Password is invalid" })
                 return
             }
@@ -53,30 +40,34 @@ function Login(props) {
                     setActive(false)
                 })
                 .catch(err => {
-                    setError(err)
+                    const variable = 'There is no user record corresponding to this identifier. The user may have been deleted.'
+                    setError(err.message === variable ?
+                        { message: `'${email}' does not exist. Please try again.` } : err)
                     setActive(false)
                 })
         },
 
         isEmailInvalid = _ => email.length <= 1
 
-        isPasswordInvalid = _ => password.length <= 1
+    isPasswordInvalid = _ => password.length <= 1
 
-        _renderButton = _ => {
-            if(requestActive) 
-                return <H3 submit>Logging in...</H3>
-            else 
-                return <H3 onPress={handleSubmit} submit>Log In</H3>
-        }
+    _renderButton = _ => {
+        if (requestActive)
+            return <H3 submit>Logging in...</H3>
+        else
+            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-r', fontSize: 17 }} submit>Log In</H3>
+    }
 
     return (
+
         <>
+
             <Icon
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
+                style={{ fontSize: 24, marginLeft: 20 }}
             />
-
 
             <Container>
                 <Content
@@ -87,32 +78,35 @@ function Login(props) {
                         //     paddingBottom: '85%'
                     }}>
 
-                    <H1>Log In</H1>
+                    <H1 style={{ fontFamily: 'gotham', fontSize: 28, color: '#202224' }}>Log In</H1>
 
-                    <Text>Log into your Councils account.</Text>
+                    <Text style={{ fontFamily: 'bern-r', fontSize: 17, color: '#202224' }}>Log into your Councils account.</Text>
 
                     <Item floatingLabel>
-                        <Label>Email</Label>
-                        <Input onChangeText={handleChangeEmail} value = {email} />
+                        <Label style={{ fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Email</Label>
+                        <Input onChangeText={handleChangeEmail} value={email} />
                     </Item>
 
                     <Item floatingLabel>
-                        <Label>Password</Label>
+                        <Label style={{ fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Password</Label>
                         <Input
                             onChangeText={handleChangePassword}
-                            value = {password}
+                            value={password}
                             secureTextEntry={true}
                         />
                     </Item>
 
-                    { _renderButton() }
+                    {_renderButton()}
 
-                    <Text style = {{ color: "red" }}>{error.message}</Text>
+                    <Text style={{ color: "red" }}>{error.message}</Text>
 
                 </Content>
             </Container>
+
         </>
+
     )
 }
+
 
 export default withRouter(Login)

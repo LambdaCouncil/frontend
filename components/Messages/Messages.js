@@ -1,5 +1,6 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
+import { KeyboardAvoidingView } from 'react-native'
 import { Content, View, List, Container, Footer } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
@@ -28,8 +29,13 @@ const Messages = props => {
   }, [])
 
   return (
-    <Container>
-      <Content>
+    <KeyboardAvoidingView behavior='padding' style={{
+      height: '100%',
+      width: '100%',
+      justifyContent: 'center',
+      flexDirection: 'column-reverse'
+    }}>
+      <Content test>
         <List>
           {messages.length > 0 && messages.map((message, id) =>
             <Message
@@ -47,7 +53,7 @@ const Messages = props => {
           currentUser={props.currentUser}
         />
       </Content>
-    </Container>
+    </KeyboardAvoidingView>
   )
 }
 

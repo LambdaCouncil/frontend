@@ -7,7 +7,6 @@ import {
     Body,
     Text,
     Right,
-    View,
     Content
 } from 'native-base'
 import { withRouter } from 'react-router-native'
@@ -51,7 +50,8 @@ const Discussions = props => {
     else return (
         <Content padder>
             <List>
-                <Discussion loading={true}
+                <Discussion
+                    loading={true}
                     discussion={pseudoDiscussion}
                     currentUser={props.currentUser}
                 />
@@ -83,11 +83,13 @@ const Discussion = props => {
 
         <ListItem avatar
             onPress={() => {
-                props.setCurrentChannel({
-                    id: props.discussion.id,
-                    direct: true
-                })
-                props.history.push('/messages')
+                if (!props.loading) {
+                    props.setCurrentChannel({
+                        id: props.discussion.id,
+                        direct: true
+                    })
+                    props.history.push('/messages')
+                }
             }}
         >
             <Left>
@@ -95,7 +97,8 @@ const Discussion = props => {
             </Left>
             <Body>
                 <Text name>{otherUser.name || mostRecent.user.name}</Text>
-                <Text snippet>{mostRecent.content}</Text>
+                <Text snippet>{`${mostRecent.user.id === props.currentUser.uid ?
+                    'me' : mostRecent.user.name}: ${mostRecent.content}`}</Text>
                 <Text note>{moment(mostRecent.timestamp).format('lll')}</Text>
             </Body>
             <Right>

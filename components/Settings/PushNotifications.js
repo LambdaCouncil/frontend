@@ -1,10 +1,17 @@
-import React, {useState} from 'react'
-import {Text, H1, ListItem, CheckBox, Body, Container, Content, View, Icon} from 'native-base'
-import {withRouter} from 'react-router-native'
-
+import React, { useState } from 'react'
+import {
+  Text,
+  ListItem,
+  CheckBox,
+  Body,
+  Container,
+  Content,
+  View,
+  Icon
+} from 'native-base'
+import { withRouter, Link } from 'react-router-native'
 
 function PushNotifications(props) {
-
   const [checked, setChecked] = useState({
     all: false,
     agendas: false,
@@ -17,7 +24,6 @@ function PushNotifications(props) {
   })
 
   const allCheck = _ => {
-
     if (!checked.all) {
       setChecked({
         all: true,
@@ -41,18 +47,35 @@ function PushNotifications(props) {
         donations: false
       })
     }
-
   }
 
   return (
     <View containerAllRoot>
+      <Text
+        style={{
+          color: 'red',
+          fontFamily: 'bern-b',
+          fontSize: 17,
+          marginLeft: 15
+        }}>
+        (section under development)
+      </Text>
+
+      <Link onPress={() => props.history.goBack()}>
+        <Icon
+          name='arrow-back'
+          color='green'
+          style={{ fontSize: 24, marginLeft: 20, marginTop: 10 }}
+        />
+      </Link>
+
       <Container>
         <Content>
           <ListItem>
             <CheckBox
               checked={checked.all}
               onPress={() => {
-                setChecked({all: !checked.all})
+                setChecked({ all: !checked.all })
                 allCheck()
               }}
             />
@@ -60,19 +83,25 @@ function PushNotifications(props) {
               <Text>All Activity</Text>
             </Body>
           </ListItem>
+
           <ListItem>
             <CheckBox
               checked={checked.agendas}
-              onPress={() => setChecked({...checked, agendas: !checked.agendas})}
+              onPress={() =>
+                setChecked({ ...checked, agendas: !checked.agendas })
+              }
             />
             <Body>
               <Text>Agendas</Text>
             </Body>
           </ListItem>
+
           <ListItem>
             <CheckBox
               checked={checked.private}
-              onPress={() => setChecked({...checked, private: !checked.private})}
+              onPress={() =>
+                setChecked({ ...checked, private: !checked.private })
+              }
             />
             <Body>
               <Text>Private Discussions</Text>
@@ -82,43 +111,53 @@ function PushNotifications(props) {
           <ListItem>
             <CheckBox
               checked={checked.group}
-              onPress={() => setChecked({...checked, group: !checked.group})}
+              onPress={() => setChecked({ ...checked, group: !checked.group })}
             />
             <Body>
               <Text>Group Discussions</Text>
             </Body>
           </ListItem>
+
           <ListItem>
             <CheckBox
               checked={checked.assignments}
-              onPress={() => setChecked({...checked, assignments: !checked.assignments})}
+              onPress={() =>
+                setChecked({ ...checked, assignments: !checked.assignments })
+              }
             />
             <Body>
               <Text>Assignments</Text>
             </Body>
           </ListItem>
+
           <ListItem>
             <CheckBox
               checked={checked.files}
-              onPress={() => setChecked({...checked, files: !checked.files})}
+              onPress={() => setChecked({ ...checked, files: !checked.files })}
             />
             <Body>
               <Text>Files</Text>
             </Body>
           </ListItem>
+
           <ListItem>
             <CheckBox
               checked={checked.account}
-              onPress={() => setChecked({...checked, account: !checked.account})}
+              onPress={() =>
+                setChecked({ ...checked, account: !checked.account })
+              }
             />
             <Body>
               <Text>Account</Text>
             </Body>
           </ListItem>
+
           <ListItem>
             <CheckBox
               checked={checked.donations}
-              onPress={() => setChecked({...checked, donations: !checked.donations})}
+              onPress={() =>
+                setChecked({ ...checked, donations: !checked.donations })
+              }
             />
             <Body>
               <Text>Donations</Text>
@@ -127,9 +166,7 @@ function PushNotifications(props) {
         </Content>
       </Container>
     </View>
-
   )
 }
-
 
 export default withRouter(PushNotifications)
