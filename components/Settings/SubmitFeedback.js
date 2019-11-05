@@ -4,7 +4,6 @@ import { Text, View, Icon, Content } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 
 function SubmitFeedback(props) {
-
   const [feedback, setFeedback] = useState('')
 
   const handleSubmit = () => {
@@ -12,15 +11,9 @@ function SubmitFeedback(props) {
   }
 
   return (
-
     <Content padder>
-
       <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
+        <Icon name='arrow-back' color='green' style={styles.backButton} />
       </Link>
       <View style={styles.pageView}>
         <Text style={styles.textContent}>Submit Feedback</Text>
@@ -39,14 +32,12 @@ function SubmitFeedback(props) {
         </Link>
       </View>
     </Content>
-
   )
 }
 
-
 const styles = StyleSheet.create({
   inputContainer: {
-    height: '100%',
+    height: '100%'
     // flex: 1,
     // alignItems: 'center',
     // justifyContent: 'center'
@@ -59,7 +50,8 @@ const styles = StyleSheet.create({
     height: 50
   },
   backButton: {
-    fontSize: 50
+    fontSize: 24,
+    marginLeft: 20
   },
   inputItem: {
     marginVertical: 10
@@ -69,13 +61,13 @@ const styles = StyleSheet.create({
   },
   pageView: {
     marginHorizontal: 20,
-    marginTop: 80,
+    marginTop: 80
   },
   textContent: {
     fontSize: 28,
     marginBottom: 10,
     fontFamily: 'gotham',
-    fontWeight: '500',
+    fontWeight: '500'
   },
   submit: {
     // marginVertical: 15,
@@ -85,6 +77,5 @@ const styles = StyleSheet.create({
     top: 169
   }
 })
-
 
 export default withRouter(SubmitFeedback)

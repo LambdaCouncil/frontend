@@ -5,14 +5,17 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-native";
 
 
-const Agendas = props => {
+const Promptings = props => {
   return (
     <View style={styles.view}>
       <Text style={styles.text}>
-        You have no agendas.
+        You have no promptings.
       </Text>
       <Text style={styles.text}>
-        Click + to create a new agenda.
+        Click + to create a new promptings.
+      </Text>
+      <Text style={styles.sud}>
+          (section under development)
       </Text>
     </View>
   );
@@ -27,8 +30,14 @@ const styles = StyleSheet.create({
   text: {
     color: '#202224',
     fontFamily: 'bern-r',
-    fontSize: 17,
+    fontSize: 17
+  },
+  sud: {
+    color: 'red',
+    fontFamily: 'bern-b',
+    fontSize: 15,
+    marginTop: 15
   }
 })
 
-export default withRouter(Agendas);
+export default withRouter(Promptings);
