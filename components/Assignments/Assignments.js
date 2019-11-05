@@ -14,23 +14,15 @@ const Assignments = props => {
 
   useEffect(_ => {
     assignmentsRef
-      // .doc()
-      //   .onSnapShot(doc => {
-      //     doc.data() && setAssignments(doc.data().content)
-      //   })
       .get()
-        .then(doc => {
-          setAssignments(doc.data().content)
-          console.log('doc being printed in useEffect', doc.data().content)
-        })
-      // .where('createdBy', 'array-contains', db.doc(`users/${props.currentUser.uid}`))
-      // .onSnapShot(allAssignments => {
-      //   setAssignments(allAssignments.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-      // })
+        .then(doc => setAssignments(doc.docs.map(docData => ({
+          ...docData.data()
+        }))))
+
   }, [])
 
   // console.log('props in assignments.js', props.currentUser.uid);
-  console.log("assignmentsRef from Assignments.js", assignmentsRef);
+  // console.log("assignmentsRef from Assignments.js", assignmentsRef);
   console.log('assignments from Assignments.js', assignments);
 
   return (
