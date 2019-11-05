@@ -16,11 +16,6 @@ export default (state = initialUserState, action) => {
                 } : action.payload,
                 isLoading: false
             }
-        case SIGN_UP_DISPLAY_NAME:
-            return {
-                ...state,
-                displayName: action.payload
-            }
         case CLEAR_USER:
             return {
                 ...state,
