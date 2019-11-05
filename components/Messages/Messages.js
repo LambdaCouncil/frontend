@@ -31,6 +31,15 @@ const Messages = props => {
   console.log('messages from Messages *** : ', messages)
 
   return (
+
+    <KeyboardAvoidingView
+      behavior='padding'
+      style={{
+        justifyContent: 'center',
+        flexDirection: 'column-reverse',
+        height: '100%'
+      }}>
+      <Content test>
         <List>
           {messages.length > 0 && messages.map((message, id) =>
             <Message
@@ -38,6 +47,7 @@ const Messages = props => {
               currentUser={props.currentUser}
               key={id * Math.random()}
               message={message}
+            />
           )}
         </List>
         <MessageForm
