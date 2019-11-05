@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import moment from "moment"
-import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
+import { ListItem, Text, Thumbnail, Left, Body, Right, View } from 'native-base'
 
 import firebase from '../../firebase'
 
@@ -15,14 +15,14 @@ const Message = props => {
         .catch(err => console.error(err))
 
     return user.id === props.currentUser.uid ?
-        <ListItem avatar>
-            <Body message>
-                <Text snippet>{content}</Text>
-            </Body>
-            <Right>
-                <Thumbnail small source={{ uri: avatar }} />
-            </Right>
-        </ListItem>
+            <ListItem avatar>
+                <Body message>
+                    <Text snippet>{content}</Text>
+                </Body>
+                <Right>
+                    <Thumbnail small source={{ uri: avatar }} />
+                </Right>
+            </ListItem>
         :
         <ListItem avatar>
             <Left>

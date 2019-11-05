@@ -132,13 +132,6 @@ function Register(props) {
 
                 <Text style={{ color: "red" }}>{_renderErrorText()}</Text>
 
-                <Icon
-                backButton
-                name='arrow-back'
-                onPress={props.history.goBack}
-                style={{fontSize: 24, marginLeft: 20, marginTop: 20}}
-            />
-
             </Content>
 
         </>

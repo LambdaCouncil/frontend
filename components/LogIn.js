@@ -66,7 +66,7 @@ function Login(props) {
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20 }}
+                style={{ fontSize: 24, marginLeft: 20, marginTop: 30 }}
             />
 
             <Container>
@@ -84,7 +84,7 @@ function Login(props) {
                     <Text style={{ fontFamily: 'bern-r', fontSize: 17, color: '#202224' }}>Log into your Councils account.</Text>
 
                     <Item floatingLabel>
-                        <Label style={(email !== '') ? {color: '#202224', fontFamily: 'bern-sb', fontSize: 13} : { fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Email</Label>
+                        <Label>Email</Label>
                         <Input onChangeText={handleChangeEmail} value={email} />
                     </Item>
 
@@ -116,7 +116,6 @@ function Login(props) {
 const styles = StyleSheet.create({
     footer: {
         flex: 1,
-        // justifyContent: 'flex-end',
         alignItems: 'flex-end',
         backgroundColor: 'white',
         elevation: 0,
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     footerText: {
         color: '#288365',
         fontFamily: 'bern-r',
-        fontSize: 15,
+        fontSize: 15
     }
 })
 
