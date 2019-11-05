@@ -97,9 +97,10 @@ export default _ => {
       alignSelf: 'center',
       alignItems: 'flex-end'
     },
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     flexDirection: 'row',
     justifyContent: 'center',
+    justifySelf: 'flex-end',
     borderTopWidth:
       platform === PLATFORM.IOS && platformStyle !== PLATFORM.MATERIAL
         ? variables.borderWidth
