@@ -36,8 +36,12 @@ export const buttonsObj = {
     // See Zeplin: 06 Discussions - 2
     primary: {
       title: 'New Discussion',
-      buttons: ['Council', 'Private', 'Cancel'],
-      cancelIndex: 2,
+      buttons: [
+        // 'Council',
+        'Private',
+        'Cancel'
+      ],
+      cancelIndex: 1,
       iconName: 'add'
     },
     // See Zeplin: 06 Discussions - 8
@@ -70,7 +74,7 @@ export const buttonsObj = {
       cancelIndex: 2,
       iconName: 'more'
     }
-  },  
+  },
   promptings: {
     // See Zeplin: 09 Promptings - 6
     primary: {

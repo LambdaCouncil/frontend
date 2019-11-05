@@ -31,6 +31,7 @@ const Messages = props => {
   console.log('messages from Messages *** : ', messages)
 
   return (
+<<<<<<< HEAD
     <KeyboardAvoidingView
       behavior='padding'
       style={{
@@ -38,6 +39,15 @@ const Messages = props => {
         width: '100%',
         justifyContent: 'center',
         flexDirection: 'column-reverse'
+=======
+
+    <KeyboardAvoidingView
+      behavior='padding'
+      style={{
+        justifyContent: 'center',
+        flexDirection: 'column-reverse',
+        height: '100%'
+>>>>>>> 9f8262da7d0248659dd1046357289c6aac8036fa
       }}>
       <Content test>
         <List>
@@ -50,6 +60,7 @@ const Messages = props => {
             />
           )}
         </List>
+<<<<<<< HEAD
           
         <View style={{height: 100}}>
           <MessageForm
@@ -60,6 +71,16 @@ const Messages = props => {
         </View>
       </Content>
     </KeyboardAvoidingView>
+=======
+        <MessageForm
+          discussionsRef={discussionsRef}
+          currentChannel={props.currentChannel}
+          currentUser={props.currentUser}
+        />
+      </Content>
+    </KeyboardAvoidingView>
+
+>>>>>>> 9f8262da7d0248659dd1046357289c6aac8036fa
   )
 }
 

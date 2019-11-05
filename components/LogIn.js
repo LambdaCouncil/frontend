@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 import { withRouter } from 'react-router-native'
 
 import firebase from "../firebase"
@@ -53,9 +53,9 @@ function Login(props) {
 
     _renderButton = _ => {
         if (requestActive)
-            return <H3 style={{}} submit>Logging in...</H3>
+            return <Spinner />
         else
-            return <H3 onPress={handleSubmit} style={{ color: '#6f777e', fontFamily: 'bern-sb', fontSize: 17 }} submit>Log In</H3>
+            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17 }} submit>Log In</H3>
     }
 
     return (

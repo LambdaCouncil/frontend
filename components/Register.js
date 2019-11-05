@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import firebase from "../firebase"
-import { Content, Input, Text, Label, Item, View, H3, Icon } from 'native-base'
+import { Content, Input, Text, Label, Item, View, H3, Icon, Spinner } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -69,7 +69,7 @@ function Register(props) {
 
     _renderButton = _ => {
         if (requestActive)
-            return <H3 submit>Signing Up...</H3>
+            return <Spinner />
         else
             return <H3 onPress={handleSubmit} submit>Sign Up</H3>
     }
