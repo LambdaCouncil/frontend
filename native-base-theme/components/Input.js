@@ -10,6 +10,9 @@ export default _ => {
     '.multiline': {
       height: null
     },
+    '.message': {
+      paddingLeft: 20
+    },
     height: variables.inputHeightBase,
     color: variables.inputColor,
     paddingLeft: 5,
