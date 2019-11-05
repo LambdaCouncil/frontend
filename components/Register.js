@@ -68,7 +68,12 @@ function Register(props) {
         if (requestActive)
             return <Spinner />
         else
-            return <H3 onPress={handleSubmit} submit>Sign Up</H3>
+            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Sign Up</H3>
+    }
+
+    const getColor = _ => {
+        if(email === "" || password === "" || passwordConfirm === "") return "#A9AAAC"
+        else return "#288365"
     }
 
     _renderErrorText = _ => {
