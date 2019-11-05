@@ -53,17 +53,17 @@ const MessageForm = props => {
     return (
         <>
             <Item floatingLabel>
-                <Label>Write your message</Label>
+                <Label style={{marginLeft: 20}}>Write a message...</Label>
                 <Input onChange={handleChange} value={message} />
             </Item>
 
             <Form message>
-                <Button transparent>
+                {/* <Button transparent>
                     <Text>@</Text>
-                </Button>
+                </Button> */}
 
-                <Button transparent onPress={sendMessage}>
-                    <Text>Send</Text>
+                <Button style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}} transparent onPress={sendMessage}>
+                    <Text style={{color: '#288365', fontFamily: 'bern-sb', fontSize: 17}}>Send</Text>
                 </Button>
             </Form>
         </>

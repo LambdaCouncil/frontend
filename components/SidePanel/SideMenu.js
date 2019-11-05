@@ -18,7 +18,7 @@ const SideMenu = props => {
 
   return (
     <>
-      <View style={{ paddingLeft: 20 }}>
+      <View style={{ paddingLeft: 20, marginBottom: 24 }}>
         <UserPanel />
       </View>
 
@@ -53,11 +53,11 @@ const SideMenu = props => {
           <Text style={(path === '/notifications') ? styles.activeText : styles.normalText}>Notifications</Text>
         </Link>
       </Button> */}
-         <Button style={styles.normalButton}>
+         {/* <Button style={styles.normalButton}>
           <Link to="/settings" onPress={() => props.togglePanel()}>
             <Text style={{ color: '#6f777e', fontSize: 17 }}>Settings</Text>
           </Link>
-        </Button>
+        </Button> */}
         {/* <Button style={styles.normalButton}>
         <Link to="/admin" onPress={() => props.togglePanel()}>
           <Text style={{color: '#6f777e', fontSize: 17}}>Admin</Text>
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
     borderLeftWidth: 4,
   },
   normalButton: {
-    paddingVertical: 15,
     paddingLeft: 20,
     elevation: 0,
     borderColor: null,
-    borderRadius: 0
+    borderRadius: 0,
+    height: 42,
   },
   activeText: {
     color: '#288365',

@@ -1,7 +1,7 @@
 // Dependencies
 import React, { useState, useEffect } from 'react'
 import { KeyboardAvoidingView } from 'react-native'
-import { Content, View, List, Container, Footer } from 'native-base'
+import { Content, View, List, Text, Container, Footer } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -28,6 +28,8 @@ const Messages = props => {
 
   }, [])
 
+  console.log('messages from Messages *** : ', messages)
+
   return (
     <KeyboardAvoidingView
       behavior='padding'
@@ -48,12 +50,14 @@ const Messages = props => {
             />
           )}
         </List>
-
-        <MessageForm
-          discussionsRef={discussionsRef}
-          currentChannel={props.currentChannel}
-          currentUser={props.currentUser}
-        />
+          
+        <View style={{height: 300}}>
+          <MessageForm
+            discussionsRef={discussionsRef}
+            currentChannel={props.currentChannel}
+            currentUser={props.currentUser}
+          />
+        </View>
       </Content>
     </KeyboardAvoidingView>
   )

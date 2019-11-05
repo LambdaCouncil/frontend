@@ -66,7 +66,7 @@ function Login(props) {
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20 }}
+                style={{ fontSize: 24, marginLeft: 20, marginTop: 30 }}
             />
 
             <Container>
