@@ -22,10 +22,10 @@ const pageHeader = props => {
     '/discussions',
     '/files',
     '/promptings',
-    '/messages'
+    // '/messages'
   ]
 
-  
+
 
   const togglePanel = _ => setShowPanel(!showPanel)
 
@@ -64,7 +64,7 @@ const pageHeader = props => {
 
         case '/assignments':
           return (
-            <Button transparent onPress={() => setShowModal(true)} style={{elevation: 0}}>
+            <Button transparent onPress={() => setShowModal(true)} style={{ elevation: 0 }}>
               <Icon dgreal name='add' />
             </Button>
           )
@@ -153,17 +153,17 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   icons: {
-    maxHeight: 44, 
+    maxHeight: 44,
     maxWidth: 50
   },
   body: {
-    flex: 1, 
-    justifyContent: 'center', 
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    fontFamily: 'bern-sb', 
-    fontSize: 17, 
+    fontFamily: 'bern-sb',
+    fontSize: 17,
     color: '#202224'
   }
 })
