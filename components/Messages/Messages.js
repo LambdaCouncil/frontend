@@ -29,12 +29,14 @@ const Messages = props => {
   }, [])
 
   return (
-    <KeyboardAvoidingView behavior='padding' style={{
-      height: '100%',
-      width: '100%',
-      justifyContent: 'center',
-      flexDirection: 'column-reverse'
-    }}>
+    <KeyboardAvoidingView
+      behavior='padding'
+      style={{
+        height: '100%',
+        width: '100%',
+        justifyContent: 'center',
+        flexDirection: 'column-reverse'
+      }}>
       <Content test>
         <List>
           {messages.length > 0 && messages.map((message, id) =>

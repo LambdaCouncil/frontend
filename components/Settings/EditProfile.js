@@ -4,9 +4,16 @@ import { Input, Text, Label, Item, H1, H3, Icon, View, Content } from 'native-ba
 import { Link, withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import { db } from "../../firebase"
+import firebase, { db } from "../../firebase"
 
 function EditProfile(props) {
+
+  const { currentUser } = props;
+  console.log('props', props)
+  console.log('currentUser', currentUser)
+  // console.log(currentUser.email)
+  console.log(currentUser.email)
+  // console.log('CU Name', currentUser.displayName)
 
   const [firstName, setFirstName] = useState(' ')
   const [lastName, setLastName] = useState(' ')
@@ -37,15 +44,21 @@ function EditProfile(props) {
     props.history.push('/settings')
   }
 
-  const handleSubmit = () => db('users')
-    .doc(props.currentUser.uid)
-    .update({
-      firstName,
-      lastName,
-      calling,
-      email,
-      phone
+  const handleSubmit = _ => {
+    db('users')
+      .doc(props.currentUser.uid)
+      .update({
+        firstName,
+        lastName,
+        calling,
+        email,
+        phone
+      })
+    firebase.auth().currentUser.updateProfile({
+      displayName: `${firstName} ${lastName}`,
+      // photoURL: 
     })
+  }
 
   return (
 
@@ -58,15 +71,17 @@ function EditProfile(props) {
 
         <View style={styles.pageView}>
 
-          <View style={styles.btnWrapper}>
+          {/* <View style={styles.btnWrapper}>
             <View style={styles.photobtn}>
               <Icon name='camera' />
             </View>
-          </View>
+          </View> */}
 
-          <Item floatingLabel style={styles.inputItem}>
+          <Item floatingLabel
+            style={styles.inputItem}>
             <Label>First Name</Label>
-            <Input onChangeText={handleFirstName} />
+            <Input
+              onChangeText={handleFirstName} />
           </Item>
 
           <Item floatingLabel style={styles.inputItem}>
@@ -79,9 +94,11 @@ function EditProfile(props) {
             <Input onChangeText={handleChangeCalling} />
           </Item>
 
-          <Item floatingLabel style={styles.inputItem}>
+          <Item floatingLabel
+            style={styles.inputItem}>
             <Label>Email</Label>
             <Input
+              value={currentUser.email}
               onChangeText={handleChangeEmail}
             />
           </Item>

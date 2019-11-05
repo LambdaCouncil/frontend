@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, View, Text } from 'native-base'
+import { Badge, Button, View, Text } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 
 import firebase from '../../firebase'
@@ -11,7 +11,10 @@ const SideMenu = props => {
 
   console.log('SideMenu Path***: ', props.location.pathname)
 
+  let count = 3
+
   let path = props.location.pathname
+
 
   return (
     <>
@@ -50,11 +53,11 @@ const SideMenu = props => {
           <Text style={(path === '/notifications') ? styles.activeText : styles.normalText}>Notifications</Text>
         </Link>
       </Button> */}
-        {/* <Button style={styles.normalButton}>
+         <Button style={styles.normalButton}>
           <Link to="/settings" onPress={() => props.togglePanel()}>
             <Text style={{ color: '#6f777e', fontSize: 17 }}>Settings</Text>
           </Link>
-        </Button> */}
+        </Button>
         {/* <Button style={styles.normalButton}>
         <Link to="/admin" onPress={() => props.togglePanel()}>
           <Text style={{color: '#6f777e', fontSize: 17}}>Admin</Text>

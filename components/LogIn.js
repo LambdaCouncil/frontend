@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Container, Content, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
+import { Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 
 import firebase from "../firebase"
@@ -53,9 +53,9 @@ function Login(props) {
 
     _renderButton = _ => {
         if (requestActive)
-            return <H3 submit>Logging in...</H3>
+            return <H3 style={{}} submit>Logging in...</H3>
         else
-            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-r', fontSize: 17 }} submit>Log In</H3>
+            return <H3 onPress={handleSubmit} style={{ color: '#6f777e', fontFamily: 'bern-sb', fontSize: 17 }} submit>Log In</H3>
     }
 
     return (
@@ -75,6 +75,7 @@ function Login(props) {
                     contentContainerStyle={{
                         alignItems: 'center',
                         paddingTop: '15%',
+                        height: '100%'
                         //     paddingBottom: '85%'
                     }}>
 
@@ -83,7 +84,7 @@ function Login(props) {
                     <Text style={{ fontFamily: 'bern-r', fontSize: 17, color: '#202224' }}>Log into your Councils account.</Text>
 
                     <Item floatingLabel>
-                        <Label style={{ fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Email</Label>
+                        <Label style={(email !== '') ? {color: '#202224', fontFamily: 'bern-sb', fontSize: 13} : { fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Email</Label>
                         <Input onChangeText={handleChangeEmail} value={email} />
                     </Item>
 
@@ -100,6 +101,10 @@ function Login(props) {
 
                     <Text style={{ color: "red" }}>{error.message}</Text>
 
+                    <Footer style={styles.footer}>
+                        <Text style={styles.footerText}>Forgot Password?</Text>
+                    </Footer>
+
                 </Content>
             </Container>
 
@@ -108,5 +113,19 @@ function Login(props) {
     )
 }
 
+const styles = StyleSheet.create({
+    footer: {
+        flex: 1,
+        // justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        backgroundColor: 'white',
+        elevation: 0,
+    },
+    footerText: {
+        color: '#288365',
+        fontFamily: 'bern-r',
+        fontSize: 15,
+    }
+})
 
 export default withRouter(Login)
