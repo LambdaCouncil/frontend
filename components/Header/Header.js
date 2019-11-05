@@ -140,7 +140,7 @@ const pageHeader = props => {
         </Body>
         <Right style={styles.icons}>{arrayForSure()}</Right>
       </Header>
-      {showPanel && <SidePanel togglePanel={togglePanel} />}
+      <SidePanel togglePanel={togglePanel} showPanel={showPanel} />
       {showModal && whichModal()}
     </>
   )

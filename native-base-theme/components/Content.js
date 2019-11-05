@@ -13,6 +13,11 @@ export default _ => {
       borderWidth: 0,
       backgroundColor: 'transparent'
     },
+    '.test': {
+      flexDirection: 'column-reverse',
+      height: '100%',
+      marginBottom: 50
+    }
   }
 
 }

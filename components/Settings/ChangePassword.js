@@ -20,7 +20,7 @@ function ChangePassword(props) {
 
   const changePassword = () => {
     console.log('Password Changed');
-    props.history.push('/editprofile')
+    props.history.push('/edit-profile')
   }
 
   console.log('ChangePasswordProps', props)
@@ -30,15 +30,7 @@ function ChangePassword(props) {
       style={styles.inputContainer}
       behavior='padding'
     >
-      <Link onPress={() => props.history.goBack()} style={styles.link}>
-        <Icon
-          name='arrow-back'
-          color='green'
-          style={styles.backButton}
-        />
-      </Link>
       <View style={styles.pageView}>
-        <H1>Change Password</H1>
         <Item floatingLabel style={styles.inputItem}>
           <Label>Old Password</Label>
           <Input
@@ -89,7 +81,7 @@ const styles = StyleSheet.create({
   },
   pageView: {
     marginHorizontal: 20,
-    marginTop: 80,
+    marginTop: 20,
   },
   header: {
     fontSize: 28,
