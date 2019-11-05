@@ -64,7 +64,7 @@ function EditProfile(props) {
   const _renderButtons = _ => {
     if(props.history.location.pathname === "/complete-profile") {
       return (
-        <H3 onPress={() => {
+        <H3 style = {{ color: "#288365" }} onPress={() => {
           handleSubmit()
           props.history.push('/discussions')
         }}>Save and Continue</H3>
