@@ -52,7 +52,8 @@ function EditProfile(props) {
         lastName,
         calling,
         email,
-        phone
+        phone,
+        name: `${firstName} ${lastName}`
       })
     firebase.auth().currentUser.updateProfile({
       displayName: `${firstName} ${lastName}`,
