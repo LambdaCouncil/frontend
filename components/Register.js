@@ -5,11 +5,10 @@ import { Content, Input, Text, Label, Item, View, H3, Icon } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
-import { signUpDisplayName, setUser } from '../actions'
+import { setUser } from '../actions'
 
 function Register(props) {
 
-    const [displayName, setDisplayName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -17,8 +16,6 @@ function Register(props) {
     const [error, setError] = useState({ message: "" })
 
     const userRef = firebase.firestore().collection('users'),
-
-        handleChangeDisplayName = text => setDisplayName(text.trim()),
 
         handleChangeEmail = text => setEmail(text.trim()),
 
@@ -32,8 +29,6 @@ function Register(props) {
 
             if (password === passwordConfirm) {
 
-                props.signUpDisplayName(displayName)
-
                 setActive(true)
 
                 firebase
@@ -42,18 +37,15 @@ function Register(props) {
                     .then(createdUser => {
                         createdUser.user
                             .updateProfile({
-                                displayName: displayName,
-                                photoURL: `https://ui-avatars.com/api/?name=${displayName.replace(' ', '+')}`
+                                photoURL: `https://ui-avatars.com/api/?name=${email}`
                             })
                             .then(_ => {
                                 userRef.doc(createdUser.user.uid)
                                     .set({
-                                        name: createdUser.user.displayName,
                                         avatar: createdUser.user.photoURL,
                                         id: createdUser.user.uid
                                     })
                                     .then(_ => {
-                                        setDisplayName(' ')
                                         setEmail(' ')
                                         setPassword(' ')
                                         setPasswordConfirm(' ')
@@ -75,16 +67,16 @@ function Register(props) {
             setActive(false)
         }
 
-        _renderButton = _ => {
-            if(requestActive) 
-                return <H3 submit>Signing Up...</H3>
-            else 
-                return <H3 onPress={handleSubmit} submit>Sign Up</H3>
-        }
+    _renderButton = _ => {
+        if (requestActive)
+            return <H3 submit>Signing Up...</H3>
+        else
+            return <H3 onPress={handleSubmit} submit>Sign Up</H3>
+    }
 
-        _renderErrorText = _ => {
-            return error ? error.message :"An internal error occured"
-        }
+    _renderErrorText = _ => {
+        return error ? error.message : "An internal error occured"
+    }
 
     return (
         <>
@@ -93,7 +85,7 @@ function Register(props) {
                 backButton
                 name='arrow-back'
                 onPress={props.history.goBack}
-                style={{fontSize: 24, marginLeft: 20, marginTop: 20}}
+                style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
             />
 
             <Content
@@ -107,15 +99,9 @@ function Register(props) {
 
                 <Text style={styles.subheader}>Create Councils account.</Text>
 
-
-                <Item floatingLabel>
-                    <Label style={styles.label}>Display Name</Label>
-                    <Input onChangeText={handleChangeDisplayName} value = {displayName} />
-                </Item>
-
                 <Item floatingLabel>
                     <Label style={styles.label}>Email</Label>
-                    <Input onChangeText={handleChangeEmail} value = {email} />
+                    <Input onChangeText={handleChangeEmail} value={email} />
                 </Item>
                 <View style={styles.view}>
                     <Text style={styles.text}>Use Councils invitation email</Text>
@@ -125,7 +111,7 @@ function Register(props) {
                     <Label style={styles.label}>Password</Label>
                     <Input
                         onChangeText={handleChangePassword}
-                        value = {password}
+                        value={password}
                         secureTextEntry={true}
                     />
                 </Item>
@@ -137,14 +123,14 @@ function Register(props) {
                     <Label style={styles.label}>Confirm Password</Label>
                     <Input
                         secureTextEntry={true}
-                        value = {passwordConfirm}
+                        value={passwordConfirm}
                         onChangeText={handleChangePasswordConfirm}
                     />
                 </Item>
 
-                { _renderButton() }
+                {_renderButton()}
 
-                <Text style = {{ color: "red" }}>{_renderErrorText()}</Text>
+                <Text style={{ color: "red" }}>{_renderErrorText()}</Text>
 
             </Content>
 
@@ -159,7 +145,7 @@ const styles = StyleSheet.create({
         fontFamily: 'gotham',
         fontSize: 28,
         marginBottom: 10
-    }, 
+    },
     subheader: {
         color: '#202224',
         fontFamily: 'bern-r',
@@ -184,4 +170,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(state => ({ ...state }), { signUpDisplayName, setUser })(withRouter(Register))
+export default connect(state => ({ ...state }), { setUser })(withRouter(Register))

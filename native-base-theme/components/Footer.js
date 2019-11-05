@@ -97,7 +97,7 @@ export default _ => {
       alignSelf: 'center',
       alignItems: 'flex-end'
     },
-    backgroundColor: variables.footerDefaultBg,
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'center',
     borderTopWidth:
@@ -110,7 +110,7 @@ export default _ => {
         : undefined,
     height: variables.footerHeight,
     paddingBottom: variables.footerPaddingBottom,
-    elevation: 3,
+    elevation: 0,
     left: 0,
     right: 0
   }
