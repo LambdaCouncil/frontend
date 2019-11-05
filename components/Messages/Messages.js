@@ -31,35 +31,31 @@ const Messages = props => {
   console.log('messages from Messages *** : ', messages)
 
   return (
-    <KeyboardAvoidingView
-      behavior='padding'
-      style={{
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-        flexDirection: 'column-reverse'
-      }}>
-      <Content test>
-        <List>
-          {messages.length > 0 && messages.map((message, id) =>
-            <Message
-              message={message}
-              currentUser={props.currentUser}
-              key={id * Math.random()}
-              message={message}
-            />
-          )}
-        </List>
-          
-        <View style={{height: 300}}>
+ 
+    <Content test>
+      <List>
+        {messages.length > 0 && messages.map((message, id) =>
+          <Message
+            message={message}
+            currentUser={props.currentUser}
+            key={id * Math.random()}
+            message={message}
+          />
+        )}
+      </List>       
+      <KeyboardAvoidingView
+        behavior='padding'
+        style={{
+          justifyContent: 'center',
+        }}>
           <MessageForm
             discussionsRef={discussionsRef}
             currentChannel={props.currentChannel}
             currentUser={props.currentUser}
           />
-        </View>
-      </Content>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </Content>
+
   )
 }
 
