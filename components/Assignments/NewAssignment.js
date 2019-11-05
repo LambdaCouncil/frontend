@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-native";
 import { connect } from "react-redux";
-import { Modal, StyleSheet } from "react-native";
+import { Modal } from "react-native";
 import {
   Content,
   View,
@@ -148,7 +148,7 @@ const NewAssignment = props => {
       <Content>
         <Form>
           <Item floatingLabel>
-            <Label style={styles.text}>Description</Label>
+            <Label>Description</Label>
             <Input
               name="description"
               onChangeText={text => handleDescription(text)}
@@ -162,7 +162,7 @@ const NewAssignment = props => {
             transparent
           >
             <View>
-              <Text style={styles.text}>Council</Text>
+              <Text>Council</Text>
               {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
             </View>
           </Button>
@@ -182,7 +182,7 @@ const NewAssignment = props => {
             transparent
           >
             <View>
-              <Text style={styles.text}>Assign To</Text>
+              <Text>Assign To</Text>
               {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
             </View>
           </Button>
@@ -231,13 +231,5 @@ const NewAssignment = props => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    color: '#6f777e',
-    fontFamily: 'bern-r',
-    fontSize: 17
-  },
-})
 
 export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(NewAssignment));

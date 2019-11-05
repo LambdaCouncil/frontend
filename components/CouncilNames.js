@@ -64,19 +64,19 @@ const CouncilNames = props => {
                     key={id}
                     onPress={() =>
                       props.handleCouncil(
-                        `${obj.firstname} ${obj.lastname}`,
+                        `${obj.name}`,
                         obj.id
                       )
                     }
                   >
                     <Left>
                       <Text>
-                        {renderCouncilName(`${obj.firstname} ${obj.lastname}`)}
+                        {(`${obj.name}`)}
                       </Text>
                     </Left>
                     <Right>
                       <Text>
-                        {renderCheckmark(`${obj.firstname} ${obj.lastname}`)}
+                        {renderCheckmark(`${obj.name}`)}
                       </Text>
                     </Right>
                   </ListItem>
