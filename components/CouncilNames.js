@@ -58,29 +58,39 @@ const CouncilNames = props => {
             </Body>
           </Header>
           <List>
-            {props.users ? (
-              options.map((obj, id) => (
-                <ListItem key={id} onPress={() => props.handleCouncil(obj.name, obj.id)}>
-                  <Left>
-                    <Text>{renderCouncilName(obj.name)}</Text>
-                  </Left>
-                  <Right>
-                    <Text>{renderCheckmark(obj.name)}</Text>
-                  </Right>
-                </ListItem>
-              ))
-            ) : (
-              options.map((name, id) => (
-                <ListItem key={id} onPress={() => props.handleCouncil(name)}>
-                  <Left>
-                    <Text>{renderCouncilName(name)}</Text>
-                  </Left>
-                  <Right>
-                    <Text>{renderCheckmark(name)}</Text>
-                  </Right>
-                </ListItem>
-              ))
-            )}
+            {props.users
+              ? options.map((obj, id) => (
+                  <ListItem
+                    key={id}
+                    onPress={() =>
+                      props.handleCouncil(
+                        `${obj.firstname} ${obj.lastname}`,
+                        obj.id
+                      )
+                    }
+                  >
+                    <Left>
+                      <Text>
+                        {renderCouncilName(`${obj.firstname} ${obj.lastname}`)}
+                      </Text>
+                    </Left>
+                    <Right>
+                      <Text>
+                        {renderCheckmark(`${obj.firstname} ${obj.lastname}`)}
+                      </Text>
+                    </Right>
+                  </ListItem>
+                ))
+              : options.map((name, id) => (
+                  <ListItem key={id} onPress={() => props.handleCouncil(name)}>
+                    <Left>
+                      <Text>{renderCouncilName(name)}</Text>
+                    </Left>
+                    <Right>
+                      <Text>{renderCheckmark(name)}</Text>
+                    </Right>
+                  </ListItem>
+                ))}
           </List>
         </View>
       </Modal>
