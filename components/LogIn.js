@@ -84,7 +84,7 @@ function Login(props) {
                     <Text style={{ fontFamily: 'bern-r', fontSize: 17, color: '#202224' }}>Log into your Councils account.</Text>
 
                     <Item floatingLabel>
-                        <Label style={(email !== '') ? {color: '#202224', fontFamily: 'bern-sb', fontSize: 13} : { fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Email</Label>
+                        <Label style={(email !== '') ? styles.activeLabel : styles.label}>Email</Label>
                         <Input onChangeText={handleChangeEmail} value={email} />
                     </Item>
 
@@ -125,6 +125,16 @@ const styles = StyleSheet.create({
         color: '#288365',
         fontFamily: 'bern-r',
         fontSize: 15,
+    },
+    label: {
+        fontFamily: 'bern-r', 
+        fontSize: 17, 
+        color: '#6f777e' 
+    },
+    activeLabel: {
+        color: '#202224', 
+        fontFamily: 'bern-sb', 
+        fontSize: 13
     }
 })
 
