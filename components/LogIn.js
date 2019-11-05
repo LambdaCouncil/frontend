@@ -35,9 +35,6 @@ function Login(props) {
                 .signInWithEmailAndPassword(email, password)
                 .then(signedInUser => {
                     console.log(signedInUser)
-                    setEmail(' ')
-                    setPassword(' ')
-                    setActive(false)
                 })
                 .catch(err => {
                     const variable = 'There is no user record corresponding to this identifier. The user may have been deleted.'

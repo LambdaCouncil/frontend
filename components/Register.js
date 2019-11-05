@@ -46,9 +46,6 @@ function Register(props) {
                                         id: createdUser.user.uid
                                     })
                                     .then(_ => {
-                                        setEmail(' ')
-                                        setPassword(' ')
-                                        setPasswordConfirm(' ')
                                         props.setUser(createdUser.user)
                                         props.history.push('/complete-profile')
                                     })
