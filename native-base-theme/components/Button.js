@@ -3,7 +3,6 @@
 import variables, { platform, PLATFORM } from './../variables/commonColor'
 
 export default _ => {
-
   const { platformStyle } = variables
 
   const { ui, text } = variables.councils
@@ -252,25 +251,25 @@ export default _ => {
       shadowOpacity: null,
       ...primaryCommon,
       '.dark': {
-        ...darkCommon,
+        ...darkCommon
       },
       '.danger': {
-        ...dangerCommon,
+        ...dangerCommon
       },
       '.warning': {
-        ...warningCommon,
+        ...warningCommon
       },
       '.info': {
-        ...infoCommon,
+        ...infoCommon
       },
       '.primary': {
-        ...primaryCommon,
+        ...primaryCommon
       },
       '.success': {
-        ...successCommon,
+        ...successCommon
       },
       '.light': {
-        ...lightCommon,
+        ...lightCommon
       },
       '.disabled': {
         backgroundColor: 'transparent',
@@ -380,11 +379,12 @@ export default _ => {
     },
     '.backButton': {
       top: 20,
-      left: 0,     
+      left: 0,
       position: 'absolute',
       zIndex: 2,
       fontSize: 50,
       color: text.greal,
+      elevation: 0
     },
     backgroundColor: ui.white,
     borderRadius: variables.borderRadiusBase,
@@ -396,5 +396,4 @@ export default _ => {
     alignItems: 'center',
     justifyContent: 'space-between'
   }
-
 }
