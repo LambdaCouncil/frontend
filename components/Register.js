@@ -24,8 +24,18 @@ function Register(props) {
         handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
 
         handleSubmit = _ => {
-            setActive(false)
-            setError({ message: "" })
+
+            if (isEmailInvalid()) {
+                setError({ message: "Email is invalid" })
+                setActive(false)
+                return
+            }
+
+            if (isPasswordInvalid()) {
+                setError({ message: "Password is invalid" })
+                setActive(false)
+                return
+            }
 
             if (password === passwordConfirm) {
 
@@ -62,17 +72,21 @@ function Register(props) {
         handleError = err => {
             setError(err)
             setActive(false)
+        },
+
+        isEmailInvalid = _ => !email.match(/^(.+[@].+[.].+)/),
+
+        isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
+
+        _renderButton = _ => {
+            if (requestActive)
+                return <Spinner />
+            else
+                return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Sign Up</H3>
         }
 
-    _renderButton = _ => {
-        if (requestActive)
-            return <Spinner />
-        else
-            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Sign Up</H3>
-    }
-
     const getColor = _ => {
-        if(email === "" || password === "" || passwordConfirm === "") return "#A9AAAC"
+        if (email === "" || password === "" || passwordConfirm === "") return "#A9AAAC"
         else return "#288365"
     }
 

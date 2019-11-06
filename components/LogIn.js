@@ -18,11 +18,13 @@ function Login(props) {
         handleSubmit = _ => {
             if (isEmailInvalid()) {
                 setError({ message: "Email is invalid" })
+                setActive(false)
                 return
             }
 
             if (isPasswordInvalid()) {
                 setError({ message: "Password is invalid" })
+                setActive(false)
                 return
             }
 
@@ -44,19 +46,19 @@ function Login(props) {
                 })
         },
 
-        isEmailInvalid = _ => email.length <= 1
+        isEmailInvalid = _ => email.length <= 1 || !email.match(/^(.+[@].+[.].+)/),
 
-    isPasswordInvalid = _ => password.length <= 1
+        isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
 
-    _renderButton = _ => {
-        if (requestActive)
-            return <Spinner />
-        else
-            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Log In</H3>
-    }
+        _renderButton = _ => {
+            if (requestActive)
+                return <Spinner />
+            else
+                return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Log In</H3>
+        }
 
     const getColor = _ => {
-        if(email === "" || password === "") return "#A9AAAC"
+        if (email === "" || password === "") return "#A9AAAC"
         else return "#288365"
     }
 
