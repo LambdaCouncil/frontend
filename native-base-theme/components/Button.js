@@ -378,6 +378,14 @@ export default _ => {
       borderWidth: 0,
       borderColor: ui.white
     },
+    '.backButton': {
+      top: 20,
+      left: 0,     
+      position: 'absolute',
+      zIndex: 2,
+      fontSize: 50,
+      color: text.greal,
+    },
     backgroundColor: ui.white,
     borderRadius: variables.borderRadiusBase,
     borderColor: ui.white,

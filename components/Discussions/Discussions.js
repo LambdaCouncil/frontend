@@ -50,11 +50,7 @@ const Discussions = props => {
     else return (
         <Content padder>
             <List>
-                <Discussion
-                    loading={true}
-                    discussion={pseudoDiscussion}
-                    currentUser={props.currentUser}
-                />
+                <Text style = {{ fontFamily: "bern-r", fontSize: 20, display: "flex", justifyContent: "center", marginHorizontal: "10%", marginTop: 30 }}>You have no active discussions! Press '+' to create a new one</Text>
             </List>
         </Content>
     )
@@ -81,7 +77,7 @@ const Discussion = props => {
 
     return (
 
-        <ListItem style={{height: 88, verticalPadding: 14}} avatar
+        <ListItem style={{ height: 88, verticalPadding: 14 }} avatar
             onPress={() => {
                 if (!props.loading) {
                     props.setCurrentChannel({
@@ -93,14 +89,24 @@ const Discussion = props => {
             }}
         >
             <Left>
-                <Thumbnail style={{height: 48, width: 48}} source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
+                <Thumbnail style={{ height: 48, width: 48 }} source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
             </Left>
             <Body>
-                <Text name style={{color: '#202224'}}>{otherUser.name || mostRecent.user.name}</Text>
-                <Text snippet style={{color: '#202224', fontFamily: 'bern-r', fontSize: 15, marginTop: 7, marginBottom: 7}}>
-                    {`${mostRecent.user.id === props.currentUser.uid ? 'me' : mostRecent.user.name}: ${mostRecent.content}`}
+                <Text name style={{ color: '#202224' }}>{otherUser.name || mostRecent.user.name}</Text>
+                <Text snippet style={{
+                    color: '#202224',
+                    fontFamily: 'bern-r',
+                    fontSize: 15,
+                    marginTop: 7,
+                    marginBottom: 7,
+                }}>
+                    {`${mostRecent.user.id === props.currentUser.uid ? 'me' : mostRecent.user.name}: ${mostRecent.content.slice(0, 10)}`}
                 </Text>
-                <Text note style={{color: '#6f777e', fontFamily: 'bern-r', fontSize: 13}}>{moment(mostRecent.timestamp).format('lll')}</Text>
+                <Text note style={{
+                    color: '#6f777e',
+                    fontFamily: 'bern-r',
+                    fontSize: 13
+                }}>{moment(mostRecent.timestamp).format('lll')}</Text>
             </Body>
             <Right>
                 <Text>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import firebase from "../firebase"
-import { Content, Input, Text, Label, Item, View, H3, Icon } from 'native-base'
+import { Button, Content, Input, Text, Label, Item, View, H3, Icon, Spinner } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -46,9 +46,6 @@ function Register(props) {
                                         id: createdUser.user.uid
                                     })
                                     .then(_ => {
-                                        setEmail(' ')
-                                        setPassword(' ')
-                                        setPasswordConfirm(' ')
                                         props.setUser(createdUser.user)
                                         props.history.push('/complete-profile')
                                     })
@@ -69,9 +66,14 @@ function Register(props) {
 
     _renderButton = _ => {
         if (requestActive)
-            return <H3 submit>Signing Up...</H3>
+            return <Spinner />
         else
-            return <H3 onPress={handleSubmit} submit>Sign Up</H3>
+            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Sign Up</H3>
+    }
+
+    const getColor = _ => {
+        if(email === "" || password === "" || passwordConfirm === "") return "#A9AAAC"
+        else return "#288365"
     }
 
     _renderErrorText = _ => {
@@ -80,13 +82,12 @@ function Register(props) {
 
     return (
         <>
-
-            <Icon
-                backButton
-                name='arrow-back'
-                onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
-            />
+            <Button backButton onPress={props.history.goBack}>                
+                <Icon backButton
+                    name='arrow-back'
+                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
+                />
+            </Button>
 
             <Content
                 padder

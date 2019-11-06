@@ -52,12 +52,39 @@ function EditProfile(props) {
         lastName,
         calling,
         email,
-        phone
+        phone,
+        name: `${firstName} ${lastName}`
       })
     firebase.auth().currentUser.updateProfile({
       displayName: `${firstName} ${lastName}`,
       // photoURL: 
     })
+  }
+
+  const _renderButtons = _ => {
+    if(props.history.location.pathname === "/complete-profile") {
+      return (
+        <H3 style = {{ color: "#288365" }} onPress={() => {
+          handleSubmit()
+          props.history.push('/discussions')
+        }}>Save and Continue</H3>
+      );
+    }
+    else {
+      return (
+        <>
+          <View style={styles.button}>
+              <Link to='/changepassword'>
+                <Text style={styles.password}>Change Password</Text>
+              </Link>
+            </View>
+
+          <View style={styles.button}>
+            <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
+          </View>
+        </>
+      );
+    }
   }
 
   return (
@@ -112,20 +139,7 @@ function EditProfile(props) {
 
           <View style={styles.buttonsBottom}>
 
-            <View style={styles.button}>
-              <Link to='/changepassword'>
-                <Text style={styles.password}>Change Password</Text>
-              </Link>
-            </View>
-
-            <View style={styles.button}>
-              <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
-            </View>
-
-            <H3 onPress={() => {
-              handleSubmit()
-              props.history.push('/discussions')
-            }}>Save and Continue</H3>
+            { _renderButtons() }            
 
           </View>
 
