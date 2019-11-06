@@ -96,7 +96,8 @@ const NewAssignment = props => {
           assign: assignTo,
           descript: description,
           note: notes
-        }
+        },
+        completed: false
       })
 
 
