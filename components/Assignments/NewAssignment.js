@@ -1,41 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-native";
-import { Modal } from "react-native";
-import { Content, 
-         View, 
-         Text, 
-         List, 
-         ListItem, 
-         Button, 
-         Form, 
-         Item, 
-         Input, 
-         Label, 
-         TextInput, 
-         Picker, 
-         Footer, 
-         H3, 
-         DatePicker, 
-         Icon, 
-         Left, 
-         Right 
-        } from "native-base";
+import { connect } from "react-redux";
+import { Modal, StyleSheet } from "react-native";
+import {
+  Content,
+  View,
+  Text,
+  Button,
+  Form,
+  Item,
+  Input,
+  Label,
+  H3,
+  DatePicker
+} from "native-base";
+import { setCurrentAssignment } from '../../actions'
 import ModalHeader from "../Modals/ModalHeader";
 import CouncilNames from "../CouncilNames";
 
 // import { setCurrentChannel } from "../../actions";
-// import ModalHeader from "../Modals/ModalHeader";
 import firebase from "../../firebase";
+
+// const blankAssignment = {
+//   date: null,
+//   council: '',
+//   assign: '',
+//   descript: '',
+//   note: ''
+// }
 
 const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
-  const [council, setCouncil] = useState('');
+  const [chosenCouncil, setChosenCouncil] = useState('');
   const [assignTo, setAssignTo] = useState('');
-  const [assignmentDescription, setAssignmentDescription] = useState('');
+  const [description, setDescription] = useState('');
   const [notes, setNotes] = useState('');
-  const [councilNameScreen, setCouncilNameScreen] = useState(false);
   const [showCouncilModal, setShowCouncilModal] = useState(false);
   const [showATModal, setShowATModal] = useState(false);
+  // const [assignment, setAssignment] = useState(blankAssignment);
 
   const councilNames = [
     "bishopric",
@@ -66,21 +68,49 @@ const NewAssignment = props => {
       .catch(err => console.error(err));
   }, []);
 
+  const assignmentsRef = db.collection('assignments')
 
-  console.log(councilNameScreen);
+  const createAssignment = () => {
+    console.log('createAssignment pressed');
+    props.setShowModal(false);
+    // console.log('assignment', assignment);
+    // setAssignment({
+    //   date: chosenDate,
+    //   council: chosenCouncil,
+    //   assign: assignTo,
+    //   descript: description,
+    //   note: notes
+    // })
+    if (description.length > 0 && chosenCouncil.length > 0 && assignTo.length > 0 && chosenDate != null && notes.length > 0) {
+      console.log('hurray')
+      // const newAssignment =
+      assignmentsRef.add({
+        timestamp: Date.now(),
+        user: {},
+        content: {
+          date: chosenDate,
+          council: chosenCouncil,
+          assign: assignTo,
+          descript: description,
+          note: notes
+        }
+      })
 
-  const handleSubmit = () => {
-    console.log('handleSubmit for assignments pressed');
+
+    } else {
+      console.log('boooooo')
+    }
   };
 
-  const handleAssignmentDescription = text => {
-    setAssignmentDescription(text);
-    console.log(assignmentDescription);
+  // console.log('assignment obj outside', assignment);
+
+  const handleDescription = text => {
+    setDescription(text);
   }
 
   const handleCouncil = name => {
-    console.log(name + ' was pressed')
-    setCouncil(name);
+    console.log(name + ' was pressed');
+    setChosenCouncil(name);
   }
 
   const handleAssignTo = name => {
@@ -88,22 +118,19 @@ const NewAssignment = props => {
     setAssignTo(name);
   };
 
+  const handleDate = value => {
+    setChosenDate(value);
+  }
+
   const handleNotes = text => {
     setNotes(text);
-    console.log(notes);
   };
 
-  const openCouncilModal = _ => {
-    console.log('modal for council selection should open')
-  }
-
-  const changeScreen = text => {
-    console.log('changeScreen pressed')
-    if (text === 'council') {
-      setCouncilNameScreen(true)
-      console.log(councilNameScreen);
-    }
-  }
+  // console.log("description: ", description);
+  // console.log("council: ", chosenCouncil);
+  // console.log("assignTo: ", assignTo);
+  // console.log("date: ", chosenDate);
+  // console.log("notes", notes);
 
   return (
     <Modal animationType="slide" transparent={false} visible={true}>
@@ -111,11 +138,11 @@ const NewAssignment = props => {
       <Content>
         <Form>
           <Item floatingLabel>
-            <Label>Description</Label>
+            <Label style={styles.text}>Description</Label>
             <Input
               name="description"
-              onChangeText={text => handleAssignmentDescription(text)}
-              value={assignmentDescription}
+              onChangeText={text => handleDescription(text)}
+              value={description}
             />
           </Item>
 
@@ -124,20 +151,9 @@ const NewAssignment = props => {
             onPress={() => setShowCouncilModal(true)}
             transparent
           >
-            {/* {council.length > 0 ? (
-              <View>
-                <Text>Council</Text>
-                <Text>{council}</Text>
-              </View>
-            ) : (
-              <View>
-                <Text>Council</Text>
-              </View>
-            )} */}
-
             <View>
-              <Text>Council</Text>
-              {council.length > 0 ? <Text>{council}</Text> : null}
+              <Text style={styles.text}>Council</Text>
+              {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
             </View>
           </Button>
 
@@ -145,7 +161,7 @@ const NewAssignment = props => {
             <CouncilNames
               options={councilNames}
               setShowModal={setShowCouncilModal}
-              council={council}
+              council={chosenCouncil}
               handleCouncil={handleCouncil}
             />
           )}
@@ -156,7 +172,7 @@ const NewAssignment = props => {
             transparent
           >
             <View>
-              <Text>Assign To</Text>
+              <Text style={styles.text}>Assign To</Text>
               {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
             </View>
           </Button>
@@ -183,11 +199,9 @@ const NewAssignment = props => {
             // placeHolderText="Select date"
             textStyle={{ color: "green" }}
             placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={value => setChosenDate(value)}
+            onDateChange={value => handleDate(value)}
             disabled={false}
           />
-          {/* <Text>{chosenDate && chosenDate.toString().substr(4, 12)}</Text> */}
-          {/* </Item> */}
           <Item floatingLabel>
             <Label>Notes</Label>
             <Input
@@ -197,7 +211,7 @@ const NewAssignment = props => {
             />
           </Item>
 
-          <H3 onPress={handleSubmit} submit>
+          <H3 onPress={createAssignment} submit>
             Create
           </H3>
         </Form>
@@ -206,4 +220,12 @@ const NewAssignment = props => {
   );
 };
 
-export default withRouter(NewAssignment);
+const styles = StyleSheet.create({
+  text: {
+    color: '#6f777e',
+    fontFamily: 'bern-r',
+    fontSize: 17
+  },
+})
+
+export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(NewAssignment));

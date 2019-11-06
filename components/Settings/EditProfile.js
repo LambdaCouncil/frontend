@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
-import firebase from "../../firebase"
-import { StyleSheet } from 'react-native'
-import { Input, Text, Label, Item, H1, Icon, View, Content } from 'native-base'
+import { StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { Input, Text, Label, Item, H1, H3, Icon, View, Content } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
+import { connect } from 'react-redux'
+
+import firebase, { db } from "../../firebase"
 
 function EditProfile(props) {
+
+  const { currentUser } = props;
+  console.log('props', props)
+  console.log('currentUser', currentUser)
+  // console.log(currentUser.email)
+  console.log(currentUser.email)
+  // console.log('CU Name', currentUser.displayName)
 
   const [firstName, setFirstName] = useState(' ')
   const [lastName, setLastName] = useState(' ')
   const [calling, setCalling] = useState(' ')
   const [email, setEmail] = useState(' ')
   const [phone, setPhone] = useState(' ')
-
-  const db = firebase.firestore()
-  const userRef = db.collection('users')
 
   const handleFirstName = text => setFirstName(text)
 
@@ -38,53 +44,99 @@ function EditProfile(props) {
     props.history.push('/settings')
   }
 
+  const handleSubmit = _ => {
+    db('users')
+      .doc(props.currentUser.uid)
+      .update({
+        firstName,
+        lastName,
+        calling,
+        email,
+        phone
+      })
+    firebase.auth().currentUser.updateProfile({
+      displayName: `${firstName} ${lastName}`,
+      // photoURL: 
+    })
+  }
+
   return (
 
-    <Content padder>
-      <View style={styles.pageView}>
-        <View style={styles.btnWrapper}>
-          <View style={styles.photobtn}>
-            <Icon name='camera' />
-          </View>
-        </View>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>First Name</Label>
-          <Input onChangeText={handleFirstName} />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Last Name</Label>
-          <Input onChangeText={handleLastName} />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Calling</Label>
-          <Input onChangeText={handleChangeCalling} />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Email</Label>
-          <Input
-            onChangeText={handleChangeEmail}
-          />
-        </Item>
-        <Item floatingLabel style={styles.inputItem}>
-          <Label>Phone</Label>
-          <Input
-            onChangeText={handleChangePhone}
-          />
-        </Item>
-        <View style={styles.buttonsBottom}>
-          <View style={styles.button}>
-            <Link to='/changepassword'>
-              <Text style={styles.password}>Change Password</Text>
-            </Link>
-          </View>
-          <View style={styles.button}>
-            <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
+    <KeyboardAvoidingView
+      style={styles.inputContainer}
+      behavior='padding'
+    >
+
+      <Content padder>
+
+        <View style={styles.pageView}>
+
+          {/* <View style={styles.btnWrapper}>
+            <View style={styles.photobtn}>
+              <Icon name='camera' />
+            </View>
+          </View> */}
+
+          <Item floatingLabel
+            style={styles.inputItem}>
+            <Label>First Name</Label>
+            <Input
+              onChangeText={handleFirstName} />
+          </Item>
+
+          <Item floatingLabel style={styles.inputItem}>
+            <Label>Last Name</Label>
+            <Input onChangeText={handleLastName} />
+          </Item>
+
+          <Item floatingLabel style={styles.inputItem}>
+            <Label>Calling</Label>
+            <Input onChangeText={handleChangeCalling} />
+          </Item>
+
+          <Item floatingLabel
+            style={styles.inputItem}>
+            <Label>Email</Label>
+            <Input
+              value={currentUser.email}
+              onChangeText={handleChangeEmail}
+            />
+          </Item>
+
+          <Item floatingLabel style={styles.inputItem}>
+            <Label>Phone</Label>
+            <Input
+              onChangeText={handleChangePhone}
+            />
+          </Item>
+
+          <View style={styles.buttonsBottom}>
+
+            <View style={styles.button}>
+              <Link to='/changepassword'>
+                <Text style={styles.password}>Change Password</Text>
+              </Link>
+            </View>
+
+            <View style={styles.button}>
+              <Text onPress={deleteAccount} style={styles.delete}>Delete Account</Text>
+            </View>
+
+            <H3 onPress={() => {
+              handleSubmit()
+              props.history.push('/discussions')
+            }}>Save and Continue</H3>
+
           </View>
 
         </View>
-      </View>
-    </Content>
+
+      </Content>
+
+    </KeyboardAvoidingView>
+
   )
+
 }
 
 
@@ -106,9 +158,13 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     height: '100%',
+    width: '100%',
+    justifyContent: 'center',
   },
   pageView: {
-    marginHorizontal: 20,
+    alignItems: 'center',
+    flex: 1,
+    width: '100%',
     marginTop: 20
   },
   button: {
@@ -127,4 +183,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default withRouter(EditProfile)
+export default connect(state => ({ ...state }))(withRouter(EditProfile))

@@ -50,7 +50,8 @@ const Discussions = props => {
     else return (
         <Content padder>
             <List>
-                <Discussion loading={true}
+                <Discussion
+                    loading={true}
                     discussion={pseudoDiscussion}
                     currentUser={props.currentUser}
                 />
@@ -80,22 +81,26 @@ const Discussion = props => {
 
     return (
 
-        <ListItem avatar
+        <ListItem style={{height: 88, verticalPadding: 14}} avatar
             onPress={() => {
-                props.setCurrentChannel({
-                    id: props.discussion.id,
-                    direct: true
-                })
-                props.history.push('/messages')
+                if (!props.loading) {
+                    props.setCurrentChannel({
+                        id: props.discussion.id,
+                        direct: true
+                    })
+                    props.history.push('/messages')
+                }
             }}
         >
             <Left>
-                <Thumbnail small source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
+                <Thumbnail style={{height: 48, width: 48}} source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
             </Left>
             <Body>
-                <Text name>{otherUser.name || mostRecent.user.name}</Text>
-                <Text snippet>{mostRecent.content}</Text>
-                <Text note>{moment(mostRecent.timestamp).format('lll')}</Text>
+                <Text name style={{color: '#202224'}}>{otherUser.name || mostRecent.user.name}</Text>
+                <Text snippet style={{color: '#202224', fontFamily: 'bern-r', fontSize: 15, marginTop: 7, marginBottom: 7}}>
+                    {`${mostRecent.user.id === props.currentUser.uid ? 'me' : mostRecent.user.name}: ${mostRecent.content}`}
+                </Text>
+                <Text note style={{color: '#6f777e', fontFamily: 'bern-r', fontSize: 13}}>{moment(mostRecent.timestamp).format('lll')}</Text>
             </Body>
             <Right>
                 <Text>

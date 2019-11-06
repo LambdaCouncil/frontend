@@ -8,7 +8,10 @@ export default _ => {
 
   return {
     '.focused': {
-      width: 0
+      color: '#202224',
+      width: 0,
+      fontFamily: 'bern-sb',
+      fontSize: 13,
     },
     fontSize: 17
   }
