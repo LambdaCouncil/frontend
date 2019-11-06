@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import firebase from "../firebase"
-import { Content, Input, Text, Label, Item, View, H3, Icon, Spinner } from 'native-base'
+import { Button, Content, Input, Text, Label, Item, View, H3, Icon, Spinner } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -82,13 +82,12 @@ function Register(props) {
 
     return (
         <>
-
-            <Icon
-                backButton
-                name='arrow-back'
-                onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
-            />
+            <Button backButton onPress={props.history.goBack}>                
+                <Icon backButton
+                    name='arrow-back'
+                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
+                />
+            </Button>
 
             <Content
                 padder

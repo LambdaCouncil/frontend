@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
+import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 import { withRouter } from 'react-router-native'
 
 import firebase from "../firebase"
@@ -64,12 +64,12 @@ function Login(props) {
 
         <>
 
-            <Icon
-                backButton
-                name='arrow-back'
-                onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20, marginTop: 30 }}
-            />
+            <Button backButton onPress={props.history.goBack}>                
+                <Icon backButton
+                    name='arrow-back'
+                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
+                />
+            </Button>
 
             <Container>
                 <Content

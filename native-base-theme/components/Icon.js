@@ -13,8 +13,6 @@ export default _ => {
       transform: [{ rotate: '90deg' }]
     },
     '.backButton': {
-      marginTop: 20,
-      marginLeft: 10,
       fontSize: 50,
       color: text.greal,
     },
