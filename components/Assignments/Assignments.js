@@ -37,6 +37,18 @@ const Assignments = props => {
     );
   }, []);
 
+  useEffect(_ => {
+    assignmentsRef
+      .where("createdBy", "==", props.currentUser.uid)
+      .onSnapshot(doc =>
+        setAssignedByMeAssignments(
+          doc.docs.map(docData => ({
+            ...docData.data(),
+            id: docData.id
+          }))
+        )
+      );
+  }, []);
 
   // useEffect(_ => {
   //   assignmentsRef.onSnapshot(doc =>
@@ -63,14 +75,6 @@ const Assignments = props => {
   // console.log('assignments from Assignments.js', assignments);
 
   const toggleComplete = (aid, completed) => {
-    console.log('toggle complete')
-    console.log('assignments assignment.id', aid);
-    console.log('assignments assignment.completed', completed);
-    // update firebase db completed for assignments
-    // assignmentsRef.where('id', '==', `${aid}`)
-    //   .update({
-    //     completed: !completed
-    //   })
     assignmentsRef.doc(aid).update({
       completed: !completed
     })
@@ -78,7 +82,7 @@ const Assignments = props => {
 
   return (
     <Content padder>
-      {myAssignments.length > 0 ? (
+      {myAssignments.length > 0 && (
         <View>
           <Text>My Assignments</Text>
           <List>
@@ -93,12 +97,29 @@ const Assignments = props => {
             })}
           </List>
         </View>
-      ) : (
+      )}
+      {assignedByMeAssignments.length > 0 && (
+        <View>
+          <Text>Assigned By Me</Text>
+          <List>
+            {assignedByMeAssignments.map(assignment => {
+              return (
+                <AssignmentCard
+                  key={assignment.timestamp}
+                  assignment={assignment}
+                  toggleComplete={toggleComplete}
+                />
+              );
+            })}
+          </List>
+        </View>
+      )}
+      {/* ) : (
         <View style={styles.view}>
           <Text style={styles.text}>You have no assignments.</Text>
           <Text style={styles.text}>Click + to create a new assignment.</Text>
         </View>
-      )}
+      )} */}
     </Content>
   );
 };
