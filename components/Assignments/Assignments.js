@@ -25,7 +25,7 @@ const Assignments = props => {
 
   // console.log('props in assignments.js', props.currentUser.uid);
   // console.log("assignmentsRef from Assignments.js", assignmentsRef);
-  console.log('assignments from Assignments.js', assignments);
+  // console.log('assignments from Assignments.js', assignments);
 
   const toggleComplete = (aid, completed) => {
     console.log('toggle complete')

@@ -18,16 +18,7 @@ import { setCurrentAssignment } from '../../actions'
 import ModalHeader from "../Modals/ModalHeader";
 import CouncilNames from "../CouncilNames";
 
-// import { setCurrentChannel } from "../../actions";
 import firebase from "../../firebase";
-
-const blankAssignment = {
-  date: null,
-  council: '',
-  assign: '',
-  descript: '',
-  note: ''
-}
 
 const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
@@ -37,8 +28,6 @@ const NewAssignment = props => {
   const [notes, setNotes] = useState('');
   const [showCouncilModal, setShowCouncilModal] = useState(false);
   const [showATModal, setShowATModal] = useState(false);
-  const [assignment, setAssignment] = useState(blankAssignment);
-  // const [createdById, setCreatedById] = useState('');
   const [assignedToId, setAssignedToId] = useState(""); 
 
   const councilNames = [
@@ -73,19 +62,9 @@ const NewAssignment = props => {
   const assignmentsRef = db.collection('assignments')
 
   const createAssignment = () => {
-    console.log('createAssignment pressed');
     props.setShowModal(false);
-    // console.log('assignment', assignment);
-    // setAssignment({
-    //   date: chosenDate,
-    //   council: chosenCouncil,
-    //   assign: assignTo,
-    //   descript: description,
-    //   note: notes
-    // })
+
     if (description.length > 0 && chosenCouncil.length > 0 && assignTo.length > 0 && chosenDate != null && notes.length > 0) {
-      console.log('hurray')
-      // const newAssignment =
       assignmentsRef.add({
         timestamp: Date.now(),
         createdBy: props.currentUser.uid,
@@ -99,18 +78,10 @@ const NewAssignment = props => {
         },
         completed: false
       })
-
-
     } else {
       console.log('boooooo')
     }
   };
-
-  // useEffect(_ => {
-  //   assignmentsRef.doc.
-  // })
-
-  // console.log('assignment obj outside', assignment);
 
   const handleDescription = text => {
     setDescription(text);
