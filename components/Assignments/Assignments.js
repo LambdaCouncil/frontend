@@ -16,8 +16,7 @@ const Assignments = props => {
 
   useEffect(_ => {
     assignmentsRef
-      .get()
-        .then(doc => setAssignments(doc.docs.map(docData => ({
+      .onSnapshot(doc => setAssignments(doc.docs.map(docData => ({
           ...docData.data(), id: docData.id
         }))))
 
@@ -36,7 +35,7 @@ const Assignments = props => {
     //   .update({
     //     completed: !completed
     //   })
-    assignmentsRef.doc(`${aid}`).update({
+    assignmentsRef.doc(aid).update({
       completed: !completed
     })
   }

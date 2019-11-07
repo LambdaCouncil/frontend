@@ -41,7 +41,11 @@ const AssignmentCard = props => {
 
       {/* <Text>{moment(assignment.timestamp).format('lll')}</Text> */}
       <Right>
-        <Text>{" >"}</Text>
+        <Icon
+          // dgreal
+          onPress={() => console.log("modal for assignment should open up")}
+          name='arrow-forward'
+        />
       </Right>
     </ListItem>
   );
