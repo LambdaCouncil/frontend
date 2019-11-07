@@ -11,16 +11,52 @@ const Assignments = props => {
 
   const db = firebase.firestore();
   const assignmentsRef = db.collection('assignments');
-  const [assignments, setAssignments] = useState([]);
+  const [allAssignments, setAllAssignments] = useState([]);
+  const [myAssignments, setMyAssignments] = useState([]);
+  const [assignedByMeAssignments, setAssignedByMeAssignments] = useState([]);
+  const [completedAssignments, setCompletedAssignments] = useState([]);
 
+
+
+  // useEffect(_ => {
+  //   assignmentsRef
+  //     .onSnapshot(doc => setAllAssignments(doc.docs.map(docData => ({
+  //         ...docData.data(), id: docData.id
+  //       }))))
+
+  // }, [])
 
   useEffect(_ => {
-    assignmentsRef
-      .onSnapshot(doc => setAssignments(doc.docs.map(docData => ({
-          ...docData.data(), id: docData.id
-        }))))
+    assignmentsRef.where('assignedTo', '==', props.currentUser.uid).onSnapshot(doc =>
+      setMyAssignments(
+        doc.docs.map(docData => ({
+          ...docData.data(),
+          id: docData.id
+        }))
+      )
+    );
+  }, []);
 
-  }, [])
+
+  // useEffect(_ => {
+  //   assignmentsRef.onSnapshot(doc =>
+  //     doc.docs.map(docData =>
+  //       (docData.data().assignedTo === props.currentUser.uid)
+  //         ? 
+  //         // console.log('docData.assignedTo', docData.data().assignedTo, ' currentUser id:', props.currentUser.uid)
+  //         setAllAssignments({...docData.data(), id: docData.id})
+  //         : console.log('switch to if statement to check if assigned by me')
+  //     )
+  //   );
+  // }, []);
+
+  // useEffect(_ => {
+  //   assignmentsRef
+  //     .onSnapshot(doc => setAllAssignments(doc.docs.filter(docData => docData.data().id === props.currentUser.uid)))
+
+  // }, [])
+
+
 
   // console.log('props in assignments.js', props.currentUser.uid);
   // console.log("assignmentsRef from Assignments.js", assignmentsRef);
@@ -42,18 +78,21 @@ const Assignments = props => {
 
   return (
     <Content padder>
-      {assignments.length > 0 ? (
-        <List>
-
-          {assignments.map(assignment => {
-            return (
-              <AssignmentCard key={assignment.timestamp} assignment={assignment}  toggleComplete={toggleComplete} />
-            );
-
-
-          })}
-        </List>
-
+      {myAssignments.length > 0 ? (
+        <View>
+          <Text>My Assignments</Text>
+          <List>
+            {myAssignments.map(assignment => {
+              return (
+                <AssignmentCard
+                  key={assignment.timestamp}
+                  assignment={assignment}
+                  toggleComplete={toggleComplete}
+                />
+              );
+            })}
+          </List>
+        </View>
       ) : (
         <View style={styles.view}>
           <Text style={styles.text}>You have no assignments.</Text>

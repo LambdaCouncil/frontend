@@ -11,7 +11,6 @@ const AssignmentCard = props => {
   
   return (
     <ListItem>
-      {/* <Left> */}
       {assignment.completed ? (
         <Icon
           onPress={() => toggleComplete(assignment.id, assignment.completed)}
@@ -26,7 +25,6 @@ const AssignmentCard = props => {
         />
       )}
 
-      {/* </Left> */}
       <Body>
         <View>
           <Text>{assignment.content.descript}</Text>
@@ -39,10 +37,8 @@ const AssignmentCard = props => {
         </View>
       </Body>
 
-      {/* <Text>{moment(assignment.timestamp).format('lll')}</Text> */}
       <Right>
         <Icon
-          // dgreal
           onPress={() => console.log("modal for assignment should open up")}
           name='arrow-forward'
         />
