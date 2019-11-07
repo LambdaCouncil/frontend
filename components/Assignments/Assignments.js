@@ -40,14 +40,26 @@ const Assignments = props => {
   useEffect(_ => {
     assignmentsRef
       .where("createdBy", "==", props.currentUser.uid)
-      .onSnapshot(doc =>
+      .onSnapshot(doc => {
         setAssignedByMeAssignments(
-          doc.docs.map(docData => ({
-            ...docData.data(),
-            id: docData.id
-          }))
-        )
+          
+          doc.docs.map(docData => {
+            if (docData.data() && docData.data().assignedTo !== props.currentUser.uid) {
+              return {
+              // setAssignedByMeAssignments({
+                ...docData.data(),
+                id: docData.id}
+              // })
+            }
+            console.log('********8inside useEffect docData.data().assignedTo:', docData.data().assignedTo)
+          })
+        );
+          console.log('assignedByMeAssignments', assignedByMeAssignments)
+      }
+
+        
       );
+
   }, []);
 
   // useEffect(_ => {
@@ -103,7 +115,7 @@ const Assignments = props => {
           <Text>Assigned By Me</Text>
           <List>
             {assignedByMeAssignments.map(assignment => {
-              return (
+              if (assignment != undefined) return (
                 <AssignmentCard
                   key={assignment.timestamp}
                   assignment={assignment}
