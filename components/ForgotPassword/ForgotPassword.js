@@ -26,7 +26,7 @@ const ForgotPassword = props => {
                 <Icon
                     backButton
                     name='arrow-back'
-                    style={{ fontSize: 24, marginLeft: 20}}
+                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20}}
                 />
             </Button>
 
@@ -47,13 +47,13 @@ const ForgotPassword = props => {
                         <Input onChangeText={handleEmail} style={styles.input} value={email} />
                     </Item>
                     
-                    <H3
-                        onPress={() => forgotPassword(email)}
-                        style={{ color: getColor(), fontFamily: 'bern-sb', fontSize: 17, marginTop: 52 }}
-                        submit
-                    >
-                        Reset Password
-                    </H3>
+                    <Button transparent style={styles.button} onPress={() => forgotPassword(email)}>
+                        <Link to='/success'>
+                            <Text style={{ color: getColor(), fontFamily: 'bern-sb', fontSize: 17 }}>                            
+                                Reset Password                            
+                            </Text>
+                        </Link>
+                    </Button>
                 </Content>
             </Container>
         </>
@@ -85,7 +85,10 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     input: {
-        marginHorizontal: 20
+        marginHorizontal: 20,
+    },
+    button: {
+        marginTop: 52
     }
 })
 
