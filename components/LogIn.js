@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
-import { withRouter } from 'react-router-native'
+import { Link, withRouter } from 'react-router-native'
+
+import ForgotPassword from './ForgotPassword/ForgotPassword'
 
 import firebase from "../firebase"
+
 
 function Login(props) {
     const [email, setEmail] = useState('')
@@ -60,6 +63,8 @@ function Login(props) {
         else return "#288365"
     }
 
+    const forgotPassword = () => <ForgotPassword />
+
     return (
 
         <>
@@ -104,7 +109,11 @@ function Login(props) {
                     <Text style={{ color: "red" }}>{error.message}</Text>
 
                     <Footer style={styles.footer}>
-                        <Text style={styles.footerText}>Forgot Password?</Text>
+                        <Button onPress={forgotPassword}>
+                            <Link to='/forgot-password'>
+                                <Text style={styles.footerText}>Forgot Password?</Text>
+                            </Link>
+                        </Button>
                     </Footer>
 
                 </Content>
