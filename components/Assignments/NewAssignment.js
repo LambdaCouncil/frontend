@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-native";
 import { connect } from "react-redux";
-import { Modal, StyleSheet } from "react-native";
+import { Modal } from "react-native";
 import {
   Content,
   View,
@@ -18,16 +18,7 @@ import { setCurrentAssignment } from '../../actions'
 import ModalHeader from "../Modals/ModalHeader";
 import CouncilNames from "../CouncilNames";
 
-// import { setCurrentChannel } from "../../actions";
 import firebase from "../../firebase";
-
-// const blankAssignment = {
-//   date: null,
-//   council: '',
-//   assign: '',
-//   descript: '',
-//   note: ''
-// }
 
 const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
@@ -37,7 +28,7 @@ const NewAssignment = props => {
   const [notes, setNotes] = useState('');
   const [showCouncilModal, setShowCouncilModal] = useState(false);
   const [showATModal, setShowATModal] = useState(false);
-  // const [assignment, setAssignment] = useState(blankAssignment);
+  const [assignedToId, setAssignedToId] = useState(""); 
 
   const councilNames = [
     "bishopric",
@@ -61,7 +52,7 @@ const NewAssignment = props => {
     Users.get()
       .then(docs =>
         docs.forEach(async doc => {
-          await loadedUsers.push(doc.data());
+          await loadedUsers.push({...doc.data(), id: doc.id});
           setAllUsers(loadedUsers);
         })
       )
@@ -71,38 +62,26 @@ const NewAssignment = props => {
   const assignmentsRef = db.collection('assignments')
 
   const createAssignment = () => {
-    console.log('createAssignment pressed');
     props.setShowModal(false);
-    // console.log('assignment', assignment);
-    // setAssignment({
-    //   date: chosenDate,
-    //   council: chosenCouncil,
-    //   assign: assignTo,
-    //   descript: description,
-    //   note: notes
-    // })
+
     if (description.length > 0 && chosenCouncil.length > 0 && assignTo.length > 0 && chosenDate != null && notes.length > 0) {
-      console.log('hurray')
-      // const newAssignment =
       assignmentsRef.add({
         timestamp: Date.now(),
-        user: {},
+        createdBy: props.currentUser.uid,
+        assignedTo: assignedToId,
         content: {
           date: chosenDate,
           council: chosenCouncil,
           assign: assignTo,
           descript: description,
           note: notes
-        }
+        },
+        completed: false
       })
-
-
     } else {
       console.log('boooooo')
     }
   };
-
-  // console.log('assignment obj outside', assignment);
 
   const handleDescription = text => {
     setDescription(text);
@@ -113,9 +92,10 @@ const NewAssignment = props => {
     setChosenCouncil(name);
   }
 
-  const handleAssignTo = name => {
+  const handleAssignTo = (name, id) => {
     console.log(name + " was pressed");
     setAssignTo(name);
+    setAssignedToId(id);
   };
 
   const handleDate = value => {
@@ -129,8 +109,10 @@ const NewAssignment = props => {
   // console.log("description: ", description);
   // console.log("council: ", chosenCouncil);
   // console.log("assignTo: ", assignTo);
-  // console.log("date: ", chosenDate);
+  console.log("date: ", chosenDate);
   // console.log("notes", notes);
+  console.log('assignedTo id', assignedToId);
+  console.log('createdBy id', props.currentUser.uid)
 
   return (
     <Modal animationType="slide" transparent={false} visible={true}>
@@ -138,7 +120,7 @@ const NewAssignment = props => {
       <Content>
         <Form>
           <Item floatingLabel>
-            <Label style={styles.text}>Description</Label>
+            <Label>Description</Label>
             <Input
               name="description"
               onChangeText={text => handleDescription(text)}
@@ -152,7 +134,7 @@ const NewAssignment = props => {
             transparent
           >
             <View>
-              <Text style={styles.text}>Council</Text>
+              <Text>Council</Text>
               {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
             </View>
           </Button>
@@ -172,17 +154,19 @@ const NewAssignment = props => {
             transparent
           >
             <View>
-              <Text style={styles.text}>Assign To</Text>
+              <Text>Assign To</Text>
               {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
             </View>
           </Button>
 
           {showATModal && (
             <CouncilNames
-              options={allUsers.map(user => user.name)}
+              users={true}
+              options={allUsers}
               setShowModal={setShowATModal}
               council={assignTo}
               handleCouncil={handleAssignTo}
+              setAssignedToId={setAssignedToId}
             />
           )}
 
@@ -219,13 +203,5 @@ const NewAssignment = props => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    color: '#6f777e',
-    fontFamily: 'bern-r',
-    fontSize: 17
-  },
-})
 
 export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(NewAssignment));
