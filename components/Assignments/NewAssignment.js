@@ -138,7 +138,7 @@ const NewAssignment = props => {
   // console.log("description: ", description);
   // console.log("council: ", chosenCouncil);
   // console.log("assignTo: ", assignTo);
-  // console.log("date: ", chosenDate);
+  console.log("date: ", chosenDate);
   // console.log("notes", notes);
   console.log('assignedTo id', assignedToId);
   console.log('createdBy id', props.currentUser.uid)

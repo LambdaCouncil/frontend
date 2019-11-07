@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-native";
 import firebase from '../../firebase';
 import { setCurrentAssignment } from '../../actions';
-import moment from "moment";
+import AssignmentCard from './AssignmentCard';
 
 const Assignments = props => {
 
@@ -38,27 +38,7 @@ const Assignments = props => {
 
           {assignments.map(assignment => {
             return (
-              <ListItem key={assignment.timestamp}>
-                {/* <Left> */}
-                  <Icon onPress={() => toggleComplete()} name="radio-button-off" style={{ paddingRight: 10}}/>
-                {/* </Left> */}
-                <Body>
-                  <Text>{assignment.content.descript}</Text>
-                  <View>
-                    <Text>{assignment.content.council}</Text>
-                    <Text>
-                      {moment(assignment.content.date.seconds).format("lll")}
-                    </Text>
-                  </View>
-                </Body>
-
-                {/* <Text>{moment(assignment.timestamp).format('lll')}</Text> */}
-                <Right>
-                  <Text>
-                    {" >"}
-                  </Text>
-                </Right>
-              </ListItem>
+              <AssignmentCard key={assignment.timestamp} assignment={assignment}  toggleComplete={toggleComplete} />
             );
 
 
