@@ -18,7 +18,7 @@ const Assignments = props => {
     assignmentsRef
       .get()
         .then(doc => setAssignments(doc.docs.map(docData => ({
-          ...docData.data()
+          ...docData.data(), id: docData.id
         }))))
 
   }, [])
@@ -27,8 +27,18 @@ const Assignments = props => {
   // console.log("assignmentsRef from Assignments.js", assignmentsRef);
   console.log('assignments from Assignments.js', assignments);
 
-  const toggleComplete = _ => {
+  const toggleComplete = (aid, completed) => {
     console.log('toggle complete')
+    console.log('assignments assignment.id', aid);
+    console.log('assignments assignment.completed', completed);
+    // update firebase db completed for assignments
+    assignmentsRef.where('id', '==', `${aid}`)
+      .update({
+        completed: !completed
+      })
+    // assignmentsRef.doc(`${aid}`).update({
+    //   completed: !completed
+    // })
   }
 
   return (

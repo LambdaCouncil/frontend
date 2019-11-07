@@ -5,22 +5,37 @@ import moment from "moment";
 
 const AssignmentCard = props => {
   const {assignment, toggleComplete} = props;
-  const [isComplete, setIsComplete] = useState(false);
+
+  // console.log('assignment id', assignment.id)
+  // console.log('assignment completed', assignment.completed);
   
   return (
-    <ListItem >
+    <ListItem>
       {/* <Left> */}
-      <Icon
-        onPress={() => toggleComplete()}
-        name="radio-button-off"
-        style={{ paddingRight: 10 }}
-      />
+      {assignment.completed ? (
+        <Icon
+          onPress={() => toggleComplete(assignment.id, assignment.completed)}
+          name="radio-button-on"
+          style={{ paddingRight: 10 }}
+        />
+      ) : (
+        <Icon
+          onPress={() => toggleComplete(assignment.id, assignment.completed)}
+          name="radio-button-off"
+          style={{ paddingRight: 10 }}
+        />
+      )}
+
       {/* </Left> */}
       <Body>
-        <Text>{assignment.content.descript}</Text>
+        <View>
+          <Text>{assignment.content.descript}</Text>
+        </View>
         <View>
           <Text>{assignment.content.council}</Text>
-          <Text>{moment(assignment.content.date.seconds * 1000).format("lll")}</Text>
+          <Text>
+            {moment(assignment.content.date.seconds * 1000).format("lll")}
+          </Text>
         </View>
       </Body>
 
