@@ -15,8 +15,7 @@ const Assignments = props => {
   const [myAssignments, setMyAssignments] = useState([]);
   const [assignedByMeAssignments, setAssignedByMeAssignments] = useState([]);
   const [completedAssignments, setCompletedAssignments] = useState([]);
-
-
+  const [showCompleted, setShowCompleted] = useState(false);
 
   // useEffect(_ => {
   //   assignmentsRef
@@ -26,8 +25,12 @@ const Assignments = props => {
 
   // }, [])
 
+  // for my assignments
   useEffect(_ => {
-    assignmentsRef.where('assignedTo', '==', props.currentUser.uid).onSnapshot(doc =>
+    assignmentsRef
+      .where('assignedTo', '==', props.currentUser.uid)
+      .where('completed', '==', false)
+      .onSnapshot(doc =>
       setMyAssignments(
         doc.docs.map(docData => ({
           ...docData.data(),
@@ -37,31 +40,26 @@ const Assignments = props => {
     );
   }, []);
 
+  // for assignments assigned by me
   useEffect(_ => {
     assignmentsRef
       .where("createdBy", "==", props.currentUser.uid)
+      .where('completed', '==', false)
       .onSnapshot(doc => {
         setAssignedByMeAssignments(
-          
           doc.docs.map(docData => {
             if (docData.data() && docData.data().assignedTo !== props.currentUser.uid) {
               return {
-              // setAssignedByMeAssignments({
                 ...docData.data(),
-                id: docData.id}
-              // })
+                id: docData.id
+              }
             }
-            console.log('********8inside useEffect docData.data().assignedTo:', docData.data().assignedTo)
           })
         );
-          console.log('assignedByMeAssignments', assignedByMeAssignments)
-      }
-
-        
-      );
-
+      });
   }, []);
 
+  // for completed assignments
   useEffect(_ => {
     assignmentsRef
       .where("completed", "==", true)
@@ -74,30 +72,6 @@ const Assignments = props => {
         )
       );
   }, []);
-
-  // useEffect(_ => {
-  //   assignmentsRef.onSnapshot(doc =>
-  //     doc.docs.map(docData =>
-  //       (docData.data().assignedTo === props.currentUser.uid)
-  //         ? 
-  //         // console.log('docData.assignedTo', docData.data().assignedTo, ' currentUser id:', props.currentUser.uid)
-  //         setAllAssignments({...docData.data(), id: docData.id})
-  //         : console.log('switch to if statement to check if assigned by me')
-  //     )
-  //   );
-  // }, []);
-
-  // useEffect(_ => {
-  //   assignmentsRef
-  //     .onSnapshot(doc => setAllAssignments(doc.docs.filter(docData => docData.data().id === props.currentUser.uid)))
-
-  // }, [])
-
-
-
-  // console.log('props in assignments.js', props.currentUser.uid);
-  // console.log("assignmentsRef from Assignments.js", assignmentsRef);
-  // console.log('assignments from Assignments.js', assignments);
 
   const toggleComplete = (aid, completed) => {
     assignmentsRef.doc(aid).update({
@@ -112,14 +86,13 @@ const Assignments = props => {
           <Text>My Assignments</Text>
           <List>
             {myAssignments.map(assignment => {
-              if (assignment.completed == false)
-                return (
-                  <AssignmentCard
-                    key={assignment.timestamp}
-                    assignment={assignment}
-                    toggleComplete={toggleComplete}
-                  />
-                );
+              return (
+                <AssignmentCard
+                  key={assignment.timestamp}
+                  assignment={assignment}
+                  toggleComplete={toggleComplete}
+                />
+              );
             })}
           </List>
         </View>
@@ -129,7 +102,7 @@ const Assignments = props => {
           <Text>Assigned By Me</Text>
           <List>
             {assignedByMeAssignments.map(assignment => {
-              if (assignment != undefined && assignment.completed == false)
+              if (assignment != undefined)
                 return (
                   <AssignmentCard
                     key={assignment.timestamp}
@@ -141,29 +114,38 @@ const Assignments = props => {
           </List>
         </View>
       )}
-      {completedAssignments.length > 0 && (
+      {showCompleted ? (completedAssignments.length > 0 && (
         <View>
-          <Text>Completed</Text>
+          <View>
+            <Left>
+              <Text>Completed</Text>
+            </Left>
+            <Right>
+              <Text onPress={() => setShowCompleted(false)} >Hide</Text>
+            </Right>
+          </View>
           <List>
             {completedAssignments.map(assignment => {
-              // if (assignment.completed != undefined)
-                return (
-                  <AssignmentCard
-                    key={assignment.timestamp}
-                    assignment={assignment}
-                    toggleComplete={toggleComplete}
-                  />
-                );
+              return (
+                <AssignmentCard
+                  key={assignment.timestamp}
+                  assignment={assignment}
+                  toggleComplete={toggleComplete}
+                />
+              );
             })}
           </List>
         </View>
-      )}
-      {/* ) : (
-        <View style={styles.view}>
-          <Text style={styles.text}>You have no assignments.</Text>
-          <Text style={styles.text}>Click + to create a new assignment.</Text>
-        </View>
-      )} */}
+      )) : (<View><Text onPress={() => setShowCompleted(true)} >Show Completed</Text></View>)}
+      {(!myAssignments.length) &&
+        (!assignedByMeAssignments.length) &&
+        (!completedAssignments.length) && (
+          <View style={styles.view}>
+            <Text style={styles.text}>You have no assignments.</Text>
+            <Text style={styles.text}>Click + to create a new assignment.</Text>
+          </View>
+        )
+      }
     </Content>
   );
 };
