@@ -9,6 +9,7 @@ import {
   View,
   Text,
   Button,
+  Footer,
   Form,
   Item,
   Input,
@@ -119,11 +120,12 @@ const NewAssignment = props => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={true}>
-      <ModalHeader style={{color: '#202224', fontFamily: 'bern-sb', fontSize: 17}} name="New Assignment" setShowModal={props.setShowModal} />
-      <Container>
+      <ModalHeader name="New Assignment" setShowModal={props.setShowModal} />
+      <Container style={styles.container}>
         <Content>
-          <Form>
-            <Item floatingLabel>
+          
+          <Form>            
+            <Item floatingLabel style={styles.item}>
               <Label>Description</Label>
               <Input
                 name="description"
@@ -132,11 +134,7 @@ const NewAssignment = props => {
               />
             </Item>
 
-            <Button
-              title="Council"
-              onPress={() => setShowCouncilModal(true)}
-              transparent
-            >
+            <Button transparent style={styles.button} title="Council" onPress={() => setShowCouncilModal(true)}>
               <View>
                 <Text>Council</Text>
                 {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
@@ -149,14 +147,10 @@ const NewAssignment = props => {
                 setShowModal={setShowCouncilModal}
                 council={chosenCouncil}
                 handleCouncil={handleCouncil}
-              />
-            )}
+              />)
+            }
 
-            <Button
-              title="AssignTo"
-              onPress={() => setShowATModal(true)}
-              transparent
-            >
+            <Button transparent style={styles.button} title="AssignTo" onPress={() => setShowATModal(true)}>
               <View>
                 <Text>Assign To</Text>
                 {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
@@ -171,8 +165,8 @@ const NewAssignment = props => {
                 council={assignTo}
                 handleCouncil={handleAssignTo}
                 setAssignedToId={setAssignedToId}
-              />
-            )}
+              />)
+            }
 
             <Label>Date &amp; Time</Label>
             <DatePicker
@@ -184,13 +178,12 @@ const NewAssignment = props => {
               modalTransparent={false}
               animationType={"fade"}
               androidMode={"default"}
-              // placeHolderText="Select date"
               textStyle={{ color: "green" }}
               placeHolderTextStyle={{ color: "#d3d3d3" }}
               onDateChange={value => handleDate(value)}
               disabled={false}
             />
-            <Item floatingLabel>
+            <Item floatingLabel style={styles.item}>
               <Label>Notes</Label>
               <Input
                 name="notes"
@@ -198,15 +191,33 @@ const NewAssignment = props => {
                 value={notes}
               />
             </Item>
-
-            <H3 onPress={createAssignment} submit>
-              Create
-            </H3>
           </Form>
+
+          <Footer>
+              <H3 onPress={createAssignment} submit>
+                Create
+              </H3>
+          </Footer>
+
         </Content>
       </Container>
     </Modal>
-  );
-};
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: '100%'
+  },
+  button: {
+    marginHorizontal: 20,
+    marginVertical: 10
+  },
+  item: {
+    marginHorizontal: 20,
+    marginVertical: 10
+  }
+})
 
 export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(NewAssignment));
