@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-native'
 
 import SidePanel from '../SidePanel/SidePanel'
 import ActionSheets from '../ActionSheets'
-import NewPrivateMessage from '../Modals/NewPrivateMessage'
-
 import { buttonsObj } from '../../objects/buttonsObj'
+
+import NewPrivateMessage from '../Modals/NewPrivateMessage'
 import NewAssignment from '../Assignments/NewAssignment'
 
 const pageHeader = props => {
@@ -24,8 +24,6 @@ const pageHeader = props => {
     '/promptings',
     // '/messages'
   ]
-
-
 
   const togglePanel = _ => setShowPanel(!showPanel)
 

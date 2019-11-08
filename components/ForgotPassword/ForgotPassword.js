@@ -43,6 +43,7 @@ const ForgotPassword = props => {
                         paddingTop: '15%',
                         height: '100%'
                     }}>
+
                     <H1 style={styles.header}>Forgot Password</H1>
 
                     <Text style={styles.text}>Please enter your email address and Councils will send you an email to reset your password.</Text>
@@ -52,7 +53,7 @@ const ForgotPassword = props => {
                         <Input onChangeText={handleEmail} style={styles.input} value={email} />
                     </Item>
 
-                    <Text style={{color: '#dd1d06', fontFamily: 'bern-r', fontSize: 13}}>{error}</Text>
+                    <Text style={styles.error}>{error}</Text>
                     
                     <Button transparent style={styles.button} onPress={() => handleSubmit(email)}>
                             <Text style={{ color: getColor(), fontFamily: 'bern-sb', fontSize: 17 }}>                            
@@ -63,9 +64,7 @@ const ForgotPassword = props => {
                 </Content>
             </Container>
         </>
-
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -89,6 +88,11 @@ const styles = StyleSheet.create({
         fontFamily: 'bern-r',
         fontSize: 17,
         marginLeft: 20,
+    },
+    error: {
+        color: '#dd1d06', 
+        fontFamily: 'bern-r', 
+        fontSize: 13
     },
     input: {
         marginHorizontal: 20,

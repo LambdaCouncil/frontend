@@ -3,6 +3,7 @@ import "firebase/auth"
 import "firebase/storage"
 import 'firebase/firestore'
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyCPVmMRkhRB5ebmcl8L_60kmcWI-_KI1Ow",
     authDomain: "council-c200f.firebaseapp.com",
@@ -17,6 +18,10 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 
+/* 
+    Import db into any component to shorten firebase syntax in function calls. 
+        example: firebase.firestore().collection(users).doc(uid) becomes: db.doc(uid)
+*/
 export const db = table => firebase.firestore().collection(table)
 
 export default firebase
