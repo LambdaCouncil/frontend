@@ -62,6 +62,19 @@ const Assignments = props => {
 
   }, []);
 
+  useEffect(_ => {
+    assignmentsRef
+      .where("completed", "==", true)
+      .onSnapshot(doc =>
+        setCompletedAssignments(
+          doc.docs.map(docData => ({
+            ...docData.data(),
+            id: docData.id
+          }))
+        )
+      );
+  }, []);
+
   // useEffect(_ => {
   //   assignmentsRef.onSnapshot(doc =>
   //     doc.docs.map(docData =>
@@ -99,13 +112,14 @@ const Assignments = props => {
           <Text>My Assignments</Text>
           <List>
             {myAssignments.map(assignment => {
-              return (
-                <AssignmentCard
-                  key={assignment.timestamp}
-                  assignment={assignment}
-                  toggleComplete={toggleComplete}
-                />
-              );
+              if (assignment.completed == false)
+                return (
+                  <AssignmentCard
+                    key={assignment.timestamp}
+                    assignment={assignment}
+                    toggleComplete={toggleComplete}
+                  />
+                );
             })}
           </List>
         </View>
@@ -115,13 +129,31 @@ const Assignments = props => {
           <Text>Assigned By Me</Text>
           <List>
             {assignedByMeAssignments.map(assignment => {
-              if (assignment != undefined) return (
-                <AssignmentCard
-                  key={assignment.timestamp}
-                  assignment={assignment}
-                  toggleComplete={toggleComplete}
-                />
-              );
+              if (assignment != undefined && assignment.completed == false)
+                return (
+                  <AssignmentCard
+                    key={assignment.timestamp}
+                    assignment={assignment}
+                    toggleComplete={toggleComplete}
+                  />
+                );
+            })}
+          </List>
+        </View>
+      )}
+      {completedAssignments.length > 0 && (
+        <View>
+          <Text>Completed</Text>
+          <List>
+            {completedAssignments.map(assignment => {
+              // if (assignment.completed != undefined)
+                return (
+                  <AssignmentCard
+                    key={assignment.timestamp}
+                    assignment={assignment}
+                    toggleComplete={toggleComplete}
+                  />
+                );
             })}
           </List>
         </View>
