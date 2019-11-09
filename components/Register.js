@@ -1,7 +1,18 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import firebase from "../firebase"
-import { Content, Input, Text, Label, Item, View, H3, Icon, Spinner } from 'native-base'
+import firebase from '../firebase'
+import {
+    Button,
+    Content,
+    Input,
+    Text,
+    Label,
+    Item,
+    View,
+    H3,
+    Icon,
+    Spinner
+} from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -94,23 +105,39 @@ function Register(props) {
         return error ? error.message : "An internal error occured"
     }
 
+    _renderButton = _ => {
+        if (requestActive) return <Spinner />
+        else
+            return (
+                <H3
+                    onPress={handleSubmit}
+                    style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }}
+                    submit>
+                    Sign Up
+        </H3>
+            )
+    }
+
+    _renderErrorText = _ => {
+        return error ? error.message : 'An internal error occured'
+    }
+
     return (
         <>
-
-            <Icon
-                backButton
-                name='arrow-back'
-                onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
-            />
+            <Button backButton onPress={props.history.goBack}>
+                <Icon
+                    backButton
+                    name='arrow-back'
+                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
+                />
+            </Button>
 
             <Content
                 padder
                 contentContainerStyle={{
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'center'
                 }}>
-
                 <Text style={styles.header}>Sign Up</Text>
 
                 <Text style={styles.subheader}>Create Councils account.</Text>
@@ -132,7 +159,9 @@ function Register(props) {
                     />
                 </Item>
                 <View style={styles.view}>
-                    <Text style={styles.text}>8 characters, 1 capital letter, 1 number</Text>
+                    <Text style={styles.text}>
+                        8 characters, 1 capital letter, 1 number
+          </Text>
                 </View>
 
                 <Item floatingLabel>
@@ -146,12 +175,9 @@ function Register(props) {
 
                 {_renderButton()}
 
-                <Text style={{ color: "red" }}>{_renderErrorText()}</Text>
-
+                <Text style={{ color: 'red' }}>{_renderErrorText()}</Text>
             </Content>
-
         </>
-
     )
 }
 
@@ -160,22 +186,23 @@ const styles = StyleSheet.create({
         color: '#202224',
         fontFamily: 'gotham',
         fontSize: 28,
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop: 30
     },
     subheader: {
         color: '#202224',
         fontFamily: 'bern-r',
-        fontSize: 17,
+        fontSize: 17
     },
     label: {
         color: '#6f777e',
         fontFamily: 'bern-r',
-        fontSize: 17,
+        fontSize: 17
     },
     text: {
         color: '#6f777e',
         fontFamily: 'bern-r',
-        fontSize: 13,
+        fontSize: 13
     },
     view: {
         flex: 1,
@@ -186,4 +213,7 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(state => ({ ...state }), { setUser })(withRouter(Register))
+export default connect(
+    state => ({ ...state }),
+    { setUser }
+)(withRouter(Register))

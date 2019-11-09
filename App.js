@@ -19,7 +19,7 @@ import OfflineStatus from "./OfflineStatus"
 const store = createStore(reducer, applyMiddleware(thunk))
 
 const App = _ => {
-  const[isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true)
 
   YellowBox.ignoreWarnings(['Setting a timer', 'Deprecation warning'])
 
@@ -33,13 +33,13 @@ const App = _ => {
       setLoading(false)
     })
 
-  return (
+  if (parseInt(Math.random() * 10) < 2) return (
     <Provider store={store}>
       <NativeRouter>
         <StyleProvider style={getTheme(common)}>
           <Root>
             <>
-              <Routes loadingFonts = {isLoading} />
+              <Routes loadingFonts={isLoading} />
               <OfflineStatus />
             </>
           </Root>
@@ -47,6 +47,8 @@ const App = _ => {
       </NativeRouter>
     </Provider>
   )
+
+  else return <Root></Root>
 
 }
 
