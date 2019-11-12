@@ -33,9 +33,6 @@ const CouncilNames = props => {
         isVisible={isVisible}
         animationIn={"slideInLeft"}
         animationOut={"slideOutLeft"}
-        // backdropColor={"#202224"}
-        // backdropOpacity={0.5}
-        // onBackdropPress={() => setIsVisible(false)}
         style={{ flex: 1, margin: 0 }}
       >
         <View

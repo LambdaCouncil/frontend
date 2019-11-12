@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
+import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 
 import ForgotPassword from './ForgotPassword/ForgotPassword'
 

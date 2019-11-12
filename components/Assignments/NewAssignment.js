@@ -110,14 +110,6 @@ const NewAssignment = props => {
     setNotes(text);
   };
 
-  // console.log("description: ", description);
-  // console.log("council: ", chosenCouncil);
-  // console.log("assignTo: ", assignTo);
-  console.log("date: ", chosenDate);
-  // console.log("notes", notes);
-  console.log('assignedTo id', assignedToId);
-  console.log('createdBy id', props.currentUser.uid)
-
   return (
     <Modal animationType="slide" transparent={false} visible={true}>
       <ModalHeader name="New Assignment" setShowModal={props.setShowModal} />
@@ -179,7 +171,7 @@ const NewAssignment = props => {
                 animationType={"fade"}
                 androidMode={"default"}
                 textStyle={{ color: "green" }}
-                placeHolderTextStyle={{ color: "#6f777e", fontFamily: 'bern-r', fontSize: 17 }}
+                placeHolderTextStyle={styles.text}
                 onDateChange={value => handleDate(value)}
                 disabled={false}
                 />
@@ -196,7 +188,7 @@ const NewAssignment = props => {
             </Item>
           </Form>
 
-          <Footer>
+          <Footer style={styles.footer}>
               <H3 onPress={createAssignment} submit>
                 Create
               </H3>
@@ -216,12 +208,17 @@ const styles = StyleSheet.create({
   button: {
     borderBottomWidth: 1,
     borderBottomColor: '#dbdcdf',
-    marginVertical: 10
+    marginVertical: 10,
+    marginHorizontal: 20
   },
   text: {
     color: '#6f777e',
     fontFamily: 'bern-r',
     fontSize: 17,
+  },
+  footer: {
+    flex: 3,
+    alignItems: 'flex-end'
   }
 })
 

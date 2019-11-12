@@ -12,13 +12,13 @@ export default _ => {
         'NativeBase.Label': {
           paddingLeft: null
         },
-        marginLeft: 15
+        marginHorizontal: 20
       },
       '.inlineLabel': {
         'NativeBase.Label': {
           paddingLeft: null
         },
-        marginLeft: 15
+        marginHorizontal: 20
       },
       '.placeholderLabel': {
         'NativeBase.Input': {}
@@ -30,18 +30,18 @@ export default _ => {
         },
         'NativeBase.Input': {
           paddingLeft: null,
-          marginLeft: null
+          marginHorizontal: null
         },
         'NativeBase.Icon': {
           marginTop: 36
         },
-        marginLeft: 15
+        marginHorizontal: 20
       },
       '.floatingLabel': {
         'NativeBase.Input': {
           paddingLeft: null,
           top: 10,
-          marginLeft: null
+          marginHorizontal: null
         },
         'NativeBase.Label': {
           left: 0,
@@ -51,19 +51,19 @@ export default _ => {
           top: 6
         },
         marginTop: 15,
-        marginLeft: 15
+        marginHorizontal: 20
       },
       '.regular': {
         'NativeBase.Label': {
           left: 0
         },
-        marginLeft: 0
+        marginHorizontal: 0
       },
       '.rounded': {
         'NativeBase.Label': {
           left: 0
         },
-        marginLeft: 0
+        marginHorizontal: 0
       },
       '.underline': {
         'NativeBase.Label': {
@@ -74,16 +74,16 @@ export default _ => {
         'NativeBase.Input': {
           left: -15
         },
-        marginLeft: 15
+        marginHorizontal: 20
       },
       '.last': {
-        marginLeft: 0,
+        marginHorizontal: 0,
         paddingLeft: 15
       },
       'NativeBase.Label': {
         paddingRight: 5
       },
-      marginLeft: 15
+      marginHorizontal: 20
     },
     '.message': {
       flexDirection: 'row',

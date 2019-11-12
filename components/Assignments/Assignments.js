@@ -17,14 +17,6 @@ const Assignments = props => {
   const [completedAssignments, setCompletedAssignments] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
 
-  // useEffect(_ => {
-  //   assignmentsRef
-  //     .onSnapshot(doc => setAllAssignments(doc.docs.map(docData => ({
-  //         ...docData.data(), id: docData.id
-  //       }))))
-
-  // }, [])
-
   // for my assignments
   useEffect(_ => {
     assignmentsRef
