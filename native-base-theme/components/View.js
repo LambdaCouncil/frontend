@@ -15,10 +15,16 @@ export default _ => {
       flexDirection: 'row',
       justifyContent: 'space-around',
       backgroundColor: ui.eggshell,
+<<<<<<< HEAD
       borderTopWidth: 1,
       borderTopColor: ui.lightPeriwinkle,
       paddingVertical: 10,
       paddingHorizontal: '10%'
+=======
+      borderTopWidth: 2,
+      borderTopColor: ui.lightPeriwinkle,
+      paddingVertical: 15
+>>>>>>> b9983ae36922d29ecb1cf8fc70faa4aba5bec292
     },
     '.containerAllRoot': {
       height: '100%',
