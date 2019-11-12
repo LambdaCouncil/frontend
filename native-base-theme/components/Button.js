@@ -383,7 +383,7 @@ export default _ => {
       position: 'absolute',
       zIndex: 2,
       fontSize: 50,
-      color: text.greal,
+      color: text.darkGreenBlue,
       elevation: 0
     },
     backgroundColor: ui.white,

@@ -9,7 +9,6 @@ const ActionSheets = props => {
   return (
     <Button
       transparent
-      style={styles.button}
       onPress={() =>
         ActionSheet.show(
           {
@@ -25,11 +24,13 @@ const ActionSheets = props => {
         )
       }
     >
-      <Icon dgreal name={props.asInfo.iconName} style={(Platform.OS === 'android') ? styles.androidIcon : styles.Icon} />
+      <Icon ddarkGreenBlue name={props.asInfo.iconName} style={(Platform.OS === 'android') ? styles.androidIcon : styles.Icon} />
     </Button>
   )
 }
 
-const styles = StyleSheet.create({ androidIcon: { transform: [{ rotate: '90deg' }] } })
+const styles = StyleSheet.create({ 
+  androidIcon: { transform: [{ rotate: '90deg' }] } 
+})
 
 export default ActionSheets

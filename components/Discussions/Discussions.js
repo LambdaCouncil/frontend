@@ -50,7 +50,14 @@ const Discussions = props => {
     else return (
         <Content padder>
             <List>
-                <Text style = {{ fontFamily: "bern-r", fontSize: 20, display: "flex", justifyContent: "center", marginHorizontal: "10%", marginTop: 30 }}>You have no active discussions! Press '+' to create a new one</Text>
+                <Text style={{
+                    fontFamily: "bern-r",
+                    fontSize: 20,
+                    display: "flex",
+                    justifyContent: "center",
+                    marginHorizontal: "10%",
+                    marginTop: 30
+                }}>You have no active discussions! Press '+' to create a new one</Text>
             </List>
         </Content>
     )

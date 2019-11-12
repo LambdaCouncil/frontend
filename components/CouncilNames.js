@@ -33,9 +33,6 @@ const CouncilNames = props => {
         isVisible={isVisible}
         animationIn={"slideInLeft"}
         animationOut={"slideOutLeft"}
-        // backdropColor={"#202224"}
-        // backdropOpacity={0.5}
-        // onBackdropPress={() => setIsVisible(false)}
         style={{ flex: 1, margin: 0 }}
       >
         <View
@@ -50,7 +47,7 @@ const CouncilNames = props => {
           <Header style={{ elevation: 0 }}>
             <Left>
               <Button transparent onPress={() => props.setShowModal(false)}>
-                <Icon dgreal name="arrow-back" />
+                <Icon ddarkGreenBlue name="arrow-back" />
               </Button>
             </Left>
             <Body>

@@ -6,22 +6,15 @@ import { Content, Text, List, ListItem, Button } from 'native-base'
 
 import { setCurrentChannel } from '../../actions'
 import ModalHeader from './ModalHeader'
-import firebase from '../../firebase'
+import { db } from '../../firebase'
 
 const NewPrivateMessage = props => {
-
-    const db = firebase.firestore()
-    const Users = db.collection('users')
 
     const [allUsers, setAllUsers] = useState([])
 
     useEffect(_ => {
-        let loadedUsers = []
-        Users.get()
-            .then(docs => docs.forEach(async doc => {
-                await loadedUsers.push(doc.data())
-                setAllUsers(loadedUsers)
-            }))
+        db('users').get()
+            .then(docs => setAllUsers(docs.map(doc => doc.data())))
             .catch(err => console.error(err))
     }, [])
 

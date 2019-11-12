@@ -4,9 +4,9 @@ import { Button, Container, Content, H1, H3, Icon, Input, Item, Label, Text } fr
 import { Link, withRouter } from 'react-router-native'
 
 const Success = props => {
+
     return (
         <>
-
             <Button backButton onPress={props.history.goBack}>
                 <Icon
                     backButton
@@ -17,17 +17,20 @@ const Success = props => {
 
             <Container>
                 <Content 
-                padder 
-                contentContainerStyle={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    paddingTop: '15%',
-                    height: '100%'
-                }}
+                    padder 
+                    contentContainerStyle={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingTop: '15%',
+                        height: '100%'
+                    }}
                 >                
                     <H1 style={styles.header}>Success</H1>
+
                     <Text style={styles.text}>Check your email to reset your password. Then log into your Councils account.</Text>
+                    
                     <H3 style={styles.button} onPress={() => props.history.push('/login')}>Log In</H3>
+                    
                 </Content>
             </Container>
         </>

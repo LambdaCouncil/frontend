@@ -8,15 +8,15 @@ import { connect } from 'react-redux'
 // Components
 import MessageForm from "./MessagesForm"
 import Message from "./Message"
-import firebase from '../../firebase'
+import { db } from '../../firebase'
 
 
 const Messages = props => {
 
   const discussionsRef = props.currentChannel.direct ?
-    firebase.firestore().collection('directMessages').doc(props.currentChannel.id)
+    db('directMessages').doc(props.currentChannel.id)
     :
-    firebase.firestore().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
+    db('councils').doc(props.currentChannel.council).collection(props.currentChannel)
 
   const [messages, setMessages] = useState([])
 

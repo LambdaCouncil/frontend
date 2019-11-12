@@ -244,7 +244,7 @@ export default _ => {
       'NativeBase.Body': {
         'NativeBase.Text': {
           marginLeft: null,
-          color: text.greal
+          color: text.darkGreenBlue
         },
         flex: 1,
         paddingVertical: variables.listItemPadding,

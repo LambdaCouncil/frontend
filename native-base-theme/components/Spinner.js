@@ -8,7 +8,7 @@ export default _ => {
 
   return {
     height: 80,
-    color: text.greal
+    color: text.darkGreenBlue
   }
 
 }

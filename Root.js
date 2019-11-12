@@ -5,6 +5,7 @@ import { Link } from 'react-router-native'
 import Carousel from "./Carousel"
 
 export default _ => {
+
     return (
         <View containerAllRoot>
 
@@ -23,4 +24,5 @@ export default _ => {
             </View>
         </View>
     )
+
 }

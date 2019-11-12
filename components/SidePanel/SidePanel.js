@@ -5,7 +5,6 @@ import Modal from 'react-native-modal'
 
 import SideMenu from './SideMenu'
 
-
 const SidePanel = props => {
 
   return (

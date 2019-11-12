@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
+import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 
 import ForgotPassword from './ForgotPassword/ForgotPassword'
 
@@ -21,11 +21,13 @@ function Login(props) {
         handleSubmit = _ => {
             if (isEmailInvalid()) {
                 setError({ message: "Email is invalid" })
+                setActive(false)
                 return
             }
 
             if (isPasswordInvalid()) {
                 setError({ message: "Password is invalid" })
+                setActive(false)
                 return
             }
 
@@ -47,19 +49,19 @@ function Login(props) {
                 })
         },
 
-        isEmailInvalid = _ => email.length <= 1
+        isEmailInvalid = _ => email.length <= 1 || !email.match(/^(.+[@].+[.].+)/),
 
-    isPasswordInvalid = _ => password.length <= 1
+        isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
 
-    _renderButton = _ => {
-        if (requestActive)
-            return <Spinner />
-        else
-            return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Log In</H3>
-    }
+        _renderButton = _ => {
+            if (requestActive)
+                return <Spinner />
+            else
+                return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Log In</H3>
+        }
 
     const getColor = _ => {
-        if(email === "" || password === "") return "#A9AAAC"
+        if (email === "" || password === "") return "#A9AAAC"
         else return "#288365"
     }
 
@@ -109,7 +111,7 @@ function Login(props) {
                     <Text style={{ color: "red" }}>{error.message}</Text>
 
                     <Footer style={styles.footer}>
-                        <Button onPress={forgotPassword}>
+                        <Button style={{elevation: 0}} onPress={forgotPassword}>
                             <Link to='/forgot-password'>
                                 <Text style={styles.footerText}>Forgot Password?</Text>
                             </Link>
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-end',
         backgroundColor: 'white',
-        elevation: 0,
+        
     },
     footerText: {
         color: '#288365',
