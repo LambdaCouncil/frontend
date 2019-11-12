@@ -13,8 +13,12 @@ const NewPrivateMessage = props => {
     const [allUsers, setAllUsers] = useState([])
 
     useEffect(_ => {
+        const loadedUsers = []
         db('users').get()
-            .then(docs => setAllUsers(docs.map(doc => doc.data())))
+            .then(docs => docs.forEach(async doc => {
+                await loadedUsers.push(doc.data())
+                setAllUsers(loadedUsers)
+            }))
             .catch(err => console.error(err))
     }, [])
 
@@ -39,7 +43,7 @@ const NewPrivateMessage = props => {
                                     id: `${props.currentUser.uid}:${user.id}`,
                                     direct: true,
                                     brandNewChannel: true,
-                                    users: [db.doc(`/users/${props.currentUser.uid}`), db.doc(`/users/${user.id}`)]
+                                    users: [db('users').doc(props.currentUser.uid), db('users').doc(user.id)]
                                 })
                                 props.setShowModal(false)
                                 props.history.push('/messages')
