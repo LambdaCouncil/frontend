@@ -58,7 +58,7 @@ const Discussions = props => {
                     loading ? 
                     <Spinner /> :
                     <>
-                        <Text style={commonTextStyle}>You have no active discussions! </Text>
+                        <Text style={commonTextStyle}>You have no active discussions!</Text>
                         <Text style={commonTextStyle}>Press '+' to create a new one</Text>
                     </>
                 }
@@ -137,8 +137,9 @@ export default connect(
 
 const commonTextStyle = {
     fontFamily: "bern-r",
-    fontSize: 20,
+    fontSize: 19,
     display: "flex",
     justifyContent: "center",
-    marginHorizontal: "10%",
+    marginHorizontal: "5%",
+    marginVertical: 10
 }
