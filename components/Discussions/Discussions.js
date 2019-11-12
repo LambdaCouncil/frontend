@@ -7,7 +7,8 @@ import {
     Body,
     Text,
     Right,
-    Content
+    Content,
+    Spinner
 } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
@@ -15,18 +16,21 @@ import moment from 'moment'
 
 import { setCurrentChannel } from '../../actions'
 import firebase from '../../firebase'
-import pseudoDiscussion from './pseudo'
 
 const Discussions = props => {
 
     const db = firebase.firestore()
     const discussionsRef = db.collection('directMessages')
+
+    const [loading, setLoading] = useState(false)
     const [discussions, setDiscussions] = useState([])
 
     useEffect(_ => {
+        setLoading(true)
         discussionsRef
             .where('users', 'array-contains', db.doc(`users/${props.currentUser.uid}`))
             .onSnapshot(allDiscussions => {
+                setLoading(false)
                 setDiscussions(allDiscussions.docs.map(doc => ({ ...doc.data(), id: doc.id })))
             })
     }, [])
@@ -50,14 +54,14 @@ const Discussions = props => {
     else return (
         <Content padder>
             <List>
-                <Text style={{
-                    fontFamily: "bern-r",
-                    fontSize: 20,
-                    display: "flex",
-                    justifyContent: "center",
-                    marginHorizontal: "10%",
-                    marginTop: 30
-                }}>You have no active discussions! Press '+' to create a new one</Text>
+                {
+                    loading ? 
+                    <Spinner /> :
+                    <>
+                        <Text style={commonTextStyle}>You have no active discussions!</Text>
+                        <Text style={commonTextStyle}>Press '+' to create a new one</Text>
+                    </>
+                }
             </List>
         </Content>
     )
@@ -130,3 +134,12 @@ export default connect(
     state => ({ ...state }),
     { setCurrentChannel }
 )(withRouter(Discussions))
+
+const commonTextStyle = {
+    fontFamily: "bern-r",
+    fontSize: 19,
+    display: "flex",
+    justifyContent: "center",
+    marginHorizontal: "5%",
+    marginVertical: 10
+}
