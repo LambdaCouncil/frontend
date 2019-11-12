@@ -23,6 +23,8 @@ import Files from './Files/Files'
 import Promptings from './Promptings/Promptings'
 import RateCouncils from './Settings/RateCouncils'
 import About from './Settings/About'
+import ForgotPassword from './ForgotPassword/ForgotPassword'
+import Success from './ForgotPassword/Success'
 
 const Routes = props => {
   useEffect(_ => {
@@ -41,7 +43,9 @@ const Routes = props => {
     if (
       props.location.pathname !== '/' &&
       props.location.pathname !== '/register' &&
-      props.location.pathname !== '/login'
+      props.location.pathname !== '/login' &&
+      props.location.pathname !== '/forgot-password' &&
+      props.location.pathname !== '/success'
     )
       return <Header />
   }
@@ -75,6 +79,10 @@ const Routes = props => {
             path='/change-password'
             render={props => <ChangePassword {...props} />}
           />
+
+          <Route path='/forgot-password' render={props => <ForgotPassword {...props} />} />
+
+          <Route path='/success' render={props => <Success {...props} />} />
 
           <Route path='/settings' render={props => <Settings {...props} />} />
 
