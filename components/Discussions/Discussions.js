@@ -55,12 +55,12 @@ const Discussions = props => {
         <Content padder>
             <List>
                 {
-                    loading ? 
-                    <Spinner /> :
-                    <>
-                        <Text style={commonTextStyle}>You have no active discussions!</Text>
-                        <Text style={commonTextStyle}>Press '+' to create a new one</Text>
-                    </>
+                    loading ?
+                        <Spinner /> :
+                        <>
+                            <Text style={commonTextStyle}>You have no active discussions!</Text>
+                            <Text style={commonTextStyle}>Press '+' to create a new one</Text>
+                        </>
                 }
             </List>
         </Content>
@@ -84,7 +84,8 @@ const Discussion = props => {
 
     }, [])
 
-    const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0]
+    const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0],
+        snippetString = `${mostRecent.user.id === props.currentUser.uid ? 'me' : mostRecent.user.name.split(' ')[0]}: ${mostRecent.content.slice(0, 15)}`
 
     return (
 
@@ -110,8 +111,10 @@ const Discussion = props => {
                     fontSize: 15,
                     marginTop: 7,
                     marginBottom: 7,
+                    maxWidth: '100%',
+                    overflow: 'hidden'
                 }}>
-                    {`${mostRecent.user.id === props.currentUser.uid ? 'me' : mostRecent.user.name}: ${mostRecent.content.slice(0, 10)}`}
+                    {`${snippetString}${snippetString.length - (mostRecent.user.id === props.currentUser.uid ? 'me'.length : mostRecent.user.name.split(' ')[0].length) < mostRecent.content.length ? '...' : ''}`}
                 </Text>
                 <Text note style={{
                     color: '#6f777e',
