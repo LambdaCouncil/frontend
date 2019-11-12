@@ -186,7 +186,7 @@ export default _ => {
         borderColor: variables.inputSuccessBorderColor
       },
       '.underline': {
-        borderWidth: variables.borderWidth * 2,
+        borderWidth: variables.borderWidth * 0,
         borderTopWidth: 0,
         borderRightWidth: 0,
         borderLeftWidth: 0,

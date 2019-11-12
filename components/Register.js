@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import firebase from '../firebase'
 import {
-  Button,
-  Content,
-  Input,
-  Text,
-  Label,
-  Item,
-  View,
-  H3,
-  Icon,
-  Spinner
+    Button,
+    Content,
+    Input,
+    Text,
+    Label,
+    Item,
+    View,
+    H3,
+    Icon,
+    Spinner
 } from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
@@ -89,123 +89,120 @@ function Register(props) {
 
         isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
 
-
-    _renderErrorText = _ => {
-        return error ? error.message : "An internal error occured"
-    }
-
-  _renderButton = _ => {
-    if (requestActive) return <Spinner />
-    else
-      return (
-        <H3
-          onPress={handleSubmit}
-          style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }}
-          submit>
-          Sign Up
+        _renderButton = _ => {
+            if (requestActive) return <Spinner />
+            else
+                return (
+                    <H3
+                        onPress={handleSubmit}
+                        style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }}
+                        submit>
+                        Sign Up
         </H3>
-      )
-  }
+                )
+        },
 
-  const getColor = _ => {
-    if (email === '' || password === '' || passwordConfirm === '')
-      return '#A9AAAC'
-    else return '#288365'
-  }
+        _renderErrorText = _ => {
+            return error ? error.message : 'An internal error occured'
+        },
 
+        getColor = _ => {
+            if (email === "" || password === "" || passwordConfirm === "") return "#A9AAAC"
+            else return "#288365"
+        }
 
-  return (
-    <>
-      <Button backButton onPress={props.history.goBack}>
-        <Icon
-          backButton
-          name='arrow-back'
-          style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
-        />
-      </Button>
+    return (
+        <>
+            <Button backButton onPress={props.history.goBack}>
+                <Icon
+                    backButton
+                    name='arrow-back'
+                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
+                />
+            </Button>
 
-      <Content
-        padder
-        contentContainerStyle={{
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-        <Text style={styles.header}>Sign Up</Text>
+            <Content
+                padder
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                <Text style={styles.header}>Sign Up</Text>
 
-        <Text style={styles.subheader}>Create Councils account.</Text>
+                <Text style={styles.subheader}>Create Councils account.</Text>
 
-        <Item floatingLabel>
-          <Label style={styles.label}>Email</Label>
-          <Input onChangeText={handleChangeEmail} value={email} />
-        </Item>
-        <View style={styles.view}>
-          <Text style={styles.text}>Use Councils invitation email</Text>
-        </View>
+                <Item floatingLabel>
+                    <Label style={styles.label}>Email</Label>
+                    <Input onChangeText={handleChangeEmail} value={email} />
+                </Item>
+                <View style={styles.view}>
+                    <Text style={styles.text}>Use Councils invitation email</Text>
+                </View>
 
-        <Item floatingLabel>
-          <Label style={styles.label}>Password</Label>
-          <Input
-            onChangeText={handleChangePassword}
-            value={password}
-            secureTextEntry={true}
-          />
-        </Item>
-        <View style={styles.view}>
-          <Text style={styles.text}>
-            8 characters, 1 capital letter, 1 number
+                <Item floatingLabel>
+                    <Label style={styles.label}>Password</Label>
+                    <Input
+                        onChangeText={handleChangePassword}
+                        value={password}
+                        secureTextEntry={true}
+                    />
+                </Item>
+                <View style={styles.view}>
+                    <Text style={styles.text}>
+                        8 characters, 1 capital letter, 1 number
           </Text>
-        </View>
+                </View>
 
-        <Item floatingLabel>
-          <Label style={styles.label}>Confirm Password</Label>
-          <Input
-            secureTextEntry={true}
-            value={passwordConfirm}
-            onChangeText={handleChangePasswordConfirm}
-          />
-        </Item>
+                <Item floatingLabel>
+                    <Label style={styles.label}>Confirm Password</Label>
+                    <Input
+                        secureTextEntry={true}
+                        value={passwordConfirm}
+                        onChangeText={handleChangePasswordConfirm}
+                    />
+                </Item>
 
-        {_renderButton()}
+                {_renderButton()}
 
-        <Text style={{ color: 'red' }}>{_renderErrorText()}</Text>
-      </Content>
-    </>
-  )
+                <Text style={{ color: 'red' }}>{_renderErrorText()}</Text>
+            </Content>
+        </>
+    )
 }
 
 const styles = StyleSheet.create({
-  header: {
-    color: '#202224',
-    fontFamily: 'gotham',
-    fontSize: 28,
-    marginBottom: 10,
-    marginTop: 30
-  },
-  subheader: {
-    color: '#202224',
-    fontFamily: 'bern-r',
-    fontSize: 17
-  },
-  label: {
-    color: '#6f777e',
-    fontFamily: 'bern-r',
-    fontSize: 17
-  },
-  text: {
-    color: '#6f777e',
-    fontFamily: 'bern-r',
-    fontSize: 13
-  },
-  view: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignContent: 'flex-start',
-    alignItems: 'flex-start',
-    width: '100%'
-  }
+    header: {
+        color: '#202224',
+        fontFamily: 'gotham',
+        fontSize: 28,
+        marginBottom: 10,
+        marginTop: 30
+    },
+    subheader: {
+        color: '#202224',
+        fontFamily: 'bern-r',
+        fontSize: 17
+    },
+    label: {
+        color: '#6f777e',
+        fontFamily: 'bern-r',
+        fontSize: 17
+    },
+    text: {
+        color: '#6f777e',
+        fontFamily: 'bern-r',
+        fontSize: 13
+    },
+    view: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignContent: 'flex-start',
+        alignItems: 'flex-start',
+        width: '100%'
+    }
 })
 
 export default connect(
-  state => ({ ...state }),
-  { setUser }
+    state => ({ ...state }),
+    { setUser }
 )(withRouter(Register))

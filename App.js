@@ -18,7 +18,7 @@ import OfflineStatus from "./OfflineStatus"
 const store = createStore(reducer, applyMiddleware(thunk))
 
 const App = _ => {
-  const[isLoading, setLoading] = useState(true)
+  const [isLoading, setLoading] = useState(true)
 
 
   // hides nuisance warnings from Expo
@@ -51,7 +51,7 @@ const App = _ => {
         <StyleProvider style={getTheme(common)}>
           <Root>
             <>
-              <Routes loadingFonts = {isLoading} />
+              <Routes loadingFonts={isLoading} />
               <OfflineStatus />
             </>
           </Root>
