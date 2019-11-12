@@ -33,7 +33,7 @@ const App = _ => {
       setLoading(false)
     })
 
-  if (parseInt(Math.random() * 10) < 2) return (
+  return (
     <Provider store={store}>
       <NativeRouter>
         <StyleProvider style={getTheme(common)}>
@@ -47,8 +47,6 @@ const App = _ => {
       </NativeRouter>
     </Provider>
   )
-
-  else return <Root></Root>
 
 }
 
