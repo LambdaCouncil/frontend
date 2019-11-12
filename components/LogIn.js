@@ -111,7 +111,7 @@ function Login(props) {
                     <Text style={{ color: "red" }}>{error.message}</Text>
 
                     <Footer style={styles.footer}>
-                        <Button onPress={forgotPassword}>
+                        <Button style={{elevation: 0}} onPress={forgotPassword}>
                             <Link to='/forgot-password'>
                                 <Text style={styles.footerText}>Forgot Password?</Text>
                             </Link>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-end',
         backgroundColor: 'white',
-        elevation: 0,
+        
     },
     footerText: {
         color: '#288365',

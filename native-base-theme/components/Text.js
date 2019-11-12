@@ -16,7 +16,7 @@ export default _ => {
     },
     '.loginButton': {
       backgroundColor: ui.eggshell,
-      color: text.greal,
+      color: text.darkGreenBlue,
       textAlign: 'center',
       padding: 10,
       paddingBottom: 15,
@@ -25,7 +25,7 @@ export default _ => {
     '.registerButton': {
       borderRadius: 7.5,
       overflow: 'hidden',
-      backgroundColor: ui.greal,
+      backgroundColor: ui.darkGreenBlue,
       padding: 10,
       paddingBottom: 15,
       textAlign: 'center',
@@ -44,7 +44,7 @@ export default _ => {
       color: text.nearBlack,
     },
     '.new': {
-      color: text.greal,
+      color: text.darkGreenBlue,
       fontWeight: 'bold'
     },
   }

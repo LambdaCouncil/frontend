@@ -125,8 +125,8 @@ const NewAssignment = props => {
         <Content>
           
           <Form>            
-            <Item floatingLabel style={styles.item}>
-              <Label>Description</Label>
+            <Item floatingLabel>
+              <Label style={styles.text}>Description</Label>
               <Input
                 name="description"
                 onChangeText={text => handleDescription(text)}
@@ -136,7 +136,7 @@ const NewAssignment = props => {
 
             <Button transparent style={styles.button} title="Council" onPress={() => setShowCouncilModal(true)}>
               <View>
-                <Text>Council</Text>
+                <Text style={styles.text}>Council</Text>
                 {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
               </View>
             </Button>
@@ -152,7 +152,7 @@ const NewAssignment = props => {
 
             <Button transparent style={styles.button} title="AssignTo" onPress={() => setShowATModal(true)}>
               <View>
-                <Text>Assign To</Text>
+                <Text style={styles.text}>Assign To</Text>
                 {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
               </View>
             </Button>
@@ -167,24 +167,27 @@ const NewAssignment = props => {
                 setAssignedToId={setAssignedToId}
               />)
             }
+            
+            <Item picker>  
+              <DatePicker
+                placeHolderText='Date & Time'
+                minimumDate={new Date(2018, 0, 1)}
+                maximumDate={new Date(3019, 11, 31)}
+                locale={"en"}
+                timeZoneOffsetInMinutes={undefined}
+                modalTransparent={false}
+                animationType={"fade"}
+                androidMode={"default"}
+                textStyle={{ color: "green" }}
+                placeHolderTextStyle={{ color: "#6f777e", fontFamily: 'bern-r', fontSize: 17 }}
+                onDateChange={value => handleDate(value)}
+                disabled={false}
+                />
+            </Item>
+         
 
-            <Label>Date &amp; Time</Label>
-            <DatePicker
-              // defaultDate={new Date(Date.now())}
-              minimumDate={new Date(2018, 0, 1)}
-              maximumDate={new Date(3019, 11, 31)}
-              locale={"en"}
-              timeZoneOffsetInMinutes={undefined}
-              modalTransparent={false}
-              animationType={"fade"}
-              androidMode={"default"}
-              textStyle={{ color: "green" }}
-              placeHolderTextStyle={{ color: "#d3d3d3" }}
-              onDateChange={value => handleDate(value)}
-              disabled={false}
-            />
-            <Item floatingLabel style={styles.item}>
-              <Label>Notes</Label>
+            <Item floatingLabel>
+              <Label style={styles.text}>Notes</Label>
               <Input
                 name="notes"
                 onChangeText={text => handleNotes(text)}
@@ -211,12 +214,14 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   button: {
-    marginHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#dbdcdf',
     marginVertical: 10
   },
-  item: {
-    marginHorizontal: 20,
-    marginVertical: 10
+  text: {
+    color: '#6f777e',
+    fontFamily: 'bern-r',
+    fontSize: 17,
   }
 })
 

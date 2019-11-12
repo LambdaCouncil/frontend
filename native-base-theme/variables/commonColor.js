@@ -6,22 +6,23 @@ import { Platform, Dimensions, PixelRatio } from 'react-native'
 const councils = {
 
   text: {
-    greal: '#288365',
-    seafoam: '#CEEBE2',
-    nearBlack: '#35373A',
-    slateGrey: '#A9AAAC',
-    white: '#fff',
-    red: '#F13822'
+    darkGreenBlue: '#288365',
+    darkGrey: '#202224',
+    battleShipGrey: '#6f777e',
+    lightPeriwinkle: '#dbdcdf',
+    veryLightBlue: '#e8e9eb',
+    tomatoRed: '#F13822',
+    white: '#fff'    
   },
 
   ui: {
-    greal: '#288365',
-    lightSlateGray: '#DCD9D8',
-    opaqueSlateGray: '#E8E9EB',
-    eggshell: '#F4F6FA',
-    slightlyLighterEggshell: '#FAFAFA',
-    white: '#fff',
-    red: '#F13822'
+    darkGreenBlue: '#288365',
+    darkGrey: '#202224',
+    battleShipGrey: '#6f777e',
+    lightPeriwinkle: '#dbdcdf',
+    veryLightBlue: '#e8e9eb',
+    tomatoRed: '#F13822',
+    white: '#fff' 
   }
 
 }
@@ -166,7 +167,7 @@ export default {
   containerBgColor: '#fff',
 
   // Date Picker
-  datePickerTextColor: '#000',
+  datePickerTextColor: '#6f777e',
   datePickerBg: 'transparent',
 
   // FAB

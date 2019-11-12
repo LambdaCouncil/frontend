@@ -50,7 +50,7 @@ const CouncilNames = props => {
           <Header style={{ elevation: 0 }}>
             <Left>
               <Button transparent onPress={() => props.setShowModal(false)}>
-                <Icon dgreal name="arrow-back" />
+                <Icon ddarkGreenBlue name="arrow-back" />
               </Button>
             </Left>
             <Body>
