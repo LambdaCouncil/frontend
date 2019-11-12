@@ -4,6 +4,8 @@ const { StatusBarManager } = NativeModules;
 
 import Carousel from 'react-native-snap-carousel'
 
+// Vincenzo's class based component
+
 let slideData = [
     {
         title: "Councils",

@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-native'
 
 import SidePanel from '../SidePanel/SidePanel'
 import ActionSheets from '../ActionSheets'
-import NewPrivateMessage from '../Modals/NewPrivateMessage'
-
 import { buttonsObj } from '../../objects/buttonsObj'
+
+import NewPrivateMessage from '../Modals/NewPrivateMessage'
 import NewAssignment from '../Assignments/NewAssignment'
 
 const pageHeader = props => {
@@ -24,8 +24,6 @@ const pageHeader = props => {
     '/promptings',
     // '/messages'
   ]
-
-
 
   const togglePanel = _ => setShowPanel(!showPanel)
 
@@ -65,7 +63,7 @@ const pageHeader = props => {
         case '/assignments':
           return (
             <Button transparent onPress={() => setShowModal(true)} style={{ elevation: 0 }}>
-              <Icon dgreal name='add' />
+              <Icon ddarkGreenBlue name='add' />
             </Button>
           )
 
@@ -132,7 +130,7 @@ const pageHeader = props => {
       <Header>
         <Left style={styles.icons}>
           <Button transparent onPress={togglePanel}>
-            <Icon dgreal name={menuIcon} />
+            <Icon ddarkGreenBlue name={menuIcon} />
           </Button>
         </Left>
         <Body style={styles.body}>

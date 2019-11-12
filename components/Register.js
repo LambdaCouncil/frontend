@@ -19,52 +19,79 @@ import { connect } from 'react-redux'
 import { setUser } from '../actions'
 
 function Register(props) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [requestActive, setActive] = useState(false)
-  const [error, setError] = useState({ message: '' })
 
-  const userRef = firebase.firestore().collection('users'),
-    handleChangeEmail = text => setEmail(text.trim()),
-    handleChangePassword = text => setPassword(text.trim()),
-    handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
-    handleSubmit = _ => {
-      setActive(false)
-      setError({ message: '' })
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [requestActive, setActive] = useState(false)
+    const [error, setError] = useState({ message: "" })
 
-      if (password === passwordConfirm) {
-        setActive(true)
+    const userRef = firebase.firestore().collection('users'),
 
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(createdUser => {
-            createdUser.user
-              .updateProfile({
-                photoURL: `https://ui-avatars.com/api/?name=${email}`
-              })
-              .then(_ => {
-                userRef
-                  .doc(createdUser.user.uid)
-                  .set({
-                    avatar: createdUser.user.photoURL,
-                    id: createdUser.user.uid
-                  })
-                  .then(_ => {
-                    props.setUser(createdUser.user)
-                    props.history.push('/complete-profile')
-                  })
-                  .catch(handleError)
-              })
-              .catch(handleError)
-          })
-          .catch(handleError)
-      } else handleError({ message: 'Passwords dont match' })
-    },
-    handleError = err => {
-      setError(err)
-      setActive(false)
+        handleChangeEmail = text => setEmail(text.trim()),
+
+        handleChangePassword = text => setPassword(text.trim()),
+
+        handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
+
+        handleSubmit = _ => {
+
+            if (isEmailInvalid()) {
+                setError({ message: "Email is invalid" })
+                setActive(false)
+                return
+            }
+
+            if (isPasswordInvalid()) {
+                setError({ message: "Password is invalid" })
+                setActive(false)
+                return
+            }
+
+            if (password === passwordConfirm) {
+
+                setActive(true)
+
+                firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(email, password)
+                    .then(createdUser => {
+                        createdUser.user
+                            .updateProfile({
+                                photoURL: `https://ui-avatars.com/api/?name=${email}`
+                            })
+                            .then(_ => {
+                                userRef.doc(createdUser.user.uid)
+                                    .set({
+                                        avatar: createdUser.user.photoURL,
+                                        id: createdUser.user.uid
+                                    })
+                                    .then(_ => {
+                                        props.setUser(createdUser.user)
+                                        props.history.push('/complete-profile')
+                                    })
+                                    .catch(handleError)
+                            })
+                            .catch(handleError)
+                    })
+                    .catch(handleError)
+
+            } else handleError({ message: "Passwords dont match" })
+
+        },
+
+        handleError = err => {
+            setError(err)
+            setActive(false)
+        },
+
+        isEmailInvalid = _ => !email.match(/^(.+[@].+[.].+)/),
+
+        isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
+
+
+    _renderErrorText = _ => {
+        return error ? error.message : "An internal error occured"
     }
 
   _renderButton = _ => {
@@ -86,9 +113,6 @@ function Register(props) {
     else return '#288365'
   }
 
-  _renderErrorText = _ => {
-    return error ? error.message : 'An internal error occured'
-  }
 
   return (
     <>

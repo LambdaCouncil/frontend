@@ -5,9 +5,6 @@ import moment from "moment";
 
 const AssignmentCard = props => {
   const {assignment, toggleComplete} = props;
-
-  // console.log('assignment id', assignment.id)
-  // console.log('assignment completed', assignment.completed);
   
   return (
     <ListItem>

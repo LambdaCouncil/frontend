@@ -1,4 +1,7 @@
-// Titles and button texts for each corresponding application section's actionsheets
+/* 
+  Titles and button texts for each corresponding application section's actionsheets. 
+  Imported into Header.js and then passed as props, to an actionsheet, through the switch starting on line 53 in Header.js
+*/
 export const buttonsObj = {
   agendas: {
     // See Zeplin: 05 Agendas - 2

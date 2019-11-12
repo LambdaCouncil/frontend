@@ -39,6 +39,8 @@ const Routes = props => {
     })
   }, [])
 
+  
+  // Don't render the header for any of the following components based on route
   const renderHeaderIf = _ => {
     if (
       props.location.pathname !== '/' &&
@@ -117,6 +119,8 @@ const Routes = props => {
           <Route path='/files' render={props => <Files {...props} />} />
 
           <Route path='/promptings' render={props => <Promptings {...props} />} />
+
+        // Inactive routes - activate when correpsonding section development begins
 
           {/* <Route
         path="/admin-notifications"

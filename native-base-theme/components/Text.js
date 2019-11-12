@@ -11,12 +11,12 @@ export default _ => {
     fontFamily: variable.fontFamily,
     color: variable.textColor,
     '.note': {
-      color: text.slateGrey,
+      color: text.battleShipGrey,
       fontSize: variable.noteFontSize
     },
     '.loginButton': {
       backgroundColor: ui.eggshell,
-      color: text.greal,
+      color: text.darkGreenBlue,
       textAlign: 'center',
       padding: 10,
       paddingBottom: 15,
@@ -25,7 +25,7 @@ export default _ => {
     '.registerButton': {
       borderRadius: 7.5,
       overflow: 'hidden',
-      backgroundColor: ui.greal,
+      backgroundColor: ui.darkGreenBlue,
       padding: 10,
       paddingBottom: 15,
       textAlign: 'center',
@@ -34,17 +34,17 @@ export default _ => {
       fontSize: 35
     },
     '.snippet': {
-      color: text.nearBlack,
+      color: text.darkGrey,
     },
     '.newSnippet': {
       fontWeight: 'bold'
     },
     '.name': {
       fontSize: 20,
-      color: text.nearBlack,
+      color: text.darkGrey,
     },
     '.new': {
-      color: text.greal,
+      color: text.darkGreenBlue,
       fontWeight: 'bold'
     },
   }
