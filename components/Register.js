@@ -89,27 +89,27 @@ function Register(props) {
 
         isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
 
+        _renderButton = _ => {
+            if (requestActive) return <Spinner />
+            else
+                return (
+                    <H3
+                        onPress={handleSubmit}
+                        style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }}
+                        submit>
+                        Sign Up
+        </H3>
+                )
+        },
 
         _renderErrorText = _ => {
-            return error ? error.message : "An internal error occured"
+            return error ? error.message : 'An internal error occured'
+        },
+
+        getColor = _ => {
+            if (email === "" || password === "" || passwordConfirm === "") return "#A9AAAC"
+            else return "#288365"
         }
-
-    _renderButton = _ => {
-        if (requestActive) return <Spinner />
-        else
-            return (
-                <H3
-                    onPress={handleSubmit}
-                    style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }}
-                    submit>
-                    Sign Up
-        </H3>
-            )
-    }
-
-    _renderErrorText = _ => {
-        return error ? error.message : 'An internal error occured'
-    }
 
     return (
         <>

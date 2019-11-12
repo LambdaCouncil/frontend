@@ -13,11 +13,12 @@ export default _ => {
     '.buttonContainerRoot': {
       width: '100%',
       flexDirection: 'row',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       backgroundColor: ui.eggshell,
-      borderTopWidth: 2,
-      borderTopColor: ui.slightlyLighterEggshell,
-      paddingVertical: 15
+      borderTopWidth: 1,
+      borderTopColor: ui.lightPeriwinkle,
+      paddingVertical: 10,
+      paddingHorizontal: '10%'
     },
     '.containerAllRoot': {
       height: '100%',

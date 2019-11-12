@@ -18,20 +18,22 @@ export default _ => {
       backgroundColor: ui.eggshell,
       color: text.darkGreenBlue,
       textAlign: 'center',
-      padding: 10,
+      paddingHorizontal: 35,
+      paddingTop: 16,
       paddingBottom: 15,
-      fontSize: 35
+      fontSize: 17
     },
     '.registerButton': {
       borderRadius: 7.5,
       overflow: 'hidden',
       backgroundColor: ui.darkGreenBlue,
-      padding: 10,
+      paddingHorizontal: 35,
+      paddingTop: 16,
       paddingBottom: 15,
       textAlign: 'center',
       textAlignVertical: 'center',
       color: text.white,
-      fontSize: 35
+      fontSize: 17
     },
     '.snippet': {
       color: text.darkGrey,
