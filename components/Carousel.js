@@ -10,22 +10,22 @@ let slideData = [
     {
         title: "Councils",
         description: "Area, Stake and Ward leadership communication.",
-        image: require("./assets/Screens/tour1.png")
+        image: require("../assets/Screens/tour1.png")
     },
     {
         title: "Agendas",
         description: "Post agendas so councils come inspired & prepared.",
-        image: require("./assets/Screens/tour2.png")
+        image: require("../assets/Screens/tour2.png")
     },
     {
         title: "Discussions",
         description: "Start council wide or private discussions when you're prompted.",
-        image: require("./assets/Screens/tour3.png")
+        image: require("../assets/Screens/tour3.png")
     },
     {
         title: "Assignments",
         description: "Create, delegate or complete assignments during the week.",
-        image: require("./assets/Screens/tour4.png")
+        image: require("../assets/Screens/tour4.png")
     },
 ]
 
