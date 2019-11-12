@@ -227,7 +227,7 @@ export default _ => {
       }
     },
     '.picker': {
-      marginLeft: 0
+      marginHorizontal: 20
     },
 
     borderWidth: variables.borderWidth * 2,

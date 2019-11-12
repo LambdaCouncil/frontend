@@ -7,7 +7,7 @@ export default _ => {
   const { ui, text } = variables.councils
 
   return {
-    color: variables.councils.text.nearBlack,
+    color: variables.councils.text.darkGrey,
     fontSize: variables.fontSizeH1,
     lineHeight: variables.lineHeightH1,
     marginVertical: 10

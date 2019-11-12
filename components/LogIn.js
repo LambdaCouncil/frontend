@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
+import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
 
 import ForgotPassword from './ForgotPassword/ForgotPassword'
 
@@ -111,7 +111,7 @@ function Login(props) {
                     <Text style={{ color: "red" }}>{error.message}</Text>
 
                     <Footer style={styles.footer}>
-                        <Button onPress={forgotPassword}>
+                        <Button style={{elevation: 0}} onPress={forgotPassword}>
                             <Link to='/forgot-password'>
                                 <Text style={styles.footerText}>Forgot Password?</Text>
                             </Link>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-end',
         backgroundColor: 'white',
-        elevation: 0,
+        
     },
     footerText: {
         color: '#288365',

@@ -1,23 +1,28 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import {Button, Container, Content, H1, H3, Icon, Input, Item, Label, Text} from 'native-base'
+import {Button, Container, Content, H1, Icon, Input, Item, Label, Text} from 'native-base'
 import { Link, withRouter } from 'react-router-native'
 
-import Success from './Success'
-
 import firebase from '../../firebase'
+import Success from './Success'
 
 const ForgotPassword = props => {
     const [email, setEmail] = useState('')
+    const [error, setError] = useState('')
+    
+    const getColor = _ => (email === "") ? '#6f777e' : '#288365'  
 
     const handleEmail = text => setEmail(text.trim())
 
-    const getColor = _ => (email === "") ? '#6f777e' : '#288365'  
+    const handleError = err => setError(err)
 
-    forgotPassword = (emailAddress) => {
-        firebase.auth().sendPasswordResetEmail(emailAddress)
-        .then(() => <Success />)
-        .catch(err => console.log(err))
+    const handleSubmit = (emailAddress) => {
+        (email !== '') && (email.match(/^(.+[@].+[.].+)/)) ?
+            firebase.auth().sendPasswordResetEmail(emailAddress)
+            .then(() => props.history.push('/success'))
+            .catch(err => handleError(err))
+        :
+            setError('Please enter a valid email address')
     }
 
     return (
@@ -38,6 +43,7 @@ const ForgotPassword = props => {
                         paddingTop: '15%',
                         height: '100%'
                     }}>
+
                     <H1 style={styles.header}>Forgot Password</H1>
 
                     <Text style={styles.text}>Please enter your email address and Councils will send you an email to reset your password.</Text>
@@ -46,20 +52,19 @@ const ForgotPassword = props => {
                         <Label style={styles.label}>Email</Label>
                         <Input onChangeText={handleEmail} style={styles.input} value={email} />
                     </Item>
+
+                    <Text style={styles.error}>{error}</Text>
                     
-                    <Button transparent style={styles.button} onPress={() => forgotPassword(email)}>
-                        <Link to='/success'>
+                    <Button transparent style={styles.button} onPress={() => handleSubmit(email)}>
                             <Text style={{ color: getColor(), fontFamily: 'bern-sb', fontSize: 17 }}>                            
                                 Reset Password                            
                             </Text>
-                        </Link>
                     </Button>
+                    
                 </Content>
             </Container>
         </>
-
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -83,6 +88,11 @@ const styles = StyleSheet.create({
         fontFamily: 'bern-r',
         fontSize: 17,
         marginLeft: 20,
+    },
+    error: {
+        color: '#dd1d06', 
+        fontFamily: 'bern-r', 
+        fontSize: 13
     },
     input: {
         marginHorizontal: 20,

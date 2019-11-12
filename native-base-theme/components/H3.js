@@ -11,7 +11,7 @@ export default _ => {
     fontSize: variables.fontSizeH3,
     lineHeight: variables.lineHeightH3,
     '.submit': {
-      color: text.greal,
+      color: text.darkGreenBlue,
       marginTop: 25
     }
   }

@@ -23,8 +23,8 @@ const CouncilNames = props => {
       .join(" ");
   };
 
-  const renderCheckmark = name => {
-    return props.council == name ? <Icon name="checkmark" /> : "";
+  const renderCheckmark = (name) => {
+    return props.council === name ? <Icon name="checkmark" /> : "";
   };
 
   return (
@@ -33,9 +33,6 @@ const CouncilNames = props => {
         isVisible={isVisible}
         animationIn={"slideInLeft"}
         animationOut={"slideOutLeft"}
-        // backdropColor={"#202224"}
-        // backdropOpacity={0.5}
-        // onBackdropPress={() => setIsVisible(false)}
         style={{ flex: 1, margin: 0 }}
       >
         <View
@@ -50,7 +47,7 @@ const CouncilNames = props => {
           <Header style={{ elevation: 0 }}>
             <Left>
               <Button transparent onPress={() => props.setShowModal(false)}>
-                <Icon dgreal name="arrow-back" />
+                <Icon ddarkGreenBlue name="arrow-back" />
               </Button>
             </Left>
             <Body>
@@ -58,18 +55,39 @@ const CouncilNames = props => {
             </Body>
           </Header>
           <List>
-            {options.map((name, id) => (
-              // <Button>
-              <ListItem key={id} onPress={() => props.handleCouncil(name)}>
-                <Left>
-                  <Text>{renderCouncilName(name)}</Text>
-                </Left>
-                <Right>
-                  <Text>{renderCheckmark(name)}</Text>
-                </Right>
-              </ListItem>
-              // </Button>
-            ))}
+            {props.users
+              ? options.map((obj, id) => (
+                  <ListItem
+                    key={id}
+                    onPress={() =>
+                      props.handleCouncil(
+                        `${obj.name}`,
+                        obj.id
+                      )
+                    }
+                  >
+                    <Left>
+                      <Text>
+                        {(`${obj.name}`)}
+                      </Text>
+                    </Left>
+                    <Right>
+                      <Text>
+                        {renderCheckmark(`${obj.name}`)}
+                      </Text>
+                    </Right>
+                  </ListItem>
+                ))
+              : options.map((name, id) => (
+                  <ListItem key={id} onPress={() => props.handleCouncil(name)}>
+                    <Left>
+                      <Text>{renderCouncilName(name)}</Text>
+                    </Left>
+                    <Right>
+                      <Text>{renderCheckmark(name)}</Text>
+                    </Right>
+                  </ListItem>
+                ))}
           </List>
         </View>
       </Modal>
