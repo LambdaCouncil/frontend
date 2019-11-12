@@ -28,8 +28,12 @@ firebase.initializeApp(firebaseConfig)
 
 /* 
     Import db into any component to shorten firebase syntax in function calls. 
-        example: firebase.firestore().collection(users).doc(uid) becomes: db.doc(uid)
+        example: firebase.firestore().collection(users).doc(uid) becomes: db(users).doc(uid)
 */
+
 export const db = table => firebase.firestore().collection(table)
 
 export default firebase
+
+
+
