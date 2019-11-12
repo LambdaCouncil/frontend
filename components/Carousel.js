@@ -46,7 +46,7 @@ export default class MyCarousel extends Component {
             <View style={itemViewStyle}>
                 <Text style={itemTitleStyle}>{item.title}</Text>
                 <Text style={itemDescriptionStyle}>{item.description}</Text>
-                <Image source={item.image} style={{ resizeMode: "cover" }} />
+                <Image source={item.image} style={{ resizeMode: "cover"}} />
             </View>
         )
     }

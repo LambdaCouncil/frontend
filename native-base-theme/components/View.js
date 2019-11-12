@@ -16,7 +16,7 @@ export default _ => {
       justifyContent: 'center',
       backgroundColor: ui.eggshell,
       borderTopWidth: 2,
-      borderTopColor: ui.slightlyLighterEggshell,
+      borderTopColor: ui.lightPeriwinkle,
       paddingVertical: 15
     },
     '.containerAllRoot': {

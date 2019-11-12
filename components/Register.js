@@ -58,7 +58,7 @@ function Register(props) {
                     .then(createdUser => {
                         createdUser.user
                             .updateProfile({
-                                photoURL: `https://ui-avatars.com/api/?name=${email}`
+                                photoURL: `https://ui-avatars.com/api/?background=fafafa&color=202224&name=${email}`
                             })
                             .then(_ => {
                                 userRef.doc(createdUser.user.uid)
