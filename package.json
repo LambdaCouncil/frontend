@@ -5,8 +5,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject",
-    "postinstall": "patch-package"
+    "eject": "expo eject"
   },
   "dependencies": {
     "braces": "^3.0.2",
@@ -17,7 +16,6 @@
     "mem": "^4.0.0",
     "moment": "^2.24.0",
     "native-base": "^2.13.8",
-    "patch-package": "^6.2.0",
     "postinstall-postinstall": "^2.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
@@ -27,6 +25,7 @@
     "react-native-rating-star": "^0.2.1",
     "react-native-ratings": "^6.5.0",
     "react-native-safe-area-context": "~0.3.6",
+    "react-native-safe-area-view": "^1.0.0",
     "react-native-snap-carousel": "^3.8.2",
     "react-native-star-rating": "^1.1.0",
     "react-native-vector-icons": "^6.6.0",
