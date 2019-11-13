@@ -9,10 +9,12 @@ import { buttonsObj } from '../../objects/buttonsObj'
 
 import NewPrivateMessage from '../Modals/NewPrivateMessage'
 import NewAssignment from '../Assignments/NewAssignment'
+import NewCouncilDiscussion from '../Modals/NewCouncilDiscussion'
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showCouncils, setShowCouncils] = useState(false)
   const [menuIcon, setMenuIcon] = useState('menu')
 
   const addIconArray = [
@@ -79,6 +81,7 @@ const pageHeader = props => {
           return (
             <ActionSheets
               setShowModal={setShowModal}
+              setShowCouncils={setShowCouncils}
               asInfo={buttonsObj.discussions.primary}
             />
           )
@@ -117,7 +120,8 @@ const pageHeader = props => {
   const whichModal = _ => {
     switch (props.location.pathname) {
       case '/discussions':
-        return <NewPrivateMessage setShowModal={setShowModal} />
+        if (!showCouncils) return <NewPrivateMessage setShowModal={setShowModal} />
+        else return <NewCouncilDiscussion setShowModal={setShowModal} setShowCouncils={setShowCouncils} />
       case '/assignments':
         return <NewAssignment setShowModal={setShowModal} />
       default:

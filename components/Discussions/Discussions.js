@@ -112,7 +112,6 @@ const Discussion = props => {
                     marginTop: 7,
                     marginBottom: 7,
                     maxWidth: '100%',
-                    overflow: 'hidden'
                 }}>
                     {`${snippetString}${snippetString.length - (mostRecent.user.id === props.currentUser.uid ? 'me'.length : mostRecent.user.name.split(' ')[0].length) < mostRecent.content.length ? '...' : ''}`}
                 </Text>

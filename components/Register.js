@@ -111,63 +111,65 @@ function Register(props) {
             else return "#288365"
         }
 
-    return (
-        <>
-            <Button backButton onPress={props.history.goBack}>
-                <Icon
-                    backButton
-                    name='arrow-back'
-                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
+    return <>
+
+        <Button backButton onPress={props.history.goBack}>
+            <Icon
+                backButton
+                name='arrow-back'
+                style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
+            />
+        </Button>
+
+        <Content
+            padder
+            contentContainerStyle={{
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+            <Text style={styles.header}>Sign Up</Text>
+
+            <Text style={styles.subheader}>Create Councils account.</Text>
+
+            <Item floatingLabel>
+                <Label style={styles.label}>Email</Label>
+                <Input onChangeText={handleChangeEmail} value={email} />
+            </Item>
+
+            <View style={styles.view}>
+                <Text style={styles.text}>Use Councils invitation email</Text>
+            </View>
+
+            <Item floatingLabel>
+                <Label style={styles.label}>Password</Label>
+                <Input
+                    onChangeText={handleChangePassword}
+                    value={password}
+                    secureTextEntry={true}
                 />
-            </Button>
-
-            <Content
-                padder
-                contentContainerStyle={{
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                <Text style={styles.header}>Sign Up</Text>
-
-                <Text style={styles.subheader}>Create Councils account.</Text>
-
-                <Item floatingLabel>
-                    <Label style={styles.label}>Email</Label>
-                    <Input onChangeText={handleChangeEmail} value={email} />
-                </Item>
-                <View style={styles.view}>
-                    <Text style={styles.text}>Use Councils invitation email</Text>
-                </View>
-
-                <Item floatingLabel>
-                    <Label style={styles.label}>Password</Label>
-                    <Input
-                        onChangeText={handleChangePassword}
-                        value={password}
-                        secureTextEntry={true}
-                    />
-                </Item>
-                <View style={styles.view}>
-                    <Text style={styles.text}>
-                        8 characters, 1 capital letter, 1 number
+            </Item>
+            <View style={styles.view}>
+                <Text style={styles.text}>
+                    8 characters, 1 capital letter, 1 number
           </Text>
-                </View>
+            </View>
 
-                <Item floatingLabel>
-                    <Label style={styles.label}>Confirm Password</Label>
-                    <Input
-                        secureTextEntry={true}
-                        value={passwordConfirm}
-                        onChangeText={handleChangePasswordConfirm}
-                    />
-                </Item>
+            <Item floatingLabel>
+                <Label style={styles.label}>Confirm Password</Label>
+                <Input
+                    secureTextEntry={true}
+                    value={passwordConfirm}
+                    onChangeText={handleChangePasswordConfirm}
+                />
+            </Item>
 
-                {_renderButton()}
+            {_renderButton()}
 
-                <Text style={{ color: 'red' }}>{_renderErrorText()}</Text>
-            </Content>
-        </>
-    )
+            <Text style={{ color: 'red' }}>{_renderErrorText()}</Text>
+        </Content>
+
+    </>
+
 }
 
 const styles = StyleSheet.create({
