@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import * as Font from 'expo-font'
 import { YellowBox, View } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import { NativeRouter } from 'react-router-native'
@@ -49,12 +50,14 @@ const App = _ => {
     <Provider store={store}>
       <NativeRouter>
         <StyleProvider style={getTheme(common)}>
-          <Root>
-            <>
-              <Routes loadingFonts={isLoading} />
-              <OfflineStatus />
-            </>
-          </Root>
+          <SafeAreaProvider>
+            <Root>
+              <>
+                <Routes loadingFonts={isLoading} />
+                <OfflineStatus />
+              </>
+            </Root>
+          </SafeAreaProvider>
         </StyleProvider>
       </NativeRouter>
     </Provider>
