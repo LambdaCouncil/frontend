@@ -65,8 +65,6 @@ function Login(props) {
         else return "#288365"
     }
 
-    const forgotPassword = () => <ForgotPassword />
-
     return (
 
         <>
@@ -85,7 +83,6 @@ function Login(props) {
                         alignItems: 'center',
                         paddingTop: '15%',
                         height: '100%'
-                        //     paddingBottom: '85%'
                     }}>
 
                     <H1 style={{ fontFamily: 'gotham', fontSize: 28, color: '#202224' }}>Log In</H1>
@@ -111,7 +108,7 @@ function Login(props) {
                     <Text style={{ color: "red" }}>{error.message}</Text>
 
                     <Footer style={styles.footer}>
-                        <Button style={{elevation: 0}} onPress={forgotPassword}>
+                        <Button style={{elevation: 0}} onPress={() => <ForgotPassword />}>
                             <Link to='/forgot-password'>
                                 <Text style={styles.footerText}>Forgot Password?</Text>
                             </Link>
