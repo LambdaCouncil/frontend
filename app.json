@@ -3,7 +3,7 @@
     "name": "Councils",
     "slug": "councils",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "3.5.0",
     "platforms": [
       "ios",
       "android",
