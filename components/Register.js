@@ -9,6 +9,7 @@ import {
     Label,
     Item,
     View,
+    H1,
     H3,
     Icon,
     Spinner
@@ -90,35 +91,19 @@ function Register(props) {
         isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
 
         _renderButton = _ => {
+            const filled = !(email === "" || password === "" || passwordConfirm === "")
             if (requestActive) return <Spinner />
-            else
-                return (
-                    <H3
-                        onPress={handleSubmit}
-                        style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }}
-                        submit>
-                        Sign Up
-        </H3>
-                )
+            else return <H3 submit active={filled} onPress={handleSubmit}>Sign Up</H3>
         },
 
         _renderErrorText = _ => {
             return error ? error.message : 'An internal error occured'
-        },
-
-        getColor = _ => {
-            if (email === "" || password === "" || passwordConfirm === "") return "#A9AAAC"
-            else return "#288365"
         }
 
     return <>
 
         <Button backButton onPress={props.history.goBack}>
-            <Icon
-                backButton
-                name='arrow-back'
-                style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
-            />
+            <Icon backButton name='arrow-back' />
         </Button>
 
         <Content
@@ -127,35 +112,35 @@ function Register(props) {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-            <Text style={styles.header}>Sign Up</Text>
+            <H1 pre>Sign Up</H1>
 
-            <Text style={styles.subheader}>Create Councils account.</Text>
+            <Text pre>Create Councils account.</Text>
 
             <Item floatingLabel>
-                <Label style={styles.label}>Email</Label>
+                <Label float>Email</Label>
                 <Input onChangeText={handleChangeEmail} value={email} />
             </Item>
 
-            <View style={styles.view}>
-                <Text style={styles.text}>Use Councils invitation email</Text>
+            <View info>
+                <Text info>Use Councils invitation email</Text>
             </View>
 
             <Item floatingLabel>
-                <Label style={styles.label}>Password</Label>
+                <Label float>Password</Label>
                 <Input
                     onChangeText={handleChangePassword}
                     value={password}
                     secureTextEntry={true}
                 />
             </Item>
-            <View style={styles.view}>
-                <Text style={styles.text}>
+            <View info>
+                <Text info>
                     8 characters, 1 capital letter, 1 number
           </Text>
             </View>
 
             <Item floatingLabel>
-                <Label style={styles.label}>Confirm Password</Label>
+                <Label float>Confirm Password</Label>
                 <Input
                     secureTextEntry={true}
                     value={passwordConfirm}
@@ -165,44 +150,12 @@ function Register(props) {
 
             {_renderButton()}
 
-            <Text style={{ color: 'red' }}>{_renderErrorText()}</Text>
+            <Text error>{_renderErrorText()}</Text>
         </Content>
 
     </>
 
 }
-
-const styles = StyleSheet.create({
-    header: {
-        color: '#202224',
-        fontFamily: 'gotham',
-        fontSize: 28,
-        marginBottom: 10,
-        marginTop: 30
-    },
-    subheader: {
-        color: '#202224',
-        fontFamily: 'bern-r',
-        fontSize: 17
-    },
-    label: {
-        color: '#6f777e',
-        fontFamily: 'bern-r',
-        fontSize: 17
-    },
-    text: {
-        color: '#6f777e',
-        fontFamily: 'bern-r',
-        fontSize: 13
-    },
-    view: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignContent: 'flex-start',
-        alignItems: 'flex-start',
-        width: '100%'
-    }
-})
 
 export default connect(
     state => ({ ...state }),
