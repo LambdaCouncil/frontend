@@ -54,87 +54,61 @@ function Login(props) {
         isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
 
         _renderButton = _ => {
-            if (requestActive)
-                return <Spinner />
-            else
-                return <H3 onPress={handleSubmit} style={{ fontFamily: 'bern-sb', fontSize: 17, color: getColor() }} submit>Log In</H3>
+            const filled = !(email === "" || password === "")
+            if (requestActive) return <Spinner />
+            else return <H3 submit active={filled} onPress={handleSubmit}>Log In</H3>
         }
 
-    const getColor = _ => {
-        if (email === "" || password === "") return "#A9AAAC"
-        else return "#288365"
-    }
+    return <>
 
-    return (
+        <Button backButton onPress={props.history.goBack}>
+            <Icon backButton name='arrow-back' />
+        </Button>
 
-        <>
+        <Container>
+            <Content
+                padder
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    paddingTop: '15%',
+                    height: '100%'
+                }}>
 
-            <Button backButton onPress={props.history.goBack}>                
-                <Icon backButton
-                    name='arrow-back'
-                    style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
-                />
-            </Button>
+                <H1 pre>Log In</H1>
 
-            <Container>
-                <Content
-                    padder
-                    contentContainerStyle={{
-                        alignItems: 'center',
-                        paddingTop: '15%',
-                        height: '100%'
-                    }}>
+                <Text pre>Log into your Councils account.</Text>
 
-                    <H1 style={{ fontFamily: 'gotham', fontSize: 28, color: '#202224' }}>Log In</H1>
+                <Item floatingLabel>
+                    <Label float>Email</Label>
+                    <Input onChangeText={handleChangeEmail} value={email} />
+                </Item>
 
-                    <Text style={{ fontFamily: 'bern-r', fontSize: 17, color: '#202224' }}>Log into your Councils account.</Text>
+                <Item floatingLabel>
+                    <Label float>Password</Label>
+                    <Input
+                        onChangeText={handleChangePassword}
+                        value={password}
+                        secureTextEntry={true}
+                    />
+                </Item>
 
-                    <Item floatingLabel>
-                        <Label>Email</Label>
-                        <Input onChangeText={handleChangeEmail} value={email} />
-                    </Item>
+                {_renderButton()}
 
-                    <Item floatingLabel>
-                        <Label style={{ fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Password</Label>
-                        <Input
-                            onChangeText={handleChangePassword}
-                            value={password}
-                            secureTextEntry={true}
-                        />
-                    </Item>
+                <Text error>{error.message}</Text>
 
-                    {_renderButton()}
+                <Footer pre>
+                    <Button style={{ elevation: 0 }} onPress={() => <ForgotPassword />}>
+                        <Link to='/forgot-password'>
+                            <Text pre foot>Forgot Password?</Text>
+                        </Link>
+                    </Button>
+                </Footer>
 
-                    <Text style={{ color: "red" }}>{error.message}</Text>
+            </Content>
+        </Container>
 
-                    <Footer style={styles.footer}>
-                        <Button style={{elevation: 0}} onPress={() => <ForgotPassword />}>
-                            <Link to='/forgot-password'>
-                                <Text style={styles.footerText}>Forgot Password?</Text>
-                            </Link>
-                        </Button>
-                    </Footer>
+    </>
 
-                </Content>
-            </Container>
-
-        </>
-
-    )
 }
-
-const styles = StyleSheet.create({
-    footer: {
-        flex: 1,
-        alignItems: 'flex-end',
-        backgroundColor: 'white',
-        
-    },
-    footerText: {
-        color: '#288365',
-        fontFamily: 'bern-r',
-        fontSize: 15
-    }
-})
 
 export default withRouter(Login)

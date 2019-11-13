@@ -12,8 +12,14 @@ export default _ => {
     lineHeight: variables.lineHeightH3,
     '.submit': {
       color: text.darkGreenBlue,
-      marginTop: 25
-    }
+      marginTop: 25,
+      fontFamily: 'bern-sb',
+      fontSize: 17,
+      color: text.battleShipGrey,
+    },
+    '.active': {
+      color: text.darkGreenBlue
+    },
   }
 
 }

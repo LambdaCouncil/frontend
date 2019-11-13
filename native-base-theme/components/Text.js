@@ -21,7 +21,8 @@ export default _ => {
       paddingHorizontal: 35,
       paddingTop: 16,
       paddingBottom: 15,
-      fontSize: 17
+      fontSize: 17,
+      fontFamily: 'bern-sb'
     },
     '.registerButton': {
       borderRadius: 7.5,
@@ -33,7 +34,8 @@ export default _ => {
       textAlign: 'center',
       textAlignVertical: 'center',
       color: text.white,
-      fontSize: 17
+      fontSize: 17,
+      fontFamily: 'bern-sb'
     },
     '.snippet': {
       color: text.darkGrey,
@@ -48,6 +50,26 @@ export default _ => {
     '.new': {
       color: text.darkGreenBlue,
       fontWeight: 'bold'
+    },
+    '.pre': {
+      color: text.darkGrey,
+      fontFamily: 'bern-r',
+      fontSize: 17,
+    },
+    '.para': {
+      textAlign: 'center'
+    },
+    '.foot': {
+      color: text.darkGreenBlue,
+      fontSize: 15
+    },
+    '.error': {
+      color: text.tomatoRed
+    },
+    '.info': {
+      color: text.battleShipGrey,
+      fontFamily: 'bern-r',
+      fontSize: 13
     },
   }
 

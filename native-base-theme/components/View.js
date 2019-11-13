@@ -36,6 +36,13 @@ export default _ => {
     '.loading': {
       flex: 1,
       justifyContent: 'center'
+    },
+    '.info': {
+      flex: 1,
+      justifyContent: 'flex-start',
+      alignContent: 'flex-start',
+      alignItems: 'flex-start',
+      width: '100%'
     }
   }
 
