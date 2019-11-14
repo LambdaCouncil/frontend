@@ -6,6 +6,7 @@ import { Link, withRouter } from "react-router-native";
 import firebase from '../../firebase';
 import { setCurrentAssignment } from '../../actions';
 import AssignmentCard from './AssignmentCard';
+import Assignment from "./Assignment";
 
 const Assignments = props => {
 
@@ -16,6 +17,7 @@ const Assignments = props => {
   const [assignedByMeAssignments, setAssignedByMeAssignments] = useState([]);
   const [completedAssignments, setCompletedAssignments] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
 
 
   // for my assignments
@@ -96,6 +98,7 @@ const Assignments = props => {
                   key={assignment.timestamp}
                   assignment={assignment}
                   toggleComplete={toggleComplete}
+                  setShowAssignmentModal={setShowAssignmentModal}
                 />
               );
             })}
@@ -113,6 +116,7 @@ const Assignments = props => {
                     key={assignment.timestamp}
                     assignment={assignment}
                     toggleComplete={toggleComplete}
+                    setShowAssignmentModal={setShowAssignmentModal}
                   />
                 );
             })}
@@ -139,6 +143,7 @@ const Assignments = props => {
                     key={assignment.timestamp}
                     assignment={assignment}
                     toggleComplete={toggleComplete}
+                    setShowAssignmentModal={setShowAssignmentModal}
                   />
                 );
               })}
@@ -157,6 +162,8 @@ const Assignments = props => {
             <Text style={styles.text}>Click + to create a new assignment.</Text>
           </View>
         )}
+
+        {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} />}
     </Content>
   );
 };

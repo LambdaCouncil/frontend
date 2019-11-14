@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {ListItem, Icon, Body, Text, View,  Right } from 'native-base';
 import moment from "moment";
+import { Link, withRouter } from "react-router-native";
 
 
 const AssignmentCard = props => {
@@ -36,7 +37,7 @@ const AssignmentCard = props => {
 
       <Right>
         <Icon
-          onPress={() => console.log("modal for assignment should open up")}
+          onPress={() => props.setShowAssignmentModal(true)}
           name='arrow-forward'
         />
       </Right>
@@ -44,4 +45,4 @@ const AssignmentCard = props => {
   );
 };
 
-export default AssignmentCard;
+export default withRouter(AssignmentCard);
