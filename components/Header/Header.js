@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, Text, Header, Left, Icon, Body, Right } from 'native-base'
+import { Button, Container, Text, Header, Left, Icon, Body, Right } from 'native-base'
 import { withRouter } from 'react-router-native'
 
 import SidePanel from '../SidePanel/SidePanel'

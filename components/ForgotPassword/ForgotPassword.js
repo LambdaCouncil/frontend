@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Container, Content, H1, H3, Icon, Input, Item, Label, Text } from 'native-base'
 import { Link, withRouter } from 'react-router-native'
+import { useSafeArea } from 'react-native-safe-area-context'
 
 import firebase from '../../firebase'
 import Success from './Success'
 
 const ForgotPassword = props => {
+    const safeAreaInsets = useSafeArea() 
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
 
@@ -28,7 +30,12 @@ const ForgotPassword = props => {
             <Icon backButton name='arrow-back' />
         </Button>
 
-        <Container>
+        <Container style={{
+            paddingTop: safeAreaInsets.top,
+            paddingBottom: safeAreaInsets.bottom,
+            paddingLeft: safeAreaInsets.left,
+            paddingRight: safeAreaInsets.right
+        }}>
             <Content
                 padder
                 contentContainerStyle={{
