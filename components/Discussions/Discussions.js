@@ -122,7 +122,7 @@ const Discussion = props => {
                 }}>{moment(mostRecent.timestamp).format('lll')}</Text>
             </Body>
             <Right>
-                <Text>
+                <Text discussionsRightArrow>
                     {/* <Text new>{conv.new > 0 && conv.new}</Text> */}
                     {' >'}
                 </Text>

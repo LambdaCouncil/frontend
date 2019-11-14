@@ -71,6 +71,11 @@ export default _ => {
       fontFamily: 'bern-r',
       fontSize: 13
     },
+    '.discussionsRightArrow': {
+      color: text.lightPeriwinkle,
+      fontSize: 17,      
+    }
+
   }
 
 }

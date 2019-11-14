@@ -20,6 +20,10 @@ export default _ => {
     },
     '.ddarkGreenBlue': {
       color: text.darkGreenBlue,
+    },
+    '.headerIcon': {
+      color: text.darkGreenBlue,
+      fontSize: 24
     }
   }
 

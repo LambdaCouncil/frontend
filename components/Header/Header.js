@@ -65,7 +65,7 @@ const pageHeader = props => {
         case '/assignments':
           return (
             <Button transparent onPress={() => setShowModal(true)} style={{ elevation: 0 }}>
-              <Icon ddarkGreenBlue name='add' />
+              <Icon headerIcon name='add' />
             </Button>
           )
 
@@ -134,7 +134,7 @@ const pageHeader = props => {
       <Header>
         <Left style={styles.icons}>
           <Button transparent onPress={togglePanel}>
-            <Icon ddarkGreenBlue name={menuIcon} />
+            <Icon headerIcon name={menuIcon} />
           </Button>
         </Left>
         <Body style={styles.body}>

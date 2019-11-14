@@ -26,7 +26,7 @@ const ActionSheets = props => {
         )
       }
     >
-      <Icon ddarkGreenBlue
+      <Icon headerIcon
         name={props.asInfo.iconName}
         style={(Platform.OS === 'android') ?
           styles.androidIcon : styles.Icon}
