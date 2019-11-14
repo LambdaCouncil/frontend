@@ -87,6 +87,13 @@ const Assignments = props => {
     })
   }
 
+  const setComplete = (aid) => {
+    assignmentsRef.doc(aid).update({
+      completed: true
+    })
+    setShowAssignmentModal(false);
+  }
+
   return (
     <Content padder>
       {myAssignments.length > 0 && (
@@ -167,7 +174,7 @@ const Assignments = props => {
           </View>
         )}
 
-        {/* {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} />} */}
+        {/* {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} setComplete={setComplete} setComplete={setComplete} />} */}
     </Content>
   );
 };

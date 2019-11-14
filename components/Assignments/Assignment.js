@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-native";
-import { View, Button, Header, Left, Right, Icon, Body, Title, Text, H3 } from "native-base";
+import { View, Button, Header, Left, Right, Icon, Body, Title, Text, H3, Footer } from "native-base";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-native";
 import moment from 'moment';
 
 const Assignment = props => {
-  const {currentAssignment} = props;
+  const {currentAssignment, setComplete} = props;
 
   console.log('props.currentAssignment in Assignment.js',currentAssignment )
   return (
@@ -46,6 +46,9 @@ const Assignment = props => {
         <Text>{currentAssignment.content.note}</Text>
       </View>
       {/* </Modal> */}
+      <Footer >
+        <H3 onPress={() => setComplete(currentAssignment.id)}>Complete</H3>
+      </Footer>
     </View>
   );
 }
