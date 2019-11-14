@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router-native";
 import { Modal } from "react-native";
-import { Header, Body, View, List, ListItem, Left, Right, Text, Icon, Button, Title } from 'native-base';
+import { Content, Header, Body, View, List, ListItem, Left, Right, Text, Icon, Button, Title } from 'native-base';
+
+import ModalHeader from './Modals/ModalHeader.js'
 
 const CouncilNames = props => {
   const {options} = props;
   const [isVisible, setIsVisible] = useState(true);
-
 
   const renderCouncilName = name => {
     return name
@@ -28,14 +29,14 @@ const CouncilNames = props => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    
       <Modal
         isVisible={isVisible}
         animationIn={"slideInLeft"}
         animationOut={"slideOutLeft"}
         style={{ flex: 1, margin: 0 }}
       >
-        <View
+        <Content padder
           style={{
             height: "100%",
             width: "100%",
@@ -44,16 +45,19 @@ const CouncilNames = props => {
             borderColor: "white"
           }}
         >
-          <Header style={{ elevation: 0 }}>
-            <Left>
+            <ModalHeader
+              style={{elevation: 0}}
+              name='Council'
+              setShowModal={props.setShowModal}
+            />
+            {/* <Left>
               <Button transparent onPress={() => props.setShowModal(false)}>
                 <Icon ddarkGreenBlue name="arrow-back" />
               </Button>
             </Left>
             <Body>
               <Title>Council</Title>
-            </Body>
-          </Header>
+            </Body> */}
           <List>
             {props.users
               ? options.map((obj, id) => (
@@ -89,9 +93,9 @@ const CouncilNames = props => {
                   </ListItem>
                 ))}
           </List>
-        </View>
+        </Content>
       </Modal>
-    </View>
+    
   );
 }
 
