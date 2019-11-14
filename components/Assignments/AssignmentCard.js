@@ -6,6 +6,11 @@ import { Link, withRouter } from "react-router-native";
 
 const AssignmentCard = props => {
   const {assignment, toggleComplete} = props;
+
+  const handleClick = () => {
+    props.setCurrentAssignment(assignment);
+    props.history.push('/assignment');
+  }
   
   return (
     <ListItem>
@@ -37,7 +42,8 @@ const AssignmentCard = props => {
 
       <Right>
         <Icon
-          onPress={() => props.setShowAssignmentModal(true)}
+          // onPress={() => props.setShowAssignmentModal(true)}
+          onPress={() => handleClick()}
           name='arrow-forward'
         />
       </Right>

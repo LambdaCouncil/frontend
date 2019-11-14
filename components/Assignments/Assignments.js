@@ -6,7 +6,7 @@ import { Link, withRouter } from "react-router-native";
 import firebase from '../../firebase';
 import { setCurrentAssignment } from '../../actions';
 import AssignmentCard from './AssignmentCard';
-import Assignment from "./Assignment";
+// import Assignment from "./Assignment";
 
 const Assignments = props => {
 
@@ -18,6 +18,7 @@ const Assignments = props => {
   const [completedAssignments, setCompletedAssignments] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
   const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  // const [currentAssignment, setCurrentAssignment] = useState({});
 
 
   // for my assignments
@@ -99,6 +100,7 @@ const Assignments = props => {
                   assignment={assignment}
                   toggleComplete={toggleComplete}
                   setShowAssignmentModal={setShowAssignmentModal}
+                  setCurrentAssignment={props.setCurrentAssignment}
                 />
               );
             })}
@@ -117,6 +119,7 @@ const Assignments = props => {
                     assignment={assignment}
                     toggleComplete={toggleComplete}
                     setShowAssignmentModal={setShowAssignmentModal}
+                    setCurrentAssignment={props.setCurrentAssignment}
                   />
                 );
             })}
@@ -144,6 +147,7 @@ const Assignments = props => {
                     assignment={assignment}
                     toggleComplete={toggleComplete}
                     setShowAssignmentModal={setShowAssignmentModal}
+                    setCurrentAssignment={props.setCurrentAssignment}
                   />
                 );
               })}
@@ -163,7 +167,7 @@ const Assignments = props => {
           </View>
         )}
 
-        {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} />}
+        {/* {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} />} */}
     </Content>
   );
 };
@@ -181,6 +185,6 @@ const styles = StyleSheet.create({
   }
 })
 
-// export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(Assignments));
+export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(Assignments));
 
-export default connect(state => ({ ...state }), {} )(withRouter(Assignments));
+// export default connect(state => ({ ...state }), {} )(withRouter(Assignments));
