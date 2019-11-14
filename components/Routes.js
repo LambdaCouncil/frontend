@@ -18,7 +18,8 @@ import Header from './Header/Header'
 import Messages from './Messages/Messages'
 import Discussions from './Discussions/Discussions'
 import Agendas from './Agendas/Agendas'
-import Assignments from './Assignments/Assignments'
+import Assignments from './Assignments/Assignments';
+import Assignment from './Assignments/Assignment';
 import Files from './Files/Files'
 import Promptings from './Promptings/Promptings'
 import RateCouncils from './Settings/RateCouncils'
@@ -114,6 +115,11 @@ const Routes = props => {
           <Route
             path='/assignments'
             render={props => <Assignments {...props} />}
+          />
+
+          <Route
+            path='/assignment'
+            render={props => <Assignment {...props} />}
           />
 
           <Route path='/files' render={props => <Files {...props} />} />

@@ -6,6 +6,7 @@ import { Link, withRouter } from "react-router-native";
 import firebase from '../../firebase';
 import { setCurrentAssignment } from '../../actions';
 import AssignmentCard from './AssignmentCard';
+// import Assignment from "./Assignment";
 
 const Assignments = props => {
 
@@ -16,6 +17,8 @@ const Assignments = props => {
   const [assignedByMeAssignments, setAssignedByMeAssignments] = useState([]);
   const [completedAssignments, setCompletedAssignments] = useState([]);
   const [showCompleted, setShowCompleted] = useState(false);
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  // const [currentAssignment, setCurrentAssignment] = useState({});
 
 
   // for my assignments
@@ -84,6 +87,13 @@ const Assignments = props => {
     })
   }
 
+  const setComplete = (aid) => {
+    assignmentsRef.doc(aid).update({
+      completed: true
+    })
+    setShowAssignmentModal(false);
+  }
+
   return (
     <Content padder>
       {myAssignments.length > 0 && (
@@ -96,6 +106,8 @@ const Assignments = props => {
                   key={assignment.timestamp}
                   assignment={assignment}
                   toggleComplete={toggleComplete}
+                  setShowAssignmentModal={setShowAssignmentModal}
+                  setCurrentAssignment={props.setCurrentAssignment}
                 />
               );
             })}
@@ -113,6 +125,8 @@ const Assignments = props => {
                     key={assignment.timestamp}
                     assignment={assignment}
                     toggleComplete={toggleComplete}
+                    setShowAssignmentModal={setShowAssignmentModal}
+                    setCurrentAssignment={props.setCurrentAssignment}
                   />
                 );
             })}
@@ -139,6 +153,8 @@ const Assignments = props => {
                     key={assignment.timestamp}
                     assignment={assignment}
                     toggleComplete={toggleComplete}
+                    setShowAssignmentModal={setShowAssignmentModal}
+                    setCurrentAssignment={props.setCurrentAssignment}
                   />
                 );
               })}
@@ -157,6 +173,8 @@ const Assignments = props => {
             <Text style={styles.text}>Click + to create a new assignment.</Text>
           </View>
         )}
+
+        {/* {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} setComplete={setComplete} setComplete={setComplete} />} */}
     </Content>
   );
 };
@@ -174,6 +192,6 @@ const styles = StyleSheet.create({
   }
 })
 
-// export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(Assignments));
+export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(Assignments));
 
-export default connect(state => ({ ...state }), {} )(withRouter(Assignments));
+// export default connect(state => ({ ...state }), {} )(withRouter(Assignments));
