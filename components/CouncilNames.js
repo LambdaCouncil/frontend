@@ -46,8 +46,8 @@ const CouncilNames = props => {
           }}
         >
             <ModalHeader
-              style={{elevation: 0}
-              name='Council'
+              style={{elevation: 0}}
+              name={'Council'}
               setShowModal={props.setShowModal}
             />
             {/* <Left>
