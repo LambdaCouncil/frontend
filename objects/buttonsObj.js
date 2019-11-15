@@ -40,11 +40,11 @@ export const buttonsObj = {
     primary: {
       title: 'New Discussion',
       buttons: [
-        'Council',
+        // 'Council',
         'Private',
         'Cancel'
       ],
-      cancelIndex: 2,
+      cancelIndex: 1,
       iconName: 'add'
     },
     // See Zeplin: 06 Discussions - 8
