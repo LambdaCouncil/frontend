@@ -150,7 +150,7 @@ const Discussion = props => {
         )
     }
 
-    else return <Spinner />
+    else return <ListItem style={{ height: 88, verticalPadding: 14 }} avatar />
 
 }
 
