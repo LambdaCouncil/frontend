@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, Text, Header, Left, Icon, Body, Right } from 'native-base'
+import { Button, Container, Text, Header, Left, Icon, Body, Right } from 'native-base'
 import { withRouter } from 'react-router-native'
 
 import SidePanel from '../SidePanel/SidePanel'
@@ -65,7 +65,7 @@ const pageHeader = props => {
         case '/assignments':
           return (
             <Button transparent onPress={() => setShowModal(true)} style={{ elevation: 0 }}>
-              <Icon ddarkGreenBlue name='add' />
+              <Icon headerIcon name='add' />
             </Button>
           )
 
@@ -134,7 +134,7 @@ const pageHeader = props => {
       <Header>
         <Left style={styles.icons}>
           <Button transparent onPress={togglePanel}>
-            <Icon ddarkGreenBlue name={menuIcon} />
+            <Icon headerIcon name={menuIcon} />
           </Button>
         </Left>
         <Body style={styles.body}>

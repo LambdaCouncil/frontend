@@ -3,7 +3,8 @@ import { CLEAR_USER, SET_USER, SET_CURRENT_CHANNEL, SIGN_UP_DISPLAY_NAME, SET_CU
 const initialUserState = {
     currentUser: undefined,
     isLoading: true,
-    channels: []
+    channels: [],
+    currentAssignment: undefined
 }
 
 export default (state = initialUserState, action) => {
