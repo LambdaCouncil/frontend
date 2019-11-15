@@ -84,9 +84,7 @@ export const buttonsObj = {
       title: 'Prompting',
       buttons: ['Edit', 'Delete', 'Cancel'],
       cancelIndex: 2,
-      //iconName: 'more'
-      // FOR 10/1 DEMO:
-      iconName: 'add'
+      iconName: 'more'
     }
   }
 }
