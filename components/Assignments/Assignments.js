@@ -23,22 +23,24 @@ const Assignments = props => {
 
   // for my assignments
   useEffect(_ => {
-    assignmentsRef
+    const unsub = assignmentsRef
       .where('assignedTo', '==', props.currentUser.uid)
       .where('completed', '==', false)
       .onSnapshot(doc =>
-      setMyAssignments(
-        doc.docs.map(docData => ({
-          ...docData.data(),
-          id: docData.id
-        }))
-      )
-    );
+        setMyAssignments(
+          doc.docs.map(docData => ({
+            ...docData.data(),
+            id: docData.id
+          }))
+        )
+      );
+
+    return unsub
   }, []);
 
   // for assignments assigned by me
   useEffect(_ => {
-    assignmentsRef
+    const unsub = assignmentsRef
       .where("createdBy", "==", props.currentUser.uid)
       .where('completed', '==', false)
       .onSnapshot(doc => {
@@ -53,28 +55,32 @@ const Assignments = props => {
           })
         );
       });
+
+    return unsub
   }, []);
 
   // for completed assignments
   useEffect(_ => {
-    assignmentsRef
+    const unsub = assignmentsRef
       .where("completed", "==", true)
       // .where('')
-      .onSnapshot(async doc =>{
+      .onSnapshot(async doc => {
         const will = []
         // setCompletedAssignments(
-          await doc.docs.forEach(docData => {
-            if (docData.data() && (docData.data().assignedTo === props.currentUser.uid || docData.data().createdBy === props.currentUser.uid)) {
-              will.push( {
-                ...docData.data(),
-                id: docData.id
-              })
-            }
+        await doc.docs.forEach(docData => {
+          if (docData.data() && (docData.data().assignedTo === props.currentUser.uid || docData.data().createdBy === props.currentUser.uid)) {
+            will.push({
+              ...docData.data(),
+              id: docData.id
+            })
+          }
 
-          })
-          setCompletedAssignments(will)
+        })
+        setCompletedAssignments(will)
         // )
       });
+
+    return unsub
   }, []);
 
   console.log('completed assignments for Will:', completedAssignments)
@@ -133,10 +139,10 @@ const Assignments = props => {
           </List>
         </View>
       )}
-      {completedAssignments.length === 0 ? 
+      {completedAssignments.length === 0 ?
         (null)
-      
-      :  showCompleted ? (
+
+        : showCompleted ? (
           <View>
             <View>
               <Left>
@@ -160,11 +166,11 @@ const Assignments = props => {
               })}
             </List>
           </View>
-      ) : ( 
-        <View>
-          <Text onPress={() => setShowCompleted(true)}>Show Completed</Text>
-        </View>
-      )}
+        ) : (
+            <View>
+              <Text onPress={() => setShowCompleted(true)}>Show Completed</Text>
+            </View>
+          )}
       {!myAssignments.length &&
         !assignedByMeAssignments.length &&
         !completedAssignments.length && (
@@ -174,15 +180,15 @@ const Assignments = props => {
           </View>
         )}
 
-        {/* {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} setComplete={setComplete} setComplete={setComplete} />} */}
+      {/* {showAssignmentModal && <Assignment setShowAssignmentModal={setShowAssignmentModal} setComplete={setComplete} setComplete={setComplete} />} */}
     </Content>
   );
 };
 
 const styles = StyleSheet.create({
   view: {
-    flex: 1, 
-    justifyContent: 'center', 
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     width: '100%'
   },

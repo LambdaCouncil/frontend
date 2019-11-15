@@ -22,12 +22,14 @@ const Messages = props => {
 
   useEffect(_ => {
 
-    discussionsRef// set messages for current channel
+    const unsub = discussionsRef// set messages for current channel
       .onSnapshot(msgs => setMessages(
         msgs.docs
           .map(msg => ({ ...msg.data(), id: msg.id }))
           .sort((msg1, msg2) => msg1.timestamp - msg2.timestamp)
       ))
+
+    return unsub
 
   }, [])
 

@@ -26,7 +26,7 @@ const Discussions = props => {
 
         setLoading(true)
 
-        db('directMessages')
+        const unsub = db('directMessages')
             .where('users', 'array-contains', props.currentUser.uid)
             .onSnapshot(allDiscussions => {
                 setDiscussions(
@@ -41,6 +41,9 @@ const Discussions = props => {
                 )
                 setLoading(false)
             })
+
+        return unsub
+
     }, [])
 
     if (discussions.length > 0) return (
@@ -83,7 +86,7 @@ const Discussion = props => {
 
     useEffect(_ => {
 
-        db('directMessages').doc(props.discussion.id)
+        const unsub = db('directMessages').doc(props.discussion.id)
             .collection('messages').onSnapshot(msgSnaps =>
                 setMessages(
                     msgSnaps.docs
@@ -98,6 +101,8 @@ const Discussion = props => {
         }
 
         if (messages.length) populateUsers()
+
+        return unsub
 
     }, [messages])
 
