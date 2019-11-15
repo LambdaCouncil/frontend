@@ -21,7 +21,7 @@ const ActionSheets = props => {
               props.setShowModal(true)
               props.setShowCouncils(true)
             }
-            if (buttonIndex === 1) props.setShowModal(true)
+            else if (buttonIndex === 1) props.setShowModal(true)
           }
         )
       }
