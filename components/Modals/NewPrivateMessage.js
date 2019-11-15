@@ -42,8 +42,11 @@ const NewPrivateMessage = props => {
                                 props.setCurrentChannel({
                                     id: `${props.currentUser.uid}:${user.id}`,
                                     direct: true,
-                                    brandNewChannel: true,
-                                    users: [db('users').doc(props.currentUser.uid), db('users').doc(user.id)]
+                                    users: [props.currentUser.uid, user.id]
+                                })
+                                db('directMessages').doc(`${props.currentUser.uid}:${user.id}`).set({
+                                    direct: true,
+                                    users: [props.currentUser.uid, user.id]
                                 })
                                 props.setShowModal(false)
                                 props.history.push('/messages')

@@ -15,39 +15,59 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { setCurrentChannel } from '../../actions'
-import firebase from '../../firebase'
+import { db } from '../../firebase'
 
 const Discussions = props => {
-
-    const db = firebase.firestore()
-    const discussionsRef = db.collection('directMessages')
 
     const [loading, setLoading] = useState(false)
     const [discussions, setDiscussions] = useState([])
 
     useEffect(_ => {
+
         setLoading(true)
-        discussionsRef
-            .where('users', 'array-contains', db.doc(`users/${props.currentUser.uid}`))
+
+        db('directMessages')
+            .where('users', 'array-contains', props.currentUser.uid)
             .onSnapshot(allDiscussions => {
+                setDiscussions(
+                    allDiscussions.docs
+                        .map(doc => {
+                            return {
+                                ...doc.data(),
+                                id: doc.id,
+                                direct: true
+                            }
+                        })
+                )
                 setLoading(false)
-                setDiscussions(allDiscussions.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-            })
+            })//.then(_ => db('councils')
+        // .where('ids', 'array-contains', props.currentUser.uid)
+        // .onSnapshot(allCouncilDiscussions => {
+        //     setLoading(false)
+        //     allCouncilDiscussions.docs
+        //     .forEach(doc => {
+        //                                         db('councils').doc(doc.id).collection('messages').onSnapshot(msgId => {
+        //                                             dms.push({ ...doc.data(), id: doc.id, direct: true, messages: msgId.data() })
+        //                                         })
+        //         })
+        //}))
+
+
     }, [])
 
     if (discussions.length > 0) return (
         <Content padder>
             <List>
-                {discussions
-                    .sort((disc1, disc2) => disc2.messages[disc2.messages.length - 1].timestamp - disc1.messages[disc1.messages.length - 1].timestamp)
-                    .map(disc => <Discussion
-                        setCurrentChannel={props.setCurrentChannel}
-                        currentUser={props.currentUser}
-                        discussion={disc}
-                        key={disc.id}
-                        history={props.history}
-                    />
-                    )}
+                {
+                    discussions
+                        .map(disc => <Discussion
+                            setCurrentChannel={props.setCurrentChannel}
+                            currentUser={props.currentUser}
+                            discussion={disc}
+                            key={disc.id}
+                            history={props.history}
+                        />)
+                }
             </List>
         </Content>
     )
@@ -55,12 +75,12 @@ const Discussions = props => {
         <Content padder>
             <List>
                 {
-                    loading ? 
-                    <Spinner /> :
-                    <>
-                        <Text style={commonTextStyle}>You have no active discussions!</Text>
-                        <Text style={commonTextStyle}>Press '+' to create a new one</Text>
-                    </>
+                    loading ?
+                        <Spinner /> :
+                        <>
+                            <Text style={commonTextStyle}>You have no active discussions!</Text>
+                            <Text style={commonTextStyle}>Press '+' to create a new one</Text>
+                        </>
                 }
             </List>
         </Content>
@@ -69,64 +89,80 @@ const Discussions = props => {
 
 const Discussion = props => {
 
-    const db = firebase.firestore()
     const [otherUser, setOtherUser] = useState({})
+    const [messages, setMessages] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(_ => {
 
+        db('directMessages').doc(props.discussion.id)
+            .collection('messages').onSnapshot(msgSnaps =>
+                setMessages(
+                    msgSnaps.docs
+                        .map(msg => ({ ...msg.data(), id: msg.id }))
+                ))
+
         const populateUsers = _ => {
-            const discIdArr = props.discussion.id.split(':')
-            const otherUserId = discIdArr[0] === props.currentUser.uid ? discIdArr[1] : discIdArr[0]
-            db.doc(`users/${otherUserId}`).get().then(user => setOtherUser(user.data()))
+            const otherUserId = props.discussion.users[0] === props.currentUser.uid ?
+                props.discussion.users[1] : props.discussion.users[0]
+            db('users').doc(otherUserId).get().then(user => setOtherUser(user.data()))
+                .then(_ => setLoading(false))
         }
 
-        if (!props.loading) populateUsers()
+        if (messages.length) populateUsers()
 
-    }, [])
+    }, [messages])
 
-    const mostRecent = props.discussion.messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0]
+    if (!loading) {
 
-    return (
+        const mostRecent = messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0],
+            snippetString = `${mostRecent.user === props.currentUser.uid ? 'me' : otherUser.firstName}: ${mostRecent.content.slice(0, 15)}`
 
-        <ListItem style={{ height: 88, verticalPadding: 14 }} avatar
-            onPress={() => {
-                if (!props.loading) {
-                    props.setCurrentChannel({
-                        id: props.discussion.id,
-                        direct: true
-                    })
-                    props.history.push('/messages')
-                }
-            }}
-        >
-            <Left>
-                <Thumbnail style={{ height: 48, width: 48 }} source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
-            </Left>
-            <Body>
-                <Text name style={{ color: '#202224' }}>{otherUser.name || mostRecent.user.name}</Text>
-                <Text snippet style={{
-                    color: '#202224',
-                    fontFamily: 'bern-r',
-                    fontSize: 15,
-                    marginTop: 7,
-                    marginBottom: 7,
-                }}>
-                    {`${mostRecent.user.id === props.currentUser.uid ? 'me' : mostRecent.user.name}: ${mostRecent.content.slice(0, 10)}`}
-                </Text>
-                <Text note style={{
-                    color: '#6f777e',
-                    fontFamily: 'bern-r',
-                    fontSize: 13
-                }}>{moment(mostRecent.timestamp).format('lll')}</Text>
-            </Body>
-            <Right>
-                <Text>
-                    {/* <Text new>{conv.new > 0 && conv.new}</Text> */}
-                    {' >'}
-                </Text>
-            </Right>
-        </ListItem>
-    )
+        return (
+
+            <ListItem style={{ height: 88, verticalPadding: 14 }} avatar
+                onPress={() => {
+                    if (!props.loading) {
+                        props.setCurrentChannel({
+                            id: props.discussion.id,
+                            direct: true
+                        })
+                        props.history.push('/messages')
+                    }
+                }}
+            >
+                <Left>
+                    <Thumbnail style={{ height: 48, width: 48 }} source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
+                </Left>
+                <Body>
+                    <Text name style={{ color: '#202224' }}>{otherUser.name}</Text>
+                    <Text snippet style={{
+                        color: '#202224',
+                        fontFamily: 'bern-r',
+                        fontSize: 15,
+                        marginTop: 7,
+                        marginBottom: 7,
+                        maxWidth: '100%',
+                    }}>
+                        {`${snippetString}${snippetString.length - (mostRecent.user.id === props.currentUser.uid ? 'me'.length : otherUser.firstName.length) < mostRecent.content.length ? '...' : ''}`}
+                    </Text>
+                    <Text note style={{
+                        color: '#6f777e',
+                        fontFamily: 'bern-r',
+                        fontSize: 13
+                    }}>{moment(mostRecent.timestamp).format('lll')}</Text>
+                </Body>
+                <Right>
+                    <Text>
+                        {/* <Text new>{conv.new > 0 && conv.new}</Text> */}
+                        {' >'}
+                    </Text>
+                </Right>
+            </ListItem>
+        )
+    }
+
+    else return <Spinner />
 
 }
 

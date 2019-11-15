@@ -8,7 +8,7 @@ const ModalHeader = props => {
         <Header modal>
             <Left>
                 <Button transparent onPress={() => props.setShowModal(false)}>
-                    <Icon ddarkGreenBlue style={styles.icon} name='close' />
+                    <Icon headerIcon name='close' />
                 </Button>
             </Left>
             <Body style={styles.body}>
