@@ -31,7 +31,7 @@ const Messages = props => {
 
   }, [])
 
-  // console.log('messages from Messages *** : ', messages)
+  console.log('messages from Messages *** : ', messages)
 
   return (
 

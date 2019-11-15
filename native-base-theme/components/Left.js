@@ -12,6 +12,9 @@ export default _ => {
     alignItems: 'flex-start',
     '.userPanel': {
       marginLeft: 15
+    },
+    '.active': {
+      borderLeft: `2px solid ${ui.darkGreenBlue}`
     }
   }
 

@@ -32,7 +32,7 @@ const Routes = props => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         props.setUser(user)
-        props.history.push('/discussions')
+        props.history.push(user.displayName === null ? '/complete-profile' : '/discussions')
       } else {
         props.history.push('/')
         props.clearUser()
@@ -40,7 +40,7 @@ const Routes = props => {
     })
   }, [])
 
-  
+
   // Don't render the header for any of the following components based on route
   const renderHeaderIf = _ => {
     if (
@@ -126,7 +126,7 @@ const Routes = props => {
 
           <Route path='/promptings' render={props => <Promptings {...props} />} />
 
-        // Inactive routes - activate when correpsonding section development begins
+          // Inactive routes - activate when correpsonding section development begins
 
           {/* <Route
         path="/admin-notifications"

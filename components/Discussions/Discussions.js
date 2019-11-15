@@ -119,7 +119,7 @@ const Discussion = props => {
                     }
                 }}
             >
-                <Left>
+                <Left active={mostRecent.unread}>
                     <Thumbnail style={{ height: 48, width: 48 }} source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
                 </Left>
                 <Body>
