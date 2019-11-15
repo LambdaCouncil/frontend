@@ -16,7 +16,7 @@ const Message = props => {
             .catch(err => console.log(err))
     }, [])
 
-    return user.id === props.currentUser.uid ?
+    return user === props.currentUser.uid ?
         <ListItem avatar>
             <Body message>
                 <Text snippet>{content}</Text>
