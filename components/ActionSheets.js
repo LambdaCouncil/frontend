@@ -1,6 +1,6 @@
 import React from 'react'
 import { Platform, StyleSheet } from 'react-native'
-import { ActionSheet, Icon, Button, Text } from 'native-base'
+import { ActionSheet, Icon, Button } from 'native-base'
 
 const ActionSheets = props => {
   const BUTTONS = [...props.asInfo.buttons]

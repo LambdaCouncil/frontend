@@ -40,19 +40,7 @@ const Discussions = props => {
                         })
                 )
                 setLoading(false)
-            })//.then(_ => db('councils')
-        // .where('ids', 'array-contains', props.currentUser.uid)
-        // .onSnapshot(allCouncilDiscussions => {
-        //     setLoading(false)
-        //     allCouncilDiscussions.docs
-        //     .forEach(doc => {
-        //                                         db('councils').doc(doc.id).collection('messages').onSnapshot(msgId => {
-        //                                             dms.push({ ...doc.data(), id: doc.id, direct: true, messages: msgId.data() })
-        //                                         })
-        //         })
-        //}))
-
-
+            })
     }, [])
 
     if (discussions.length > 0) return (

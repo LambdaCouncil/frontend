@@ -3,7 +3,7 @@ import { Text, Input, Button, Item, Label, Form } from 'native-base'
 import { connect } from 'react-redux'
 
 import { setCurrentChannel } from '../../actions'
-import firebase from '../../firebase'
+
 
 
 const MessageForm = props => {
