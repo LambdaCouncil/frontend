@@ -20,7 +20,8 @@ const MessageForm = props => {
             props.discussionsRef.add({
                 timestamp: Date.now(),
                 user: props.currentUser.uid,
-                content: message
+                content: message,
+                unread: true
             })
             setMessage('')
 
@@ -40,8 +41,18 @@ const MessageForm = props => {
                     <Text>@</Text>
                 </Button> */}
 
-                <Button style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', order: 0 }} transparent onPress={sendMessage}>
-                    <Text style={{ color: '#288365', fontFamily: 'bern-sb', fontSize: 17 }}>Send</Text>
+                <Button style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                    order: 0
+                }} transparent
+                    onPress={sendMessage}>
+                    <Text style={{
+                        color: '#288365',
+                        fontFamily: 'bern-sb',
+                        fontSize: 17
+                    }}>Send</Text>
                 </Button>
             </Form>
         </>
