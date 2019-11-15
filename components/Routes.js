@@ -18,11 +18,14 @@ import Header from './Header/Header'
 import Messages from './Messages/Messages'
 import Discussions from './Discussions/Discussions'
 import Agendas from './Agendas/Agendas'
-import Assignments from './Assignments/Assignments'
+import Assignments from './Assignments/Assignments';
+import Assignment from './Assignments/Assignment';
 import Files from './Files/Files'
 import Promptings from './Promptings/Promptings'
 import RateCouncils from './Settings/RateCouncils'
 import About from './Settings/About'
+import ForgotPassword from './ForgotPassword/ForgotPassword'
+import Success from './ForgotPassword/Success'
 
 const Routes = props => {
   useEffect(_ => {
@@ -37,11 +40,15 @@ const Routes = props => {
     })
   }, [])
 
+  
+  // Don't render the header for any of the following components based on route
   const renderHeaderIf = _ => {
     if (
       props.location.pathname !== '/' &&
       props.location.pathname !== '/register' &&
-      props.location.pathname !== '/login'
+      props.location.pathname !== '/login' &&
+      props.location.pathname !== '/forgot-password' &&
+      props.location.pathname !== '/success'
     )
       return <Header />
   }
@@ -76,6 +83,10 @@ const Routes = props => {
             render={props => <ChangePassword {...props} />}
           />
 
+          <Route path='/forgot-password' render={props => <ForgotPassword {...props} />} />
+
+          <Route path='/success' render={props => <Success {...props} />} />
+
           <Route path='/settings' render={props => <Settings {...props} />} />
 
           <Route
@@ -106,9 +117,16 @@ const Routes = props => {
             render={props => <Assignments {...props} />}
           />
 
+          <Route
+            path='/assignment'
+            render={props => <Assignment {...props} />}
+          />
+
           <Route path='/files' render={props => <Files {...props} />} />
 
           <Route path='/promptings' render={props => <Promptings {...props} />} />
+
+        // Inactive routes - activate when correpsonding section development begins
 
           {/* <Route
         path="/admin-notifications"

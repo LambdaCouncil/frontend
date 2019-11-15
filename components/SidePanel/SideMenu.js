@@ -15,13 +15,17 @@ const SideMenu = props => {
 
   let path = props.location.pathname
 
+   /* 
+       Uncomment any button in the <View> below to render it in the side panel modal. 
+       All of them are functional, just hidden for demo purposes (only demo completed / tested sections).
+   */
 
   return (
     <>
       <View style={{ paddingLeft: 20, marginBottom: 24 }}>
         <UserPanel />
       </View>
-
+     
       <View>
         {/* <Button style={(path === '/agendas') ? styles.activeTopButton : styles.normalTopButton}>
         <Link to="/agendas" onPress={() => props.togglePanel()}>
@@ -33,11 +37,11 @@ const SideMenu = props => {
             <Text style={(path === '/discussions') ? styles.activeText : styles.normalText}>Discussions</Text>
           </Link>
         </Button>
-        {/* <Button style={(path === '/assignments') ? styles.activeButton : styles.normalButton}>
+        <Button style={(path === '/assignments') ? styles.activeButton : styles.normalButton}>
         <Link to="/assignments" onPress={() => props.togglePanel()}>
           <Text style={(path === '/assignments') ? styles.activeText : styles.normalText}>Assignments</Text>
         </Link>
-      </Button> */}
+      </Button>
         {/* <Button style={(path === '/files') ? styles.activeButton : styles.normalButton}>
         <Link to="/files" onPress={() => props.togglePanel()}>
           <Text style={(path === '/files') ? styles.activeText : styles.normalText}>Files</Text>

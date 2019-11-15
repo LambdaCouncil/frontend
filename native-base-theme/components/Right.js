@@ -10,6 +10,7 @@ export default _ => {
     'NativeBase.Button': {
       alignSelf: null
     },
+    borderWidth: 0,
     flex: 1,
     alignSelf: 'center',
     alignItems: 'flex-end'

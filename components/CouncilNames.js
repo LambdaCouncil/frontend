@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router-native";
 import { Modal } from "react-native";
-import { Header, Body, View, List, ListItem, Left, Right, Text, Icon, Button, Title } from 'native-base';
+import { Content, Header, Body, View, List, ListItem, Left, Right, Text, Icon, Button, Title } from 'native-base';
+
+import ModalHeader from './Modals/ModalHeader.js'
 
 const CouncilNames = props => {
   const {options} = props;
   const [isVisible, setIsVisible] = useState(true);
-
 
   const renderCouncilName = name => {
     return name
@@ -23,22 +24,19 @@ const CouncilNames = props => {
       .join(" ");
   };
 
-  const renderCheckmark = name => {
-    return props.council == name ? <Icon name="checkmark" /> : "";
+  const renderCheckmark = (name) => {
+    return props.council === name ? <Icon name="checkmark" /> : "";
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    
       <Modal
         isVisible={isVisible}
         animationIn={"slideInLeft"}
         animationOut={"slideOutLeft"}
-        // backdropColor={"#202224"}
-        // backdropOpacity={0.5}
-        // onBackdropPress={() => setIsVisible(false)}
         style={{ flex: 1, margin: 0 }}
       >
-        <View
+        <Content padder
           style={{
             height: "100%",
             width: "100%",
@@ -47,33 +45,57 @@ const CouncilNames = props => {
             borderColor: "white"
           }}
         >
-          <Header style={{ elevation: 0 }}>
-            <Left>
+            <ModalHeader
+              style={{elevation: 0}}
+              name={'Council'}
+              setShowModal={props.setShowModal}
+            />
+            {/* <Left>
               <Button transparent onPress={() => props.setShowModal(false)}>
-                <Icon dgreal name="arrow-back" />
+                <Icon ddarkGreenBlue name="arrow-back" />
               </Button>
             </Left>
             <Body>
               <Title>Council</Title>
-            </Body>
-          </Header>
+            </Body> */}
           <List>
-            {options.map((name, id) => (
-              // <Button>
-              <ListItem key={id} onPress={() => props.handleCouncil(name)}>
-                <Left>
-                  <Text>{renderCouncilName(name)}</Text>
-                </Left>
-                <Right>
-                  <Text>{renderCheckmark(name)}</Text>
-                </Right>
-              </ListItem>
-              // </Button>
-            ))}
+            {props.users
+              ? options.map((obj, id) => (
+                  <ListItem
+                    key={id}
+                    onPress={() =>
+                      props.handleCouncil(
+                        `${obj.name}`,
+                        obj.id
+                      )
+                    }
+                  >
+                    <Left>
+                      <Text>
+                        {(`${obj.name}`)}
+                      </Text>
+                    </Left>
+                    <Right>
+                      <Text>
+                        {renderCheckmark(`${obj.name}`)}
+                      </Text>
+                    </Right>
+                  </ListItem>
+                ))
+              : options.map((name, id) => (
+                  <ListItem key={id} onPress={() => props.handleCouncil(name)}>
+                    <Left>
+                      <Text>{renderCouncilName(name)}</Text>
+                    </Left>
+                    <Right>
+                      <Text>{renderCheckmark(name)}</Text>
+                    </Right>
+                  </ListItem>
+                ))}
           </List>
-        </View>
+        </Content>
       </Modal>
-    </View>
+    
   );
 }
 

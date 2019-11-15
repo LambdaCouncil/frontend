@@ -1,33 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-native";
-import { connect } from "react-redux";
-import { Modal, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react"
+import { StyleSheet } from 'react-native'
+import { withRouter } from "react-router-native"
+import { connect } from "react-redux"
+import { Modal } from "react-native"
 import {
+  Container,
   Content,
   View,
   Text,
   Button,
+  Footer,
   Form,
   Item,
   Input,
   Label,
   H3,
   DatePicker
-} from "native-base";
+} from "native-base"
+
 import { setCurrentAssignment } from '../../actions'
-import ModalHeader from "../Modals/ModalHeader";
-import CouncilNames from "../CouncilNames";
+import ModalHeader from "../Modals/ModalHeader"
+import CouncilNames from "../CouncilNames"
 
-// import { setCurrentChannel } from "../../actions";
-import firebase from "../../firebase";
-
-// const blankAssignment = {
-//   date: null,
-//   council: '',
-//   assign: '',
-//   descript: '',
-//   note: ''
-// }
+import firebase from "../../firebase"
 
 const NewAssignment = props => {
   const [chosenDate, setChosenDate] = useState();
@@ -37,7 +32,7 @@ const NewAssignment = props => {
   const [notes, setNotes] = useState('');
   const [showCouncilModal, setShowCouncilModal] = useState(false);
   const [showATModal, setShowATModal] = useState(false);
-  // const [assignment, setAssignment] = useState(blankAssignment);
+  const [assignedToId, setAssignedToId] = useState(""); 
 
   const councilNames = [
     "bishopric",
@@ -61,7 +56,7 @@ const NewAssignment = props => {
     Users.get()
       .then(docs =>
         docs.forEach(async doc => {
-          await loadedUsers.push(doc.data());
+          await loadedUsers.push({...doc.data(), id: doc.id});
           setAllUsers(loadedUsers);
         })
       )
@@ -71,38 +66,26 @@ const NewAssignment = props => {
   const assignmentsRef = db.collection('assignments')
 
   const createAssignment = () => {
-    console.log('createAssignment pressed');
     props.setShowModal(false);
-    // console.log('assignment', assignment);
-    // setAssignment({
-    //   date: chosenDate,
-    //   council: chosenCouncil,
-    //   assign: assignTo,
-    //   descript: description,
-    //   note: notes
-    // })
+
     if (description.length > 0 && chosenCouncil.length > 0 && assignTo.length > 0 && chosenDate != null && notes.length > 0) {
-      console.log('hurray')
-      // const newAssignment =
       assignmentsRef.add({
         timestamp: Date.now(),
-        user: {},
+        createdBy: props.currentUser.uid,
+        assignedTo: assignedToId,
         content: {
           date: chosenDate,
           council: chosenCouncil,
           assign: assignTo,
           descript: description,
           note: notes
-        }
+        },
+        completed: false
       })
-
-
     } else {
       console.log('boooooo')
     }
   };
-
-  // console.log('assignment obj outside', assignment);
 
   const handleDescription = text => {
     setDescription(text);
@@ -113,9 +96,10 @@ const NewAssignment = props => {
     setChosenCouncil(name);
   }
 
-  const handleAssignTo = name => {
+  const handleAssignTo = (name, id) => {
     console.log(name + " was pressed");
     setAssignTo(name);
+    setAssignedToId(id);
   };
 
   const handleDate = value => {
@@ -126,106 +110,116 @@ const NewAssignment = props => {
     setNotes(text);
   };
 
-  // console.log("description: ", description);
-  // console.log("council: ", chosenCouncil);
-  // console.log("assignTo: ", assignTo);
-  // console.log("date: ", chosenDate);
-  // console.log("notes", notes);
-
   return (
     <Modal animationType="slide" transparent={false} visible={true}>
       <ModalHeader name="New Assignment" setShowModal={props.setShowModal} />
-      <Content>
-        <Form>
-          <Item floatingLabel>
-            <Label style={styles.text}>Description</Label>
-            <Input
-              name="description"
-              onChangeText={text => handleDescription(text)}
-              value={description}
-            />
-          </Item>
+      <Container style={styles.container}>
+        <Content>
+          
+          <Form>            
+            <Item floatingLabel>
+              <Label style={styles.text}>Description</Label>
+              <Input
+                name="description"
+                onChangeText={text => handleDescription(text)}
+                value={description}
+              />
+            </Item>
 
-          <Button
-            title="Council"
-            onPress={() => setShowCouncilModal(true)}
-            transparent
-          >
-            <View>
-              <Text style={styles.text}>Council</Text>
-              {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
-            </View>
-          </Button>
+            <Button transparent style={styles.button} title="Council" onPress={() => setShowCouncilModal(true)}>
+              <View>
+                <Text style={styles.text}>Council</Text>
+                {chosenCouncil.length > 0 ? <Text>{chosenCouncil}</Text> : null}
+              </View>
+            </Button>
 
-          {showCouncilModal && (
-            <CouncilNames
-              options={councilNames}
-              setShowModal={setShowCouncilModal}
-              council={chosenCouncil}
-              handleCouncil={handleCouncil}
-            />
-          )}
+            {showCouncilModal && (
+              <CouncilNames
+                options={councilNames}
+                setShowModal={setShowCouncilModal}
+                council={chosenCouncil}
+                handleCouncil={handleCouncil}
+              />)
+            }
 
-          <Button
-            title="AssignTo"
-            onPress={() => setShowATModal(true)}
-            transparent
-          >
-            <View>
-              <Text style={styles.text}>Assign To</Text>
-              {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
-            </View>
-          </Button>
+            <Button transparent style={styles.button} title="AssignTo" onPress={() => setShowATModal(true)}>
+              <View>
+                <Text style={styles.text}>Assign To</Text>
+                {assignTo.length > 0 ? <Text>{assignTo}</Text> : null}
+              </View>
+            </Button>
 
-          {showATModal && (
-            <CouncilNames
-              options={allUsers.map(user => user.name)}
-              setShowModal={setShowATModal}
-              council={assignTo}
-              handleCouncil={handleAssignTo}
-            />
-          )}
+            {showATModal && (
+              <CouncilNames
+                users={true}
+                options={allUsers}
+                setShowModal={setShowATModal}
+                council={assignTo}
+                handleCouncil={handleAssignTo}
+                setAssignedToId={setAssignedToId}
+              />)
+            }
+            
+            <Item picker>  
+              <DatePicker
+                placeHolderText='Date & Time'
+                minimumDate={new Date(2018, 0, 1)}
+                maximumDate={new Date(3019, 11, 31)}
+                locale={"en"}
+                timeZoneOffsetInMinutes={undefined}
+                modalTransparent={false}
+                animationType={"fade"}
+                androidMode={"default"}
+                textStyle={{ color: "green" }}
+                placeHolderTextStyle={styles.text}
+                onDateChange={value => handleDate(value)}
+                disabled={false}
+                />
+            </Item>
+         
 
-          <Label>Date &amp; Time</Label>
-          <DatePicker
-            // defaultDate={new Date(Date.now())}
-            minimumDate={new Date(2018, 0, 1)}
-            maximumDate={new Date(3019, 11, 31)}
-            locale={"en"}
-            timeZoneOffsetInMinutes={undefined}
-            modalTransparent={false}
-            animationType={"fade"}
-            androidMode={"default"}
-            // placeHolderText="Select date"
-            textStyle={{ color: "green" }}
-            placeHolderTextStyle={{ color: "#d3d3d3" }}
-            onDateChange={value => handleDate(value)}
-            disabled={false}
-          />
-          <Item floatingLabel>
-            <Label>Notes</Label>
-            <Input
-              name="notes"
-              onChangeText={text => handleNotes(text)}
-              value={notes}
-            />
-          </Item>
+            <Item floatingLabel>
+              <Label style={styles.text}>Notes</Label>
+              <Input
+                name="notes"
+                onChangeText={text => handleNotes(text)}
+                value={notes}
+              />
+            </Item>
+          </Form>
 
-          <H3 onPress={createAssignment} submit>
-            Create
-          </H3>
-        </Form>
-      </Content>
+          <Footer style={styles.footer}>
+              <H3 onPress={createAssignment} submit>
+                Create
+              </H3>
+          </Footer>
+
+        </Content>
+      </Container>
     </Modal>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: '100%'
+  },
+  button: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#dbdcdf',
+    marginVertical: 10,
+    marginHorizontal: 20
+  },
   text: {
     color: '#6f777e',
     fontFamily: 'bern-r',
-    fontSize: 17
+    fontSize: 17,
   },
+  footer: {
+    flex: 3,
+    alignItems: 'flex-end'
+  }
 })
 
 export default connect(state => ({ ...state }), { setCurrentAssignment })(withRouter(NewAssignment));

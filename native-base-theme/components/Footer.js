@@ -97,6 +97,11 @@ export default _ => {
       alignSelf: 'center',
       alignItems: 'flex-end'
     },
+    '.pre': {
+      flex: 1,
+      alignItems: 'flex-end',
+      backgroundColor: 'white',
+    },
     backgroundColor: "transparent",
     flexDirection: 'row',
     justifyContent: 'center',

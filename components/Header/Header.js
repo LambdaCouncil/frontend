@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Button, Text, Header, Left, Icon, Body, Right } from 'native-base'
+import { Button, Container, Text, Header, Left, Icon, Body, Right } from 'native-base'
 import { withRouter } from 'react-router-native'
 
 import SidePanel from '../SidePanel/SidePanel'
 import ActionSheets from '../ActionSheets'
-import NewPrivateMessage from '../Modals/NewPrivateMessage'
-
 import { buttonsObj } from '../../objects/buttonsObj'
+
+import NewPrivateMessage from '../Modals/NewPrivateMessage'
 import NewAssignment from '../Assignments/NewAssignment'
+import NewCouncilDiscussion from '../Modals/NewCouncilDiscussion'
 
 const pageHeader = props => {
   const [showPanel, setShowPanel] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showCouncils, setShowCouncils] = useState(false)
   const [menuIcon, setMenuIcon] = useState('menu')
 
   const addIconArray = [
@@ -22,10 +24,8 @@ const pageHeader = props => {
     '/discussions',
     '/files',
     '/promptings',
-    '/messages'
+    // '/messages'
   ]
-
-  
 
   const togglePanel = _ => setShowPanel(!showPanel)
 
@@ -64,8 +64,8 @@ const pageHeader = props => {
 
         case '/assignments':
           return (
-            <Button transparent onPress={() => setShowModal(true)} style={{elevation: 0}}>
-              <Icon dgreal name='add' />
+            <Button transparent onPress={() => setShowModal(true)} style={{ elevation: 0 }}>
+              <Icon headerIcon name='add' />
             </Button>
           )
 
@@ -81,6 +81,7 @@ const pageHeader = props => {
           return (
             <ActionSheets
               setShowModal={setShowModal}
+              setShowCouncils={setShowCouncils}
               asInfo={buttonsObj.discussions.primary}
             />
           )
@@ -119,7 +120,8 @@ const pageHeader = props => {
   const whichModal = _ => {
     switch (props.location.pathname) {
       case '/discussions':
-        return <NewPrivateMessage setShowModal={setShowModal} />
+        if (!showCouncils) return <NewPrivateMessage setShowModal={setShowModal} />
+        else return <NewCouncilDiscussion setShowModal={setShowModal} setShowCouncils={setShowCouncils} />
       case '/assignments':
         return <NewAssignment setShowModal={setShowModal} />
       default:
@@ -132,7 +134,7 @@ const pageHeader = props => {
       <Header>
         <Left style={styles.icons}>
           <Button transparent onPress={togglePanel}>
-            <Icon dgreal name={menuIcon} />
+            <Icon headerIcon name={menuIcon} />
           </Button>
         </Left>
         <Body style={styles.body}>
@@ -153,17 +155,17 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   icons: {
-    maxHeight: 44, 
+    maxHeight: 44,
     maxWidth: 50
   },
   body: {
-    flex: 1, 
-    justifyContent: 'center', 
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    fontFamily: 'bern-sb', 
-    fontSize: 17, 
+    fontFamily: 'bern-sb',
+    fontSize: 17,
     color: '#202224'
   }
 })

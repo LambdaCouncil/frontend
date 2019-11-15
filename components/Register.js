@@ -1,7 +1,19 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import firebase from "../firebase"
-import { Content, Input, Text, Label, Item, View, H3, Icon } from 'native-base'
+import firebase from '../firebase'
+import {
+    Button,
+    Content,
+    Input,
+    Text,
+    Label,
+    Item,
+    View,
+    H1,
+    H3,
+    Icon,
+    Spinner
+} from 'native-base'
 import { withRouter } from 'react-router-native'
 import { connect } from 'react-redux'
 
@@ -24,8 +36,18 @@ function Register(props) {
         handleChangePasswordConfirm = text => setPasswordConfirm(text.trim()),
 
         handleSubmit = _ => {
-            setActive(false)
-            setError({ message: "" })
+
+            if (isEmailInvalid()) {
+                setError({ message: "Email is invalid" })
+                setActive(false)
+                return
+            }
+
+            if (isPasswordInvalid()) {
+                setError({ message: "Password is invalid" })
+                setActive(false)
+                return
+            }
 
             if (password === passwordConfirm) {
 
@@ -37,7 +59,7 @@ function Register(props) {
                     .then(createdUser => {
                         createdUser.user
                             .updateProfile({
-                                photoURL: `https://ui-avatars.com/api/?name=${email}`
+                                photoURL: `https://ui-avatars.com/api/?background=e8e9eb&color=202224&name=${email}`
                             })
                             .then(_ => {
                                 userRef.doc(createdUser.user.uid)
@@ -46,9 +68,6 @@ function Register(props) {
                                         id: createdUser.user.uid
                                     })
                                     .then(_ => {
-                                        setEmail(' ')
-                                        setPassword(' ')
-                                        setPasswordConfirm(' ')
                                         props.setUser(createdUser.user)
                                         props.history.push('/complete-profile')
                                     })
@@ -65,109 +84,80 @@ function Register(props) {
         handleError = err => {
             setError(err)
             setActive(false)
+        },
+
+        isEmailInvalid = _ => !email.match(/^(.+[@].+[.].+)/),
+
+        isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
+
+        _renderButton = _ => {
+            const filled = !(email === "" || password === "" || passwordConfirm === "")
+            if (requestActive) return <Spinner />
+            else return <H3 submit active={filled} onPress={handleSubmit}>Sign Up</H3>
+        },
+
+        _renderErrorText = _ => {
+            return error ? error.message : 'An internal error occured'
         }
 
-    _renderButton = _ => {
-        if (requestActive)
-            return <H3 submit>Signing Up...</H3>
-        else
-            return <H3 onPress={handleSubmit} submit>Sign Up</H3>
-    }
+    return <>
 
-    _renderErrorText = _ => {
-        return error ? error.message : "An internal error occured"
-    }
+        <Button backButton onPress={props.history.goBack}>
+            <Icon backButton name='arrow-back' />
+        </Button>
 
-    return (
-        <>
+        <Content
+            padder
+            contentContainerStyle={{
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
+            <H1 pre>Sign Up</H1>
 
-            <Icon
-                backButton
-                name='arrow-back'
-                onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20, marginTop: 20 }}
-            />
+            <Text pre>Create Councils account.</Text>
 
-            <Content
-                padder
-                contentContainerStyle={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
+            <Item floatingLabel>
+                <Label float>Email</Label>
+                <Input onChangeText={handleChangeEmail} value={email} />
+            </Item>
 
-                <Text style={styles.header}>Sign Up</Text>
+            <View info>
+                <Text info>Use Councils invitation email</Text>
+            </View>
 
-                <Text style={styles.subheader}>Create Councils account.</Text>
+            <Item floatingLabel>
+                <Label float>Password</Label>
+                <Input
+                    onChangeText={handleChangePassword}
+                    value={password}
+                    secureTextEntry={true}
+                />
+            </Item>
+            <View info>
+                <Text info>
+                    8 characters, 1 capital letter, 1 number
+          </Text>
+            </View>
 
-                <Item floatingLabel>
-                    <Label style={styles.label}>Email</Label>
-                    <Input onChangeText={handleChangeEmail} value={email} />
-                </Item>
-                <View style={styles.view}>
-                    <Text style={styles.text}>Use Councils invitation email</Text>
-                </View>
+            <Item floatingLabel>
+                <Label float>Confirm Password</Label>
+                <Input
+                    secureTextEntry={true}
+                    value={passwordConfirm}
+                    onChangeText={handleChangePasswordConfirm}
+                />
+            </Item>
 
-                <Item floatingLabel>
-                    <Label style={styles.label}>Password</Label>
-                    <Input
-                        onChangeText={handleChangePassword}
-                        value={password}
-                        secureTextEntry={true}
-                    />
-                </Item>
-                <View style={styles.view}>
-                    <Text style={styles.text}>8 characters, 1 capital letter, 1 number</Text>
-                </View>
+            {_renderButton()}
 
-                <Item floatingLabel>
-                    <Label style={styles.label}>Confirm Password</Label>
-                    <Input
-                        secureTextEntry={true}
-                        value={passwordConfirm}
-                        onChangeText={handleChangePasswordConfirm}
-                    />
-                </Item>
+            <Text error>{_renderErrorText()}</Text>
+        </Content>
 
-                {_renderButton()}
+    </>
 
-                <Text style={{ color: "red" }}>{_renderErrorText()}</Text>
-
-            </Content>
-
-        </>
-
-    )
 }
 
-const styles = StyleSheet.create({
-    header: {
-        color: '#202224',
-        fontFamily: 'gotham',
-        fontSize: 28,
-        marginBottom: 10
-    },
-    subheader: {
-        color: '#202224',
-        fontFamily: 'bern-r',
-        fontSize: 17,
-    },
-    label: {
-        color: '#6f777e',
-        fontFamily: 'bern-r',
-        fontSize: 17,
-    },
-    text: {
-        color: '#6f777e',
-        fontFamily: 'bern-r',
-        fontSize: 13,
-    },
-    view: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignContent: 'flex-start',
-        alignItems: 'flex-start',
-        width: '100%'
-    }
-})
-
-export default connect(state => ({ ...state }), { setUser })(withRouter(Register))
+export default connect(
+    state => ({ ...state }),
+    { setUser }
+)(withRouter(Register))

@@ -7,19 +7,23 @@ export default _ => {
   const { ui, text } = variable.councils
 
   return {
-    color: text.greal,
+    color: text.darkGreenBlue,
     fontSize: variable.iconFontSize,
     '.rotate90': {
       transform: [{ rotate: '90deg' }]
     },
     '.backButton': {
-      marginTop: 20,
-      marginLeft: 10,
-      fontSize: 50,
-      color: text.greal,
+      color: text.darkGreenBlue,
+      fontSize: 24,
+      marginLeft: 20,
+      marginTop: 20
     },
-    '.dgreal': {
-      color: text.greal,
+    '.ddarkGreenBlue': {
+      color: text.darkGreenBlue,
+    },
+    '.headerIcon': {
+      color: text.darkGreenBlue,
+      fontSize: 24
     }
   }
 
