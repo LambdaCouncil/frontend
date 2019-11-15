@@ -40,11 +40,11 @@ export const buttonsObj = {
     primary: {
       title: 'New Discussion',
       buttons: [
-        // 'Council',
+        'Council',
         'Private',
         'Cancel'
       ],
-      cancelIndex: 1,
+      cancelIndex: 2,
       iconName: 'add'
     },
     // See Zeplin: 06 Discussions - 8
@@ -84,9 +84,7 @@ export const buttonsObj = {
       title: 'Prompting',
       buttons: ['Edit', 'Delete', 'Cancel'],
       cancelIndex: 2,
-      //iconName: 'more'
-      // FOR 10/1 DEMO:
-      iconName: 'add'
+      iconName: 'more'
     }
   }
 }

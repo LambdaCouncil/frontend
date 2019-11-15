@@ -14,11 +14,11 @@ export default _ => {
             <View buttonContainerRoot>
 
                 <Link to='/login' style={{ width: '45%' }}>
-                    <Text loginButton style={{ fontFamily: 'bern-sb' }}>Log In</Text>
+                    <Text loginButton>Log In</Text>
                 </Link>
 
                 <Link to='/register' style={{ width: '45%' }}>
-                    <Text registerButton style={{ fontFamily: 'bern-sb' }}>Sign Up</Text>
+                    <Text registerButton>Sign Up</Text>
                 </Link>
 
             </View>

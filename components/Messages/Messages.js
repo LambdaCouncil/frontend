@@ -14,17 +14,20 @@ import { db } from '../../firebase'
 const Messages = props => {
 
   const discussionsRef = props.currentChannel.direct ?
-    db('directMessages').doc(props.currentChannel.id)
+    db('directMessages').doc(props.currentChannel.id).collection('messages')// if channel is direct message
     :
-    db('councils').doc(props.currentChannel.council).collection(props.currentChannel)
+    db('councils').doc(props.currentChannel.council).collection(props.currentChannel.id)// if channel is council
 
   const [messages, setMessages] = useState([])
 
   useEffect(_ => {
 
-    discussionsRef.onSnapshot(doc => {
-      doc.data() && setMessages(doc.data().messages)
-    })
+    discussionsRef// set messages for current channel
+      .onSnapshot(msgs => setMessages(
+        msgs.docs
+          .map(msg => ({ ...msg.data(), id: msg.id }))
+          .sort((msg1, msg2) => msg1.timestamp - msg2.timestamp)
+      ))
 
   }, [])
 

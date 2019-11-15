@@ -3,7 +3,7 @@ import { Text, Input, Button, Item, Label, Form } from 'native-base'
 import { connect } from 'react-redux'
 
 import { setCurrentChannel } from '../../actions'
-import firebase from '../../firebase'
+
 
 
 const MessageForm = props => {
@@ -17,34 +17,12 @@ const MessageForm = props => {
     const sendMessage = _ => {
         if (message) {
 
-            const newMessage = {
-                messages: firebase.firestore.FieldValue.arrayUnion({
-                    timestamp: Date.now(),
-                    user: {
-                        id: props.currentUser.uid,
-                        name: props.currentUser.displayName
-                    },
-                    content: message
-                })
-            }
-
-            props.currentChannel.brandNewChannel ?
-                props.discussionsRef.set({
-                    ...newMessage,
-                    users: props.currentChannel.users
-                })
-                    .then(_ => {
-                        props.setCurrentChannel({
-                            ...props.currentChannel,
-                            brandNewChannel: false
-                        })
-                        setMessage('')
-                    })
-                    .catch(err => console.log(err))
-                :
-                props.discussionsRef.update(newMessage)
-                    .then(_ => setMessage(''))
-                    .catch(err => console.log(err))
+            props.discussionsRef.add({
+                timestamp: Date.now(),
+                user: props.currentUser.uid,
+                content: message
+            })
+            setMessage('')
 
         }
     }
