@@ -26,7 +26,7 @@ const Discussions = props => {
 
         setLoading(true)
 
-        db('directMessages')
+        const unsub = db('directMessages')
             .where('users', 'array-contains', props.currentUser.uid)
             .onSnapshot(allDiscussions => {
                 setDiscussions(
@@ -40,18 +40,9 @@ const Discussions = props => {
                         })
                 )
                 setLoading(false)
-            })//.then(_ => db('councils')
-        // .where('ids', 'array-contains', props.currentUser.uid)
-        // .onSnapshot(allCouncilDiscussions => {
-        //     setLoading(false)
-        //     allCouncilDiscussions.docs
-        //     .forEach(doc => {
-        //                                         db('councils').doc(doc.id).collection('messages').onSnapshot(msgId => {
-        //                                             dms.push({ ...doc.data(), id: doc.id, direct: true, messages: msgId.data() })
-        //                                         })
-        //         })
-        //}))
+            })
 
+        return unsub
 
     }, [])
 
@@ -95,7 +86,7 @@ const Discussion = props => {
 
     useEffect(_ => {
 
-        db('directMessages').doc(props.discussion.id)
+        const unsub = db('directMessages').doc(props.discussion.id)
             .collection('messages').onSnapshot(msgSnaps =>
                 setMessages(
                     msgSnaps.docs
@@ -110,6 +101,8 @@ const Discussion = props => {
         }
 
         if (messages.length) populateUsers()
+
+        return unsub
 
     }, [messages])
 
@@ -131,7 +124,7 @@ const Discussion = props => {
                     }
                 }}
             >
-                <Left>
+                <Left active={mostRecent.unread}>
                     <Thumbnail style={{ height: 48, width: 48 }} source={{ uri: otherUser.avatar || props.currentUser.photoURL }} />
                 </Left>
                 <Body>
@@ -162,7 +155,7 @@ const Discussion = props => {
         )
     }
 
-    else return <Spinner />
+    else return <ListItem style={{ height: 88, verticalPadding: 14 }} avatar />
 
 }
 
