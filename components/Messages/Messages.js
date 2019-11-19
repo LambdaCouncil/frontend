@@ -8,36 +8,39 @@ import { connect } from 'react-redux'
 // Components
 import MessageForm from "./MessagesForm"
 import Message from "./Message"
-import firebase from '../../firebase'
+import { db } from '../../firebase'
 
 
 const Messages = props => {
 
   const discussionsRef = props.currentChannel.direct ?
-    firebase.firestore().collection('directMessages').doc(props.currentChannel.id)
+    db('directMessages').doc(props.currentChannel.id).collection('messages')// if channel is direct message
     :
-    firebase.firestore().ref('councils').child(props.currentChannel.council).child(props.currentChannel)
+    db('councils').doc(props.currentChannel.council).collection(props.currentChannel.id)// if channel is council
 
   const [messages, setMessages] = useState([])
 
   useEffect(_ => {
 
-    discussionsRef.onSnapshot(doc => {
-      doc.data() && setMessages(doc.data().messages)
-    })
+    discussionsRef// set messages for current channel
+      .onSnapshot(msgs => setMessages(
+        msgs.docs
+          .map(msg => ({ ...msg.data(), id: msg.id }))
+          .sort((msg1, msg2) => msg1.timestamp - msg2.timestamp)
+      ))
 
   }, [])
 
-  console.log('messages from Messages *** : ', messages)
+  // console.log('messages from Messages *** : ', messages)
 
   return (
+
     <KeyboardAvoidingView
       behavior='padding'
       style={{
-        height: '100%',
-        width: '100%',
         justifyContent: 'center',
-        flexDirection: 'column-reverse'
+        flexDirection: 'column-reverse',
+        height: '100%'
       }}>
       <Content test>
         <List>
@@ -50,16 +53,14 @@ const Messages = props => {
             />
           )}
         </List>
-          
-        <View style={{height: 300}}>
-          <MessageForm
-            discussionsRef={discussionsRef}
-            currentChannel={props.currentChannel}
-            currentUser={props.currentUser}
-          />
-        </View>
+        <MessageForm
+          discussionsRef={discussionsRef}
+          currentChannel={props.currentChannel}
+          currentUser={props.currentUser}
+        />
       </Content>
     </KeyboardAvoidingView>
+
   )
 }
 

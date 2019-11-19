@@ -244,11 +244,11 @@ export default _ => {
       'NativeBase.Body': {
         'NativeBase.Text': {
           marginLeft: null,
-          color: text.greal
+          color: text.darkGreenBlue
         },
         flex: 1,
         paddingVertical: variables.listItemPadding,
-        borderBottomWidth: variables.borderWidth,
+        borderBottomWidth: 0,
         borderColor: variables.listBorderColor,
         marginLeft: variables.listItemPadding + 5,
       },
@@ -262,7 +262,7 @@ export default _ => {
         paddingRight: variables.listItemPadding + 5,
         alignSelf: 'stretch',
         paddingVertical: variables.listItemPadding,
-        borderBottomWidth: variables.borderWidth,
+        borderBottomWidth: 0,
         borderColor: variables.listBorderColor
       },
       '.noBorder': {

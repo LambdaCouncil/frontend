@@ -2,9 +2,10 @@ import React from 'react'
 import { Text, H1, H2, View } from 'native-base'
 import { Link } from 'react-router-native'
 
-import Carousel from "./Carousel"
+import Carousel from './components/Carousel'
 
 export default _ => {
+
     return (
         <View containerAllRoot>
 
@@ -23,4 +24,5 @@ export default _ => {
             </View>
         </View>
     )
+
 }

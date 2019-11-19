@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon } from 'native-base'
-import { withRouter } from 'react-router-native'
+import { Link, withRouter } from 'react-router-native'
+import { Button, Container, Content, Footer, Input, Text, Label, Item, H1, H3, Icon, Spinner } from 'native-base'
+
+import ForgotPassword from './ForgotPassword/ForgotPassword'
 
 import firebase from "../firebase"
+
 
 function Login(props) {
     const [email, setEmail] = useState('')
@@ -18,11 +21,13 @@ function Login(props) {
         handleSubmit = _ => {
             if (isEmailInvalid()) {
                 setError({ message: "Email is invalid" })
+                setActive(false)
                 return
             }
 
             if (isPasswordInvalid()) {
                 setError({ message: "Password is invalid" })
+                setActive(false)
                 return
             }
 
@@ -35,9 +40,6 @@ function Login(props) {
                 .signInWithEmailAndPassword(email, password)
                 .then(signedInUser => {
                     console.log(signedInUser)
-                    setEmail(' ')
-                    setPassword(' ')
-                    setActive(false)
                 })
                 .catch(err => {
                     const variable = 'There is no user record corresponding to this identifier. The user may have been deleted.'
@@ -47,84 +49,66 @@ function Login(props) {
                 })
         },
 
-        isEmailInvalid = _ => email.length <= 1
+        isEmailInvalid = _ => email.length <= 1 || !email.match(/^(.+[@].+[.].+)/),
 
-    isPasswordInvalid = _ => password.length <= 1
+        isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
 
-    _renderButton = _ => {
-        if (requestActive)
-            return <H3 style={{}} submit>Logging in...</H3>
-        else
-            return <H3 onPress={handleSubmit} style={{ color: '#6f777e', fontFamily: 'bern-sb', fontSize: 17 }} submit>Log In</H3>
-    }
+        _renderButton = _ => {
+            const filled = !(email === "" || password === "")
+            if (requestActive) return <Spinner />
+            else return <H3 submit active={filled} onPress={handleSubmit}>Log In</H3>
+        }
 
-    return (
+    return <>
 
-        <>
+        <Button backButton onPress={props.history.goBack}>
+            <Icon backButton name='arrow-back' />
+        </Button>
 
-            <Icon
-                backButton
-                name='arrow-back'
-                onPress={props.history.goBack}
-                style={{ fontSize: 24, marginLeft: 20, marginTop: 30 }}
-            />
+        <Container>
+            <Content
+                padder
+                contentContainerStyle={{
+                    alignItems: 'center',
+                    paddingTop: '15%',
+                    height: '100%'
+                }}>
 
-            <Container>
-                <Content
-                    padder
-                    contentContainerStyle={{
-                        alignItems: 'center',
-                        paddingTop: '15%',
-                        height: '100%'
-                        //     paddingBottom: '85%'
-                    }}>
+                <H1 pre>Log In</H1>
 
-                    <H1 style={{ fontFamily: 'gotham', fontSize: 28, color: '#202224' }}>Log In</H1>
+                <Text pre>Log into your Councils account.</Text>
 
-                    <Text style={{ fontFamily: 'bern-r', fontSize: 17, color: '#202224' }}>Log into your Councils account.</Text>
+                <Item floatingLabel>
+                    <Label float>Email</Label>
+                    <Input onChangeText={handleChangeEmail} value={email} />
+                </Item>
 
-                    <Item floatingLabel>
-                        <Label>Email</Label>
-                        <Input onChangeText={handleChangeEmail} value={email} />
-                    </Item>
+                <Item floatingLabel>
+                    <Label float>Password</Label>
+                    <Input
+                        onChangeText={handleChangePassword}
+                        value={password}
+                        secureTextEntry={true}
+                    />
+                </Item>
 
-                    <Item floatingLabel>
-                        <Label style={{ fontFamily: 'bern-r', fontSize: 17, color: '#6f777e' }}>Password</Label>
-                        <Input
-                            onChangeText={handleChangePassword}
-                            value={password}
-                            secureTextEntry={true}
-                        />
-                    </Item>
+                {_renderButton()}
 
-                    {_renderButton()}
+                <Text error>{error.message}</Text>
 
-                    <Text style={{ color: "red" }}>{error.message}</Text>
+                <Footer pre>
+                    <Button style={{ elevation: 0 }} onPress={() => <ForgotPassword />}>
+                        <Link to='/forgot-password'>
+                            <Text pre foot>Forgot Password?</Text>
+                        </Link>
+                    </Button>
+                </Footer>
 
-                    <Footer style={styles.footer}>
-                        <Text style={styles.footerText}>Forgot Password?</Text>
-                    </Footer>
+            </Content>
+        </Container>
 
-                </Content>
-            </Container>
+    </>
 
-        </>
-
-    )
 }
-
-const styles = StyleSheet.create({
-    footer: {
-        flex: 1,
-        alignItems: 'flex-end',
-        backgroundColor: 'white',
-        elevation: 0,
-    },
-    footerText: {
-        color: '#288365',
-        fontFamily: 'bern-r',
-        fontSize: 15
-    }
-})
 
 export default withRouter(Login)

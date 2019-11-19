@@ -11,42 +11,71 @@ export default _ => {
     fontFamily: variable.fontFamily,
     color: variable.textColor,
     '.note': {
-      color: text.slateGrey,
+      color: text.battleShipGrey,
       fontSize: variable.noteFontSize
     },
     '.loginButton': {
       backgroundColor: ui.eggshell,
-      color: text.greal,
+      color: text.darkGreenBlue,
       textAlign: 'center',
-      padding: 10,
+      paddingHorizontal: 35,
+      paddingTop: 16,
       paddingBottom: 15,
-      fontSize: 35
+      fontSize: 17,
+      fontFamily: 'bern-sb'
     },
     '.registerButton': {
       borderRadius: 7.5,
       overflow: 'hidden',
-      backgroundColor: ui.greal,
-      padding: 10,
+      backgroundColor: ui.darkGreenBlue,
+      paddingHorizontal: 35,
+      paddingTop: 16,
       paddingBottom: 15,
       textAlign: 'center',
       textAlignVertical: 'center',
       color: text.white,
-      fontSize: 35
+      fontSize: 17,
+      fontFamily: 'bern-sb'
     },
     '.snippet': {
-      color: text.nearBlack,
+      color: text.darkGrey,
     },
     '.newSnippet': {
       fontWeight: 'bold'
     },
     '.name': {
       fontSize: 20,
-      color: text.nearBlack,
+      color: text.darkGrey,
     },
     '.new': {
-      color: text.greal,
+      color: text.darkGreenBlue,
       fontWeight: 'bold'
     },
+    '.pre': {
+      color: text.darkGrey,
+      fontFamily: 'bern-r',
+      fontSize: 17,
+    },
+    '.para': {
+      textAlign: 'center'
+    },
+    '.foot': {
+      color: text.darkGreenBlue,
+      fontSize: 15
+    },
+    '.error': {
+      color: text.tomatoRed
+    },
+    '.info': {
+      color: text.battleShipGrey,
+      fontFamily: 'bern-r',
+      fontSize: 13
+    },
+    '.discussionsRightArrow': {
+      color: text.lightPeriwinkle,
+      fontSize: 17,      
+    }
+
   }
 
 }

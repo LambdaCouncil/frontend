@@ -6,18 +6,15 @@ import { Content, Text, List, ListItem, Button } from 'native-base'
 
 import { setCurrentChannel } from '../../actions'
 import ModalHeader from './ModalHeader'
-import firebase from '../../firebase'
+import { db } from '../../firebase'
 
 const NewPrivateMessage = props => {
-
-    const db = firebase.firestore()
-    const Users = db.collection('users')
 
     const [allUsers, setAllUsers] = useState([])
 
     useEffect(_ => {
-        let loadedUsers = []
-        Users.get()
+        const loadedUsers = []
+        db('users').get()
             .then(docs => docs.forEach(async doc => {
                 await loadedUsers.push(doc.data())
                 setAllUsers(loadedUsers)
@@ -45,8 +42,11 @@ const NewPrivateMessage = props => {
                                 props.setCurrentChannel({
                                     id: `${props.currentUser.uid}:${user.id}`,
                                     direct: true,
-                                    brandNewChannel: true,
-                                    users: [db.doc(`/users/${props.currentUser.uid}`), db.doc(`/users/${user.id}`)]
+                                    users: [props.currentUser.uid, user.id]
+                                })
+                                db('directMessages').doc(`${props.currentUser.uid}:${user.id}`).set({
+                                    direct: true,
+                                    users: [props.currentUser.uid, user.id]
                                 })
                                 props.setShowModal(false)
                                 props.history.push('/messages')

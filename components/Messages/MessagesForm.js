@@ -17,34 +17,12 @@ const MessageForm = props => {
     const sendMessage = _ => {
         if (message) {
 
-            const newMessage = {
-                messages: firebase.firestore.FieldValue.arrayUnion({
-                    timestamp: Date.now(),
-                    user: {
-                        id: props.currentUser.uid,
-                        name: props.currentUser.displayName
-                    },
-                    content: message
-                })
-            }
-
-            props.currentChannel.brandNewChannel ?
-                props.discussionsRef.set({
-                    ...newMessage,
-                    users: props.currentChannel.users
-                })
-                    .then(_ => {
-                        props.setCurrentChannel({
-                            ...props.currentChannel,
-                            brandNewChannel: false
-                        })
-                        setMessage('')
-                    })
-                    .catch(err => console.log(err))
-                :
-                props.discussionsRef.update(newMessage)
-                    .then(_ => setMessage(''))
-                    .catch(err => console.log(err))
+            props.discussionsRef.add({
+                timestamp: Date.now(),
+                user: props.currentUser.uid,
+                content: message
+            })
+            setMessage('')
 
         }
     }
@@ -53,8 +31,8 @@ const MessageForm = props => {
     return (
         <>
             <Item floatingLabel>
-                <Label style={{marginLeft: 20}}>Write a message...</Label>
-                <Input onChange={handleChange} value={message} />
+                <Label style={{ marginLeft: 20 }}>Write a message...</Label>
+                <Input message onChange={handleChange} value={message} />
             </Item>
 
             <Form message>
@@ -62,8 +40,8 @@ const MessageForm = props => {
                     <Text>@</Text>
                 </Button> */}
 
-                <Button style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}} transparent onPress={sendMessage}>
-                    <Text style={{color: '#288365', fontFamily: 'bern-sb', fontSize: 17}}>Send</Text>
+                <Button style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', order: 0 }} transparent onPress={sendMessage}>
+                    <Text style={{ color: '#288365', fontFamily: 'bern-sb', fontSize: 17 }}>Send</Text>
                 </Button>
             </Form>
         </>

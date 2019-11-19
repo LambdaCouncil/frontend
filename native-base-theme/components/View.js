@@ -13,11 +13,12 @@ export default _ => {
     '.buttonContainerRoot': {
       width: '100%',
       flexDirection: 'row',
-      justifyContent: 'center',
+      justifyContent: 'space-around',
       backgroundColor: ui.eggshell,
-      borderTopWidth: 2,
-      borderTopColor: ui.slightlyLighterEggshell,
-      paddingVertical: 15
+      borderTopWidth: 1,
+      borderTopColor: ui.lightPeriwinkle,
+      paddingVertical: 10,
+      paddingHorizontal: '10%'
     },
     '.containerAllRoot': {
       height: '100%',
@@ -35,6 +36,13 @@ export default _ => {
     '.loading': {
       flex: 1,
       justifyContent: 'center'
+    },
+    '.info': {
+      flex: 1,
+      justifyContent: 'flex-start',
+      alignContent: 'flex-start',
+      alignItems: 'flex-start',
+      width: '100%'
     }
   }
 
