@@ -87,7 +87,7 @@ function Register(props) {
 
         isEmailInvalid = _ => !email.match(/^(.+[@].+[.].+)/),
 
-        isPasswordInvalid = _ => password.length < 8 && !password.match(/[0-9]/) && !password.match(/[A-Z]/),
+        isPasswordInvalid = _ => password.length < 8 || !password.match(/[0-9]/) || !password.match(/[A-Z]/),
 
         _renderButton = _ => {
             const filled = !(email === "" || password === "" || passwordConfirm === "")
