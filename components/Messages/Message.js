@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import moment from "moment"
-import { ListItem, Text, Thumbnail, Left, Body, Right, View } from 'native-base'
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
 
 import { db } from '../../firebase'
 
