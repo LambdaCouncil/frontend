@@ -109,7 +109,7 @@ const Discussion = props => {
     if (!loading) {
 
         const mostRecent = messages.sort((conv1, conv2) => conv2.timestamp - conv1.timestamp)[0],
-            snippetString = `${mostRecent.user === props.currentUser.uid ? 'me' : otherUser.firstName}: ${mostRecent.content.slice(0, 15)}`
+            snippetString = `${mostRecent.user === props.currentUser.uid ? 'me' : otherUser.firstName || `Councils User`}: ${mostRecent.content.slice(0, 15)}`
 
         return (
 
@@ -137,7 +137,7 @@ const Discussion = props => {
                         marginBottom: 7,
                         maxWidth: '100%',
                     }}>
-                        {`${snippetString}${snippetString.length - (mostRecent.user.id === props.currentUser.uid ? 'me'.length : otherUser.firstName.length) < mostRecent.content.length ? '...' : ''}`}
+                        {snippetString}
                     </Text>
                     <Text note style={{
                         color: '#6f777e',
