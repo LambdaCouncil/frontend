@@ -14,7 +14,7 @@
     "expo-font": "~7.0.0",
     "firebase": "^7.3.0",
     "mem": "^4.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "native-base": "^2.13.8",
     "postinstall-postinstall": "^2.0.0",
     "react": "16.8.3",
